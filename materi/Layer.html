@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layer - Adobe Photoshop</title>
+<style>
+    *{box-sizing:border-box}
+    body{
+        margin:0;font-family:Arial,Helvetica,sans-serif;
+        background:#f4f7fb;color:#202735;line-height:1.7
+    }
+    header{
+        background:linear-gradient(135deg,#111827,#2563eb);
+        color:white;padding:48px 20px;text-align:center
+    }
+    header h1{margin:0 0 10px;font-size:38px}
+    header p{max-width:850px;margin:auto;font-size:17px}
+    nav{
+        position:sticky;top:0;z-index:10;background:white;
+        border-bottom:1px solid #ddd;padding:10px;text-align:center
+    }
+    nav a{
+        display:inline-block;text-decoration:none;color:#1d4ed8;
+        padding:7px 10px;font-size:14px;font-weight:bold
+    }
+    main{max-width:1050px;margin:30px auto;padding:0 18px}
+    section{
+        background:white;margin:22px 0;padding:28px;
+        border-radius:14px;box-shadow:0 3px 14px rgba(0,0,0,.07)
+    }
+    h2{color:#1d4ed8;border-bottom:2px solid #dbeafe;padding-bottom:8px}
+    h3{color:#1e40af;margin-top:28px}
+    .box{
+        background:#eff6ff;border-left:5px solid #2563eb;
+        padding:15px 18px;border-radius:8px;margin:16px 0
+    }
+    .tip{
+        background:#ecfdf5;border-left:5px solid #10b981;
+        padding:15px 18px;border-radius:8px;margin:16px 0
+    }
+    .warn{
+        background:#fff7ed;border-left:5px solid #f97316;
+        padding:15px 18px;border-radius:8px;margin:16px 0
+    }
+    table{width:100%;border-collapse:collapse;margin:16px 0}
+    th,td{border:1px solid #d1d5db;padding:10px;vertical-align:top}
+    th{background:#eff6ff;text-align:left}
+    code{
+        background:#eef2ff;padding:2px 5px;border-radius:4px;color:#3730a3
+    }
+    .steps{counter-reset:step}
+    .steps li{margin:10px 0}
+    .exercise{
+        border:1px solid #dbeafe;border-radius:10px;padding:16px;margin:15px 0
+    }
+    .answer{
+        background:#f8fafc;padding:12px;border-radius:7px;margin-top:10px
+    }
+    .project{
+        background:linear-gradient(135deg,#eff6ff,#f8fafc);
+        border:2px solid #bfdbfe
+    }
+    footer{text-align:center;padding:30px;color:#64748b}
+    .badge{
+        display:inline-block;background:#dbeafe;color:#1e40af;
+        padding:4px 9px;border-radius:999px;font-size:12px;font-weight:bold
+    }
+    @media(max-width:700px){
+        header h1{font-size:29px}
+        section{padding:20px}
+        nav{white-space:nowrap;overflow:auto;text-align:left}
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <span class="badge">MATERI ADOBE PHOTOSHOP</span>
+    <h1>Layer</h1>
+    <p>
+        Memahami pengertian, fungsi, pembuatan, pengelolaan, pengaturan,
+        dan penggunaan Layer untuk membuat komposisi desain sederhana.
+    </p>
+</header>
+
+<nav>
+   <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    </a>
+    <a href="#tujuan">Tujuan</a>
+    <a href="#pengertian">Pengertian</a>
+    <a href="#membuat">Membuat</a>
+    <a href="#mengelola">Mengelola</a>
+    <a href="#urutan">Urutan</a>
+    <a href="#opacity">Opacity</a>
+    <a href="#lock">Lock</a>
+    <a href="#blending">Blending</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#latihan">Latihan</a>
+    <a href="#tugas">Tugas</a>
+</nav>
+
+<main>
+
+<section id="tujuan">
+<h2>1. Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, murid diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian dan fungsi Layer pada Adobe Photoshop.</li>
+<li>Membuat Layer baru dan menghapus Layer yang tidak diperlukan.</li>
+<li>Mengganti nama Layer agar file desain mudah dikelola.</li>
+<li>Menduplikasi Layer dan menjelaskan manfaatnya.</li>
+<li>Mengelompokkan beberapa Layer menggunakan Group.</li>
+<li>Mengatur posisi atau urutan Layer.</li>
+<li>Mengatur tingkat transparansi menggunakan Opacity.</li>
+<li>Mengunci Layer agar tidak berubah secara tidak sengaja.</li>
+<li>Mengenal dan menggunakan Blending Mode dasar.</li>
+<li>Membuat komposisi sederhana yang memiliki background, gambar, bentuk, dan teks.</li>
+</ol>
+</section>
+
+<section id="pengertian">
+<h2>2. Pengertian Layer</h2>
+<p>
+<strong>Layer</strong> adalah lapisan atau tempat terpisah yang digunakan Photoshop
+untuk menyimpan objek dalam sebuah desain. Setiap objek dapat diletakkan pada
+Layer yang berbeda sehingga objek tersebut dapat diedit tanpa harus mengubah
+objek lainnya.
+</p>
+
+<div class="box">
+<strong>Analogi mudah:</strong> Bayangkan kita membuat gambar menggunakan beberapa
+lembar plastik transparan. Plastik pertama berisi background, plastik kedua berisi
+foto, plastik ketiga berisi bentuk, dan plastik keempat berisi tulisan.
+Semua plastik ditumpuk menjadi satu sehingga terlihat sebagai satu desain.
+Setiap plastik tersebut dapat dianggap sebagai sebuah <strong>Layer</strong>.
+</div>
+
+<h3>Mengapa Layer penting?</h3>
+<p>
+Tanpa Layer, mengedit desain yang memiliki banyak objek akan lebih sulit.
+Misalnya sebuah poster memiliki background, foto, logo, kotak, dan tulisan.
+Jika semuanya berada dalam satu lapisan, mengubah satu objek dapat mengganggu
+objek lainnya. Dengan Layer, setiap bagian dapat dikelola secara terpisah.
+</p>
+
+<h3>Contoh susunan Layer</h3>
+<table>
+<tr><th>Urutan</th><th>Nama Layer</th><th>Isi</th></tr>
+<tr><td>Atas</td><td>Judul</td><td>Tulisan judul poster</td></tr>
+<tr><td>2</td><td>Bentuk</td><td>Kotak atau lingkaran dekorasi</td></tr>
+<tr><td>3</td><td>Foto</td><td>Gambar utama</td></tr>
+<tr><td>Bawah</td><td>Background</td><td>Warna atau gambar latar</td></tr>
+</table>
+
+<div class="tip">
+<strong>Ingat:</strong> Layer yang berada lebih atas biasanya tampil di depan Layer
+yang berada di bawahnya, selama tidak ada pengaturan tertentu yang mengubah
+tampilannya.
+</div>
+</section>
+
+<section id="membuat">
+<h2>3. Membuat Layer Baru</h2>
+<p>Ada beberapa cara membuat Layer baru di Photoshop.</p>
+
+<h3>Cara 1: Menggunakan tombol New Layer</h3>
+<ol class="steps">
+<li>Buka panel <strong>Layers</strong>.</li>
+<li>Cari ikon <strong>+</strong> atau <strong>Create New Layer</strong> di bagian bawah panel.</li>
+<li>Klik ikon tersebut.</li>
+<li>Photoshop membuat Layer baru di atas Layer yang sedang dipilih.</li>
+</ol>
+
+<h3>Cara 2: Menggunakan menu</h3>
+<p>Pada Photoshop, Layer baru dapat dibuat melalui menu <strong>Layer &gt; New &gt; Layer</strong>.</p>
+
+<h3>Cara 3: Shortcut</h3>
+<p>Shortcut umum untuk membuat Layer baru adalah <code>Ctrl + Shift + N</code>
+pada Windows.</p>
+
+<div class="warn">
+<strong>Kesalahan umum:</strong> Murid sering langsung menggambar tanpa memperhatikan
+Layer yang sedang aktif. Akibatnya gambar masuk ke Layer yang salah.
+<strong>Solusi:</strong> sebelum menggambar, lihat panel Layers dan pastikan Layer
+yang diinginkan sudah dipilih.
+</div>
+</section>
+
+<section id="mengelola">
+<h2>4. Menghapus, Rename, Duplicate, dan Grouping Layer</h2>
+
+<h3>A. Menghapus Layer</h3>
+<p>
+Layer yang tidak diperlukan dapat dihapus agar dokumen lebih rapi.
+Pilih Layer kemudian klik ikon tempat sampah <strong>Delete</strong> pada panel Layers.
+</p>
+<p><strong>Contoh:</strong> jika terdapat Layer bernama <em>Copy 3</em> yang ternyata
+tidak digunakan, Layer tersebut dapat dihapus.</p>
+
+<h3>B. Rename Layer</h3>
+<p>
+Rename berarti mengganti nama Layer. Nama yang jelas membuat pekerjaan lebih mudah
+dipahami, terutama ketika desain memiliki banyak Layer.
+</p>
+<ol>
+<li>Double-click nama Layer.</li>
+<li>Ketik nama baru.</li>
+<li>Tekan <code>Enter</code>.</li>
+</ol>
+
+<p>Contoh penamaan yang baik:</p>
+<ul>
+<li><code>Background</code></li>
+<li><code>Foto Utama</code></li>
+<li><code>Bentuk Lingkaran</code></li>
+<li><code>Judul Poster</code></li>
+<li><code>Logo Sekolah</code></li>
+</ul>
+
+<h3>C. Duplicate Layer</h3>
+<p>
+Duplicate berarti membuat salinan Layer. Fitur ini berguna ketika kita ingin
+menggunakan objek yang sama beberapa kali tanpa membuatnya dari awal.
+</p>
+<ol>
+<li>Pilih Layer yang ingin disalin.</li>
+<li>Gunakan <code>Ctrl + J</code> pada Windows, atau gunakan perintah Duplicate Layer.</li>
+<li>Photoshop membuat salinan Layer.</li>
+<li>Pindahkan atau edit salinan sesuai kebutuhan.</li>
+</ol>
+
+<div class="box">
+<strong>Contoh:</strong> Kita mempunyai satu bentuk lingkaran. Daripada membuat
+lingkaran baru lima kali, kita dapat melakukan Duplicate lalu mengubah ukuran
+atau posisinya.
+</div>
+
+<h3>D. Grouping Layer</h3>
+<p>
+Grouping digunakan untuk mengumpulkan beberapa Layer ke dalam satu kelompok.
+Ini sangat berguna ketika desain sudah memiliki banyak objek.
+</p>
+<ol>
+<li>Pilih beberapa Layer yang ingin dikelompokkan.</li>
+<li>Buat <strong>Group</strong> baru.</li>
+<li>Masukkan Layer tersebut ke dalam Group.</li>
+<li>Beri nama Group, misalnya <code>Elemen Poster</code>.</li>
+</ol>
+
+<p>Contoh:</p>
+<table>
+<tr><th>Group</th><th>Isi</th></tr>
+<tr><td>TEKS</td><td>Judul, Subjudul, Keterangan</td></tr>
+<tr><td>GRAFIS</td><td>Lingkaran, Kotak, Garis</td></tr>
+<tr><td>FOTO</td><td>Foto Utama, Foto Tambahan</td></tr>
+</table>
+</section>
+
+<section id="urutan">
+<h2>5. Mengatur Urutan Layer</h2>
+<p>
+Urutan Layer menentukan objek mana yang berada di depan dan mana yang berada
+di belakang.
+</p>
+
+<h3>Memindahkan Layer ke atas</h3>
+<p>
+Klik dan tahan Layer, kemudian tarik ke posisi yang lebih tinggi pada panel Layers.
+</p>
+
+<h3>Memindahkan Layer ke bawah</h3>
+<p>
+Klik dan tahan Layer, kemudian tarik ke posisi yang lebih rendah.
+</p>
+
+<div class="box">
+<strong>Contoh sederhana:</strong><br>
+Jika tulisan berada di bawah foto, tulisan dapat tertutup oleh foto.
+Jika tulisan dipindahkan ke atas foto, tulisan akan terlihat di depan foto.
+</div>
+
+<h3>Urutan yang disarankan untuk proyek</h3>
+<ol>
+<li>Judul / teks utama</li>
+<li>Bentuk dekorasi</li>
+<li>Gambar utama</li>
+<li>Background</li>
+</ol>
+</section>
+
+<section id="opacity">
+<h2>6. Opacity</h2>
+<p>
+<strong>Opacity</strong> digunakan untuk mengatur tingkat keterlihatan atau
+transparansi sebuah Layer. Nilai Opacity berada pada rentang <strong>0% sampai 100%</strong>.
+</p>
+
+<table>
+<tr><th>Opacity</th><th>Hasil</th></tr>
+<tr><td>100%</td><td>Layer terlihat penuh/tidak transparan.</td></tr>
+<tr><td>75%</td><td>Layer sedikit transparan.</td></tr>
+<tr><td>50%</td><td>Layer setengah transparan.</td></tr>
+<tr><td>25%</td><td>Layer sangat transparan.</td></tr>
+<tr><td>0%</td><td>Layer tidak terlihat.</td></tr>
+</table>
+
+<h3>Contoh penggunaan</h3>
+<p>
+Misalnya terdapat tulisan di atas foto. Jika tulisan terlalu kuat, Opacity dapat
+diturunkan menjadi 80%. Untuk membuat bentuk dekorasi yang tidak terlalu
+menonjol, Opacity dapat dicoba pada 20–50%.
+</p>
+
+<div class="warn">
+Opacity 0% membuat Layer tidak terlihat, tetapi Layer tersebut sebenarnya masih
+ada. Jangan langsung menghapus Layer hanya karena tidak terlihat.
+</div>
+</section>
+
+<section id="lock">
+<h2>7. Lock Layer</h2>
+<p>
+<strong>Lock</strong> berarti mengunci Layer agar tidak mudah berubah ketika kita
+bekerja pada desain.
+</p>
+
+<h3>Mengapa Layer perlu dikunci?</h3>
+<p>
+Bayangkan background sudah selesai dan tidak ingin diubah lagi. Jika Layer
+background tidak dikunci, kita bisa tidak sengaja menggeser atau menggambar
+pada background tersebut.
+</p>
+
+<h3>Cara menggunakan Lock</h3>
+<ol>
+<li>Pilih Layer yang ingin diamankan.</li>
+<li>Pada panel Layers, pilih ikon <strong>Lock</strong> yang sesuai.</li>
+<li>Layer menjadi terkunci.</li>
+<li>Untuk mengeditnya kembali, buka kunci Layer tersebut.</li>
+</ol>
+
+<div class="tip">
+<strong>Kebiasaan baik:</strong> Setelah background selesai, kunci Layer background.
+Dengan begitu, saat mengedit foto atau teks, background tidak mudah berubah.
+</div>
+</section>
+
+<section id="blending">
+<h2>8. Blending Mode Dasar</h2>
+<p>
+<strong>Blending Mode</strong> mengatur bagaimana warna pada satu Layer
+berinteraksi dengan warna Layer yang berada di bawahnya.
+</p>
+
+<p>
+Untuk pemula, tidak perlu menghafal semua Blending Mode. Kenali terlebih dahulu
+beberapa mode dasar berikut.
+</p>
+
+<table>
+<tr><th>Blending Mode</th><th>Penjelasan sederhana</th><th>Contoh penggunaan</th></tr>
+<tr>
+<td>Normal</td>
+<td>Warna Layer tampil secara normal.</td>
+<td>Foto dan teks biasa.</td>
+</tr>
+<tr>
+<td>Multiply</td>
+<td>Membuat hasil cenderung lebih gelap dan warna menyatu dengan objek di bawah.</td>
+<td>Bayangan, efek tekstur.</td>
+</tr>
+<tr>
+<td>Screen</td>
+<td>Cenderung membuat hasil lebih terang.</td>
+<td>Cahaya atau efek terang.</td>
+</tr>
+<tr>
+<td>Overlay</td>
+<td>Meningkatkan kontras dan membuat warna Layer berinteraksi lebih kuat.</td>
+<td>Efek tekstur dan peningkatan kontras.</td>
+</tr>
+</table>
+
+<h3>Cara mencoba Blending Mode</h3>
+<ol>
+<li>Pilih sebuah Layer.</li>
+<li>Cari menu Blending Mode di bagian atas panel Layers.</li>
+<li>Pilih <code>Normal</code>, lalu coba <code>Multiply</code>.</li>
+<li>Amati perubahan gambar.</li>
+<li>Coba <code>Screen</code> dan <code>Overlay</code>.</li>
+<li>Pilih mode yang sesuai kebutuhan desain.</li>
+</ol>
+
+<div class="box">
+<strong>Tips belajar:</strong> Jangan takut mencoba Blending Mode. Gunakan
+preview dan perhatikan bagaimana warna Layer berubah ketika berinteraksi
+dengan Layer di bawahnya.
+</div>
+</section>
+
+<section id="proyek" class="project">
+<h2>9. Proyek Praktik: Membuat Komposisi Sederhana</h2>
+<p>
+Pada proyek ini kita akan membuat sebuah komposisi sederhana yang terdiri dari
+<strong>background, gambar, bentuk, dan teks</strong>. Tujuan utamanya bukan
+membuat desain yang rumit, tetapi memahami cara kerja Layer.
+</p>
+
+<h3>A. Persiapan</h3>
+<ul>
+<li>Siapkan Adobe Photoshop.</li>
+<li>Siapkan satu gambar/foto yang boleh digunakan untuk latihan.</li>
+<li>Buat dokumen baru, misalnya ukuran 1200 × 800 piksel.</li>
+</ul>
+
+<h3>B. Membuat Background</h3>
+<ol>
+<li>Buat dokumen baru.</li>
+<li>Buat Layer bernama <code>Background</code>.</li>
+<li>Isi dengan warna yang sesuai.</li>
+<li>Pastikan Layer berada di posisi paling bawah.</li>
+<li>Kunci Layer Background.</li>
+</ol>
+
+<h3>C. Memasukkan Gambar</h3>
+<ol>
+<li>Masukkan gambar ke dalam dokumen.</li>
+<li>Letakkan gambar di atas Background.</li>
+<li>Rename Layer menjadi <code>Foto Utama</code>.</li>
+<li>Atur ukuran dan posisi gambar.</li>
+</ol>
+
+<h3>D. Membuat Bentuk</h3>
+<ol>
+<li>Buat Layer baru bernama <code>Bentuk Dekorasi</code>.</li>
+<li>Buat lingkaran, kotak, atau bentuk sederhana.</li>
+<li>Letakkan bentuk pada area yang tidak mengganggu gambar utama.</li>
+<li>Jika bentuk terlalu kuat, turunkan Opacity, misalnya menjadi 30–60%.</li>
+</ol>
+
+<h3>E. Membuat Teks</h3>
+<ol>
+<li>Pilih Type Tool.</li>
+<li>Klik pada area desain.</li>
+<li>Ketik judul, misalnya <strong>DESAIN KREATIF</strong>.</li>
+<li>Atur ukuran dan posisi teks.</li>
+<li>Rename Layer menjadi <code>Judul</code>.</li>
+</ol>
+
+<h3>F. Merapikan Layer</h3>
+<p>Susun Layer menjadi seperti berikut:</p>
+<table>
+<tr><th>Posisi</th><th>Layer</th></tr>
+<tr><td>1</td><td>Judul</td></tr>
+<tr><td>2</td><td>Bentuk Dekorasi</td></tr>
+<tr><td>3</td><td>Foto Utama</td></tr>
+<tr><td>4</td><td>Background</td></tr>
+</table>
+
+<h3>G. Eksperimen Opacity dan Blending</h3>
+<ol>
+<li>Pilih Bentuk Dekorasi.</li>
+<li>Coba Opacity 50%.</li>
+<li>Coba Blending Mode Multiply.</li>
+<li>Bandingkan dengan Normal.</li>
+<li>Coba Screen atau Overlay.</li>
+<li>Pilih hasil yang paling sesuai dengan komposisi.</li>
+</ol>
+
+<h3>H. Pemeriksaan Akhir</h3>
+<ul>
+<li>Apakah semua objek memiliki Layer masing-masing?</li>
+<li>Apakah nama Layer sudah jelas?</li>
+<li>Apakah Background berada paling bawah?</li>
+<li>Apakah Background sudah dikunci?</li>
+<li>Apakah teks terbaca dengan jelas?</li>
+<li>Apakah bentuk dekorasi tidak mengganggu foto?</li>
+<li>Apakah penggunaan Opacity dan Blending sudah sesuai?</li>
+</ul>
+
+<div class="tip">
+<strong>Hasil akhir yang diharapkan:</strong> sebuah komposisi sederhana yang
+terlihat rapi dan menunjukkan bahwa murid mampu mengelola Background, Foto,
+Bentuk, dan Teks menggunakan Layer yang terpisah.
+</div>
+</section>
+
+<section id="latihan">
+<h2>10. Latihan Soal</h2>
+<p>Jawablah 5 soal berikut berdasarkan materi yang sudah dipelajari.</p>
+
+<div class="exercise">
+<strong>Soal 1</strong>
+<p>Apa yang dimaksud dengan Layer pada Adobe Photoshop dan mengapa Layer penting
+dalam proses desain?</p>
+<div class="answer"><strong>Jawaban:</strong> Layer adalah lapisan tempat objek
+desain disimpan secara terpisah. Layer penting karena memungkinkan setiap objek
+diedit, dipindahkan, diatur, atau dihapus tanpa harus mengubah objek lain.</div>
+</div>
+
+<div class="exercise">
+<strong>Soal 2</strong>
+<p>Jelaskan perbedaan Duplicate Layer dan Grouping Layer.</p>
+<div class="answer"><strong>Jawaban:</strong> Duplicate Layer membuat salinan
+dari sebuah Layer, sedangkan Grouping mengumpulkan beberapa Layer ke dalam satu
+kelompok agar lebih mudah dikelola.</div>
+</div>
+
+<div class="exercise">
+<strong>Soal 3</strong>
+<p>Apa yang terjadi jika Opacity sebuah Layer diatur menjadi 50%?</p>
+<div class="answer"><strong>Jawaban:</strong> Layer menjadi sekitar setengah
+transparan sehingga objek atau warna di bawahnya dapat terlihat.</div>
+</div>
+
+<div class="exercise">
+<strong>Soal 4</strong>
+<p>Mengapa Background sebaiknya dikunci setelah selesai dibuat?</p>
+<div class="answer"><strong>Jawaban:</strong> Agar Background tidak sengaja
+bergeser, berubah, atau terkena proses pengeditan ketika kita mengerjakan
+objek lain.</div>
+</div>
+
+<div class="exercise">
+<strong>Soal 5</strong>
+<p>Sebutkan minimal tiga Blending Mode dasar yang dipelajari dan jelaskan secara
+singkat kegunaannya.</p>
+<div class="answer"><strong>Jawaban:</strong> Normal untuk tampilan biasa,
+Multiply untuk menghasilkan efek yang cenderung lebih gelap, Screen untuk
+efek yang cenderung lebih terang, dan Overlay untuk meningkatkan interaksi
+warna serta kontras.</div>
+</div>
+</section>
+
+<section id="tugas">
+<h2>11. Tugas Praktik</h2>
+
+<div class="exercise">
+<h3>Tugas 1 — Membuat Struktur Layer</h3>
+<p>
+Buat dokumen baru dan buat minimal 4 Layer dengan nama:
+<strong>Background, Foto, Bentuk, dan Teks</strong>. Atur urutannya dengan benar.
+</p>
+<p><strong>Output:</strong> file Photoshop berformat PSD.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 2 — Latihan Duplicate</h3>
+<p>
+Buat satu bentuk sederhana, kemudian lakukan Duplicate hingga menjadi minimal
+5 bentuk. Atur ukuran dan posisi masing-masing sehingga membentuk pola yang rapi.
+</p>
+<p><strong>Output:</strong> komposisi dengan minimal 5 objek hasil duplikasi.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 3 — Latihan Opacity</h3>
+<p>
+Buat tiga bentuk dengan Opacity berbeda, misalnya 100%, 60%, dan 30%.
+Susun ketiganya agar terlihat perbedaan tingkat transparansinya.
+</p>
+<p><strong>Output:</strong> satu desain yang menunjukkan tiga tingkat Opacity.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 4 — Latihan Blending Mode</h3>
+<p>
+Buat satu background berwarna dan satu bentuk di atasnya. Duplikasikan bentuk
+tersebut, lalu gunakan Normal, Multiply, Screen, dan Overlay. Bandingkan hasilnya.
+</p>
+<p><strong>Output:</strong> desain yang menunjukkan perbedaan minimal empat Blending Mode.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 5 — Proyek Komposisi Sederhana</h3>
+<p>
+Buat sebuah poster sederhana dengan tema bebas. Poster wajib memiliki:
+</p>
+<ul>
+<li>1 Background</li>
+<li>minimal 1 gambar/foto</li>
+<li>minimal 2 bentuk</li>
+<li>minimal 1 teks judul</li>
+<li>Layer yang diberi nama dengan jelas</li>
+<li>minimal 1 Layer yang dikunci</li>
+<li>minimal 1 penggunaan Opacity</li>
+<li>minimal 1 penggunaan Blending Mode</li>
+</ul>
+<p>
+Rapikan seluruh Layer dan simpan dalam format <strong>PSD</strong>.
+Jika diminta, ekspor juga hasil akhirnya dalam PNG atau JPG.
+</p>
+</div>
+</section>
+
+<section>
+<h2>12. Ringkasan Materi</h2>
+<table>
+<tr><th>Materi</th><th>Inti yang Harus Dipahami</th></tr>
+<tr><td>Layer</td><td>Lapisan untuk menyimpan objek secara terpisah.</td></tr>
+<tr><td>New Layer</td><td>Membuat lapisan baru.</td></tr>
+<tr><td>Delete</td><td>Menghapus Layer yang tidak diperlukan.</td></tr>
+<tr><td>Rename</td><td>Mengganti nama Layer agar mudah dikenali.</td></tr>
+<tr><td>Duplicate</td><td>Membuat salinan Layer.</td></tr>
+<tr><td>Group</td><td>Mengumpulkan beberapa Layer.</td></tr>
+<tr><td>Urutan Layer</td><td>Menentukan posisi depan dan belakang objek.</td></tr>
+<tr><td>Opacity</td><td>Mengatur tingkat transparansi Layer.</td></tr>
+<tr><td>Lock</td><td>Mengunci Layer agar tidak mudah berubah.</td></tr>
+<tr><td>Blending Mode</td><td>Mengatur cara warna Layer berinteraksi dengan Layer di bawahnya.</td></tr>
+</table>
+</section>
+
+<section>
+<h2>13. Refleksi</h2>
+<p>Setelah selesai belajar, jawab pertanyaan berikut secara jujur:</p>
+<ol>
+<li>Apakah saya sudah memahami fungsi Layer?</li>
+<li>Apakah saya dapat membuat dan menghapus Layer?</li>
+<li>Apakah saya dapat memberi nama Layer dengan benar?</li>
+<li>Apakah saya memahami fungsi Duplicate dan Group?</li>
+<li>Apakah saya dapat mengatur urutan Layer?</li>
+<li>Apakah saya memahami fungsi Opacity?</li>
+<li>Apakah saya tahu kapan sebuah Layer perlu dikunci?</li>
+<li>Apakah saya dapat membedakan Normal, Multiply, Screen, dan Overlay?</li>
+<li>Bagian mana yang masih membingungkan bagi saya?</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+    <p><strong>Materi Adobe Photoshop — Layer</strong></p>
+    <p>Materi pembelajaran untuk latihan pengelolaan Layer dan pembuatan komposisi sederhana.</p>
+</footer>
+
+</body>
+</html>

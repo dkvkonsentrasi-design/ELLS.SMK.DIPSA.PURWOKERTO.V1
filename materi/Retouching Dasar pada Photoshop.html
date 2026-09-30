@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retouching Dasar pada Photoshop - SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#17191d;
+  --muted:#626872;
+  --paper:#f5f2ec;
+  --white:#fff;
+  --accent:#8f1d2c;
+  --accent-dark:#6e1420;
+  --line:#ddd8cf;
+  --soft:#eee9e1;
+  --green:#176b4d;
+  --blue:#245b8f;
+  --gold:#9a6900;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  background:var(--ink);
+  color:#fff;
+  padding:22px 0;
+}
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand h1{margin:0;font-size:1.15rem;letter-spacing:.04em}
+.brand p{margin:3px 0 0;color:#cfd2d6;font-size:.88rem}
+.hero{
+  background:#fff;
+  padding:70px 0 55px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  color:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+}
+.hero h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.2rem,5vw,4.4rem);
+  line-height:1.08;
+  margin:12px 0 18px;
+  max-width:900px;
+}
+.hero .lead{font-size:1.1rem;color:var(--muted);max-width:850px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.badge{
+  border:1px solid var(--line);
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--paper);
+  font-size:.85rem;
+}
+.layout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:35px;
+  align-items:start;
+  padding:45px 0 80px;
+}
+.toc{
+  position:sticky;
+  top:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  padding:20px;
+}
+.toc h3{margin-top:0;font-family:Georgia,serif}
+.toc a{
+  display:block;
+  padding:7px 0;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:.92rem;
+  border-bottom:1px solid #eee;
+}
+.toc a:hover{color:var(--accent)}
+section{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:34px;
+  margin-bottom:25px;
+}
+section h2{
+  font-family:Georgia,serif;
+  font-size:2rem;
+  line-height:1.2;
+  margin:0 0 18px;
+}
+section h3{
+  font-size:1.3rem;
+  margin-top:30px;
+  color:var(--accent-dark);
+}
+section h4{margin-bottom:7px}
+.note,.tip,.warning,.success{
+  padding:17px 19px;
+  margin:20px 0;
+  border-left:5px solid;
+  background:var(--soft);
+}
+.note{border-color:var(--blue)}
+.tip{border-color:var(--green);background:#edf6f1}
+.warning{border-color:var(--gold);background:#fbf4e6}
+.success{border-color:var(--green);background:#edf6f1}
+strong{color:#202228}
+code{
+  background:#eeeae4;
+  padding:2px 6px;
+  border-radius:4px;
+  font-family:Consolas,monospace;
+}
+kbd{
+  border:1px solid #bbb;
+  border-bottom-width:2px;
+  border-radius:4px;
+  padding:2px 6px;
+  background:#fafafa;
+  font-family:Arial,sans-serif;
+}
+.step{
+  border:1px solid var(--line);
+  padding:20px;
+  margin:16px 0;
+  background:#fcfbf8;
+}
+.step-number{
+  display:inline-flex;
+  width:32px;height:32px;
+  align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-weight:bold;
+  margin-right:8px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
+  margin:20px 0;
+}
+.card{
+  border:1px solid var(--line);
+  padding:20px;
+  background:#fcfbf8;
+}
+.card h4{margin-top:0;color:var(--accent-dark)}
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  margin:20px 0;
+}
+.compare th,.compare td{
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  vertical-align:top;
+}
+.compare th{background:var(--ink);color:#fff}
+details{
+  border:1px solid var(--line);
+  padding:15px 18px;
+  margin:12px 0;
+  background:#fcfbf8;
+}
+summary{cursor:pointer;font-weight:700;color:var(--accent-dark)}
+.project-box{
+  border:2px solid var(--accent);
+  padding:25px;
+  background:#fff8f8;
+}
+.checklist{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.check{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.small{font-size:.9rem;color:var(--muted)}
+footer{
+  background:var(--ink);
+  color:#ddd;
+  text-align:center;
+  padding:30px 20px;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .toc{position:relative;top:0}
+  .grid,.checklist{grid-template-columns:1fr}
+  section{padding:25px 20px}
+}
+@media print{
+  header,.toc{display:none}
+  .layout{display:block;padding-top:0}
+  section{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container brand">
+    <div>
+      <h1>SMK DIPSA PURWOKERTO</h1>
+      <p>Materi Pembelajaran Desain Grafis &amp; Photoshop</p>
+    </div>
+    <div>ADOBE PHOTOSHOP</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <div class="eyebrow">Materi Photoshop</div>
+    <h2>Retouching Dasar pada Photoshop</h2>
+    <p class="lead">
+      Pelajari cara memperbaiki noda, membersihkan bagian yang mengganggu, dan menghilangkan
+      objek sederhana pada foto menggunakan teknik retouching. Materi ini dimulai dari konsep
+      dasar hingga proyek retouching foto dengan hasil yang tetap terlihat natural.
+    </p>
+    <div class="badges">
+      <span class="badge">Spot Healing Brush</span>
+      <span class="badge">Healing Brush</span>
+      <span class="badge">Clone Stamp</span>
+      <span class="badge">Remove Tool</span>
+      <span class="badge">Natural Retouching</span>
+    </div>
+  </div>
+</div>
+
+<div class="container layout">
+
+<aside class="toc">
+  <h3>Daftar Materi</h3>
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+  <a href="#tujuan">Tujuan Pembelajaran</a>
+  <a href="#pengertian">1. Pengertian Retouching</a>
+  <a href="#spot">2. Spot Healing Brush</a>
+  <a href="#healing">3. Healing Brush</a>
+  <a href="#clone">4. Clone Stamp</a>
+  <a href="#remove">5. Remove Tool</a>
+  <a href="#objek">6. Menghilangkan Objek Sederhana</a>
+  <a href="#noda">7. Membersihkan Noda</a>
+  <a href="#natural">8. Prinsip Retouching Natural</a>
+  <a href="#workflow">9. Workflow Retouching</a>
+  <a href="#project">10. Proyek Retouching Foto</a>
+  <a href="#kesalahan">11. Kesalahan Umum</a>
+  <a href="#soal">12. 5 Latihan Soal</a>
+  <a href="#tugas">13. 5 Tugas Praktik</a>
+  <a href="#ringkasan">14. Ringkasan</a>
+</aside>
+
+<main>
+
+<section id="tujuan">
+  <h2>Tujuan Pembelajaran</h2>
+  <p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+  <ul>
+    <li>Menjelaskan pengertian dan tujuan retouching pada foto.</li>
+    <li>Mengenali fungsi Spot Healing Brush, Healing Brush, Clone Stamp, dan Remove Tool.</li>
+    <li>Membersihkan noda kecil dan gangguan sederhana pada foto.</li>
+    <li>Menghilangkan objek sederhana tanpa membuat hasil terlihat aneh.</li>
+    <li>Memilih alat retouching sesuai dengan kondisi gambar.</li>
+    <li>Memahami pentingnya menjaga tekstur, detail, cahaya, dan warna asli foto.</li>
+    <li>Mengerjakan retouching secara bertahap dan tidak berlebihan.</li>
+    <li>Membuat proyek retouching dengan hasil yang terlihat natural.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Inti materi:</strong> Retouching bukan berarti membuat foto menjadi
+    "sempurna" dengan menghilangkan semua detail. Retouching yang baik justru memperbaiki
+    gangguan sambil mempertahankan karakter dan keaslian foto.
+  </div>
+</section>
+
+<section id="pengertian">
+  <h2>1. Pengertian Retouching</h2>
+
+  <p>
+    <strong>Retouching</strong> adalah proses memperbaiki atau membersihkan bagian tertentu
+    dari sebuah foto agar tampilannya menjadi lebih baik. Retouching dapat digunakan untuk
+    menghilangkan noda kecil, debu, objek yang mengganggu, atau ketidaksempurnaan sederhana.
+  </p>
+
+  <p>
+    Dalam dunia fotografi dan desain grafis, retouching sangat sering digunakan. Contohnya:
+    membersihkan debu pada foto produk, menghilangkan noda pada background, memperbaiki
+    bagian foto yang terganggu, atau menghapus objek kecil yang tidak diperlukan.
+  </p>
+
+  <h3>Retouching bukan sekadar menghapus</h3>
+  <p>
+    Ketika kita menghilangkan sebuah objek, Photoshop harus membuat area pengganti agar
+    hasil foto tetap terlihat masuk akal. Karena itu, retouching membutuhkan perhatian
+    terhadap tekstur, warna, cahaya, pola, dan lingkungan di sekitar objek.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Contoh retouching sederhana</h4>
+      <ul>
+        <li>Menghilangkan jerawat kecil.</li>
+        <li>Menghapus debu pada produk.</li>
+        <li>Menghilangkan noda pada background.</li>
+        <li>Menghapus benda kecil yang mengganggu.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Contoh retouching yang lebih kompleks</h4>
+      <ul>
+        <li>Menghilangkan orang dari background.</li>
+        <li>Membersihkan banyak objek pada foto produk.</li>
+        <li>Memperbaiki area dengan pola berulang.</li>
+        <li>Retouching portrait secara detail.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Prinsip utama</h3>
+  <p>
+    Sebelum melakukan retouching, tanyakan:
+    <strong>"Apakah bagian ini benar-benar perlu diperbaiki?"</strong>
+    Jika sebuah detail merupakan bagian alami dari objek atau wajah, tidak selalu perlu dihilangkan.
+  </p>
+</section>
+
+<section id="spot">
+  <h2>2. Spot Healing Brush</h2>
+
+  <p>
+    <strong>Spot Healing Brush</strong> adalah alat yang praktis untuk menghilangkan
+    noda atau objek kecil. Photoshop akan mencoba mengambil informasi dari area di sekitar
+    noda untuk mengisi area tersebut.
+  </p>
+
+  <h3>Kapan menggunakan Spot Healing Brush?</h3>
+  <ul>
+    <li>Membersihkan jerawat kecil.</li>
+    <li>Menghilangkan bintik debu.</li>
+    <li>Menghilangkan noda kecil pada background.</li>
+    <li>Membersihkan detail kecil pada foto produk.</li>
+    <li>Menghilangkan objek kecil pada area yang relatif sederhana.</li>
+  </ul>
+
+  <h3>Langkah menggunakan Spot Healing Brush</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Buka foto di Photoshop.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Pilih <strong>Spot Healing Brush Tool</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Atur ukuran brush sedikit lebih besar dari noda yang ingin diperbaiki.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Klik atau sapukan brush secara pendek pada noda.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Periksa hasilnya pada ukuran 100% atau lebih besar.
+  </div>
+
+  <div class="tip">
+    <strong>Tips:</strong> Jangan menggunakan brush terlalu besar.
+    Jika noda kecil, gunakan brush kecil. Ukuran brush yang terlalu besar dapat mengambil
+    area sekitar yang tidak diperlukan dan membuat hasil terlihat aneh.
+  </div>
+
+  <h3>Contoh penggunaan</h3>
+  <p>
+    Misalnya terdapat satu titik debu pada background putih. Gunakan Spot Healing Brush
+    dengan ukuran sedikit lebih besar dari titik tersebut, kemudian klik. Photoshop akan
+    mencoba memperbaiki titik tersebut berdasarkan area di sekitarnya.
+  </p>
+</section>
+
+<section id="healing">
+  <h2>3. Healing Brush</h2>
+
+  <p>
+    <strong>Healing Brush</strong> juga digunakan untuk memperbaiki bagian foto, tetapi
+    memberikan kontrol lebih besar karena kita dapat menentukan sumber area yang digunakan
+    sebagai sampel.
+  </p>
+
+  <h3>Perbedaan sederhana dengan Spot Healing Brush</h3>
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Alat</th>
+        <th>Cara Kerja</th>
+        <th>Cocok Untuk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Spot Healing Brush</td>
+        <td>Photoshop memilih sumber berdasarkan area sekitar.</td>
+        <td>Noda kecil dan perbaikan cepat.</td>
+      </tr>
+      <tr>
+        <td>Healing Brush</td>
+        <td>Kita menentukan area sumber yang akan digunakan.</td>
+        <td>Perbaikan yang membutuhkan kontrol lebih.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Langkah menggunakan Healing Brush</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Pilih <strong>Healing Brush Tool</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Tentukan area yang memiliki tekstur atau pola yang bagus.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Tekan dan tahan <kbd>Alt</kbd> lalu klik area sumber untuk mengambil sampel.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Lepaskan <kbd>Alt</kbd>.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Sapukan brush pada area yang ingin diperbaiki.
+  </div>
+  <div class="step">
+    <span class="step-number">6</span>
+    Periksa apakah tekstur dan warna terlihat menyatu.
+  </div>
+
+  <div class="note">
+    <strong>Kenapa Healing Brush berguna?</strong>
+    Karena area sumber dapat dipilih secara manual. Ini membantu ketika area yang ingin
+    diperbaiki memiliki pola khusus dan kita ingin mengambil tekstur dari tempat tertentu.
+  </div>
+</section>
+
+<section id="clone">
+  <h2>4. Clone Stamp</h2>
+
+  <p>
+    <strong>Clone Stamp Tool</strong> digunakan untuk menyalin pixel dari satu area
+    ke area lain. Berbeda dengan Healing Brush, Clone Stamp lebih berfokus pada menyalin
+    tampilan pixel sumber.
+  </p>
+
+  <h3>Contoh penggunaan</h3>
+  <ul>
+    <li>Menghilangkan objek pada background yang mempunyai pola tertentu.</li>
+    <li>Memperpanjang tekstur background.</li>
+    <li>Menggandakan bagian tertentu dari sebuah foto.</li>
+    <li>Memperbaiki pola atau detail yang berulang.</li>
+  </ul>
+
+  <h3>Langkah menggunakan Clone Stamp</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Pilih <strong>Clone Stamp Tool</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Cari area yang teksturnya cocok untuk dijadikan sumber.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Tekan dan tahan <kbd>Alt</kbd>, kemudian klik area sumber.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Lepaskan <kbd>Alt</kbd>.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Sapukan brush pada area yang ingin ditutupi.
+  </div>
+  <div class="step">
+    <span class="step-number">6</span>
+    Ambil sampel baru jika pola mulai terlihat berulang secara tidak alami.
+  </div>
+
+  <div class="warning">
+    <strong>Kesalahan umum:</strong> mengambil satu sumber yang sama untuk area yang sangat
+    luas dapat membuat pola terlihat berulang. Untuk hasil natural, ambil sampel dari beberapa
+    lokasi yang berbeda dan perhatikan arah teksturnya.
+  </div>
+
+  <h3>Healing Brush vs Clone Stamp</h3>
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Healing Brush</th>
+        <th>Clone Stamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Menggunakan sumber kemudian menyesuaikan hasil agar lebih menyatu.</td>
+        <td>Menyalin pixel sumber secara lebih langsung.</td>
+      </tr>
+      <tr>
+        <td>Cocok untuk memperbaiki tekstur sekaligus menyesuaikan warna sekitar.</td>
+        <td>Cocok untuk pola, bentuk, dan area yang membutuhkan kontrol penyalinan.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="remove">
+  <h2>5. Remove Tool</h2>
+
+  <p>
+    <strong>Remove Tool</strong> dirancang untuk membantu menghilangkan objek atau bagian
+    gambar dengan cara yang praktis. Photoshop akan mencoba mengisi area yang dihapus
+    berdasarkan lingkungan di sekitarnya.
+  </p>
+
+  <h3>Kapan Remove Tool cocok digunakan?</h3>
+  <ul>
+    <li>Menghilangkan benda kecil pada background.</li>
+    <li>Menghapus orang atau objek sederhana yang mengganggu.</li>
+    <li>Membersihkan kabel, noda, atau detail tertentu.</li>
+    <li>Mempercepat pekerjaan retouching pada area yang relatif mudah.</li>
+  </ul>
+
+  <h3>Langkah dasar menggunakan Remove Tool</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Pilih <strong>Remove Tool</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Atur ukuran brush agar sesuai dengan objek yang akan dihilangkan.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Sapukan brush pada objek yang ingin dihilangkan.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Tunggu Photoshop memproses area tersebut.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Periksa hasil dan ulangi pada bagian yang masih terlihat tidak natural.
+  </div>
+
+  <div class="tip">
+    <strong>Catatan:</strong> Hasil Remove Tool sangat bergantung pada kondisi area sekitar.
+    Background yang sederhana biasanya lebih mudah diperbaiki dibandingkan background yang
+    penuh detail, pola, atau objek lain.
+  </div>
+</section>
+
+<section id="objek">
+  <h2>6. Menghilangkan Objek Sederhana</h2>
+
+  <p>
+    Menghilangkan objek sederhana berarti menghapus benda yang tidak diinginkan dari foto
+    dan membuat area bekas objek tersebut terlihat seperti bagian asli dari background.
+  </p>
+
+  <h3>Contoh objek sederhana</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Background polos</h4>
+      <p>Contohnya tembok, lantai, langit, atau permukaan dengan warna relatif seragam.</p>
+    </div>
+    <div class="card">
+      <h4>Objek kecil</h4>
+      <p>Contohnya botol kecil, noda, sampah kecil, atau benda yang berada di kejauhan.</p>
+    </div>
+    <div class="card">
+      <h4>Kabel sederhana</h4>
+      <p>Kabel dapat dicoba dihapus jika area di bawahnya cukup mudah untuk direkonstruksi.</p>
+    </div>
+    <div class="card">
+      <h4>Gangguan kecil</h4>
+      <p>Detail kecil yang mengalihkan perhatian dari subjek utama.</p>
+    </div>
+  </div>
+
+  <h3>Metode 1 — Remove Tool</h3>
+  <p>
+    Cocok untuk mencoba menghapus objek dengan cepat. Sapukan Remove Tool pada objek,
+    kemudian evaluasi hasilnya.
+  </p>
+
+  <h3>Metode 2 — Spot Healing Brush</h3>
+  <p>
+    Cocok untuk objek atau noda kecil. Gunakan brush yang ukurannya sesuai dengan area yang
+    ingin dibersihkan.
+  </p>
+
+  <h3>Metode 3 — Clone Stamp</h3>
+  <p>
+    Gunakan jika kamu membutuhkan kontrol manual terhadap area yang menggantikan objek.
+    Ambil sampel dari bagian background yang cocok.
+  </p>
+
+  <h3>Metode 4 — Kombinasi alat</h3>
+  <p>
+    Pekerjaan retouching tidak harus menggunakan satu alat saja. Kamu dapat menggunakan
+    Remove Tool terlebih dahulu, lalu memperbaiki bagian yang belum sempurna dengan
+    Healing Brush atau Clone Stamp.
+  </p>
+</section>
+
+<section id="noda">
+  <h2>7. Membersihkan Noda</h2>
+
+  <p>
+    Membersihkan noda adalah latihan yang sangat baik untuk memahami retouching.
+    Noda dapat berupa debu, titik kecil, jerawat, bekas kotoran, atau gangguan visual lainnya.
+  </p>
+
+  <h3>Langkah membersihkan noda secara aman</h3>
+
+  <div class="step">
+    <span class="step-number">1</span>
+    Buka foto dengan resolusi asli atau kualitas terbaik yang tersedia.
+  </div>
+
+  <div class="step">
+    <span class="step-number">2</span>
+    Perbesar tampilan agar noda terlihat jelas. Gunakan zoom secukupnya, jangan hanya bekerja
+    pada tampilan sangat kecil.
+  </div>
+
+  <div class="step">
+    <span class="step-number">3</span>
+    Pilih alat sesuai kebutuhan. Untuk noda kecil, mulai dengan Spot Healing Brush.
+  </div>
+
+  <div class="step">
+    <span class="step-number">4</span>
+    Gunakan ukuran brush yang sedikit lebih besar dari noda.
+  </div>
+
+  <div class="step">
+    <span class="step-number">5</span>
+    Klik atau sapukan secara pendek.
+  </div>
+
+  <div class="step">
+    <span class="step-number">6</span>
+    Zoom out dan lihat foto secara keseluruhan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">7</span>
+    Jika hasil terlihat terlalu halus atau tidak natural, batalkan dan coba dengan pengaturan
+    atau sumber yang berbeda.
+  </div>
+
+  <div class="note">
+    <strong>Prinsip penting:</strong> Jangan membersihkan semua detail kulit atau tekstur.
+    Kulit manusia secara alami mempunyai pori, garis, tekstur, dan variasi warna.
+    Retouching yang terlalu kuat dapat membuat wajah terlihat seperti plastik.
+  </div>
+</section>
+
+<section id="natural">
+  <h2>8. Prinsip Retouching yang Tetap Natural</h2>
+
+  <p>
+    Hasil retouching yang baik biasanya tidak menarik perhatian orang pada proses editnya.
+    Tujuan utamanya adalah membuat foto terlihat lebih bersih atau sesuai kebutuhan,
+    bukan membuat foto kehilangan karakter aslinya.
+  </p>
+
+  <h3>Prinsip 1 — Jangan berlebihan</h3>
+  <p>
+    Jika noda kecil sudah tidak terlihat, berhenti. Jangan terus mengedit hanya karena
+    masih ada detail kecil yang sebenarnya tidak mengganggu.
+  </p>
+
+  <h3>Prinsip 2 — Pertahankan tekstur</h3>
+  <p>
+    Tekstur membuat foto terasa nyata. Saat melakukan retouching, usahakan tekstur
+    permukaan tetap masuk akal.
+  </p>
+
+  <h3>Prinsip 3 — Perhatikan arah cahaya</h3>
+  <p>
+    Jika menghilangkan objek pada area dengan bayangan, area pengganti harus tetap sesuai
+    dengan arah cahaya. Jangan membuat satu bagian tiba-tiba terlalu terang atau terlalu gelap.
+  </p>
+
+  <h3>Prinsip 4 — Jangan membuat pola berulang</h3>
+  <p>
+    Clone Stamp dapat menghasilkan pola berulang jika sumber yang sama digunakan terus-menerus.
+    Variasikan sumber sampel bila diperlukan.
+  </p>
+
+  <h3>Prinsip 5 — Sering bandingkan Before dan After</h3>
+  <p>
+    Sesekali lihat foto sebelum retouching. Hal ini membantu memastikan bahwa perubahan
+    yang dilakukan memang memberikan manfaat.
+  </p>
+
+  <h3>Prinsip 6 — Kerjakan secara bertahap</h3>
+  <p>
+    Lebih baik melakukan beberapa perbaikan kecil daripada satu perubahan besar yang sulit
+    dikontrol.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Retouching Natural</th>
+        <th>Retouching Berlebihan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tekstur masih terlihat.</td>
+        <td>Tekstur hilang seluruhnya.</td>
+      </tr>
+      <tr>
+        <td>Perubahan sulit terlihat jika tidak dibandingkan.</td>
+        <td>Hasil edit sangat mudah terlihat.</td>
+      </tr>
+      <tr>
+        <td>Karakter foto tetap dipertahankan.</td>
+        <td>Foto kehilangan karakter aslinya.</td>
+      </tr>
+      <tr>
+        <td>Objek yang mengganggu diperbaiki secukupnya.</td>
+        <td>Terlalu banyak bagian diubah tanpa kebutuhan.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="workflow">
+  <h2>9. Workflow Retouching yang Disarankan</h2>
+
+  <p>Gunakan alur berikut ketika mengerjakan foto agar pekerjaan lebih teratur:</p>
+
+  <ol>
+    <li><strong>Amati foto terlebih dahulu.</strong> Tentukan apa yang benar-benar perlu diperbaiki.</li>
+    <li><strong>Buat salinan layer</strong> jika diperlukan agar gambar asli tetap aman.</li>
+    <li><strong>Mulai dari masalah kecil.</strong> Bersihkan noda dan gangguan yang paling jelas.</li>
+    <li><strong>Pilih alat yang tepat.</strong> Jangan menggunakan Clone Stamp untuk semua masalah.</li>
+    <li><strong>Gunakan brush yang sesuai.</strong> Ukuran brush harus mengikuti ukuran area yang diperbaiki.</li>
+    <li><strong>Periksa tekstur.</strong> Pastikan hasil tidak terlihat terlalu halus atau berulang.</li>
+    <li><strong>Zoom out.</strong> Pastikan perubahan terlihat natural pada keseluruhan foto.</li>
+    <li><strong>Bandingkan before-after.</strong> Pastikan retouching memang memperbaiki foto.</li>
+    <li><strong>Simpan PSD.</strong> Pertahankan file kerja agar dapat diedit kembali.</li>
+    <li><strong>Export hasil akhir.</strong> Buat JPG atau PNG sesuai kebutuhan.</li>
+  </ol>
+
+  <div class="success">
+    <strong>Workflow sederhana untuk pemula:</strong><br>
+    AMATI → PILIH AREA → PILIH ALAT → RETOUCH → CEK TEKSTUR → ZOOM OUT →
+    BEFORE/AFTER → SIMPAN.
+  </div>
+</section>
+
+<section id="project">
+  <h2>10. Proyek: Melakukan Retouching pada Sebuah Foto</h2>
+
+  <div class="project-box">
+    <h3 style="margin-top:0">Judul Proyek</h3>
+    <p><strong>“Clean &amp; Natural Photo Retouching”</strong></p>
+    <p>
+      Pilih satu foto yang memiliki beberapa masalah sederhana, kemudian lakukan retouching
+      dengan tujuan membuat foto terlihat lebih bersih dan rapi tanpa kehilangan karakter
+      aslinya.
+    </p>
+  </div>
+
+  <h3>Ketentuan foto</h3>
+  <ul>
+    <li>Gunakan foto dengan resolusi yang cukup baik.</li>
+    <li>Pilih foto yang mempunyai minimal 3 bagian yang dapat diperbaiki.</li>
+    <li>Contoh masalah: noda, debu, objek kecil, kabel, atau gangguan pada background.</li>
+    <li>Hindari memilih foto yang terlalu kompleks untuk latihan pertama.</li>
+  </ul>
+
+  <h3>Langkah proyek secara lengkap</h3>
+
+  <div class="step">
+    <span class="step-number">1</span>
+    <strong>Pilih foto.</strong>
+    Pilih foto yang mempunyai objek utama jelas dan beberapa gangguan sederhana.
+  </div>
+
+  <div class="step">
+    <span class="step-number">2</span>
+    <strong>Analisis foto.</strong>
+    Catat minimal tiga bagian yang ingin diperbaiki. Jangan langsung mengedit semuanya.
+  </div>
+
+  <div class="step">
+    <span class="step-number">3</span>
+    <strong>Siapkan layer.</strong>
+    Simpan salinan layer asli jika diperlukan agar kamu mempunyai cadangan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">4</span>
+    <strong>Bersihkan noda kecil.</strong>
+    Gunakan Spot Healing Brush untuk noda yang sederhana.
+  </div>
+
+  <div class="step">
+    <span class="step-number">5</span>
+    <strong>Perbaiki area yang membutuhkan sumber tertentu.</strong>
+    Gunakan Healing Brush jika kamu ingin menentukan sendiri sumber teksturnya.
+  </div>
+
+  <div class="step">
+    <span class="step-number">6</span>
+    <strong>Hilangkan objek sederhana.</strong>
+    Coba Remove Tool untuk objek yang cocok. Jika hasil belum rapi, gunakan Healing Brush
+    atau Clone Stamp untuk memperbaikinya.
+  </div>
+
+  <div class="step">
+    <span class="step-number">7</span>
+    <strong>Gunakan Clone Stamp secara hati-hati.</strong>
+    Ambil sumber yang sesuai dan ubah sumber sampel jika pola mulai berulang.
+  </div>
+
+  <div class="step">
+    <span class="step-number">8</span>
+    <strong>Periksa tekstur.</strong>
+    Zoom in untuk melihat detail dan zoom out untuk melihat keseluruhan hasil.
+  </div>
+
+  <div class="step">
+    <span class="step-number">9</span>
+    <strong>Bandingkan before-after.</strong>
+    Pastikan perubahan tidak terlalu berlebihan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">10</span>
+    <strong>Simpan dan export.</strong>
+    Simpan file kerja dalam PSD dan hasil akhir dalam JPG/PNG.
+  </div>
+
+  <h3>Target hasil proyek</h3>
+  <div class="checklist">
+    <div class="check">☐ Minimal 3 bagian foto diperbaiki.</div>
+    <div class="check">☐ Menggunakan minimal 2 alat retouching.</div>
+    <div class="check">☐ Noda atau objek yang diperbaiki tidak terlihat mencolok.</div>
+    <div class="check">☐ Tekstur foto tetap terlihat natural.</div>
+    <div class="check">☐ Tidak ada pola clone yang berulang secara jelas.</div>
+    <div class="check">☐ Objek utama tetap memiliki karakter asli.</div>
+    <div class="check">☐ Ada perbandingan before dan after.</div>
+    <div class="check">☐ File PSD tersedia untuk pemeriksaan proses.</div>
+  </div>
+
+  <h3>Dokumentasi yang dikumpulkan</h3>
+  <ol>
+    <li>Foto original sebelum retouching.</li>
+    <li>Foto final setelah retouching.</li>
+    <li>File PSD.</li>
+    <li>Screenshot proses yang menunjukkan penggunaan alat retouching.</li>
+    <li>Penjelasan singkat alat yang digunakan dan alasan pemilihannya.</li>
+  </ol>
+</section>
+
+<section id="kesalahan">
+  <h2>11. Kesalahan Umum Saat Retouching</h2>
+
+  <h3>1. Brush terlalu besar</h3>
+  <p>
+    Brush yang terlalu besar dapat mengubah area yang sebenarnya tidak perlu diperbaiki.
+    Gunakan ukuran brush yang lebih kecil dan sesuai kebutuhan.
+  </p>
+
+  <h3>2. Terlalu sering menggunakan satu alat</h3>
+  <p>
+    Setiap alat memiliki karakter berbeda. Spot Healing cocok untuk noda kecil,
+    Healing Brush memberikan kontrol sumber, Clone Stamp cocok untuk penyalinan pixel,
+    dan Remove Tool dapat membantu menghilangkan objek secara praktis.
+  </p>
+
+  <h3>3. Hasil terlalu halus</h3>
+  <p>
+    Jika tekstur kulit atau permukaan hilang, hasil dapat terlihat tidak natural.
+    Retouching seharusnya memperbaiki gangguan, bukan menghilangkan seluruh tekstur.
+  </p>
+
+  <h3>4. Clone Stamp membuat pola berulang</h3>
+  <p>
+    Jika sumber yang sama digunakan berkali-kali, pola dapat terlihat berulang.
+    Ambil sampel dari beberapa area yang sesuai.
+  </p>
+
+  <h3>5. Tidak mengecek hasil pada ukuran 100%</h3>
+  <p>
+    Retouching yang terlihat bagus pada zoom kecil belum tentu rapi pada ukuran sebenarnya.
+    Selalu periksa detail sebelum menyelesaikan pekerjaan.
+  </p>
+
+  <h3>6. Tidak melihat before-after</h3>
+  <p>
+    Tanpa membandingkan foto sebelum dan sesudah, kita bisa tidak sadar bahwa retouching
+    sudah terlalu banyak.
+  </p>
+
+  <h3>7. Menghapus detail yang sebenarnya penting</h3>
+  <p>
+    Tidak semua noda atau tekstur harus dihilangkan. Tentukan terlebih dahulu apakah
+    detail tersebut memang mengganggu tujuan foto.
+  </p>
+</section>
+
+<section id="soal">
+  <h2>12. Latihan Soal — 5 Pertanyaan</h2>
+  <p>Jawablah pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+  <details>
+    <summary>Soal 1 — Apa yang dimaksud dengan retouching?</summary>
+    <p>
+      <strong>Jawaban:</strong> Retouching adalah proses memperbaiki atau membersihkan
+      bagian tertentu dari foto agar tampilannya lebih baik, misalnya membersihkan noda,
+      menghilangkan objek kecil, atau memperbaiki gangguan pada gambar.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 2 — Apa perbedaan Spot Healing Brush dan Healing Brush?</summary>
+    <p>
+      <strong>Jawaban:</strong> Spot Healing Brush mencoba menentukan sumber perbaikan
+      secara otomatis berdasarkan area sekitar, sedangkan Healing Brush memungkinkan
+      pengguna menentukan area sumber secara manual.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 3 — Untuk apa Clone Stamp digunakan?</summary>
+    <p>
+      <strong>Jawaban:</strong> Clone Stamp digunakan untuk menyalin pixel dari satu area
+      ke area lain. Alat ini berguna untuk menghilangkan objek, memperbaiki tekstur,
+      atau mengisi area dengan pola yang sesuai.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 4 — Mengapa retouching tidak boleh dilakukan secara berlebihan?</summary>
+    <p>
+      <strong>Jawaban:</strong> Retouching berlebihan dapat menghilangkan tekstur,
+      membuat pola terlihat aneh, dan membuat foto kehilangan karakter atau terlihat
+      tidak natural.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 5 — Mengapa before-after penting dalam retouching?</summary>
+    <p>
+      <strong>Jawaban:</strong> Perbandingan before-after membantu kita melihat apakah
+      perubahan yang dilakukan memang memperbaiki foto dan memastikan hasil akhir
+      tidak terlalu berlebihan.
+    </p>
+  </details>
+</section>
+
+<section id="tugas">
+  <h2>13. 5 Tugas Praktik</h2>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 1 — Membersihkan Noda</h3>
+    <p>
+      Pilih satu foto yang memiliki minimal 5 noda atau gangguan kecil. Bersihkan menggunakan
+      Spot Healing Brush.
+    </p>
+    <p><strong>Tujuan:</strong> memahami ukuran brush dan penggunaan Spot Healing Brush.</p>
+    <p><strong>Output:</strong> before-after + file PSD.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 2 — Latihan Healing Brush</h3>
+    <p>
+      Pilih foto dengan area yang membutuhkan sumber tekstur tertentu. Gunakan Healing Brush
+      dengan mengambil sampel dari area yang sesuai.
+    </p>
+    <p><strong>Tujuan:</strong> memahami cara memilih sumber yang tepat.</p>
+    <p><strong>Output:</strong> JPG/PNG hasil latihan + PSD.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 3 — Clone Stamp</h3>
+    <p>
+      Cari foto dengan objek sederhana yang dapat dihilangkan menggunakan Clone Stamp.
+      Hilangkan objek tersebut tanpa membuat pola background terlihat berulang.
+    </p>
+    <p><strong>Tujuan:</strong> melatih pengambilan sampel dan kontrol Clone Stamp.</p>
+    <p><strong>Output:</strong> before-after + screenshot proses.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 4 — Remove Tool</h3>
+    <p>
+      Pilih foto yang memiliki satu atau beberapa objek sederhana yang mengganggu.
+      Gunakan Remove Tool untuk membersihkannya, kemudian perbaiki hasil jika diperlukan
+      dengan alat lain.
+    </p>
+    <p><strong>Tujuan:</strong> memahami penggunaan Remove Tool dan evaluasi hasil otomatis.</p>
+    <p><strong>Output:</strong> before-after + PSD.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 5 — Proyek Retouching Natural</h3>
+    <p>
+      Lakukan retouching pada satu foto dengan minimal tiga masalah berbeda.
+      Gunakan minimal dua jenis alat retouching dari materi.
+    </p>
+    <p>
+      Hasil akhir harus terlihat lebih bersih tetapi tetap natural. Sertakan perbandingan
+      before-after dan screenshot proses.
+    </p>
+    <p><strong>Tujuan:</strong> menerapkan seluruh konsep retouching dalam sebuah karya.</p>
+    <p><strong>Output:</strong> 1 PSD, 1 JPG/PNG, before-after, dan 2–3 screenshot proses.</p>
+  </div>
+
+  <h3>Kriteria penilaian yang dapat digunakan</h3>
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Aspek</th>
+        <th>Yang Dinilai</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pemahaman alat</td>
+        <td>Mampu memilih alat yang sesuai dengan masalah foto.</td>
+      </tr>
+      <tr>
+        <td>Teknik</td>
+        <td>Penggunaan Spot Healing, Healing Brush, Clone Stamp, atau Remove Tool dilakukan dengan benar.</td>
+      </tr>
+      <tr>
+        <td>Kerapian</td>
+        <td>Area hasil retouching tidak terlihat rusak, berulang, atau kasar.</td>
+      </tr>
+      <tr>
+        <td>Natural</td>
+        <td>Tekstur, cahaya, dan karakter foto tetap terlihat masuk akal.</td>
+      </tr>
+      <tr>
+        <td>Ketelitian</td>
+        <td>Siswa melakukan pengecekan detail dan before-after.</td>
+      </tr>
+      <tr>
+        <td>File kerja</td>
+        <td>File PSD tersedia dan proses dapat diperiksa.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="ringkasan">
+  <h2>14. Ringkasan Materi</h2>
+
+  <ul>
+    <li><strong>Retouching</strong> adalah proses memperbaiki atau membersihkan bagian tertentu dari foto.</li>
+    <li><strong>Spot Healing Brush</strong> cocok untuk noda dan gangguan kecil dengan proses yang praktis.</li>
+    <li><strong>Healing Brush</strong> memberikan kontrol lebih besar karena sumber sampel dapat ditentukan.</li>
+    <li><strong>Clone Stamp</strong> menyalin pixel dari area sumber ke area tujuan.</li>
+    <li><strong>Remove Tool</strong> membantu menghilangkan objek dengan proses yang praktis.</li>
+    <li>Objek sederhana dapat dihilangkan menggunakan satu alat atau kombinasi beberapa alat.</li>
+    <li>Ukuran brush harus disesuaikan dengan ukuran area yang diperbaiki.</li>
+    <li>Retouching yang baik tetap mempertahankan tekstur dan karakter asli foto.</li>
+    <li>Jangan menggunakan sumber Clone Stamp yang sama terus-menerus karena dapat membuat pola berulang.</li>
+    <li>Selalu periksa hasil pada detail dan keseluruhan foto.</li>
+    <li>Bandingkan before-after untuk menghindari retouching yang berlebihan.</li>
+    <li>Simpan file PSD agar proses editing tetap dapat diperiksa dan dilanjutkan.</li>
+  </ul>
+
+  <div class="success">
+    <strong>Kalimat kunci untuk diingat:</strong><br>
+    “Retouching yang baik bukan yang paling banyak mengubah foto,
+    tetapi yang memperbaiki masalah tanpa membuat hasil terlihat tidak natural.”
+  </div>
+
+  <p class="small">
+    Materi pembelajaran — SMK DIPSA Purwokerto. Disusun sebagai materi dasar
+    Adobe Photoshop dan dapat dikembangkan menjadi latihan retouching tingkat lanjut.
+  </p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <div class="container">
+    <strong>SMK DIPSA PURWOKERTO</strong><br>
+    Materi Retouching Dasar pada Photoshop
+  </div>
+</footer>
+
+</body>
+</html>

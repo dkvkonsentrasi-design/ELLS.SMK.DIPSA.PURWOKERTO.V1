@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Design pada Photoshop - SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#17191d;
+  --muted:#626872;
+  --paper:#f5f2ec;
+  --white:#fff;
+  --accent:#8f1d2c;
+  --accent-dark:#67131f;
+  --line:#ddd8cf;
+  --soft:#eee9e1;
+  --success:#e8f3ec;
+  --warning:#fff4df;
+  --shadow:0 12px 35px rgba(23,25,29,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header{
+  background:var(--ink);
+  color:#fff;
+  padding:18px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{font-weight:800;letter-spacing:.08em;font-size:14px}
+.brand span{display:block;color:#cfc9bf;font-size:11px;margin-top:2px;font-weight:500}
+.hero{
+  background:linear-gradient(135deg,#17191d 0%,#35131a 55%,#8f1d2c 100%);
+  color:#fff;
+  padding:70px 6% 75px;
+}
+.hero-inner{width:min(1180px,100%);margin:auto}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  color:#e5cbd0;
+  font-weight:700;
+}
+.hero h1{
+  font-size:clamp(36px,6vw,68px);
+  line-height:1.05;
+  margin:12px 0 18px;
+  max-width:900px;
+}
+.hero p{max-width:820px;color:#eee7e5;font-size:18px;margin:0}
+.layout{
+  width:min(1180px,92%);
+  margin:35px auto 70px;
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:28px;
+}
+.sidebar{
+  position:sticky;
+  top:20px;
+  align-self:start;
+  background:var(--white);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:22px;
+  border-radius:16px;
+}
+.sidebar h3{margin:0 0 14px;font-size:16px}
+.sidebar a{
+  display:block;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+  color:var(--ink);
+  font-size:14px;
+}
+.sidebar a:last-child{border-bottom:0}
+main section{
+  background:var(--white);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:32px;
+  margin-bottom:25px;
+  border-radius:18px;
+}
+h2{font-size:30px;line-height:1.2;margin:0 0 18px}
+h3{font-size:21px;margin-top:28px}
+h4{font-size:17px;margin-bottom:8px}
+p{margin:10px 0 16px}
+ul,ol{padding-left:24px}
+li{margin:7px 0}
+.lead{font-size:17px;color:#34373c}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.card{
+  background:#faf9f6;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:20px;
+}
+.card h3,.card h4{margin-top:0}
+.note,.tip,.warning,.success{
+  padding:17px 19px;
+  border-left:5px solid var(--accent);
+  border-radius:8px;
+  margin:18px 0;
+}
+.note{background:#f5f1eb}
+.tip{background:#f3f0f8;border-color:#5d477d}
+.warning{background:var(--warning);border-color:#c78316}
+.success{background:var(--success);border-color:#2d7a4d}
+.step{
+  counter-increment:steps;
+  position:relative;
+  padding-left:58px;
+  margin:24px 0;
+}
+.steps{counter-reset:steps}
+.step:before{
+  content:counter(steps);
+  position:absolute;
+  left:0;top:0;
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  background:var(--accent);
+  color:#fff;
+  border-radius:50%;
+  font-weight:800;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:18px 0;
+  font-size:14px;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  vertical-align:top;
+}
+th{background:#f0ece5}
+kbd{
+  background:#24272c;
+  color:#fff;
+  padding:2px 7px;
+  border-radius:5px;
+  font-size:12px;
+}
+.example{
+  border:1px dashed #bdb5aa;
+  background:#fbfaf7;
+  border-radius:12px;
+  padding:18px;
+  margin:15px 0;
+}
+.social-demo{
+  width:min(430px,100%);
+  margin:18px auto;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+}
+.social-demo .visual{
+  aspect-ratio:1/1;
+  background:linear-gradient(145deg,#17191d,#8f1d2c 62%,#d9b9be);
+  padding:28px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.social-demo .visual small{
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-weight:700;
+}
+.social-demo .visual h3{
+  font-size:42px;
+  line-height:1;
+  margin:0;
+}
+.social-demo .caption{
+  padding:16px;
+  font-size:13px;
+}
+.badge{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#f0e4e6;
+  color:var(--accent-dark);
+  font-size:12px;
+  font-weight:700;
+  margin:3px 4px 3px 0;
+}
+.checklist li::marker{color:var(--accent)}
+details{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:12px 0;
+  background:#faf9f6;
+}
+summary{cursor:pointer;font-weight:700}
+footer{
+  background:var(--ink);
+  color:#cfcfcf;
+  padding:35px 6%;
+  text-align:center;
+  font-size:13px;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  header{padding:15px 4%}
+  .hero{padding:52px 5% 58px}
+  .layout{width:94%;margin-top:20px}
+  main section{padding:22px 18px;border-radius:14px}
+  h2{font-size:25px}
+  .hero p{font-size:16px}
+  table{font-size:13px}
+  th,td{padding:9px}
+  .social-demo .visual h3{font-size:34px}
+}
+@media print{
+  body{background:#fff}
+  header,.sidebar,footer{display:none}
+  .layout{display:block;width:100%;margin:0}
+  main section{box-shadow:none;border:0;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    SMK DIPSA PURWOKERTO
+    <span>Materi Pembelajaran Desain Grafis & Photoshop</span>
+  </div>
+  <div>SOCIAL MEDIA DESIGN</div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Materi Photoshop • Desain Grafis</div>
+    <h1>Social Media Design pada Photoshop</h1>
+    <p>
+      Belajar membuat desain untuk media sosial yang menarik, mudah dibaca, konsisten,
+      dan memiliki identitas visual yang kuat. Materi ini membahas proses dari menentukan
+      ukuran canvas sampai membuat tiga desain dengan satu tema atau brand yang sama.
+    </p>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    <a href="#tujuan">Tujuan Pembelajaran</a>
+    <a href="#karakteristik">1. Karakteristik Social Media Design</a>
+    <a href="#canvas">2. Ukuran Canvas</a>
+    <a href="#konsep">3. Menentukan Konsep</a>
+    <a href="#layout">4. Layout</a>
+    <a href="#hierarchy">5. Visual Hierarchy</a>
+    <a href="#branding">6. Branding</a>
+    <a href="#tipografi">7. Typography</a>
+    <a href="#warna">8. Pemilihan Warna</a>
+    <a href="#foto">9. Penggunaan Foto</a>
+    <a href="#konsistensi">10. Konsistensi Desain</a>
+    <a href="#photoshop">11. Membuat Desain di Photoshop</a>
+    <a href="#workflow">12. Workflow</a>
+    <a href="#proyek">13. Proyek 3 Desain</a>
+    <a href="#kesalahan">14. Kesalahan Umum</a>
+    <a href="#soal">15. 5 Latihan Soal</a>
+    <a href="#tugas">16. 5 Tugas Praktik</a>
+    <a href="#ringkasan">17. Ringkasan</a>
+  </aside>
+
+  <main>
+    <section id="tujuan">
+      <h2>Tujuan Pembelajaran</h2>
+      <p class="lead">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+      <ul class="checklist">
+        <li>Menjelaskan karakteristik desain untuk media sosial.</li>
+        <li>Menentukan ukuran canvas sesuai kebutuhan platform.</li>
+        <li>Menyusun layout yang rapi dan mudah dipahami.</li>
+        <li>Menerapkan visual hierarchy pada desain.</li>
+        <li>Memahami hubungan desain media sosial dengan branding.</li>
+        <li>Menggunakan typography secara tepat.</li>
+        <li>Memilih warna yang sesuai dengan identitas brand.</li>
+        <li>Menggunakan foto sebagai elemen komunikasi visual.</li>
+        <li>Membuat beberapa desain yang tetap konsisten dalam satu brand.</li>
+        <li>Menyusun dan mengekspor desain media sosial menggunakan Photoshop.</li>
+      </ul>
+    </section>
+
+    <section id="karakteristik">
+      <h2>1. Karakteristik Desain Media Sosial</h2>
+      <p class="lead">
+        Social media design adalah desain visual yang dibuat untuk menyampaikan informasi,
+        promosi, edukasi, atau identitas melalui platform media sosial.
+      </p>
+      <p>
+        Berbeda dengan poster cetak yang mungkin dilihat dari jarak tertentu, desain media sosial
+        biasanya dilihat melalui layar ponsel. Audiens dapat menggulir halaman dengan cepat.
+        Karena itu, desain harus mampu menarik perhatian dalam waktu singkat.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Singkat</h3>
+          <p>Pesan utama harus mudah dipahami tanpa membutuhkan waktu lama.</p>
+        </div>
+        <div class="card">
+          <h3>Menarik</h3>
+          <p>Visual harus mampu menghentikan kebiasaan scrolling dan membuat audiens memperhatikan.</p>
+        </div>
+        <div class="card">
+          <h3>Mudah Dibaca</h3>
+          <p>Ukuran teks dan kontras harus cukup agar tetap terbaca pada layar yang relatif kecil.</p>
+        </div>
+        <div class="card">
+          <h3>Konsisten</h3>
+          <p>Desain yang dibuat untuk satu brand perlu memiliki ciri visual yang saling berhubungan.</p>
+        </div>
+      </div>
+
+      <h3>Contoh jenis konten</h3>
+      <ul>
+        <li>Konten promosi kegiatan.</li>
+        <li>Pengumuman sekolah atau organisasi.</li>
+        <li>Konten edukasi.</li>
+        <li>Quote atau motivasi.</li>
+        <li>Informasi produk atau jasa.</li>
+        <li>Dokumentasi kegiatan.</li>
+        <li>Konten portofolio.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Prinsip utama:</strong> desain media sosial harus mengutamakan komunikasi.
+        Jangan membuat desain terlalu ramai hanya agar terlihat “keren”. Setiap elemen harus
+        memiliki alasan mengapa digunakan.
+      </div>
+    </section>
+
+    <section id="canvas">
+      <h2>2. Menentukan Ukuran Canvas</h2>
+      <p>
+        Ukuran canvas harus ditentukan sebelum mulai mendesain. Gunakan ukuran yang sesuai dengan
+        kebutuhan platform dan jenis konten. Ukuran platform dapat berubah, jadi biasakan memeriksa
+        spesifikasi terbaru ketika mengerjakan proyek nyata.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Kebutuhan</th>
+            <th>Contoh Canvas</th>
+            <th>Kegunaan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Post portrait</td>
+            <td>1080 × 1350 px</td>
+            <td>Konten feed dengan format vertikal.</td>
+          </tr>
+          <tr>
+            <td>Post square</td>
+            <td>1080 × 1080 px</td>
+            <td>Konten berbentuk persegi.</td>
+          </tr>
+          <tr>
+            <td>Story / vertical content</td>
+            <td>1080 × 1920 px</td>
+            <td>Konten layar penuh vertikal.</td>
+          </tr>
+          <tr>
+            <td>Landscape post</td>
+            <td>Contoh 1200 × 628 px</td>
+            <td>Konten horizontal pada kebutuhan tertentu.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Catatan:</strong> angka di atas adalah contoh ukuran kerja yang umum digunakan.
+        Platform dapat memperbarui rasio atau area tampilan. Untuk proyek nyata, sesuaikan dengan
+        spesifikasi platform yang sedang digunakan.
+      </div>
+
+      <h3>Hal yang perlu diperhatikan</h3>
+      <ul>
+        <li>Pastikan resolusi cukup untuk hasil yang tajam.</li>
+        <li>Gunakan RGB untuk kebutuhan layar/digital.</li>
+        <li>Jangan menempatkan teks terlalu dekat dengan tepi.</li>
+        <li>Untuk konten vertikal, pikirkan bagaimana desain akan terlihat pada layar ponsel.</li>
+      </ul>
+    </section>
+
+    <section id="konsep">
+      <h2>3. Menentukan Konsep</h2>
+      <p>
+        Sebelum membuka Photoshop, tentukan tujuan konten. Desain untuk pengumuman sekolah tentu
+        berbeda dengan desain promosi produk atau konten portofolio DKV.
+      </p>
+
+      <h3>Gunakan brief sederhana</h3>
+      <div class="example">
+        <strong>Brand:</strong> DKV Creative Club<br>
+        <strong>Target:</strong> Siswa SMK DIPSA Purwokerto<br>
+        <strong>Konten:</strong> Pameran karya siswa<br>
+        <strong>Pesan:</strong> “Lihat Ide, Karya, dan Kreativitas Kami”<br>
+        <strong>Gaya:</strong> Modern, kreatif, minimalis<br>
+        <strong>Warna:</strong> Hitam, putih, marun sebagai aksen<br>
+        <strong>CTA:</strong> “Datang dan Lihat Karyanya”
+      </div>
+
+      <h3>5 pertanyaan sebelum mendesain</h3>
+      <ol>
+        <li>Siapa yang akan melihat desain ini?</li>
+        <li>Apa pesan utama yang harus diingat?</li>
+        <li>Apa tujuan kontennya?</li>
+        <li>Bagaimana karakter visual brand?</li>
+        <li>Tindakan apa yang diharapkan dari audiens?</li>
+      </ol>
+    </section>
+
+    <section id="layout">
+      <h2>4. Layout</h2>
+      <p>
+        Layout adalah cara menyusun elemen-elemen desain di dalam canvas. Pada media sosial,
+        layout harus memperhatikan keterbatasan ukuran layar dan kebiasaan audiens yang melihat
+        konten secara cepat.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Alignment</h3>
+          <p>Samakan posisi tepi atau garis elemen agar desain terlihat teratur.</p>
+        </div>
+        <div class="card">
+          <h3>Spacing</h3>
+          <p>Berikan ruang kosong agar setiap informasi tidak saling bertabrakan.</p>
+        </div>
+        <div class="card">
+          <h3>Balance</h3>
+          <p>Seimbangkan elemen visual agar komposisi tidak terasa berat di satu sisi.</p>
+        </div>
+        <div class="card">
+          <h3>Grid</h3>
+          <p>Gunakan grid atau guides untuk membantu menjaga konsistensi posisi elemen.</p>
+        </div>
+      </div>
+
+      <h3>White space</h3>
+      <p>
+        White space adalah area kosong yang sengaja diberikan di antara elemen. White space bukan
+        berarti ruang yang terbuang. Justru ruang kosong dapat membuat desain terasa lebih rapi,
+        memberi fokus, dan meningkatkan keterbacaan.
+      </p>
+
+      <div class="tip">
+        <strong>Tips praktis:</strong> jika desain terasa terlalu penuh, jangan langsung mengecilkan
+        semua elemen. Coba hapus informasi yang tidak penting dan tambah ruang kosong.
+      </div>
+    </section>
+
+    <section id="hierarchy">
+      <h2>5. Visual Hierarchy</h2>
+      <p>
+        Visual hierarchy adalah cara menentukan urutan perhatian mata terhadap elemen desain.
+        Audiens sebaiknya dapat mengetahui bagian terpenting hanya dengan melihat sekilas.
+      </p>
+
+      <h3>Contoh urutan hierarchy</h3>
+      <ol>
+        <li><strong>Headline:</strong> pesan utama.</li>
+        <li><strong>Visual:</strong> foto atau ilustrasi utama.</li>
+        <li><strong>Informasi:</strong> tanggal, detail, manfaat, atau keterangan.</li>
+        <li><strong>CTA:</strong> tindakan yang diharapkan.</li>
+        <li><strong>Identitas:</strong> logo atau nama brand.</li>
+      </ol>
+
+      <div class="social-demo">
+        <div class="visual">
+          <div>
+            <small>DKV Creative Club</small>
+          </div>
+          <div>
+            <h3>EXHIBITION<br>2026</h3>
+            <p>Ide • Visual • Karya</p>
+          </div>
+          <div><strong>DATANG & LIHAT KARYANYA →</strong></div>
+        </div>
+        <div class="caption">
+          Contoh sederhana: headline dibuat paling dominan, kemudian visual dan informasi pendukung.
+        </div>
+      </div>
+
+      <h3>Cara membuat hierarchy</h3>
+      <ul>
+        <li>Gunakan perbedaan ukuran.</li>
+        <li>Gunakan perbedaan ketebalan font.</li>
+        <li>Gunakan kontras warna.</li>
+        <li>Berikan ruang di sekitar elemen penting.</li>
+        <li>Tempatkan elemen utama pada posisi yang strategis.</li>
+      </ul>
+
+      <div class="note">
+        Jika semua elemen memiliki ukuran, warna, dan ketebalan yang sama, audiens akan kesulitan
+        menentukan fokus. Hierarchy membuat desain mempunyai “urutan membaca”.
+      </div>
+    </section>
+
+    <section id="branding">
+      <h2>6. Branding</h2>
+      <p>
+        Branding adalah proses membangun identitas yang membuat sebuah brand mudah dikenali.
+        Dalam social media design, branding dapat terlihat dari penggunaan logo, warna, font,
+        gaya gambar, bentuk grafis, dan gaya komunikasi.
+      </p>
+
+      <h3>Elemen identitas visual</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>Logo</h3>
+          <p>Identitas utama yang dapat membantu audiens mengenali brand.</p>
+        </div>
+        <div class="card">
+          <h3>Color Palette</h3>
+          <p>Kumpulan warna utama dan pendukung yang digunakan secara konsisten.</p>
+        </div>
+        <div class="card">
+          <h3>Typography</h3>
+          <p>Jenis dan gaya huruf yang menjadi bagian dari karakter visual brand.</p>
+        </div>
+        <div class="card">
+          <h3>Visual Style</h3>
+          <p>Gaya foto, ilustrasi, bentuk, tekstur, dan elemen grafis yang digunakan.</p>
+        </div>
+      </div>
+
+      <h3>Contoh brand kit sederhana</h3>
+      <div class="example">
+        <span class="badge">Warna utama: Marun</span>
+        <span class="badge">Warna netral: Putih</span>
+        <span class="badge">Warna gelap: Hitam</span>
+        <span class="badge">Font judul: Bold Sans</span>
+        <span class="badge">Font isi: Sans Regular</span>
+        <span class="badge">Gaya: Modern Minimal</span>
+      </div>
+
+      <p>
+        Brand kit sederhana seperti ini akan membantu ketika membuat beberapa desain sekaligus.
+        Desain pertama, kedua, dan ketiga akan terlihat berasal dari identitas yang sama.
+      </p>
+    </section>
+
+    <section id="tipografi">
+      <h2>7. Typography</h2>
+      <p>
+        Typography sangat penting karena sebagian besar social media design menggunakan teks sebagai
+        penyampai pesan. Teks harus menarik tetapi tetap mudah dibaca pada layar.
+      </p>
+
+      <h3>Prinsip typography</h3>
+      <ul>
+        <li>Gunakan font yang sesuai karakter brand.</li>
+        <li>Batasi jumlah keluarga font.</li>
+        <li>Buat perbedaan ukuran antara headline dan informasi pendukung.</li>
+        <li>Gunakan weight seperti bold atau semibold untuk menekankan informasi.</li>
+        <li>Atur tracking dan leading jika jarak huruf/baris terasa terlalu rapat atau terlalu renggang.</li>
+        <li>Pastikan warna teks memiliki kontras yang cukup.</li>
+      </ul>
+
+      <h3>Contoh hierarchy teks</h3>
+      <table>
+        <thead>
+          <tr><th>Elemen</th><th>Peran</th><th>Perlakuan</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Headline</td><td>Pesan utama</td><td>Paling besar dan paling menonjol.</td></tr>
+          <tr><td>Subheadline</td><td>Penjelasan singkat</td><td>Lebih kecil tetapi tetap terlihat.</td></tr>
+          <tr><td>Body text</td><td>Informasi detail</td><td>Ukuran nyaman dibaca.</td></tr>
+          <tr><td>CTA</td><td>Ajakan</td><td>Kontras dan mudah ditemukan.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        Jangan mengorbankan keterbacaan demi gaya. Font dekoratif dapat digunakan sebagai aksen,
+        tetapi jangan digunakan untuk paragraf panjang.
+      </div>
+    </section>
+
+    <section id="warna">
+      <h2>8. Pemilihan Warna</h2>
+      <p>
+        Warna harus membantu brand terlihat konsisten dan membantu informasi memiliki hierarchy.
+        Tentukan palette sebelum membuat banyak desain.
+      </p>
+
+      <h3>Struktur palette sederhana</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>Primary</h3>
+          <p>Warna utama yang paling sering muncul dan menjadi identitas brand.</p>
+        </div>
+        <div class="card">
+          <h3>Secondary</h3>
+          <p>Warna pendukung yang membantu membangun variasi visual.</p>
+        </div>
+        <div class="card">
+          <h3>Accent</h3>
+          <p>Warna penekanan untuk CTA atau informasi tertentu.</p>
+        </div>
+        <div class="card">
+          <h3>Neutral</h3>
+          <p>Putih, hitam, abu-abu, atau warna netral untuk menjaga keseimbangan.</p>
+        </div>
+      </div>
+
+      <h3>Kontras</h3>
+      <p>
+        Kontras adalah perbedaan visual yang membuat satu elemen lebih mudah terlihat. Kontras dapat
+        dibuat melalui warna, ukuran, ketebalan, bentuk, atau posisi.
+      </p>
+
+      <div class="tip">
+        Jika background menggunakan foto yang ramai, tambahkan area warna atau overlay yang cukup
+        agar teks tidak tenggelam.
+      </div>
+    </section>
+
+    <section id="foto">
+      <h2>9. Penggunaan Foto</h2>
+      <p>
+        Foto dapat menjadi elemen utama atau pendukung. Pilih foto yang sesuai dengan pesan dan
+        pertimbangkan ruang kosong di dalam foto untuk menempatkan teks.
+      </p>
+
+      <h3>Kriteria foto</h3>
+      <ul>
+        <li>Relevan dengan isi konten.</li>
+        <li>Memiliki kualitas yang cukup.</li>
+        <li>Komposisinya mendukung layout.</li>
+        <li>Subjek utama tidak terpotong secara tidak sengaja.</li>
+        <li>Warna foto tidak bertabrakan dengan identitas brand.</li>
+        <li>Penggunaan foto memiliki hak/izin yang sesuai.</li>
+      </ul>
+
+      <h3>Teknik sederhana di Photoshop</h3>
+      <ol>
+        <li>Masukkan foto ke canvas.</li>
+        <li>Gunakan Transform untuk mengatur ukuran dan posisi.</li>
+        <li>Gunakan Crop jika komposisi perlu diperbaiki.</li>
+        <li>Gunakan Adjustment Layer untuk memperbaiki warna jika diperlukan.</li>
+        <li>Gunakan layer mask jika ingin menyembunyikan sebagian foto.</li>
+        <li>Tambahkan overlay warna jika teks membutuhkan kontras.</li>
+      </ol>
+
+      <div class="note">
+        Foto yang bagus belum tentu cocok untuk desain. Yang lebih penting adalah apakah foto tersebut
+        membantu menyampaikan pesan dan memberi ruang untuk elemen lainnya.
+      </div>
+    </section>
+
+    <section id="konsistensi">
+      <h2>10. Konsistensi Desain</h2>
+      <p>
+        Konsistensi berarti beberapa desain dalam satu brand memiliki hubungan visual. Audiens dapat
+        mengenali bahwa konten tersebut berasal dari brand yang sama walaupun topiknya berbeda.
+      </p>
+
+      <h3>Yang harus konsisten</h3>
+      <ul class="checklist">
+        <li>Palet warna utama.</li>
+        <li>Jenis font dan hierarchy.</li>
+        <li>Posisi atau gaya penggunaan logo.</li>
+        <li>Gaya foto atau ilustrasi.</li>
+        <li>Gaya ikon dan bentuk grafis.</li>
+        <li>Margin dan spacing.</li>
+        <li>Gaya CTA.</li>
+        <li>Karakter visual secara keseluruhan.</li>
+      </ul>
+
+      <h3>Konsisten bukan berarti identik</h3>
+      <p>
+        Tiga desain tidak harus memiliki layout yang persis sama. Variasi tetap diperlukan agar
+        feed tidak membosankan. Yang dipertahankan adalah identitas visualnya.
+      </p>
+
+      <div class="example">
+        <strong>Contoh:</strong> desain 1 menggunakan foto besar, desain 2 menggunakan tipografi
+        dominan, dan desain 3 menggunakan beberapa foto. Ketiganya tetap terlihat satu brand karena
+        menggunakan palette, font, logo, spacing, dan gaya grafis yang sama.
+      </div>
+    </section>
+
+    <section id="photoshop">
+      <h2>11. Membuat Social Media Design di Photoshop</h2>
+      <p class="lead">
+        Berikut langkah praktik yang dapat digunakan untuk membuat satu desain media sosial dari awal.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Tentukan tujuan konten</h3>
+          <p>
+            Tentukan apakah konten digunakan untuk promosi, informasi, edukasi, dokumentasi,
+            pengumuman, atau branding.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Tentukan platform dan canvas</h3>
+          <p>
+            Pilih ukuran sesuai kebutuhan. Contoh untuk post portrait: 1080 × 1350 px.
+            Gunakan mode warna RGB untuk konten digital.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat folder/group layer</h3>
+          <p>
+            Pisahkan layer menjadi kelompok seperti <strong>Background</strong>, <strong>Photo</strong>,
+            <strong>Typography</strong>, <strong>Graphic</strong>, dan <strong>Logo</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat background</h3>
+          <p>
+            Gunakan warna brand, gradient, tekstur, atau foto sesuai konsep. Jangan membuat background
+            terlalu ramai jika konten membutuhkan banyak teks.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Masukkan foto</h3>
+          <p>
+            Gunakan <strong>File &gt; Place Embedded</strong> jika tersedia pada versi Photoshop Anda.
+            Atur posisi menggunakan Transform dan pastikan foto tidak pecah.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat headline</h3>
+          <p>
+            Tekan <kbd>T</kbd> untuk Type Tool. Buat headline yang singkat dan kuat. Atur font,
+            ukuran, weight, warna, dan alignment.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Tambahkan informasi</h3>
+          <p>
+            Masukkan informasi pendukung yang benar-benar diperlukan. Hindari membuat paragraf terlalu
+            panjang untuk satu posting.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat CTA</h3>
+          <p>
+            Buat elemen CTA seperti tombol visual atau teks ajakan. Gunakan warna aksen dan ruang
+            yang cukup agar mudah ditemukan.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Tambahkan logo</h3>
+          <p>
+            Tempatkan logo dengan ukuran yang proporsional. Pastikan logo tetap terlihat tetapi
+            tidak mengalahkan pesan utama.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Rapikan layout</h3>
+          <p>
+            Aktifkan ruler dan guides bila diperlukan. Periksa alignment, margin, spacing, dan
+            keseimbangan komposisi.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Periksa hierarchy</h3>
+          <p>
+            Zoom out dan lihat desain secara keseluruhan. Pastikan headline menjadi fokus pertama,
+            lalu visual dan informasi berikutnya.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Simpan dan ekspor</h3>
+          <p>
+            Simpan file kerja sebagai <strong>PSD</strong> agar layer tetap dapat diedit.
+            Ekspor salinan ke JPEG atau PNG sesuai kebutuhan publikasi digital.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <h2>12. Workflow Social Media Design</h2>
+      <p>Gunakan alur berikut agar proses desain lebih terarah:</p>
+      <ol>
+        <li><strong>Brief:</strong> pahami kebutuhan konten.</li>
+        <li><strong>Riset:</strong> pelajari referensi visual dan target audiens.</li>
+        <li><strong>Branding:</strong> tentukan palette, font, logo, dan gaya visual.</li>
+        <li><strong>Sketsa:</strong> buat beberapa alternatif layout sederhana.</li>
+        <li><strong>Produksi:</strong> susun desain di Photoshop.</li>
+        <li><strong>Review:</strong> cek hierarchy, keterbacaan, warna, dan informasi.</li>
+        <li><strong>Konsistensi:</strong> bandingkan dengan desain lain dari brand yang sama.</li>
+        <li><strong>Finalisasi:</strong> simpan PSD dan ekspor file final.</li>
+      </ol>
+
+      <div class="success">
+        <strong>Tips:</strong> buat satu template dasar yang berisi elemen brand.
+        Setelah itu, buat variasi layout untuk konten berikutnya. Cara ini membantu menjaga
+        konsistensi dan menghemat waktu.
+      </div>
+    </section>
+
+    <section id="proyek">
+      <h2>13. Proyek: Membuat 3 Desain Social Media dengan Satu Tema/Brand</h2>
+      <p class="lead">
+        Buat tiga desain media sosial yang berbeda tetapi tetap terlihat sebagai bagian dari
+        satu brand atau kampanye.
+      </p>
+
+      <h3>Contoh proyek</h3>
+      <div class="example">
+        <strong>Brand:</strong> DKV Creative Club<br>
+        <strong>Tema:</strong> Pameran Karya Siswa<br>
+        <strong>Target:</strong> Siswa, guru, dan warga sekolah<br>
+        <strong>Gaya:</strong> Modern, kreatif, minimalis<br>
+        <strong>Palette:</strong> Marun, hitam, putih<br>
+        <strong>Typography:</strong> Sans-serif bold untuk headline + sans-serif regular untuk informasi
+      </div>
+
+      <h3>Desain 1 — Announcement</h3>
+      <p>
+        Buat desain pengumuman yang memperkenalkan kegiatan. Gunakan headline besar, visual utama,
+        tanggal, dan CTA.
+      </p>
+
+      <h3>Desain 2 — Information</h3>
+      <p>
+        Buat desain yang berisi informasi lebih detail, misalnya jadwal, lokasi, ketentuan,
+        atau daftar kegiatan. Prioritaskan keterbacaan.
+      </p>
+
+      <h3>Desain 3 — Reminder/Promotion</h3>
+      <p>
+        Buat desain pengingat atau promosi menjelang kegiatan. Gunakan visual yang lebih menarik
+        dan CTA yang jelas.
+      </p>
+
+      <h3>Contoh perbedaan layout</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Desain</th>
+            <th>Fokus</th>
+            <th>Layout</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Announcement</td>
+            <td>Nama kegiatan</td>
+            <td>Headline dominan + foto besar</td>
+          </tr>
+          <tr>
+            <td>2. Information</td>
+            <td>Detail kegiatan</td>
+            <td>Grid/kartu informasi</td>
+          </tr>
+          <tr>
+            <td>3. Reminder</td>
+            <td>Ajakan bertindak</td>
+            <td>Visual kuat + CTA dominan</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Ketentuan proyek</h3>
+      <ul class="checklist">
+        <li>Membuat 3 desain dengan tema/brand yang sama.</li>
+        <li>Menggunakan palette warna yang konsisten.</li>
+        <li>Menggunakan typography yang konsisten.</li>
+        <li>Memiliki identitas/logo yang konsisten.</li>
+        <li>Memiliki gaya visual yang saling berhubungan.</li>
+        <li>Layout boleh berbeda agar masing-masing konten tidak monoton.</li>
+        <li>Setiap desain memiliki hierarchy yang jelas.</li>
+        <li>Setiap desain dapat berdiri sendiri dan tetap mudah dipahami.</li>
+      </ul>
+
+      <h3>Checklist sebelum dikumpulkan</h3>
+      <ul class="checklist">
+        <li>Ukuran canvas sesuai kebutuhan.</li>
+        <li>Semua desain terlihat satu brand.</li>
+        <li>Headline mudah dibaca.</li>
+        <li>Informasi tidak terlalu kecil.</li>
+        <li>Warna memiliki kontras yang baik.</li>
+        <li>Foto berkualitas dan relevan.</li>
+        <li>Logo tidak berubah-ubah secara tidak wajar.</li>
+        <li>Spacing dan alignment rapi.</li>
+        <li>Tidak ada salah ketik.</li>
+        <li>File PSD setiap desain tersimpan.</li>
+      </ul>
+
+      <h3>Kriteria penilaian proyek</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspek</th>
+            <th>Yang Dinilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Konsep</td>
+            <td>Kesesuaian tema, target, tujuan, dan pesan.</td>
+          </tr>
+          <tr>
+            <td>Layout</td>
+            <td>Komposisi, alignment, spacing, dan keseimbangan.</td>
+          </tr>
+          <tr>
+            <td>Hierarchy</td>
+            <td>Kejelasan fokus dan urutan membaca.</td>
+          </tr>
+          <tr>
+            <td>Branding</td>
+            <td>Konsistensi warna, logo, font, dan gaya visual.</td>
+          </tr>
+          <tr>
+            <td>Typography</td>
+            <td>Keterbacaan dan pengaturan hierarchy teks.</td>
+          </tr>
+          <tr>
+            <td>Warna</td>
+            <td>Harmoni, kontras, dan kesesuaian dengan brand.</td>
+          </tr>
+          <tr>
+            <td>Foto/Visual</td>
+            <td>Relevansi, kualitas, dan cara penempatan.</td>
+          </tr>
+          <tr>
+            <td>Konsistensi 3 desain</td>
+            <td>Ketiga desain terlihat sebagai satu identitas tetapi tetap memiliki variasi.</td>
+          </tr>
+          <tr>
+            <td>Teknis</td>
+            <td>Kerapian layer, ukuran canvas, PSD, dan hasil ekspor.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="kesalahan">
+      <h2>14. Kesalahan Umum</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Desain terlalu penuh</h3>
+          <p>Kurangi informasi yang tidak penting dan gunakan white space.</p>
+        </div>
+        <div class="card">
+          <h3>Font terlalu kecil</h3>
+          <p>Periksa desain dari ukuran layar yang realistis dan prioritaskan informasi utama.</p>
+        </div>
+        <div class="card">
+          <h3>Warna tidak konsisten</h3>
+          <p>Buat palette terlebih dahulu dan gunakan warna tersebut secara terkontrol.</p>
+        </div>
+        <div class="card">
+          <h3>Logo terlalu besar</h3>
+          <p>Logo penting untuk branding, tetapi jangan sampai mengalahkan pesan utama.</p>
+        </div>
+        <div class="card">
+          <h3>Foto tidak relevan</h3>
+          <p>Pilih foto yang mendukung pesan dan gaya brand.</p>
+        </div>
+        <div class="card">
+          <h3>Tiga desain terlihat berbeda total</h3>
+          <p>Pertahankan elemen brand seperti palette, font, logo, dan gaya visual.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="soal">
+      <h2>15. 5 Latihan Soal</h2>
+
+      <details>
+        <summary>Soal 1 — Apa yang dimaksud dengan social media design?</summary>
+        <p><strong>Jawaban:</strong> Social media design adalah desain visual yang dibuat untuk menyampaikan informasi, promosi, edukasi, dokumentasi, atau identitas melalui platform media sosial.</p>
+      </details>
+
+      <details>
+        <summary>Soal 2 — Mengapa ukuran canvas harus ditentukan sebelum membuat desain?</summary>
+        <p><strong>Jawaban:</strong> Karena setiap kebutuhan/platform dapat memiliki ukuran atau rasio yang berbeda. Menentukan canvas sejak awal membantu desain sesuai media dan menghindari pekerjaan harus diubah ulang.</p>
+      </details>
+
+      <details>
+        <summary>Soal 3 — Apa fungsi visual hierarchy?</summary>
+        <p><strong>Jawaban:</strong> Visual hierarchy mengatur tingkat kepentingan elemen agar audiens mengetahui bagian yang harus dilihat atau dibaca terlebih dahulu.</p>
+      </details>
+
+      <details>
+        <summary>Soal 4 — Mengapa branding dan konsistensi penting ketika membuat beberapa desain?</summary>
+        <p><strong>Jawaban:</strong> Karena konsistensi membantu audiens mengenali bahwa beberapa konten berasal dari brand atau kampanye yang sama.</p>
+      </details>
+
+      <details>
+        <summary>Soal 5 — Sebutkan minimal empat elemen yang perlu dibuat konsisten dalam tiga desain social media.</summary>
+        <p><strong>Jawaban:</strong> Contohnya warna, typography, logo, gaya foto/visual, gaya grafis, spacing, layout dasar, dan gaya CTA. Minimal empat jawaban sudah benar.</p>
+      </details>
+    </section>
+
+    <section id="tugas">
+      <h2>16. 5 Tugas Praktik</h2>
+
+      <div class="card">
+        <h3>Tugas 1 — Satu Konten Promosi</h3>
+        <p>
+          Buat satu desain social media untuk mempromosikan kegiatan sekolah. Tentukan tema,
+          target audiens, warna, font, foto, dan CTA.
+        </p>
+        <p><strong>Output:</strong> 1 desain digital + file PSD.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 2 — Membuat Brand Kit Mini</h3>
+        <p>
+          Buat identitas sederhana untuk sebuah brand fiktif. Tentukan logo/wordmark, tiga sampai
+          lima warna, font judul, font isi, dan gaya visual.
+        </p>
+        <p><strong>Output:</strong> 1 halaman brand kit + file PSD.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 3 — Latihan Visual Hierarchy</h3>
+        <p>
+          Buat desain pengumuman dengan minimal tiga tingkat hierarchy: headline, informasi,
+          dan CTA. Pastikan audiens dapat mengetahui fokus utama dalam waktu singkat.
+        </p>
+        <p><strong>Output:</strong> 1 desain social media.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 4 — Eksplorasi Foto</h3>
+        <p>
+          Buat dua versi desain dengan tema yang sama menggunakan foto berbeda. Bandingkan
+          bagaimana posisi, crop, dan overlay memengaruhi keterbacaan teks.
+        </p>
+        <p><strong>Output:</strong> 2 desain + penjelasan singkat.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 5 — Proyek Utama 3 Desain</h3>
+        <p>
+          Buat tiga desain social media dengan satu tema/brand yang sama:
+          <strong>Announcement, Information, dan Reminder/Promotion</strong>.
+          Gunakan identitas visual yang konsisten tetapi buat layout yang bervariasi.
+        </p>
+        <p><strong>Output:</strong> 3 desain final + 3 file PSD + brief konsep.</p>
+      </div>
+
+      <div class="success">
+        <strong>Saran nama file:</strong><br>
+        NamaSiswa_SocialMedia_01.psd<br>
+        NamaSiswa_SocialMedia_02.psd<br>
+        NamaSiswa_SocialMedia_03.psd
+      </div>
+    </section>
+
+    <section id="ringkasan">
+      <h2>17. Ringkasan</h2>
+      <p>
+        Social media design bukan hanya tentang membuat gambar yang menarik. Desain harus mampu
+        menyampaikan pesan dengan cepat, sesuai karakter platform, dan tetap memiliki identitas
+        visual yang konsisten.
+      </p>
+      <ul>
+        <li>Pahami karakteristik media sosial dan kebiasaan audiens.</li>
+        <li>Tentukan ukuran canvas sesuai kebutuhan platform.</li>
+        <li>Buat konsep sebelum masuk ke tahap produksi.</li>
+        <li>Gunakan layout yang rapi dan memiliki ruang kosong.</li>
+        <li>Terapkan visual hierarchy agar fokus mudah ditemukan.</li>
+        <li>Gunakan branding agar konten mudah dikenali.</li>
+        <li>Pilih typography yang mudah dibaca.</li>
+        <li>Gunakan warna secara konsisten dan perhatikan kontras.</li>
+        <li>Pilih foto yang relevan dan berkualitas.</li>
+        <li>Jaga konsistensi antara beberapa desain dalam satu brand.</li>
+        <li>Simpan file PSD dan ekspor hasil akhir sesuai kebutuhan.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Inti materi:</strong> desain media sosial yang baik memiliki tiga hal utama:
+        <strong>pesan yang jelas, visual yang menarik, dan identitas yang konsisten.</strong>
+        Ketiganya harus bekerja bersama agar desain tidak hanya terlihat bagus tetapi juga efektif
+        dalam berkomunikasi.
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <strong>SMK DIPSA PURWOKERTO</strong><br>
+  Materi Social Media Design pada Photoshop • Pembelajaran Desain Grafis
+</footer>
+
+</body>
+</html>

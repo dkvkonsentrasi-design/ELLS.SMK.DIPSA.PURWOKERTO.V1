@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjustment & Color Correction Dasar pada Photoshop | SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#15171a;--muted:#626872;--paper:#f5f2eb;--white:#fff;
+  --accent:#8f1d2c;--line:#ded9cf;--soft:#eee9df;--green:#236b4b;
+  --gold:#8a6b2f;--shadow:0 12px 35px rgba(0,0,0,.08)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
+a{color:inherit}
+.hero{background:linear-gradient(135deg,#17191d 0%,#292c31 55%,#8f1d2c 100%);color:#fff;padding:64px 20px 55px}
+.container{width:min(1120px,calc(100% - 40px));margin:auto}
+.badge{display:inline-block;padding:7px 13px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:13px;letter-spacing:.4px;margin-bottom:18px}
+h1{font-size:clamp(34px,5.7vw,62px);line-height:1.06;margin:0 0 18px}
+.hero p{max-width:850px;font-size:18px;color:#eee;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.meta span{background:rgba(255,255,255,.1);padding:7px 12px;border-radius:8px;font-size:14px}
+.toc{position:sticky;top:0;z-index:5;background:rgba(245,242,235,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.toc .container{display:flex;gap:8px;overflow:auto;padding-top:10px;padding-bottom:10px}
+.toc a{text-decoration:none;white-space:nowrap;padding:8px 11px;border-radius:7px;font-size:13px}
+.toc a:hover{background:var(--soft)}
+main{padding:45px 0 70px}
+section{margin-bottom:48px}
+h2{font-size:31px;line-height:1.2;margin:0 0 18px;border-left:6px solid var(--accent);padding-left:14px}
+h3{font-size:22px;margin:28px 0 10px}
+h4{font-size:17px;margin:20px 0 7px}
+p{margin:9px 0}
+.lead{font-size:18px;color:#30343a}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--shadow);margin:18px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tool{border-top:4px solid var(--accent);height:100%}
+.tool .num{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.tool h3{margin-top:5px}
+.tip,.warning,.success,.info{padding:16px 18px;border-radius:10px;margin:16px 0}
+.tip{background:#f2eee5;border-left:4px solid var(--gold)}
+.warning{background:#fff0f0;border-left:4px solid var(--accent)}
+.success{background:#edf7f1;border-left:4px solid var(--green)}
+.info{background:#edf2f8;border-left:4px solid #486a91}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{counter-increment:step;position:relative;padding:14px 15px 14px 57px;background:#fff;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.steps li:before{content:counter(step);position:absolute;left:15px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:28px;font-weight:bold}
+code{background:#eeeae2;border:1px solid #ded8ce;padding:2px 6px;border-radius:5px;font-family:Consolas,monospace}
+kbd{background:#25272b;color:#fff;border-radius:5px;padding:3px 7px;font:13px Consolas,monospace}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:12px 13px;text-align:left;vertical-align:top}
+th{background:#eee9df}
+tr:last-child td{border-bottom:0}
+.question{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0}
+.question strong{color:var(--accent)}
+details{background:#f8f6f1;border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin-top:10px}
+summary{cursor:pointer;font-weight:700}
+.task-number{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:50%;font-weight:bold;margin-right:8px}
+.checklist{padding-left:22px}.checklist li{margin:5px 0}
+.footer{background:#17191d;color:#ddd;padding:35px 20px}
+.footer p{margin:4px 0;color:#bbb}
+.term{font-weight:700;color:var(--accent)}
+@media(max-width:760px){
+  .container{width:min(100% - 24px,1120px)}
+  .grid{grid-template-columns:1fr}.hero{padding-top:42px}.card{padding:18px}
+  h2{font-size:26px}.toc .container{width:100%}
+}
+@media print{.toc{display:none}.hero{background:#222!important}.card{box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">MATERI DKV • ADOBE PHOTOSHOP</span>
+<h1>Adjustment & Color Correction Dasar</h1>
+<p>
+Panduan lengkap dan mudah dipahami untuk memahami koreksi warna,
+mengatur terang-gelap, kontras, warna, dan membuat foto before–after
+menggunakan Adobe Photoshop.
+</p>
+<div class="meta">
+<span>📚 Materi Pembelajaran</span>
+<span>🎨 Desain Komunikasi Visual</span>
+<span>🌈 Color Correction</span>
+<span>🏫 SMK DIPSA Purwokerto</span>
+</div>
+</div>
+</header>
+
+<nav class="toc">
+<div class="container">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">Tujuan</a>
+<a href="#konsep">Konsep Warna</a>
+<a href="#brightness">Brightness/Contrast</a>
+<a href="#levels">Levels</a>
+<a href="#curves">Curves</a>
+<a href="#huesat">Hue/Saturation</a>
+<a href="#colorbalance">Color Balance</a>
+<a href="#vibrance">Vibrance</a>
+<a href="#layer">Adjustment Layer</a>
+<a href="#perbedaan">Perbedaan Istilah</a>
+<a href="#workflow">Workflow</a>
+<a href="#proyek">Proyek</a>
+<a href="#soal">5 Soal</a>
+<a href="#tugas">5 Tugas</a>
+<a href="#ringkasan">Ringkasan</a>
+</div>
+</nav>
+
+<main><div class="container">
+
+<section id="tujuan">
+<h2>1. Tujuan Pembelajaran</h2>
+<div class="card">
+<p class="lead">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan konsep dasar koreksi warna pada foto.</li>
+<li>Membedakan masalah brightness, contrast, saturation, dan hue.</li>
+<li>Menggunakan Brightness/Contrast untuk memperbaiki terang dan kontras.</li>
+<li>Menggunakan Levels dan memahami fungsi Shadow, Midtone, serta Highlight.</li>
+<li>Menggunakan Curves untuk melakukan koreksi tonal secara lebih terkontrol.</li>
+<li>Menggunakan Hue/Saturation untuk mengatur karakter dan intensitas warna.</li>
+<li>Menggunakan Color Balance untuk mengoreksi kecenderungan warna pada foto.</li>
+<li>Menggunakan Vibrance dengan lebih aman untuk meningkatkan warna.</li>
+<li>Memahami keuntungan menggunakan Adjustment Layer.</li>
+<li>Membuat proyek foto before–after color correction secara terstruktur.</li>
+</ol>
+</div>
+</section>
+
+<section id="konsep">
+<h2>2. Konsep Dasar Koreksi Warna</h2>
+<div class="card">
+<p>
+<strong>Color correction</strong> adalah proses memperbaiki tampilan warna dan tonal
+sebuah foto agar terlihat lebih seimbang, natural, atau sesuai tujuan visual.
+Koreksi warna biasanya dilakukan sebelum memberikan gaya warna tertentu.
+</p>
+
+<p>
+Contohnya, sebuah foto mungkin terlihat terlalu gelap, terlalu terang, terlalu pucat,
+terlalu kuning, terlalu biru, atau memiliki kontras yang kurang. Dengan adjustment
+di Photoshop, masalah tersebut dapat diperbaiki.
+</p>
+
+<div class="tip">
+<strong>💡 Cara mudah mengingat:</strong><br>
+Color correction = <strong>memperbaiki kondisi foto terlebih dahulu</strong>.<br>
+Color grading = <strong>memberikan karakter atau suasana warna tertentu</strong>.
+</div>
+
+<h3>Urutan berpikir sebelum melakukan correction</h3>
+<ol class="steps">
+<li><strong>Lihat brightness.</strong> Apakah foto terlalu gelap atau terlalu terang?</li>
+<li><strong>Lihat contrast.</strong> Apakah perbedaan antara area terang dan gelap terlalu lemah atau terlalu kuat?</li>
+<li><strong>Lihat warna.</strong> Apakah foto memiliki kecenderungan kuning, biru, merah, hijau, atau warna lain?</li>
+<li><strong>Lihat saturation.</strong> Apakah warna terlalu pucat atau terlalu kuat?</li>
+<li><strong>Periksa detail.</strong> Jangan sampai koreksi membuat area highlight kehilangan detail atau shadow menjadi terlalu gelap.</li>
+</ol>
+
+<h3>Contoh masalah dan solusi</h3>
+<table>
+<thead><tr><th>Masalah foto</th><th>Adjustment yang dapat dicoba</th></tr></thead>
+<tbody>
+<tr><td>Foto terlalu gelap</td><td>Brightness/Contrast, Levels, atau Curves.</td></tr>
+<tr><td>Foto terlalu terang</td><td>Brightness/Contrast, Levels, atau Curves.</td></tr>
+<tr><td>Foto terlihat datar</td><td>Contrast, Levels, atau Curves.</td></tr>
+<tr><td>Warna terlalu pucat</td><td>Vibrance atau Saturation secara hati-hati.</td></tr>
+<tr><td>Warna terlalu kuat</td><td>Turunkan Saturation atau Vibrance.</td></tr>
+<tr><td>Foto terlalu kuning/biru</td><td>Color Balance atau adjustment warna yang sesuai.</td></tr>
+<tr><td>Warna tertentu ingin diubah</td><td>Hue/Saturation.</td></tr>
+</tbody>
+</table>
+
+<div class="success">
+<strong>Prinsip penting:</strong> jangan langsung menaikkan semua slider.
+Koreksi warna yang baik biasanya dilakukan sedikit demi sedikit sambil terus
+membandingkan hasil dengan foto asli.
+</div>
+</div>
+</section>
+
+<section id="brightness">
+<h2>3. Brightness / Contrast</h2>
+<div class="card">
+<p>
+<strong>Brightness/Contrast</strong> adalah adjustment yang mudah dipahami dan cocok
+untuk pemula. Brightness berhubungan dengan tingkat terang-gelap gambar, sedangkan
+Contrast mengatur perbedaan antara area terang dan area gelap.
+</p>
+
+<h3>Brightness</h3>
+<p>
+Brightness dapat digunakan ketika keseluruhan foto terasa terlalu gelap atau terlalu terang.
+Menaikkan brightness membuat gambar terlihat lebih terang, sedangkan menurunkannya
+membuat gambar lebih gelap.
+</p>
+
+<h3>Contrast</h3>
+<p>
+Contrast menentukan seberapa kuat perbedaan antara area terang dan area gelap.
+Kontras yang lebih tinggi dapat membuat foto terlihat lebih tegas, sedangkan kontras
+yang lebih rendah dapat membuat foto terlihat lebih lembut atau datar.
+</p>
+
+<h3>Cara menggunakan</h3>
+<ol class="steps">
+<li>Buka foto di Photoshop.</li>
+<li>Pilih <strong>Image → Adjustments → Brightness/Contrast</strong> jika bekerja langsung pada gambar, atau lebih disarankan membuat Adjustment Layer.</li>
+<li>Atur Brightness sedikit demi sedikit.</li>
+<li>Atur Contrast sesuai kebutuhan.</li>
+<li>Bandingkan dengan kondisi awal.</li>
+<li>Pastikan detail foto masih terlihat.</li>
+</ol>
+
+<div class="warning">
+<strong>Hindari berlebihan:</strong> brightness yang terlalu tinggi dapat membuat area terang
+kehilangan detail, sedangkan contrast yang terlalu tinggi dapat membuat shadow terlalu gelap
+dan highlight terlalu kuat.
+</div>
+</div>
+</section>
+
+<section id="levels">
+<h2>4. Levels</h2>
+<div class="card">
+<p>
+<strong>Levels</strong> digunakan untuk mengatur rentang tonal gambar dengan lebih terkontrol.
+Levels sangat berguna untuk memperbaiki distribusi area gelap, midtone, dan terang.
+</p>
+
+<h3>Tiga bagian penting pada Levels</h3>
+<table>
+<thead><tr><th>Bagian</th><th>Pengertian mudah</th><th>Pengaruh</th></tr></thead>
+<tbody>
+<tr><td>Shadows</td><td>Area gelap</td><td>Mengatur bagian foto yang paling gelap.</td></tr>
+<tr><td>Midtones</td><td>Area tengah</td><td>Mempengaruhi tingkat terang area pertengahan.</td></tr>
+<tr><td>Highlights</td><td>Area terang</td><td>Mengatur bagian foto yang paling terang.</td></tr>
+</tbody>
+</table>
+
+<h3>Histogram</h3>
+<p>
+Levels menampilkan <strong>histogram</strong>, yaitu gambaran distribusi tonal pada foto.
+Secara sederhana, histogram membantu kita melihat apakah informasi gambar lebih banyak
+berada di area gelap, tengah, atau terang.
+</p>
+
+<h3>Cara menggunakan Levels</h3>
+<ol class="steps">
+<li>Buka foto.</li>
+<li>Buat Levels melalui <strong>Adjustment Layer</strong> atau menu Adjustment.</li>
+<li>Perhatikan histogram.</li>
+<li>Atur bagian shadow jika area gelap terlalu lemah atau terlalu kuat.</li>
+<li>Atur midtone untuk mengontrol tingkat terang area tengah.</li>
+<li>Atur highlight jika area terang perlu disesuaikan.</li>
+<li>Bandingkan dengan foto awal.</li>
+</ol>
+
+<div class="tip">
+<strong>Tips:</strong> jangan mengejar histogram dengan aturan yang kaku. Foto yang berbeda
+memang memiliki distribusi tonal yang berbeda. Gunakan histogram sebagai informasi,
+bukan sebagai satu-satunya penentu apakah foto sudah bagus.
+</div>
+</div>
+</section>
+
+<section id="curves">
+<h2>5. Curves</h2>
+<div class="card">
+<p>
+<strong>Curves</strong> memungkinkan kita mengatur tonal gambar dengan sangat fleksibel.
+Curves menggunakan garis yang dapat dibentuk untuk mengubah hubungan antara input
+dan output brightness.
+</p>
+
+<h3>Cara memahami Curves dengan sederhana</h3>
+<p>
+Bayangkan ada garis diagonal dari kiri bawah ke kanan atas. Bagian kiri mewakili
+area gelap, bagian tengah mewakili midtone, dan bagian kanan mewakili area terang.
+Ketika garis dinaikkan, area tersebut menjadi lebih terang. Ketika garis diturunkan,
+area tersebut menjadi lebih gelap.
+</p>
+
+<h3>Membuat kontras sederhana</h3>
+<p>
+Salah satu pendekatan umum adalah membuat kurva seperti huruf <strong>S</strong> secara
+halus: sedikit menurunkan area shadow dan sedikit menaikkan area highlight.
+Hasilnya dapat meningkatkan kontras.
+</p>
+
+<h3>Langkah menggunakan Curves</h3>
+<ol class="steps">
+<li>Buat <strong>Curves Adjustment Layer</strong>.</li>
+<li>Perhatikan garis diagonal.</li>
+<li>Klik area shadow dan lakukan perubahan kecil jika diperlukan.</li>
+<li>Klik area midtone jika perlu memperbaiki tingkat terang tengah.</li>
+<li>Klik area highlight untuk mengatur bagian terang.</li>
+<li>Bandingkan hasil dengan kondisi awal.</li>
+<li>Jika terlihat berlebihan, kurangi perubahan kurva.</li>
+</ol>
+
+<div class="info">
+<strong>Catatan:</strong> Curves merupakan tool yang sangat kuat. Pemula sebaiknya
+melakukan perubahan kecil terlebih dahulu. Tujuan utama adalah mendapatkan kontrol,
+bukan membuat kurva yang ekstrem.
+</div>
+
+<h3>Curves untuk kontras</h3>
+<table>
+<thead><tr><th>Perubahan</th><th>Efek umum</th></tr></thead>
+<tbody>
+<tr><td>Shadow sedikit turun</td><td>Area gelap menjadi lebih dalam.</td></tr>
+<tr><td>Highlight sedikit naik</td><td>Area terang menjadi lebih terang.</td></tr>
+<tr><td>Midtone naik</td><td>Area tengah menjadi lebih terang.</td></tr>
+<tr><td>Midtone turun</td><td>Area tengah menjadi lebih gelap.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="huesat">
+<h2>6. Hue / Saturation</h2>
+<div class="card">
+<p>
+<strong>Hue/Saturation</strong> digunakan untuk mengatur karakter warna dan intensitasnya.
+Ini merupakan salah satu adjustment yang sangat sering digunakan dalam pengolahan foto.
+</p>
+
+<h3>Hue</h3>
+<p>
+Hue adalah jenis atau posisi warna. Secara sederhana, Hue menentukan apakah warna
+cenderung merah, kuning, hijau, cyan, biru, atau magenta.
+</p>
+
+<h3>Saturation</h3>
+<p>
+Saturation menunjukkan seberapa kuat atau intens suatu warna. Saturation tinggi membuat
+warna terlihat lebih kuat, sedangkan saturation rendah membuat warna semakin mendekati
+abu-abu.
+</p>
+
+<h3>Lightness</h3>
+<p>
+Lightness mengatur tingkat terang-gelap warna dalam adjustment Hue/Saturation.
+Gunakan dengan hati-hati karena perubahan berlebihan dapat membuat warna terlihat tidak alami.
+</p>
+
+<h3>Cara menggunakan</h3>
+<ol class="steps">
+<li>Buat <strong>Hue/Saturation Adjustment Layer</strong>.</li>
+<li>Gunakan Hue jika ingin menggeser karakter warna.</li>
+<li>Atur Saturation sedikit demi sedikit.</li>
+<li>Gunakan Lightness hanya jika memang diperlukan.</li>
+<li>Periksa kulit manusia atau warna objek penting agar tetap terlihat natural.</li>
+</ol>
+
+<div class="warning">
+<strong>Perhatian:</strong> saturation yang terlalu tinggi sering membuat foto terlihat
+tidak natural. Untuk koreksi foto, gunakan perubahan kecil terlebih dahulu.
+</div>
+</div>
+</section>
+
+<section id="colorbalance">
+<h2>7. Color Balance</h2>
+<div class="card">
+<p>
+<strong>Color Balance</strong> digunakan untuk mengubah keseimbangan warna pada area
+tonal tertentu. Fitur ini sangat berguna ketika sebuah foto memiliki kecenderungan
+warna yang terlalu kuat.
+</p>
+
+<h3>Contoh masalah</h3>
+<p>
+Misalnya sebuah foto indoor terlihat terlalu kuning karena sumber cahaya. Color Balance
+dapat digunakan untuk mengurangi kecenderungan warna tertentu dan membuat warna terlihat
+lebih seimbang.
+</p>
+
+<h3>Konsep warna berpasangan</h3>
+<table>
+<thead><tr><th>Pasangan</th><th>Contoh arah koreksi</th></tr></thead>
+<tbody>
+<tr><td>Cyan ↔ Red</td><td>Menggeser keseimbangan antara cyan dan merah.</td></tr>
+<tr><td>Magenta ↔ Green</td><td>Menggeser keseimbangan antara magenta dan hijau.</td></tr>
+<tr><td>Yellow ↔ Blue</td><td>Menggeser keseimbangan antara kuning dan biru.</td></tr>
+</tbody>
+</table>
+
+<h3>Shadow, Midtones, Highlights</h3>
+<p>
+Color Balance memungkinkan kita melakukan penyesuaian pada bagian shadow, midtone,
+atau highlight. Hal ini membuat koreksi lebih terarah daripada mengubah seluruh warna
+secara sama.
+</p>
+
+<h3>Cara menggunakan</h3>
+<ol class="steps">
+<li>Buat <strong>Color Balance Adjustment Layer</strong>.</li>
+<li>Tentukan apakah yang ingin diperbaiki adalah Shadows, Midtones, atau Highlights.</li>
+<li>Geser slider warna sedikit demi sedikit.</li>
+<li>Periksa perubahan pada foto.</li>
+<li>Ulangi pada tonal lain jika diperlukan.</li>
+<li>Bandingkan hasil dengan foto awal.</li>
+</ol>
+
+<div class="tip">
+<strong>Tips:</strong> lakukan koreksi berdasarkan warna yang benar-benar terlihat pada foto.
+Jangan menggeser semua slider hanya untuk mencoba-coba tanpa tujuan.
+</div>
+</div>
+</section>
+
+<section id="vibrance">
+<h2>8. Vibrance</h2>
+<div class="card">
+<p>
+<strong>Vibrance</strong> digunakan untuk meningkatkan intensitas warna dengan pendekatan
+yang berbeda dari Saturation. Secara umum, Vibrance sering menjadi pilihan yang lebih
+lembut untuk meningkatkan warna pada foto.
+</p>
+
+<h3>Vibrance vs Saturation</h3>
+<p>
+Saturation menaikkan atau menurunkan intensitas warna secara lebih menyeluruh.
+Vibrance cenderung memberikan peningkatan warna yang lebih selektif dan sering digunakan
+ketika kita ingin memperkuat warna tanpa membuat seluruh foto terlalu mencolok.
+</p>
+
+<h3>Cara menggunakan</h3>
+<ol class="steps">
+<li>Buat <strong>Vibrance Adjustment Layer</strong>.</li>
+<li>Naikkan Vibrance sedikit.</li>
+<li>Periksa warna kulit, pakaian, langit, tanaman, dan objek penting.</li>
+<li>Jika masih kurang, lakukan penyesuaian kecil lagi.</li>
+<li>Jangan mengejar warna yang sangat kuat jika tujuan Anda adalah color correction natural.</li>
+</ol>
+
+<div class="success">
+<strong>Tips:</strong> jika tujuan Anda hanya membuat foto sedikit lebih hidup,
+coba Vibrance terlebih dahulu sebelum menaikkan Saturation secara besar.
+</div>
+</div>
+</section>
+
+<section id="layer">
+<h2>9. Adjustment Layer</h2>
+<div class="card">
+<p>
+<strong>Adjustment Layer</strong> adalah layer khusus untuk melakukan penyesuaian
+gambar secara non-destruktif. Artinya, adjustment dapat diubah, dimatikan, atau
+disesuaikan kembali tanpa harus merusak pixel foto asli secara langsung.
+</p>
+
+<h3>Mengapa Adjustment Layer penting?</h3>
+<ul>
+<li>Foto asli tetap lebih aman.</li>
+<li>Pengaturan dapat diedit kembali.</li>
+<li>Adjustment dapat dimatikan sementara untuk perbandingan before–after.</li>
+<li>Adjustment dapat menggunakan Layer Mask.</li>
+<li>Beberapa adjustment dapat disusun dalam satu dokumen.</li>
+</ul>
+
+<h3>Contoh workflow menggunakan Adjustment Layer</h3>
+<ol class="steps">
+<li>Buka foto.</li>
+<li>Pada panel Layers, pilih ikon <strong>Create new fill or adjustment layer</strong> atau menu yang sesuai.</li>
+<li>Pilih Brightness/Contrast, Levels, Curves, Hue/Saturation, Color Balance, atau Vibrance.</li>
+<li>Atur nilainya.</li>
+<li>Biarkan layer adjustment tetap terpisah dari foto asli.</li>
+<li>Jika hasil kurang sesuai, klik kembali adjustment untuk mengubahnya.</li>
+</ol>
+
+<h3>Adjustment Layer dan Layer Mask</h3>
+<p>
+Layer Mask memungkinkan adjustment diterapkan hanya pada bagian tertentu.
+Misalnya, Anda ingin menaikkan brightness hanya pada wajah tetapi tidak pada background.
+Dengan mask, area adjustment dapat dibatasi.
+</p>
+
+<div class="warning">
+<strong>Catatan:</strong> untuk pekerjaan belajar dan desain yang perlu mudah diperbaiki,
+biasakan menggunakan Adjustment Layer daripada langsung mengubah pixel foto melalui
+menu adjustment secara permanen.
+</div>
+</div>
+</section>
+
+<section id="perbedaan">
+<h2>10. Perbedaan Brightness, Contrast, Saturation & Hue</h2>
+<div class="card">
+<table>
+<thead><tr><th>Istilah</th><th>Pengertian sederhana</th><th>Contoh pertanyaan</th></tr></thead>
+<tbody>
+<tr>
+<td><span class="term">Brightness</span></td>
+<td>Mengatur tingkat terang atau gelap gambar.</td>
+<td>"Foto ini terlalu gelap atau terlalu terang?"</td>
+</tr>
+<tr>
+<td><span class="term">Contrast</span></td>
+<td>Mengatur perbedaan antara area terang dan gelap.</td>
+<td>"Foto ini terlihat datar atau terlalu keras?"</td>
+</tr>
+<tr>
+<td><span class="term">Saturation</span></td>
+<td>Mengatur intensitas warna secara umum.</td>
+<td>"Warnanya terlalu pucat atau terlalu kuat?"</td>
+</tr>
+<tr>
+<td><span class="term">Hue</span></td>
+<td>Menggeser jenis/karakter warna.</td>
+<td>"Saya ingin warna ini berubah dari satu jenis warna ke warna lain."</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Contoh sederhana</h3>
+<div class="grid">
+<div class="card tool">
+<div class="num">Brightness</div>
+<h3>Foto gelap</h3>
+<p>Jika seluruh foto terlihat kurang terang, periksa Brightness, Levels, atau Curves.</p>
+</div>
+<div class="card tool">
+<div class="num">Contrast</div>
+<h3>Foto datar</h3>
+<p>Jika shadow dan highlight terlalu mirip, pertimbangkan penyesuaian Contrast, Levels, atau Curves.</p>
+</div>
+<div class="card tool">
+<div class="num">Saturation</div>
+<h3>Foto pucat</h3>
+<p>Jika warna terlihat lemah, Vibrance atau Saturation dapat digunakan dengan hati-hati.</p>
+</div>
+<div class="card tool">
+<div class="num">Hue</div>
+<h3>Warna ingin digeser</h3>
+<p>Jika warna tertentu ingin diarahkan ke karakter warna lain, gunakan Hue/Saturation.</p>
+</div>
+</div>
+
+<div class="info">
+<strong>Ingat:</strong> satu masalah foto bisa membutuhkan lebih dari satu adjustment.
+Misalnya foto terlalu gelap dan terlalu kuning. Anda mungkin membutuhkan Levels atau
+Curves untuk tonal, kemudian Color Balance untuk koreksi warna.
+</div>
+</div>
+</section>
+
+<section id="workflow">
+<h2>11. Workflow Color Correction yang Mudah</h2>
+<div class="card">
+<p>
+Berikut alur sederhana yang dapat digunakan siswa ketika pertama kali melakukan
+color correction.
+</p>
+
+<ol class="steps">
+<li><strong>Duplikasi/backup foto.</strong> Pastikan file asli tetap aman.</li>
+<li><strong>Gunakan Adjustment Layer.</strong> Hindari perubahan permanen jika belum diperlukan.</li>
+<li><strong>Perbaiki exposure/brightness.</strong> Pastikan foto tidak terlalu gelap atau terang.</li>
+<li><strong>Perbaiki tonal/contrast.</strong> Gunakan Levels atau Curves jika diperlukan.</li>
+<li><strong>Periksa warna.</strong> Cari kecenderungan warna yang tidak diinginkan.</li>
+<li><strong>Koreksi color cast.</strong> Gunakan Color Balance sesuai masalah.</li>
+<li><strong>Periksa saturation.</strong> Gunakan Vibrance atau Saturation dengan hati-hati.</li>
+<li><strong>Zoom out dan lihat keseluruhan.</strong> Jangan hanya fokus pada satu area.</li>
+<li><strong>Bandingkan before–after.</strong> Matikan sementara adjustment layer untuk melihat perbedaannya.</li>
+<li><strong>Simpan PSD.</strong> Pertahankan layer agar proses dapat diperiksa dan diedit kembali.</li>
+</ol>
+
+<h3>Checklist sebelum mengatakan "selesai"</h3>
+<ul class="checklist">
+<li>☐ Tidak ada area highlight yang terlalu terang tanpa detail.</li>
+<li>☐ Shadow tidak terlalu gelap tanpa alasan.</li>
+<li>☐ Warna kulit tetap terlihat natural jika terdapat manusia.</li>
+<li>☐ Saturation tidak berlebihan.</li>
+<li>☐ Warna keseluruhan lebih seimbang.</li>
+<li>☐ Foto masih terlihat seperti foto yang natural jika tujuan proyek adalah correction.</li>
+<li>☐ Before dan after dapat dibandingkan.</li>
+</ul>
+</div>
+</section>
+
+<section id="proyek">
+<h2>12. Proyek: Foto Before–After Color Correction</h2>
+<div class="card">
+<h3>🎯 Tujuan Proyek</h3>
+<p>
+Membuat satu hasil foto yang telah diperbaiki menggunakan teknik color correction,
+kemudian menunjukkan perbedaan kondisi <strong>before</strong> dan <strong>after</strong>.
+Siswa harus dapat menjelaskan adjustment apa yang digunakan dan mengapa.
+</p>
+
+<h3>Ketentuan foto</h3>
+<ul>
+<li>Gunakan foto milik sendiri atau foto yang memiliki izin untuk digunakan.</li>
+<li>Pilih foto yang memiliki masalah warna atau tonal yang jelas.</li>
+<li>Contoh: foto terlalu gelap, terlalu terang, pucat, terlalu kuning, terlalu biru, atau kurang kontras.</li>
+</ul>
+
+<h3>Langkah proyek dari awal</h3>
+<ol class="steps">
+<li><strong>Pilih foto.</strong> Cari foto yang memiliki masalah yang dapat diperbaiki.</li>
+<li><strong>Buka di Photoshop.</strong> Pastikan foto memiliki kualitas yang cukup.</li>
+<li><strong>Simpan file PSD.</strong> Gunakan nama file yang rapi.</li>
+<li><strong>Buat Adjustment Layer.</strong> Ini menjadi dasar workflow non-destruktif.</li>
+<li><strong>Periksa Brightness/Contrast.</strong> Perbaiki masalah terang-gelap dan kontras jika ada.</li>
+<li><strong>Periksa Levels.</strong> Gunakan histogram untuk memahami distribusi tonal.</li>
+<li><strong>Gunakan Curves jika diperlukan.</strong> Lakukan perubahan kecil dan terkontrol.</li>
+<li><strong>Periksa Hue/Saturation.</strong> Pastikan intensitas dan karakter warna sesuai.</li>
+<li><strong>Gunakan Color Balance.</strong> Jika terdapat color cast seperti terlalu kuning atau terlalu biru.</li>
+<li><strong>Gunakan Vibrance.</strong> Tambahkan sedikit intensitas warna jika foto masih terlihat pucat.</li>
+<li><strong>Bandingkan before–after.</strong> Matikan seluruh Adjustment Layer sementara untuk melihat kondisi awal.</li>
+<li><strong>Periksa naturalitas.</strong> Pastikan koreksi tidak membuat foto terlihat berlebihan.</li>
+<li><strong>Buat hasil before–after.</strong> Anda dapat menampilkan dua versi berdampingan atau menggunakan layout perbandingan.</li>
+<li><strong>Simpan PSD dan ekspor hasil akhir.</strong></li>
+</ol>
+
+<h3>Contoh kasus 1 — Foto terlalu gelap</h3>
+<div class="info">
+<strong>Masalah:</strong> wajah dan objek utama terlihat kurang terang.<br>
+<strong>Pendekatan:</strong> gunakan Levels atau Curves untuk menaikkan tonal yang diperlukan,
+kemudian periksa Contrast. Jika hanya bagian tertentu yang terlalu gelap, pertimbangkan
+penggunaan Layer Mask pada Adjustment Layer.
+</div>
+
+<h3>Contoh kasus 2 — Foto terlalu kuning</h3>
+<div class="info">
+<strong>Masalah:</strong> seluruh foto memiliki kecenderungan warna kuning.<br>
+<strong>Pendekatan:</strong> gunakan Color Balance untuk mengoreksi keseimbangan warna.
+Setelah itu periksa kembali saturation agar warna tidak terlihat berlebihan.
+</div>
+
+<h3>Contoh kasus 3 — Foto terlalu pucat</h3>
+<div class="info">
+<strong>Masalah:</strong> warna terlihat kurang hidup dan kontras rendah.<br>
+<strong>Pendekatan:</strong> perbaiki tonal terlebih dahulu menggunakan Levels atau Curves,
+kemudian gunakan Vibrance secara hati-hati. Jangan langsung menaikkan Saturation terlalu tinggi.
+</div>
+
+<h3>Format Before–After</h3>
+<table>
+<thead><tr><th>Bagian</th><th>Isi</th></tr></thead>
+<tbody>
+<tr><td>BEFORE</td><td>Foto asli sebelum correction.</td></tr>
+<tr><td>AFTER</td><td>Foto setelah correction.</td></tr>
+<tr><td>Adjustment</td><td>Daftar adjustment yang digunakan.</td></tr>
+<tr><td>Alasan</td><td>Penjelasan mengapa adjustment tersebut digunakan.</td></tr>
+</tbody>
+</table>
+
+<h3>Checklist proyek</h3>
+<ul class="checklist">
+<li>☐ Foto asli tersedia.</li>
+<li>☐ File PSD memiliki Adjustment Layer.</li>
+<li>☐ Brightness/tonal sudah diperiksa.</li>
+<li>☐ Contrast sudah diperiksa.</li>
+<li>☐ Warna sudah diperiksa.</li>
+<li>☐ Saturation/Vibrance sudah diperiksa.</li>
+<li>☐ Before–after dapat dibandingkan dengan jelas.</li>
+<li>☐ Tidak ada koreksi yang terlihat berlebihan tanpa alasan.</li>
+<li>☐ File PSD sudah disimpan.</li>
+<li>☐ Hasil akhir sudah diekspor.</li>
+</ul>
+
+<h3>Kesalahan yang sering terjadi</h3>
+<ul>
+<li>Menaikkan Saturation terlalu tinggi karena menganggap warna yang lebih kuat selalu lebih baik.</li>
+<li>Membuat foto terlalu terang sehingga highlight kehilangan detail.</li>
+<li>Membuat contrast terlalu tinggi sehingga shadow menjadi terlalu gelap.</li>
+<li>Menggeser Hue terlalu jauh sehingga warna objek menjadi tidak natural.</li>
+<li>Mengubah semua slider sekaligus tanpa mengetahui masalah foto.</li>
+<li>Tidak menggunakan Adjustment Layer sehingga koreksi sulit diperbaiki.</li>
+<li>Tidak membandingkan hasil dengan foto asli.</li>
+</ul>
+</div>
+</section>
+
+<section id="soal">
+<h2>13. Latihan Soal — 5 Pertanyaan</h2>
+
+<div class="question">
+<strong>Soal 1</strong>
+<p>Apa yang dimaksud dengan color correction pada foto?</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Color correction adalah proses memperbaiki tonal dan warna foto agar lebih seimbang,
+sesuai kondisi yang diinginkan, dan dapat terlihat lebih natural.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 2</strong>
+<p>Apa perbedaan Brightness dan Contrast?</p>
+<details><summary>Lihat jawaban</summary>
+<p>Brightness berhubungan dengan tingkat terang-gelap gambar, sedangkan Contrast mengatur
+perbedaan antara area terang dan area gelap.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 3</strong>
+<p>Jika sebuah foto terlalu kuning, adjustment apa yang dapat digunakan untuk membantu mengoreksinya?</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Color Balance dapat digunakan untuk membantu menyeimbangkan kecenderungan warna.
+Penyesuaian sebaiknya dilakukan sedikit demi sedikit sambil membandingkan dengan foto asli.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 4</strong>
+<p>Apa fungsi utama Hue dan Saturation?</p>
+<details><summary>Lihat jawaban</summary>
+<p>Hue digunakan untuk menggeser karakter atau jenis warna, sedangkan Saturation
+digunakan untuk mengatur intensitas warna.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 5</strong>
+<p>Mengapa Adjustment Layer disarankan dalam proses color correction?</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Karena Adjustment Layer memungkinkan koreksi dilakukan secara non-destruktif.
+Pengaturan dapat diedit kembali, dimatikan, atau dikombinasikan dengan Layer Mask tanpa
+harus merusak foto asli secara langsung.</p>
+</details>
+</div>
+</section>
+
+<section id="tugas">
+<h2>14. Tugas Praktik — 5 Tugas</h2>
+
+<div class="card">
+<h3><span class="task-number">1</span>Latihan Brightness & Contrast</h3>
+<p>Pilih satu foto yang terlalu gelap atau terlalu datar.</p>
+<ul>
+<li>Buat versi asli.</li>
+<li>Buat Brightness/Contrast Adjustment Layer.</li>
+<li>Perbaiki brightness.</li>
+<li>Perbaiki contrast.</li>
+<li>Bandingkan sebelum dan sesudah.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami pengaruh Brightness dan Contrast.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">2</span>Latihan Levels & Curves</h3>
+<p>Gunakan satu foto yang memiliki tonal kurang seimbang.</p>
+<ul>
+<li>Buat Levels Adjustment Layer.</li>
+<li>Amati histogram.</li>
+<li>Perbaiki shadow, midtone, atau highlight sesuai kebutuhan.</li>
+<li>Buat versi lain menggunakan Curves.</li>
+<li>Bandingkan hasil Levels dan Curves.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami dua metode pengaturan tonal.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">3</span>Latihan Hue/Saturation & Vibrance</h3>
+<p>Gunakan foto dengan objek yang memiliki warna jelas.</p>
+<ul>
+<li>Buat satu versi dengan Hue/Saturation.</li>
+<li>Ubah Hue secara sederhana untuk melihat efeknya.</li>
+<li>Kembalikan ke kondisi yang sesuai.</li>
+<li>Buat versi Vibrance.</li>
+<li>Bandingkan Saturation dan Vibrance.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami perbedaan Hue, Saturation, dan Vibrance.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">4</span>Latihan Color Balance</h3>
+<p>Pilih foto yang memiliki kecenderungan warna, misalnya terlalu kuning atau terlalu biru.</p>
+<ul>
+<li>Buat Color Balance Adjustment Layer.</li>
+<li>Periksa Shadows.</li>
+<li>Periksa Midtones.</li>
+<li>Periksa Highlights.</li>
+<li>Lakukan koreksi kecil.</li>
+<li>Catat perubahan yang Anda lakukan dan alasannya.</li>
+</ul>
+<p><strong>Tujuan:</strong> melatih kemampuan membaca dan mengoreksi color cast.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">5</span>Proyek Utama — Before–After Color Correction</h3>
+<p>
+Pilih satu foto dan lakukan color correction sampai mendapatkan hasil yang lebih
+seimbang. Buat presentasi before–after dan jelaskan prosesnya.
+</p>
+<ol>
+<li>Siapkan foto asli.</li>
+<li>Buka dan simpan sebagai PSD.</li>
+<li>Buat Adjustment Layer.</li>
+<li>Identifikasi masalah foto.</li>
+<li>Gunakan Brightness/Contrast jika diperlukan.</li>
+<li>Gunakan Levels atau Curves untuk tonal.</li>
+<li>Gunakan Hue/Saturation untuk warna.</li>
+<li>Gunakan Color Balance jika terdapat color cast.</li>
+<li>Gunakan Vibrance jika warna masih perlu sedikit diperkuat.</li>
+<li>Bandingkan before dan after.</li>
+<li>Pastikan hasil tetap natural sesuai tujuan correction.</li>
+<li>Ekspor hasil akhir.</li>
+</ol>
+
+<h4>Ketentuan pengumpulan</h4>
+<ul>
+<li>File PSD.</li>
+<li>Hasil akhir JPG/PNG.</li>
+<li>Gambar before–after.</li>
+<li>Daftar adjustment yang digunakan.</li>
+<li>Penjelasan singkat alasan penggunaan setiap adjustment.</li>
+<li>Nama file: <code>Nama_Siswa_Color_Correction.psd</code></li>
+</ul>
+
+<h4>Kriteria penilaian</h4>
+<table>
+<thead><tr><th>Aspek</th><th>Yang dinilai</th></tr></thead>
+<tbody>
+<tr><td>Analisis</td><td>Kemampuan mengenali masalah tonal dan warna.</td></tr>
+<tr><td>Adjustment</td><td>Pemilihan adjustment sesuai masalah foto.</td></tr>
+<tr><td>Kontrol</td><td>Perubahan dilakukan secukupnya dan tidak berlebihan.</td></tr>
+<tr><td>Before–After</td><td>Perbedaan dapat dilihat dan dijelaskan.</td></tr>
+<tr><td>Workflow</td><td>Penggunaan Adjustment Layer dan file PSD yang rapi.</td></tr>
+<tr><td>Hasil akhir</td><td>Foto terlihat lebih seimbang sesuai tujuan correction.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="ringkasan">
+<h2>15. Ringkasan Materi</h2>
+<div class="card">
+<table>
+<thead><tr><th>Materi</th><th>Inti yang perlu diingat</th></tr></thead>
+<tbody>
+<tr><td>Color Correction</td><td>Memperbaiki tonal dan warna agar foto lebih seimbang.</td></tr>
+<tr><td>Brightness</td><td>Mengatur terang dan gelap gambar.</td></tr>
+<tr><td>Contrast</td><td>Mengatur perbedaan antara area terang dan gelap.</td></tr>
+<tr><td>Levels</td><td>Mengatur shadow, midtone, highlight dan membaca histogram.</td></tr>
+<tr><td>Curves</td><td>Mengatur tonal dengan kontrol yang lebih fleksibel.</td></tr>
+<tr><td>Hue</td><td>Menggeser karakter/jenis warna.</td></tr>
+<tr><td>Saturation</td><td>Mengatur intensitas warna.</td></tr>
+<tr><td>Color Balance</td><td>Mengatur keseimbangan warna pada shadow, midtone, dan highlight.</td></tr>
+<tr><td>Vibrance</td><td>Meningkatkan intensitas warna dengan pendekatan yang relatif lebih lembut.</td></tr>
+<tr><td>Adjustment Layer</td><td>Memungkinkan koreksi non-destruktif dan mudah diedit kembali.</td></tr>
+</tbody>
+</table>
+
+<div class="success">
+<strong>🎯 Prinsip utama:</strong> jangan mengoreksi foto berdasarkan "slider harus tinggi".
+Identifikasi masalah terlebih dahulu, pilih adjustment yang sesuai, lakukan perubahan
+kecil, kemudian bandingkan before–after.
+</div>
+
+<h3>Urutan cepat yang bisa diingat</h3>
+<p>
+<strong>Terang → Kontras → Tonal → Warna → Saturasi → Before/After.</strong>
+</p>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h2 style="border:0;padding:0">Penutup</h2>
+<p>
+Kemampuan melakukan adjustment dan color correction merupakan dasar penting dalam
+pengolahan foto. Dengan memahami fungsi setiap adjustment, siswa tidak hanya dapat
+membuat foto terlihat lebih menarik, tetapi juga dapat menjelaskan <strong>mengapa</strong>
+perubahan tertentu dilakukan.
+</p>
+<p>
+Biasakan bekerja secara bertahap dan menggunakan Adjustment Layer. Selalu simpan
+versi asli dan lakukan perbandingan before–after agar perubahan dapat dinilai dengan jelas.
+</p>
+<p><strong>Selamat belajar, berlatih, dan berkarya! 🎨📷</strong></p>
+</div>
+</section>
+
+</div></main>
+
+<footer class="footer">
+<div class="container">
+<strong>SMK DIPSA PURWOKERTO</strong>
+<p>Materi DKV — Adjustment & Color Correction Dasar pada Adobe Photoshop</p>
+<p>Digunakan sebagai bahan pembelajaran dan praktik siswa.</p>
+</div>
+</footer>
+
+</body>
+</html>

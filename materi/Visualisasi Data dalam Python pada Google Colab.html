@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualisasi Data dalam Python pada Google Colab</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;--border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;--orange:#c2410c;--orange-soft:#fff7ed;--shadow:0 10px 30px rgba(15,23,42,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}.container{width:min(1180px,92%);margin:auto}
+header.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff,#faf5ff 48%,#eff6ff);border-bottom:1px solid var(--border)}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}.lead{max-width:880px;color:#475467;font-size:1.08rem}.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}aside h3{margin:2px 0 12px}.nav a{display:block;padding:9px 10px;border-radius:9px;color:#475467;font-size:.92rem}.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}main{min-width:0}section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}p{margin:9px 0}ul,ol{padding-left:24px}.note,.tip,.warn{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}.tip{border-color:var(--green);background:var(--green-soft)}.warn{border-color:#f97316;background:var(--orange-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.card strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.92rem;line-height:1.6;margin:0}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}.arrow{color:var(--primary);font-size:1.3rem}
+.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}.checklist label{display:block;margin:8px 0}.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.small{font-size:.9rem;color:var(--muted)}footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">📊 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span>
+<h1>Visualisasi Data dalam Python pada Google Colab</h1>
+<p class="lead">Belajar mengubah data menjadi informasi visual menggunakan <strong>Matplotlib</strong>. Materi membahas grafik batang, grafik garis, scatter plot, cara memilih jenis grafik, membaca grafik, dan menarik kesimpulan berdasarkan data.</p>
+<div class="top-actions">
+<a class="btn primary" href="https://colab.research.google.com/" target="_blank">🚀 Buka Google Colab</a>
+<a class="btn" href="#praktik">🎯 Langsung ke Praktik</a>
+</div>
+</div>
+</header>
+
+<div class="container layout">
+<aside>
+<h3>📚 Navigasi Materi</h3>
+<nav class="nav">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a>
+<a href="#colab">2. Google Colab</a>
+<a href="#konsep">3. Mengenal Visualisasi Data</a>
+<a href="#matplotlib">4. Matplotlib</a>
+<a href="#data">5. Menyiapkan Data</a>
+<a href="#batang">6. Grafik Batang</a>
+<a href="#garis">7. Grafik Garis</a>
+<a href="#scatter">8. Scatter Plot</a>
+<a href="#label">9. Judul, Label, Legend</a>
+<a href="#memilih">10. Memilih Jenis Grafik</a>
+<a href="#membaca">11. Membaca Grafik</a>
+<a href="#praktik">12. Praktik Grafik Garis</a>
+<a href="#proyek">13. Proyek Mini</a>
+<a href="#latihan">14. 5 Latihan Soal</a>
+<a href="#tugas">15. 5 Tugas</a>
+<a href="#ringkasan">16. Ringkasan</a>
+<a href="#refleksi">17. Refleksi</a>
+</nav>
+</aside>
+
+<main>
+
+<section id="tujuan">
+<div class="kicker">Bagian 1</div>
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian visualisasi data.</li>
+<li>Menjelaskan manfaat grafik dalam menyampaikan informasi.</li>
+<li>Menggunakan Matplotlib di Google Colab.</li>
+<li>Membuat grafik batang.</li>
+<li>Membuat grafik garis.</li>
+<li>Membuat scatter plot.</li>
+<li>Memberi judul, label sumbu, dan keterangan pada grafik.</li>
+<li>Membaca pola atau informasi dari grafik.</li>
+<li>Membuat minimal tiga visualisasi dari sebuah dataset.</li>
+<li>Menuliskan kesimpulan berdasarkan grafik yang dibuat.</li>
+</ol>
+<div class="note"><strong>Tujuan utama:</strong> Siswa tidak hanya membuat grafik yang terlihat menarik, tetapi mampu menggunakan grafik untuk menjawab pertanyaan dari data.</div>
+</section>
+
+<section id="colab">
+<div class="kicker">Bagian 2</div>
+<h2>☁️ Praktik di Google Colab</h2>
+<p>Google Colab dapat digunakan untuk menulis dan menjalankan kode Python melalui browser. Pada materi ini, seluruh visualisasi dibuat di dalam notebook Colab.</p>
+<div class="step"><div class="num">1</div><div>Buka <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>.</div></div>
+<div class="step"><div class="num">2</div><div>Pilih <strong>New Notebook</strong>.</div></div>
+<div class="step"><div class="num">3</div><div>Buat code cell dan masukkan kode Python.</div></div>
+<div class="step"><div class="num">4</div><div>Jalankan dengan tombol ▶ atau <strong>Shift + Enter</strong>.</div></div>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Saya siap membuat visualisasi data!")</code></pre></div>
+<div class="tip"><strong>Tips:</strong> Jalankan kode sedikit demi sedikit agar mudah mengetahui bagian mana yang menghasilkan grafik.</div>
+</section>
+
+<section id="konsep">
+<div class="kicker">Bagian 3</div>
+<h2>📊 Mengenal Visualisasi Data</h2>
+<p><strong>Visualisasi data</strong> adalah cara menyajikan data dalam bentuk visual seperti grafik atau diagram sehingga informasi dan pola lebih mudah dipahami.</p>
+<h3>Mengapa data perlu divisualisasikan?</h3>
+<div class="grid">
+<div class="card"><strong>👀 Lebih mudah dilihat</strong>Perbedaan nilai dapat terlihat dengan cepat.</div>
+<div class="card"><strong>🔎 Menemukan pola</strong>Grafik membantu melihat kenaikan, penurunan, atau hubungan antar-data.</div>
+<div class="card"><strong>💡 Mempermudah penjelasan</strong>Informasi dapat disampaikan tanpa membaca seluruh angka satu per satu.</div>
+<div class="card"><strong>🎯 Membantu mengambil informasi</strong>Grafik dapat membantu kita menjawab pertanyaan berdasarkan data.</div>
+</div>
+<div class="flow">
+<div class="box">Data angka</div><div class="arrow">→</div><div class="box">Python</div><div class="arrow">→</div><div class="box">Grafik</div><div class="arrow">→</div><div class="box">Informasi</div>
+</div>
+<div class="note"><strong>Contoh:</strong> Daripada hanya melihat angka penjualan selama 12 bulan, grafik garis dapat membantu kita melihat kapan penjualan naik dan kapan turun.</div>
+</section>
+
+<section id="matplotlib">
+<div class="kicker">Bagian 4</div>
+<h2>🐍 Matplotlib</h2>
+<p><strong>Matplotlib</strong> adalah library Python yang dapat digunakan untuk membuat berbagai jenis grafik.</p>
+<h3>Mengimpor Matplotlib</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt</code></pre></div>
+<p>Alias <code>plt</code> adalah nama singkat yang umum digunakan untuk modul <code>pyplot</code>.</p>
+<h3>Perintah dasar yang sering digunakan</h3>
+<table>
+<tr><th>Perintah</th><th>Fungsi</th></tr>
+<tr><td><code>plt.bar()</code></td><td>Membuat grafik batang.</td></tr>
+<tr><td><code>plt.plot()</code></td><td>Membuat grafik garis.</td></tr>
+<tr><td><code>plt.scatter()</code></td><td>Membuat scatter plot.</td></tr>
+<tr><td><code>plt.title()</code></td><td>Memberi judul grafik.</td></tr>
+<tr><td><code>plt.xlabel()</code></td><td>Memberi nama sumbu X.</td></tr>
+<tr><td><code>plt.ylabel()</code></td><td>Memberi nama sumbu Y.</td></tr>
+<tr><td><code>plt.legend()</code></td><td>Menampilkan keterangan/legend.</td></tr>
+<tr><td><code>plt.grid()</code></td><td>Menampilkan garis bantu.</td></tr>
+<tr><td><code>plt.show()</code></td><td>Menampilkan grafik.</td></tr>
+</table>
+</section>
+
+<section id="data">
+<div class="kicker">Bagian 5</div>
+<h2>🗃️ Menyiapkan Data</h2>
+<p>Kita dapat menggunakan list Python sebagai data sederhana. Contoh berikut menunjukkan nilai penjualan selama enam bulan.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni"]
+penjualan = [20, 25, 23, 30, 35, 32]
+
+print(bulan)
+print(penjualan)</code></pre></div>
+<table>
+<tr><th>Bulan</th><th>Penjualan</th></tr>
+<tr><td>Januari</td><td>20</td></tr>
+<tr><td>Februari</td><td>25</td></tr>
+<tr><td>Maret</td><td>23</td></tr>
+<tr><td>April</td><td>30</td></tr>
+<tr><td>Mei</td><td>35</td></tr>
+<tr><td>Juni</td><td>32</td></tr>
+</table>
+<div class="tip"><strong>Perhatikan pasangan data:</strong> posisi data pada <code>bulan</code> harus sesuai dengan posisi data pada <code>penjualan</code>. Januari memiliki nilai 20, Februari 25, dan seterusnya.</div>
+</section>
+
+<section id="batang">
+<div class="kicker">Bagian 6</div>
+<h2>📊 Grafik Batang</h2>
+<p><strong>Grafik batang</strong> cocok untuk membandingkan nilai antar-kategori.</p>
+<h3>Contoh sederhana</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+
+mata_pelajaran = ["Matematika", "Bahasa", "Informatika"]
+nilai = [82, 78, 90]
+
+plt.bar(mata_pelajaran, nilai)
+plt.title("Nilai Rata-rata Mata Pelajaran")
+plt.xlabel("Mata Pelajaran")
+plt.ylabel("Nilai")
+plt.show()</code></pre></div>
+<h3>Bagaimana membaca grafik?</h3>
+<p>Batang yang lebih tinggi menunjukkan nilai yang lebih besar. Dari contoh tersebut, Informatika memiliki nilai 90 sehingga batangnya paling tinggi.</p>
+<div class="note"><strong>Kapan digunakan?</strong> Gunakan grafik batang ketika ingin membandingkan beberapa kategori, misalnya nilai antar-mata pelajaran, jumlah produk terjual, atau jumlah siswa tiap kelas.</div>
+</section>
+
+<section id="garis">
+<div class="kicker">Bagian 7</div>
+<h2>📈 Grafik Garis</h2>
+<p><strong>Grafik garis</strong> cocok untuk melihat perubahan atau perkembangan data berdasarkan urutan tertentu, misalnya waktu.</p>
+<h3>Contoh dasar</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+
+bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni"]
+penjualan = [20, 25, 23, 30, 35, 32]
+
+plt.plot(bulan, penjualan, marker="o")
+plt.title("Perkembangan Penjualan")
+plt.xlabel("Bulan")
+plt.ylabel("Jumlah Penjualan")
+plt.show()</code></pre></div>
+<h3>Memahami <code>marker="o"</code></h3>
+<p>Parameter tersebut menambahkan titik pada setiap data sehingga posisi nilai lebih mudah terlihat.</p>
+<h3>Menambahkan grid</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>plt.plot(bulan, penjualan, marker="o")
+plt.title("Perkembangan Penjualan")
+plt.xlabel("Bulan")
+plt.ylabel("Jumlah Penjualan")
+plt.grid()
+plt.show()</code></pre></div>
+<div class="tip"><strong>Ingat:</strong> Grafik garis sangat berguna untuk melihat kecenderungan data dari satu waktu ke waktu berikutnya.</div>
+</section>
+
+<section id="scatter">
+<div class="kicker">Bagian 8</div>
+<h2>🔵 Scatter Plot</h2>
+<p><strong>Scatter plot</strong> menampilkan data sebagai titik-titik. Grafik ini cocok untuk melihat hubungan antara dua variabel.</p>
+<h3>Contoh</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+
+jam_belajar = [1, 2, 3, 4, 5, 6]
+nilai = [60, 65, 70, 76, 82, 88]
+
+plt.scatter(jam_belajar, nilai)
+plt.title("Hubungan Jam Belajar dan Nilai")
+plt.xlabel("Jam Belajar")
+plt.ylabel("Nilai")
+plt.show()</code></pre></div>
+<p>Pada contoh tersebut, sumbu X berisi jam belajar dan sumbu Y berisi nilai. Titik-titik membantu kita melihat pola hubungan kedua data.</p>
+<div class="note"><strong>Catatan penting:</strong> Scatter plot dapat menunjukkan pola hubungan pada data, tetapi sebuah grafik saja tidak membuktikan bahwa satu variabel pasti menyebabkan variabel lainnya.</div>
+</section>
+
+<section id="label">
+<div class="kicker">Bagian 9</div>
+<h2>🏷️ Membuat Grafik Lebih Mudah Dipahami</h2>
+<p>Grafik sebaiknya memiliki judul dan keterangan sumbu yang jelas.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+
+bulan = ["Januari", "Februari", "Maret", "April"]
+penjualan = [20, 25, 23, 30]
+
+plt.plot(bulan, penjualan, marker="o", label="Penjualan")
+
+plt.title("Grafik Penjualan Bulanan")
+plt.xlabel("Bulan")
+plt.ylabel("Jumlah Produk")
+plt.legend()
+plt.grid()
+
+plt.show()</code></pre></div>
+<table>
+<tr><th>Bagian</th><th>Fungsi</th></tr>
+<tr><td>Title</td><td>Menjelaskan isi grafik.</td></tr>
+<tr><td>X label</td><td>Menjelaskan data pada sumbu X.</td></tr>
+<tr><td>Y label</td><td>Menjelaskan data pada sumbu Y.</td></tr>
+<tr><td>Legend</td><td>Menjelaskan seri data jika terdapat keterangan.</td></tr>
+<tr><td>Grid</td><td>Membantu memperkirakan nilai pada grafik.</td></tr>
+</table>
+</section>
+
+<section id="memilih">
+<div class="kicker">Bagian 10</div>
+<h2>🧭 Memilih Jenis Grafik</h2>
+<table>
+<tr><th>Jenis Grafik</th><th>Cocok untuk</th><th>Contoh</th></tr>
+<tr><td><strong>Batang</strong></td><td>Membandingkan kategori.</td><td>Nilai Matematika, Bahasa, Informatika.</td></tr>
+<tr><td><strong>Garis</strong></td><td>Melihat perubahan atau perkembangan.</td><td>Penjualan Januari–Desember.</td></tr>
+<tr><td><strong>Scatter</strong></td><td>Melihat pola hubungan dua variabel.</td><td>Jam belajar dan nilai.</td></tr>
+</table>
+<div class="flow">
+<div class="box">Bandingkan kategori?</div><div class="arrow">→</div><div class="box">Batang</div>
+<div class="box">Lihat perubahan?</div><div class="arrow">→</div><div class="box">Garis</div>
+<div class="box">Lihat hubungan?</div><div class="arrow">→</div><div class="box">Scatter</div>
+</div>
+<div class="tip"><strong>Pertanyaan sebelum membuat grafik:</strong> “Apa yang ingin saya jelaskan dari data ini?” Jawaban pertanyaan tersebut membantu menentukan jenis grafik.</div>
+</section>
+
+<section id="membaca">
+<div class="kicker">Bagian 11</div>
+<h2>🔎 Cara Membaca dan Menarik Kesimpulan</h2>
+<p>Membuat grafik adalah langkah pertama. Langkah berikutnya adalah membaca grafik dengan teliti.</p>
+<h3>Gunakan pola sederhana</h3>
+<ol>
+<li><strong>Lihat kategori atau sumbu.</strong> Pahami apa yang ditampilkan pada X dan Y.</li>
+<li><strong>Cari nilai tertinggi.</strong> Data mana yang paling besar?</li>
+<li><strong>Cari nilai terendah.</strong> Data mana yang paling kecil?</li>
+<li><strong>Perhatikan perubahan.</strong> Apakah data naik, turun, atau berfluktuasi?</li>
+<li><strong>Bandingkan.</strong> Apakah terdapat perbedaan yang jelas?</li>
+<li><strong>Tulis kesimpulan berdasarkan data.</strong> Jangan menambahkan informasi yang tidak terlihat pada grafik.</li>
+</ol>
+<h3>Contoh kesimpulan</h3>
+<p>Jika grafik penjualan menunjukkan Januari 20, Februari 25, Maret 23, April 30, Mei 35, dan Juni 32, maka contoh kesimpulannya:</p>
+<ul>
+<li>Penjualan tertinggi terjadi pada bulan Mei dengan 35 produk.</li>
+<li>Penjualan meningkat dari Januari ke Februari, kemudian sedikit menurun pada Maret.</li>
+<li>Setelah Maret, penjualan meningkat sampai Mei lalu sedikit menurun pada Juni.</li>
+</ul>
+<div class="warn"><strong>Hindari kesimpulan berlebihan:</strong> Jika grafik hanya menunjukkan penjualan meningkat, jangan langsung menyatakan penyebabnya tanpa data pendukung.</div>
+</section>
+
+<section id="praktik">
+<div class="kicker">Bagian 12</div>
+<h2>🎯 Praktik — Membuat Grafik Garis</h2>
+<p>Pada praktik ini, siswa membuat grafik garis dari data penjualan selama enam bulan.</p>
+<h3>Data praktik</h3>
+<table>
+<tr><th>Bulan</th><th>Penjualan</th></tr>
+<tr><td>Januari</td><td>20</td></tr>
+<tr><td>Februari</td><td>25</td></tr>
+<tr><td>Maret</td><td>23</td></tr>
+<tr><td>April</td><td>30</td></tr>
+<tr><td>Mei</td><td>35</td></tr>
+<tr><td>Juni</td><td>32</td></tr>
+</table>
+<h3>Langkah 1 — Masukkan data</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni"]
+penjualan = [20, 25, 23, 30, 35, 32]</code></pre></div>
+<h3>Langkah 2 — Import Matplotlib</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt</code></pre></div>
+<h3>Langkah 3 — Buat grafik</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>plt.plot(bulan, penjualan, marker="o")
+
+plt.title("Perkembangan Penjualan")
+plt.xlabel("Bulan")
+plt.ylabel("Jumlah Penjualan")
+
+plt.grid()
+plt.show()</code></pre></div>
+<h3>Langkah 4 — Amati grafik</h3>
+<p>Jawab pertanyaan berikut:</p>
+<ol>
+<li>Pada bulan apa penjualan tertinggi?</li>
+<li>Pada bulan apa penjualan terendah?</li>
+<li>Kapan terjadi penurunan?</li>
+<li>Bagaimana kecenderungan penjualan dari Januari sampai Juni?</li>
+<li>Tuliskan minimal tiga kesimpulan berdasarkan grafik.</li>
+</ol>
+<div class="tip"><strong>Target praktik:</strong> Siswa mampu membuat grafik sendiri, memberi judul dan label, kemudian menjelaskan informasi yang terlihat dari grafik.</div>
+</section>
+
+<section id="proyek">
+<div class="kicker">Bagian 13</div>
+<h2>🚀 Proyek Mini — 3 Visualisasi dari Satu Dataset</h2>
+<p>Buat minimal <strong>3 visualisasi</strong> dari dataset yang diberikan guru. Setiap grafik harus memiliki tujuan yang jelas.</p>
+<h3>Ketentuan proyek</h3>
+<ol>
+<li>Gunakan dataset dari guru.</li>
+<li>Pilih minimal tiga data yang dapat divisualisasikan.</li>
+<li>Buat satu grafik batang.</li>
+<li>Buat satu grafik garis.</li>
+<li>Buat satu scatter plot.</li>
+<li>Berikan judul dan label sumbu pada setiap grafik.</li>
+<li>Tulis minimal tiga kesimpulan berdasarkan grafik.</li>
+</ol>
+<h3>Contoh dataset</h3>
+<table>
+<tr><th>Bulan</th><th>Penjualan</th><th>Biaya Iklan</th><th>Pengunjung</th></tr>
+<tr><td>Januari</td><td>20</td><td>5</td><td>100</td></tr>
+<tr><td>Februari</td><td>25</td><td>6</td><td>120</td></tr>
+<tr><td>Maret</td><td>23</td><td>5</td><td>115</td></tr>
+<tr><td>April</td><td>30</td><td>7</td><td>140</td></tr>
+<tr><td>Mei</td><td>35</td><td>8</td><td>160</td></tr>
+<tr><td>Juni</td><td>32</td><td>7</td><td>150</td></tr>
+</table>
+<h3>Contoh kode lengkap</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+
+bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni"]
+penjualan = [20, 25, 23, 30, 35, 32]
+biaya_iklan = [5, 6, 5, 7, 8, 7]
+pengunjung = [100, 120, 115, 140, 160, 150]
+
+# 1. Grafik Batang
+plt.bar(bulan, penjualan)
+plt.title("Penjualan per Bulan")
+plt.xlabel("Bulan")
+plt.ylabel("Penjualan")
+plt.xticks(rotation=30)
+plt.show()
+
+# 2. Grafik Garis
+plt.plot(bulan, penjualan, marker="o")
+plt.title("Perkembangan Penjualan")
+plt.xlabel("Bulan")
+plt.ylabel("Penjualan")
+plt.grid()
+plt.xticks(rotation=30)
+plt.show()
+
+# 3. Scatter Plot
+plt.scatter(biaya_iklan, penjualan)
+plt.title("Biaya Iklan dan Penjualan")
+plt.xlabel("Biaya Iklan")
+plt.ylabel("Penjualan")
+plt.grid()
+plt.show()</code></pre></div>
+<h3>Menulis 3 kesimpulan</h3>
+<div class="grid">
+<div class="card"><strong>Kesimpulan 1</strong>Jelaskan informasi utama dari grafik batang.</div>
+<div class="card"><strong>Kesimpulan 2</strong>Jelaskan pola perubahan dari grafik garis.</div>
+<div class="card"><strong>Kesimpulan 3</strong>Jelaskan pola hubungan yang terlihat pada scatter plot.</div>
+</div>
+<div class="note"><strong>Contoh:</strong> “Penjualan tertinggi terjadi pada bulan Mei dengan 35 unit.” Ini merupakan kesimpulan yang langsung didukung oleh data.</div>
+</section>
+
+<section id="latihan">
+<div class="kicker">Bagian 14</div>
+<h2>📝 5 Latihan Soal</h2>
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan visualisasi data?<details><summary>Lihat pedoman jawaban</summary><div>Visualisasi data adalah penyajian data dalam bentuk visual seperti grafik atau diagram agar informasi dan pola lebih mudah dipahami.</div></details></div>
+<div class="quiz"><strong>Soal 2.</strong> Kapan grafik batang lebih tepat digunakan daripada grafik garis?<details><summary>Lihat jawaban</summary><div>Grafik batang cocok digunakan ketika ingin membandingkan nilai antar-kategori, sedangkan grafik garis lebih cocok untuk melihat perubahan atau perkembangan berdasarkan urutan, misalnya waktu.</div></details></div>
+<div class="quiz"><strong>Soal 3.</strong> Apa fungsi <code>plt.plot()</code>?<details><summary>Lihat jawaban</summary><div><code>plt.plot()</code> digunakan untuk membuat grafik garis.</div></details></div>
+<div class="quiz"><strong>Soal 4.</strong> Apa fungsi <code>plt.scatter()</code>?<details><summary>Lihat jawaban</summary><div><code>plt.scatter()</code> digunakan untuk membuat scatter plot berupa titik-titik yang dapat membantu melihat pola hubungan dua variabel.</div></details></div>
+<div class="quiz"><strong>Soal 5.</strong> Mengapa grafik perlu diberi judul dan label sumbu?<details><summary>Lihat jawaban</summary><div>Agar pembaca mengetahui isi grafik dan memahami arti data pada sumbu X dan Y.</div></details></div>
+</section>
+
+<section id="tugas">
+<div class="kicker">Bagian 15</div>
+<h2>🛠️ 5 Tugas Praktik</h2>
+<div class="task"><h3>Tugas 1 — Grafik Batang</h3><p>Buat grafik batang dari data nilai rata-rata minimal 5 mata pelajaran. Berikan judul, label sumbu X dan Y, lalu tuliskan dua kesimpulan.</p></div>
+<div class="task"><h3>Tugas 2 — Grafik Garis</h3><p>Buat grafik garis dari data perkembangan selama minimal 6 periode, misalnya penjualan bulanan atau jumlah pengunjung. Gunakan <code>marker="o"</code> dan <code>plt.grid()</code>. Tuliskan tiga kesimpulan.</p></div>
+<div class="task"><h3>Tugas 3 — Scatter Plot</h3><p>Buat scatter plot dari dua variabel yang diberikan guru. Beri judul dan label sumbu. Jelaskan pola titik-titik yang terlihat tanpa membuat klaim sebab-akibat yang tidak didukung data.</p></div>
+<div class="task"><h3>Tugas 4 — Tiga Visualisasi</h3><p>Gunakan satu dataset yang sama untuk membuat <strong>grafik batang, grafik garis, dan scatter plot</strong>. Jelaskan mengapa setiap jenis grafik dipilih dan tuliskan minimal tiga kesimpulan berdasarkan hasil visualisasi.</p></div>
+<div class="task"><h3>Tugas 5 — Proyek Visualisasi Data</h3><p>Gunakan dataset minimal 10 baris dari guru. Buat notebook Google Colab berisi minimal tiga visualisasi. Setiap grafik harus memiliki judul, label sumbu, dan jika diperlukan legend. Tulis minimal tiga kesimpulan yang didukung data.</p><p><strong>Bonus:</strong> Tambahkan satu visualisasi pilihan sendiri dan jelaskan alasan pemilihannya.</p></div>
+<h3>Checklist Pengumpulan</h3>
+<div class="checklist">
+<label>☐ Notebook berjalan di Google Colab.</label>
+<label>☐ Menggunakan Matplotlib.</label>
+<label>☐ Data ditulis atau dibaca dengan benar.</label>
+<label>☐ Ada grafik batang.</label>
+<label>☐ Ada grafik garis.</label>
+<label>☐ Ada scatter plot.</label>
+<label>☐ Setiap grafik memiliki judul dan label sumbu.</label>
+<label>☐ Ada minimal 3 kesimpulan berdasarkan grafik.</label>
+<label>☐ Kesimpulan sesuai dengan data yang terlihat.</label>
+<label>☐ Notebook atau link hasil dikumpulkan sesuai instruksi guru.</label>
+</div>
+</section>
+
+<section id="ringkasan">
+<div class="kicker">Bagian 16</div>
+<h2>📌 Ringkasan</h2>
+<ol>
+<li>Visualisasi data mengubah data menjadi bentuk visual agar lebih mudah dipahami.</li>
+<li>Matplotlib adalah library Python yang dapat digunakan untuk membuat grafik.</li>
+<li><code>plt.bar()</code> digunakan untuk grafik batang.</li>
+<li><code>plt.plot()</code> digunakan untuk grafik garis.</li>
+<li><code>plt.scatter()</code> digunakan untuk scatter plot.</li>
+<li><code>plt.title()</code> memberi judul grafik.</li>
+<li><code>plt.xlabel()</code> dan <code>plt.ylabel()</code> memberi keterangan sumbu.</li>
+<li><code>plt.legend()</code> dapat menampilkan keterangan seri data.</li>
+<li><code>plt.grid()</code> dapat membantu membaca nilai grafik.</li>
+<li>Grafik harus dipilih berdasarkan tujuan analisis.</li>
+<li>Kesimpulan harus berasal dari data yang benar-benar terlihat pada grafik.</li>
+</ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Grafik bukan hanya hiasan. Grafik digunakan untuk membantu kita melihat, memahami, dan menjelaskan informasi dari data.”</div>
+</section>
+
+<section id="refleksi">
+<div class="kicker">Bagian 17</div>
+<h2>💭 Refleksi Siswa</h2>
+<ol>
+<li>Apa manfaat visualisasi data?</li>
+<li>Apa perbedaan fungsi grafik batang dan grafik garis?</li>
+<li>Kapan scatter plot dapat digunakan?</li>
+<li>Apa fungsi Matplotlib?</li>
+<li>Bagian kode mana yang paling mudah dipahami?</li>
+<li>Bagian mana yang masih membingungkan?</li>
+<li>Mengapa grafik perlu memiliki judul dan label sumbu?</li>
+<li>Bagaimana cara memastikan kesimpulan yang dibuat benar-benar sesuai dengan data?</li>
+</ol>
+<div class="tip"><strong>Refleksi lanjutan:</strong> Bayangkan kamu harus menjelaskan sebuah dataset kepada orang yang tidak ingin membaca tabel angka. Grafik apa yang akan kamu pilih dan informasi apa yang ingin kamu tunjukkan?</div>
+</section>
+
+<section>
+<div class="kicker">Referensi Praktik</div>
+<h2>📚 Google Colab</h2>
+<p>Gunakan <a href="https://colab.research.google.com/" target="_blank">Google Colab</a> untuk menjalankan seluruh contoh kode pada materi ini.</p>
+<p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Visualisasi Data</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+<div class="container">Visualisasi Data dalam Python pada Google Colab • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div>
+</footer>
+
+<script>
+function copyCode(button){
+  const code=button.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    const old=button.innerText;
+    button.innerText="Tersalin ✓";
+    setTimeout(()=>button.innerText=old,1400);
+  }).catch(()=>{
+    button.innerText="Gagal";
+    setTimeout(()=>button.innerText="Salin",1200);
+  });
+}
+</script>
+</body>
+</html>

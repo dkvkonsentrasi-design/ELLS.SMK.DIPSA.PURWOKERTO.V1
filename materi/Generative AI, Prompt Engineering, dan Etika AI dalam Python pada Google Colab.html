@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generative AI, Prompt Engineering, dan Etika AI dalam Python pada Google Colab</title>
+<meta name="description" content="Materi Koding dan Kecerdasan Artifisial tentang Generative AI, Prompt Engineering, eksperimen teks dengan Python di Google Colab, dan Etika AI.">
+<style>
+:root{
+  --bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;
+  --primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;
+  --border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;
+  --orange:#c2410c;--orange-soft:#fff7ed;--blue-soft:#eff6ff;
+  --blue:#1d4ed8;--shadow:0 10px 30px rgba(15,23,42,.07)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(1180px,92%);margin:auto}
+.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff 0%,#faf5ff 48%,#eff6ff 100%);border-bottom:1px solid var(--border)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}
+h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}
+.lead{max-width:900px;color:#475467;font-size:1.08rem;margin:0}
+.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text);box-shadow:0 3px 12px rgba(15,23,42,.04)}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}
+aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+aside h3{margin:2px 0 12px}
+.nav a{display:block;padding:8px 10px;border-radius:9px;color:#475467;font-size:.9rem}
+.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}
+main{min-width:0}
+section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}
+h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}
+h3{font-size:1.18rem;margin:26px 0 10px}
+p{margin:9px 0}ul,ol{padding-left:24px}
+.note,.tip,.warn,.info{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}
+.tip{border-color:var(--green);background:var(--green-soft)}
+.warn{border-color:#f97316;background:var(--orange-soft)}
+.info{border-color:var(--blue);background:var(--blue-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}
+.card strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}
+pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.9rem;line-height:1.6;margin:0}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}
+.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}
+.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}
+.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}
+.arrow{color:var(--primary);font-size:1.3rem}
+.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}
+.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}
+details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}
+.checklist label{display:block;margin:8px 0}
+.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+.small{font-size:.9rem;color:var(--muted)}
+.prompt-box{background:#f8fafc;border:1px solid var(--border);border-radius:14px;padding:17px;margin:14px 0}
+.prompt-bad{border-left:5px solid #f97316}.prompt-good{border-left:5px solid var(--green)}
+footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}
+@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">🤖 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span>
+<h1>Generative AI, Prompt Engineering, dan Etika AI</h1>
+<p class="lead">Mengenal AI generatif, belajar menyusun prompt yang lebih jelas, membandingkan hasil dari prompt sederhana dan prompt yang diperbaiki, serta melakukan eksperimen pengolahan teks sederhana menggunakan Python di Google Colab.</p>
+<div class="top-actions">
+<a class="btn primary" href="https://colab.research.google.com/" target="_blank" rel="noopener">🚀 Buka Google Colab</a>
+<a class="btn" href="#praktik">🎯 Langsung ke Praktik</a>
+</div>
+</div>
+</header>
+
+<div class="container layout">
+<aside>
+<h3>📚 Navigasi Materi</h3>
+<nav class="nav">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a>
+<a href="#genai">2. Mengenal Generative AI</a>
+<a href="#bentuk">3. Bentuk Konten AI</a>
+<a href="#cara">4. Cara Kerja Sederhana</a>
+<a href="#prompt">5. Konsep Prompt</a>
+<a href="#engineering">6. Prompt Engineering</a>
+<a href="#contoh">7. Contoh Prompt</a>
+<a href="#praktik">8. Praktik Google Colab</a>
+<a href="#frekuensi">9. Frekuensi Kata</a>
+<a href="#laporan">10. Laporan Eksperimen AI</a>
+<a href="#etika">11. Etika AI</a>
+<a href="#privasi">12. Privasi &amp; Keamanan</a>
+<a href="#bias">13. Bias AI</a>
+<a href="#hakcipta">14. Hak Cipta &amp; Plagiarisme</a>
+<a href="#informasi">15. Informasi Palsu</a>
+<a href="#tanggungjawab">16. Penggunaan Bertanggung Jawab</a>
+<a href="#latihan">17. 5 Latihan Soal</a>
+<a href="#tugas">18. 5 Tugas</a>
+<a href="#ringkasan">19. Ringkasan</a>
+<a href="#refleksi">20. Refleksi</a>
+</nav>
+</aside>
+
+<main>
+
+<section id="tujuan">
+<div class="kicker">Bagian 1</div>
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian <strong>Generative AI</strong> dengan bahasa sendiri.</li>
+<li>Menyebutkan beberapa bentuk konten yang dapat dihasilkan AI generatif.</li>
+<li>Menjelaskan apa itu <strong>prompt</strong>.</li>
+<li>Membedakan prompt yang terlalu umum dengan prompt yang lebih jelas dan terarah.</li>
+<li>Mengenal unsur prompt seperti tujuan, konteks, batasan, format, dan contoh.</li>
+<li>Melakukan eksperimen pengolahan teks sederhana menggunakan Python di Google Colab.</li>
+<li>Membandingkan dua hasil AI berdasarkan prompt yang berbeda.</li>
+<li>Menjelaskan risiko privasi, keamanan data, bias, hak cipta, plagiarisme, dan informasi palsu.</li>
+<li>Menyusun laporan eksperimen AI secara terstruktur.</li>
+<li>Menggunakan AI sebagai alat bantu belajar secara bertanggung jawab.</li>
+</ol>
+<div class="note"><strong>Gagasan utama:</strong> AI adalah alat bantu. Manusia tetap perlu menentukan tujuan, memeriksa hasil, menjaga data, dan bertanggung jawab atas penggunaan hasil AI.</div>
+</section>
+
+<section id="genai">
+<div class="kicker">Bagian 2</div>
+<h2>🤖 Apa itu Generative AI?</h2>
+<p><strong>Generative AI</strong> atau AI generatif adalah teknologi AI yang dapat menghasilkan konten baru berdasarkan pola yang dipelajari dari data dan instruksi yang diberikan pengguna.</p>
+<p>Konten yang dihasilkan dapat berupa teks, gambar, kode, audio, dan bentuk lainnya.</p>
+<div class="grid">
+<div class="card"><strong>📝 Teks</strong>Contoh: ringkasan, ide tulisan, dialog, penjelasan konsep, atau draf artikel.</div>
+<div class="card"><strong>🖼️ Gambar</strong>Contoh: ilustrasi, konsep desain, poster, atau gambar berdasarkan deskripsi.</div>
+<div class="card"><strong>💻 Kode</strong>Contoh: contoh Python, fungsi sederhana, atau penjelasan kode.</div>
+<div class="card"><strong>🎵 Audio</strong>Contoh: suara sintetis, musik, atau bentuk audio generatif tertentu.</div>
+</div>
+<div class="tip"><strong>Mudahnya:</strong> jika AI menerima instruksi lalu menghasilkan konten baru, kita dapat mengenalinya sebagai salah satu contoh penggunaan AI generatif.</div>
+</section>
+
+<section id="bentuk">
+<div class="kicker">Bagian 3</div>
+<h2>🧩 Bentuk Konten yang Dapat Dihasilkan</h2>
+<table>
+<tr><th>Bentuk</th><th>Contoh penggunaan</th><th>Hal yang perlu diperiksa</th></tr>
+<tr><td>Teks</td><td>Menjelaskan materi, membuat ide, meringkas teks.</td><td>Ketepatan fakta, konteks, bahasa, dan sumber.</td></tr>
+<tr><td>Gambar</td><td>Membuat ilustrasi berdasarkan deskripsi.</td><td>Kesesuaian instruksi, penggunaan elemen, dan hak penggunaan.</td></tr>
+<tr><td>Kode</td><td>Membantu membuat contoh program.</td><td>Keamanan, kebenaran logika, dan pengujian kode.</td></tr>
+<tr><td>Audio</td><td>Membuat suara atau musik sintetis.</td><td>Izin penggunaan, identitas suara, dan hak cipta.</td></tr>
+</table>
+<div class="warn"><strong>Penting:</strong> kemampuan menghasilkan konten tidak berarti hasil tersebut otomatis benar, bebas kesalahan, atau bebas masalah etika.</div>
+</section>
+
+<section id="cara">
+<div class="kicker">Bagian 4</div>
+<h2>⚙️ Cara Kerja Generative AI secara Sederhana</h2>
+<p>Siswa tidak perlu mempelajari seluruh matematika di balik model AI untuk memahami konsep dasar. Gunakan gambaran sederhana berikut:</p>
+<div class="flow">
+<div class="box">Instruksi / Prompt</div><div class="arrow">→</div><div class="box">Model AI</div><div class="arrow">→</div><div class="box">Hasil Generatif</div><div class="arrow">→</div><div class="box">Pemeriksaan Manusia</div>
+</div>
+<p>Model memproses input yang diberikan dan menghasilkan keluaran berdasarkan pola yang dipelajari. Hasilnya kemudian perlu diperiksa oleh pengguna.</p>
+<h3>Mengapa pemeriksaan manusia penting?</h3>
+<ul>
+<li>AI dapat menghasilkan informasi yang keliru.</li>
+<li>AI dapat salah memahami konteks.</li>
+<li>AI dapat memberikan jawaban yang terdengar meyakinkan tetapi tidak akurat.</li>
+<li>AI tidak mengetahui seluruh kondisi dunia nyata dari konteks yang tidak diberikan.</li>
+<li>Hasil AI dapat memiliki implikasi etika atau hak penggunaan tertentu.</li>
+</ul>
+<div class="note"><strong>Prinsip sederhana:</strong> “Gunakan AI untuk membantu berpikir, bukan untuk berhenti berpikir.”</div>
+</section>
+
+<section id="prompt">
+<div class="kicker">Bagian 5</div>
+<h2>💬 Apa itu Prompt?</h2>
+<p><strong>Prompt</strong> adalah instruksi, pertanyaan, atau konteks yang diberikan kepada AI untuk menghasilkan respons.</p>
+<p>Prompt dapat sangat singkat atau dapat berisi beberapa informasi agar AI memahami tugas yang diinginkan.</p>
+<h3>Contoh prompt sederhana</h3>
+<div class="prompt-box prompt-bad">
+<strong>Prompt 1:</strong>
+<p>“Jelaskan Machine Learning.”</p>
+</div>
+<p>Prompt tersebut dapat menghasilkan jawaban yang benar, tetapi hasilnya mungkin terlalu umum karena belum menjelaskan siapa pembacanya, seberapa panjang jawabannya, dan format yang diinginkan.</p>
+<h3>Prompt yang diperbaiki</h3>
+<div class="prompt-box prompt-good">
+<strong>Prompt 2:</strong>
+<p>“Jelaskan pengertian Machine Learning untuk siswa SMK kelas X yang baru mengenal AI. Gunakan bahasa Indonesia yang sederhana, berikan 2 contoh kehidupan sehari-hari, dan buat dalam 3 paragraf.”</p>
+</div>
+<p>Prompt kedua memberikan konteks dan batasan yang lebih jelas sehingga pengguna memiliki kriteria untuk menilai hasil.</p>
+</section>
+
+<section id="engineering">
+<div class="kicker">Bagian 6</div>
+<h2>🛠️ Prompt Engineering</h2>
+<p><strong>Prompt Engineering</strong> adalah proses menyusun, memperbaiki, dan menguji instruksi agar AI memberikan hasil yang lebih sesuai dengan tujuan pengguna.</p>
+<p>Prompt engineering bukan sekadar membuat prompt yang panjang. Yang penting adalah <strong>kejelasan dan relevansi informasi</strong>.</p>
+<h3>5 unsur prompt yang mudah digunakan</h3>
+<div class="grid">
+<div class="card"><strong>1. Tujuan</strong>Apa yang ingin AI kerjakan?</div>
+<div class="card"><strong>2. Konteks</strong>Informasi apa yang perlu diketahui AI?</div>
+<div class="card"><strong>3. Peran / audiens</strong>Untuk siapa hasil dibuat atau gaya apa yang dibutuhkan?</div>
+<div class="card"><strong>4. Batasan</strong>Panjang, bahasa, jumlah contoh, atau hal yang harus dihindari.</div>
+<div class="card"><strong>5. Format output</strong>Misalnya tabel, poin, paragraf, langkah-langkah, atau kode.</div>
+<div class="card"><strong>6. Kriteria</strong>Bagaimana kita mengetahui bahwa hasil sudah sesuai?</div>
+</div>
+<h3>Template prompt</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>Tugas:
+[jelaskan apa yang harus dibuat]
+
+Konteks:
+[jelaskan informasi penting]
+
+Target pembaca:
+[siapa yang akan membaca hasil]
+
+Batasan:
+[jumlah, panjang, bahasa, atau aturan]
+
+Format output:
+[tentukan bentuk hasil yang diinginkan]
+
+Kriteria:
+[jelaskan ciri hasil yang dianggap sesuai]</code></pre></div>
+<div class="tip"><strong>Strategi:</strong> buat prompt → lihat hasil → identifikasi kekurangan → perbaiki prompt → bandingkan hasil kembali.</div>
+</section>
+
+<section id="contoh">
+<div class="kicker">Bagian 7</div>
+<h2>🔎 Membandingkan Dua Prompt</h2>
+<h3>Kasus: meminta AI membuat materi tentang Python</h3>
+<div class="prompt-box prompt-bad">
+<strong>Prompt awal:</strong>
+<p>“Buat materi tentang Python.”</p>
+<p class="small">Kelemahan: tujuan, tingkat siswa, panjang, format, dan fokus belum ditentukan.</p>
+</div>
+<div class="prompt-box prompt-good">
+<strong>Prompt diperbaiki:</strong>
+<p>“Buat materi pengantar Python untuk siswa SMK kelas X yang belum pernah coding. Jelaskan variabel, tipe data, input, dan output dengan bahasa Indonesia yang mudah. Berikan satu contoh kode untuk setiap konsep dan jelaskan hasilnya. Susun dengan judul, penjelasan, contoh, dan latihan singkat.”</p>
+<p class="small">Kelebihan: tujuan, audiens, topik, gaya bahasa, contoh, dan format lebih jelas.</p>
+</div>
+<h3>Aktivitas perbandingan</h3>
+<ol>
+<li>Jalankan prompt awal pada AI yang digunakan guru.</li>
+<li>Simpan hasilnya tanpa mengubah isi.</li>
+<li>Jalankan prompt yang diperbaiki.</li>
+<li>Simpan hasil kedua.</li>
+<li>Bandingkan kedua hasil.</li>
+<li>Catat bagian mana yang lebih sesuai dengan kebutuhan dan jelaskan alasannya.</li>
+</ol>
+<table>
+<tr><th>Aspek</th><th>Pertanyaan pembanding</th></tr>
+<tr><td>Kelengkapan</td><td>Apakah semua informasi yang dibutuhkan tersedia?</td></tr>
+<tr><td>Kesesuaian</td><td>Apakah hasil sesuai dengan target pembaca?</td></tr>
+<tr><td>Struktur</td><td>Apakah formatnya mudah dibaca?</td></tr>
+<tr><td>Ketepatan</td><td>Apakah ada informasi yang perlu diperiksa?</td></tr>
+<tr><td>Keterbatasan</td><td>Apakah AI masih membuat asumsi atau kesalahan?</td></tr>
+</table>
+</section>
+
+<section id="praktik">
+<div class="kicker">Bagian 8</div>
+<h2>💻 Praktik di Google Colab: Eksperimen Pengolahan Teks</h2>
+<p>Pada praktik ini kita tidak harus menghubungkan Google Colab langsung ke layanan AI berbayar. Kita akan menggunakan Python untuk melakukan eksperimen teks sederhana yang membantu memahami bagaimana data teks dapat diolah secara programatis.</p>
+<p>Contoh kegiatan: <strong>menghitung frekuensi kata</strong> dari sebuah teks.</p>
+<h3>Langkah 1 — Membuat teks</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>teks = """
+AI dapat membantu siswa belajar.
+Siswa dapat menggunakan AI untuk mencari ide.
+AI juga dapat membantu menjelaskan konsep.
+Namun siswa tetap perlu memeriksa hasil AI.
+"""
+
+print(teks)</code></pre></div>
+<h3>Langkah 2 — Mengubah teks menjadi kata</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>kata = teks.lower().split()
+
+print(kata[:20])
+print("Jumlah kata:", len(kata))</code></pre></div>
+<p><code>lower()</code> mengubah huruf menjadi huruf kecil. <code>split()</code> memecah teks berdasarkan spasi sehingga kita memperoleh kumpulan kata.</p>
+<h3>Langkah 3 — Menghitung frekuensi setiap kata</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>from collections import Counter
+
+frekuensi = Counter(kata)
+
+print(frekuensi)</code></pre></div>
+<div class="tip"><strong>Ide penting:</strong> kita sedang mengubah teks menjadi data yang dapat dihitung. Cara seperti ini merupakan dasar dari banyak kegiatan pengolahan teks.</div>
+</section>
+
+<section id="frekuensi">
+<div class="kicker">Bagian 9</div>
+<h2>📊 Praktik Lanjutan — Membersihkan Teks</h2>
+<p>Jika tanda baca tidak dibersihkan, kata seperti <code>AI</code> dan <code>AI.</code> dapat dianggap berbeda. Kita dapat membersihkan tanda baca terlebih dahulu.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import re
+from collections import Counter
+
+teks = """
+AI dapat membantu siswa belajar.
+Siswa dapat menggunakan AI untuk mencari ide.
+AI juga dapat membantu menjelaskan konsep.
+Namun siswa tetap perlu memeriksa hasil AI.
+"""
+
+teks_bersih = re.sub(r'[^a-zA-Z0-9\s]', '', teks.lower())
+
+kata = teks_bersih.split()
+frekuensi = Counter(kata)
+
+print("10 kata paling sering:")
+for kata, jumlah in frekuensi.most_common(10):
+    print(kata, ":", jumlah)</code></pre></div>
+<h3>Memahami kode</h3>
+<table>
+<tr><th>Kode</th><th>Fungsi</th></tr>
+<tr><td><code>re.sub()</code></td><td>Mengganti bagian teks yang sesuai pola tertentu.</td></tr>
+<tr><td><code>lower()</code></td><td>Menyamakan huruf menjadi huruf kecil.</td></tr>
+<tr><td><code>split()</code></td><td>Membagi teks menjadi kata-kata.</td></tr>
+<tr><td><code>Counter()</code></td><td>Menghitung kemunculan setiap item.</td></tr>
+<tr><td><code>most_common(10)</code></td><td>Mengambil kata yang paling sering muncul.</td></tr>
+</table>
+<h3>Aktivitas eksperimen</h3>
+<p>Ganti isi variabel <code>teks</code> dengan paragraf tentang sekolah, lingkungan, teknologi, atau topik lain. Jalankan kembali program dan amati kata yang paling sering muncul.</p>
+</section>
+
+<section id="laporan">
+<div class="kicker">Bagian 10</div>
+<h2>📝 Laporan Eksperimen AI</h2>
+<p>Tugas utama pada materi ini adalah membuat laporan yang mendokumentasikan proses eksperimen prompt.</p>
+<div class="flow">
+<div class="box">Prompt Awal</div><div class="arrow">→</div><div class="box">Hasil AI</div><div class="arrow">→</div><div class="box">Prompt Diperbaiki</div><div class="arrow">→</div><div class="box">Hasil Kedua</div><div class="arrow">→</div><div class="box">Perbandingan</div>
+</div>
+<h3>Format laporan</h3>
+<table>
+<tr><th>Bagian</th><th>Isi yang ditulis siswa</th></tr>
+<tr><td>1. Prompt awal</td><td>Salin prompt pertama yang digunakan.</td></tr>
+<tr><td>2. Hasil AI</td><td>Dokumentasikan hasil pertama. Jika panjang, dapat diringkas dengan tetap menyimpan bukti yang relevan.</td></tr>
+<tr><td>3. Prompt diperbaiki</td><td>Tuliskan versi prompt yang sudah diperjelas.</td></tr>
+<tr><td>4. Hasil kedua</td><td>Dokumentasikan hasil setelah prompt diperbaiki.</td></tr>
+<tr><td>5. Perbandingan</td><td>Jelaskan perbedaan kualitas, struktur, kelengkapan, dan kesesuaian.</td></tr>
+<tr><td>6. Kesimpulan</td><td>Jelaskan apa yang dipelajari tentang prompt dan keterbatasan AI.</td></tr>
+</table>
+<div class="note"><strong>Tambahan yang dianjurkan:</strong> catat nama alat AI, tanggal eksperimen, topik, serta apakah ada fakta yang perlu diverifikasi. Ini membuat laporan lebih mudah ditelusuri.</div>
+</section>
+
+<section id="etika">
+<div class="kicker">Bagian 11</div>
+<h2>⚖️ Etika AI</h2>
+<p><strong>Etika AI</strong> membahas bagaimana AI dikembangkan dan digunakan dengan memperhatikan manusia, data, keamanan, keadilan, hak, dan dampaknya.</p>
+<p>Teknologi yang kuat membutuhkan penggunaan yang bertanggung jawab. Siswa perlu belajar bukan hanya “bagaimana memakai AI”, tetapi juga “kapan dan bagaimana AI sebaiknya digunakan”.</p>
+<div class="grid">
+<div class="card"><strong>🔒 Privasi</strong>Jangan sembarangan memasukkan data pribadi atau rahasia ke layanan AI.</div>
+<div class="card"><strong>🛡️ Keamanan Data</strong>Pahami siapa yang dapat mengakses data dan hindari membagikan informasi sensitif.</div>
+<div class="card"><strong>⚖️ Bias AI</strong>Hasil AI dapat dipengaruhi oleh pola dan keterbatasan data yang digunakan untuk membangun sistem.</div>
+<div class="card"><strong>©️ Hak Cipta</strong>Perhatikan hak penggunaan karya, gambar, teks, kode, musik, dan materi lain.</div>
+<div class="card"><strong>📚 Plagiarisme</strong>Jangan menyerahkan hasil AI sebagai karya sendiri jika aturan tugas mengharuskan karya orisinal.</div>
+<div class="card"><strong>❗ Informasi Palsu</strong>AI dapat menghasilkan informasi yang keliru atau tidak berdasar.</div>
+</div>
+</section>
+
+<section id="privasi">
+<div class="kicker">Bagian 12</div>
+<h2>🔒 Privasi dan Keamanan Data</h2>
+<p>Privasi berkaitan dengan bagaimana informasi tentang seseorang dikumpulkan, digunakan, dan dibagikan. Dalam menggunakan AI, siswa perlu berhati-hati terhadap data yang dimasukkan.</p>
+<h3>Contoh data yang perlu diperlakukan hati-hati</h3>
+<ul>
+<li>Nomor identitas atau dokumen pribadi.</li>
+<li>Alamat lengkap dan informasi kontak pribadi.</li>
+<li>Password, kode OTP, token API, atau kunci rahasia.</li>
+<li>Data kesehatan atau data sensitif lainnya.</li>
+<li>Dokumen internal sekolah atau organisasi yang tidak untuk publik.</li>
+<li>Data pribadi orang lain tanpa izin.</li>
+</ul>
+<div class="warn"><strong>Aturan kelas yang mudah diingat:</strong> jika sebuah informasi seharusnya tidak dibagikan kepada orang lain, jangan memasukkannya ke AI sebelum memahami kebijakan dan izin yang berlaku.</div>
+<h3>Contoh aman</h3>
+<p>Alih-alih memasukkan data siswa asli, gunakan data contoh:</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>data_siswa = [
+    {"nama": "Siswa A", "nilai": 80},
+    {"nama": "Siswa B", "nilai": 75},
+    {"nama": "Siswa C", "nilai": 90}
+]</code></pre></div>
+</section>
+
+<section id="bias">
+<div class="kicker">Bagian 13</div>
+<h2>⚖️ Bias AI</h2>
+<p><strong>Bias AI</strong> dapat terjadi ketika data, proses pengembangan, atau cara penggunaan sistem menghasilkan pola yang tidak adil atau kurang mewakili kelompok tertentu.</p>
+<h3>Contoh sederhana</h3>
+<p>Bayangkan sistem klasifikasi dilatih terutama menggunakan contoh dari satu kelompok. Ketika digunakan pada kelompok yang kurang terwakili, performanya dapat berbeda.</p>
+<div class="grid">
+<div class="card"><strong>Data</strong>Apakah data cukup beragam dan mewakili konteks penggunaan?</div>
+<div class="card"><strong>Model</strong>Apakah ada kelompok yang memiliki hasil berbeda?</div>
+<div class="card"><strong>Evaluasi</strong>Apakah performa diperiksa secara lebih rinci, bukan hanya rata-rata?</div>
+<div class="card"><strong>Dampak</strong>Siapa yang mungkin dirugikan jika model salah?</div>
+</div>
+<div class="note"><strong>Pesan penting:</strong> siswa tidak perlu menyimpulkan bahwa semua AI selalu bias. Yang perlu dipahami adalah bias merupakan salah satu risiko yang harus diperiksa ketika AI digunakan.</div>
+</section>
+
+<section id="hakcipta">
+<div class="kicker">Bagian 14</div>
+<h2>©️ Hak Cipta dan Plagiarisme</h2>
+<p>AI dapat membantu menghasilkan teks, gambar, kode, dan konten lainnya. Namun penggunaan AI tidak otomatis menghilangkan aturan hak cipta atau aturan akademik.</p>
+<h3>Hak cipta</h3>
+<p>Perhatikan apakah suatu materi boleh digunakan, dimodifikasi, atau dipublikasikan. Aturan dapat berbeda menurut jenis karya, lisensi, dan yurisdiksi.</p>
+<h3>Plagiarisme</h3>
+<p>Plagiarisme berkaitan dengan menyajikan karya atau gagasan orang lain sebagai milik sendiri tanpa pengakuan yang sesuai. Dalam tugas sekolah, siswa harus mengikuti aturan guru mengenai penggunaan AI dan mencantumkan bantuan AI bila diwajibkan.</p>
+<div class="tip"><strong>Prinsip belajar:</strong> gunakan AI untuk membantu memahami, membuat ide, mendapatkan contoh, atau memperbaiki proses belajar—kemudian pahami dan periksa hasilnya sendiri.</div>
+<h3>Contoh perilaku yang baik</h3>
+<ul>
+<li>Membaca dan memahami jawaban AI sebelum menggunakannya.</li>
+<li>Mengubah dan mengembangkan ide dengan pemahaman sendiri.</li>
+<li>Mencantumkan penggunaan AI jika aturan tugas meminta.</li>
+<li>Memeriksa sumber dan fakta penting.</li>
+<li>Tidak mengaku bahwa seluruh hasil AI adalah karya pribadi jika aturan sekolah melarangnya.</li>
+</ul>
+</section>
+
+<section id="informasi">
+<div class="kicker">Bagian 15</div>
+<h2>❗ Informasi Palsu dan Halusinasi AI</h2>
+<p>AI generatif dapat menghasilkan jawaban yang terdengar meyakinkan tetapi salah. Kondisi seperti ini sering disebut <strong>halusinasi AI</strong>.</p>
+<p>Karena itu, jangan menggunakan kelancaran bahasa sebagai bukti bahwa informasi tersebut benar.</p>
+<h3>Langkah memeriksa hasil AI</h3>
+<ol>
+<li>Identifikasi klaim utama.</li>
+<li>Tanyakan: apakah informasi tersebut penting atau berisiko jika salah?</li>
+<li>Cari sumber tepercaya untuk memverifikasi.</li>
+<li>Bandingkan beberapa sumber jika diperlukan.</li>
+<li>Periksa tanggal dan konteks informasi.</li>
+<li>Jika tidak dapat diverifikasi, nyatakan bahwa informasi tersebut belum terverifikasi.</li>
+</ol>
+<div class="warn"><strong>Contoh:</strong> jika AI memberikan nama buku, angka statistik, kutipan, atau fakta sejarah, jangan langsung menganggap semuanya benar. Verifikasi informasi yang penting.</div>
+</section>
+
+<section id="tanggungjawab">
+<div class="kicker">Bagian 16</div>
+<h2>✅ Menggunakan AI Secara Bertanggung Jawab</h2>
+<table>
+<tr><th>Prinsip</th><th>Contoh tindakan siswa</th></tr>
+<tr><td>Jujur</td><td>Mengikuti aturan guru tentang penggunaan AI dan menyatakan bantuan AI jika diminta.</td></tr>
+<tr><td>Periksa</td><td>Memverifikasi fakta dan menguji kode sebelum digunakan.</td></tr>
+<tr><td>Jaga privasi</td><td>Tidak memasukkan data sensitif sembarangan.</td></tr>
+<tr><td>Hormati karya</td><td>Memperhatikan hak cipta, lisensi, dan atribusi.</td></tr>
+<tr><td>Pahami hasil</td><td>Tidak sekadar menyalin; siswa harus memahami apa yang digunakan.</td></tr>
+<tr><td>Pertimbangkan dampak</td><td>Memikirkan siapa yang dapat terdampak jika hasil AI salah.</td></tr>
+</table>
+<div class="flow">
+<div class="box">Gunakan AI</div><div class="arrow">→</div><div class="box">Periksa</div><div class="arrow">→</div><div class="box">Pahami</div><div class="arrow">→</div><div class="box">Perbaiki</div><div class="arrow">→</div><div class="box">Gunakan secara bertanggung jawab</div>
+</div>
+</section>
+
+<section id="latihan">
+<div class="kicker">Bagian 17</div>
+<h2>📝 5 Latihan Soal</h2>
+
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan Generative AI? Sebutkan minimal empat bentuk konten yang dapat dihasilkan.<details><summary>Lihat pedoman jawaban</summary><div>Generative AI adalah teknologi AI yang dapat menghasilkan konten baru berdasarkan pola yang dipelajari dan instruksi pengguna. Contohnya teks, gambar, kode, dan audio.</div></details></div>
+
+<div class="quiz"><strong>Soal 2.</strong> Apa yang dimaksud dengan prompt? Mengapa prompt yang lebih jelas dapat membantu menghasilkan respons yang lebih sesuai?<details><summary>Lihat pedoman jawaban</summary><div>Prompt adalah instruksi atau konteks yang diberikan kepada AI. Prompt yang jelas memberikan tujuan, konteks, batasan, dan format sehingga AI memiliki informasi lebih lengkap tentang hasil yang diinginkan.</div></details></div>
+
+<div class="quiz"><strong>Soal 3.</strong> Perhatikan prompt: “Buat materi Python.” Tuliskan versi prompt yang lebih baik untuk siswa SMK kelas X.<details><summary>Lihat contoh jawaban</summary><div>Contoh: “Buat materi pengantar Python untuk siswa SMK kelas X yang belum pernah coding. Jelaskan variabel, input, dan output dengan bahasa sederhana, berikan contoh kode, lalu buat 3 latihan singkat.” Jawaban lain yang memenuhi tujuan, konteks, dan format juga benar.</div></details></div>
+
+<div class="quiz"><strong>Soal 4.</strong> Mengapa kita tidak boleh langsung mempercayai semua informasi yang dihasilkan AI?<details><summary>Lihat pedoman jawaban</summary><div>Karena AI dapat menghasilkan informasi yang keliru, tidak lengkap, atau tidak sesuai konteks. Informasi penting perlu diperiksa dan diverifikasi dengan sumber yang tepercaya.</div></details></div>
+
+<div class="quiz"><strong>Soal 5.</strong> Sebutkan minimal empat hal yang perlu diperhatikan dalam etika penggunaan AI.<details><summary>Lihat pedoman jawaban</summary><div>Contohnya privasi, keamanan data, bias AI, hak cipta, plagiarisme, informasi palsu, transparansi penggunaan AI, dan tanggung jawab terhadap dampak hasil AI.</div></details></div>
+</section>
+
+<section id="tugas">
+<div class="kicker">Bagian 18</div>
+<h2>🛠️ 5 Tugas Praktik</h2>
+
+<div class="task">
+<h3>Tugas 1 — Membandingkan Dua Prompt</h3>
+<p>Pilih satu topik pelajaran, misalnya Python, matematika, jaringan komputer, atau desain.</p>
+<ol>
+<li>Buat prompt awal yang singkat.</li>
+<li>Jalankan pada AI yang tersedia.</li>
+<li>Simpan hasil pertama.</li>
+<li>Perbaiki prompt dengan menambahkan tujuan, konteks, target pembaca, batasan, dan format.</li>
+<li>Jalankan kembali.</li>
+<li>Bandingkan kedua hasil.</li>
+</ol>
+<p><strong>Output:</strong> dua prompt, dua hasil, tabel perbandingan, dan kesimpulan.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 2 — Eksperimen Frekuensi Kata di Google Colab</h3>
+<p>Buat program Python yang menerima satu paragraf dari pengguna, membersihkan tanda baca, menghitung frekuensi kata, lalu menampilkan 10 kata yang paling sering muncul.</p>
+<p><strong>Bonus:</strong> tambahkan input dari <code>input()</code> dan hitung jumlah kata unik.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 3 — Audit Hasil AI</h3>
+<p>Minta AI menjelaskan suatu topik pelajaran. Ambil minimal lima klaim atau fakta dari jawabannya. Periksa fakta tersebut menggunakan sumber yang tepercaya.</p>
+<p><strong>Output:</strong> tabel dengan kolom <em>klaim AI, sumber pemeriksa, hasil pemeriksaan, dan catatan</em>.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 4 — Poster Etika AI</h3>
+<p>Buat poster digital bertema <strong>“7 Aturan Menggunakan AI Secara Bertanggung Jawab”</strong>.</p>
+<p>Poster minimal membahas privasi, keamanan data, bias, hak cipta, plagiarisme, informasi palsu, dan verifikasi hasil. Jika menggunakan AI untuk membantu membuat desain atau teks, ikuti aturan atribusi yang ditetapkan guru.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 5 — Laporan Eksperimen AI</h3>
+<p>Buat laporan lengkap sesuai format berikut:</p>
+<ol>
+<li><strong>Prompt awal.</strong></li>
+<li><strong>Hasil AI.</strong></li>
+<li><strong>Prompt yang diperbaiki.</strong></li>
+<li><strong>Hasil kedua.</strong></li>
+<li><strong>Perbandingan.</strong></li>
+<li><strong>Kesimpulan.</strong></li>
+</ol>
+<p>Tambahkan identitas alat AI yang digunakan, tanggal eksperimen, tujuan eksperimen, dan catatan verifikasi fakta. Jelaskan minimal <strong>3 perubahan</strong> yang dilakukan pada prompt dan bagaimana perubahan tersebut memengaruhi hasil.</p>
+<p><strong>Kesimpulan wajib:</strong> jelaskan apa yang dipelajari tentang prompt engineering dan mengapa hasil AI tetap perlu diperiksa manusia.</p>
+</div>
+
+<h3>Checklist Pengumpulan</h3>
+<div class="checklist">
+<label>☐ Tujuan eksperimen ditulis dengan jelas.</label>
+<label>☐ Prompt awal dicantumkan.</label>
+<label>☐ Hasil pertama didokumentasikan.</label>
+<label>☐ Prompt diperbaiki dan dijelaskan perubahannya.</label>
+<label>☐ Hasil kedua didokumentasikan.</label>
+<label>☐ Kedua hasil dibandingkan.</label>
+<label>☐ Fakta penting diperiksa.</label>
+<label>☐ Risiko etika dibahas.</label>
+<label>☐ Kesimpulan ditulis dengan bahasa sendiri.</label>
+<label>☐ Penggunaan AI dicantumkan sesuai aturan guru.</label>
+</div>
+</section>
+
+<section id="ringkasan">
+<div class="kicker">Bagian 19</div>
+<h2>📌 Ringkasan</h2>
+<ol>
+<li>Generative AI dapat menghasilkan berbagai bentuk konten seperti teks, gambar, kode, dan audio.</li>
+<li>Prompt adalah instruksi atau konteks yang diberikan kepada AI.</li>
+<li>Prompt yang jelas dapat membantu mengarahkan hasil sesuai tujuan.</li>
+<li>Prompt engineering adalah proses menyusun, menguji, dan memperbaiki prompt.</li>
+<li>Unsur yang dapat membantu prompt antara lain tujuan, konteks, target pembaca, batasan, format, dan kriteria.</li>
+<li>Google Colab dapat digunakan untuk melakukan eksperimen Python yang mendukung pembelajaran AI, termasuk pengolahan teks.</li>
+<li>Frekuensi kata adalah contoh sederhana mengubah teks menjadi data yang dapat dianalisis.</li>
+<li>AI dapat menghasilkan informasi yang keliru sehingga hasil penting perlu diverifikasi.</li>
+<li>Etika AI mencakup privasi, keamanan data, bias, hak cipta, plagiarisme, informasi palsu, dan tanggung jawab.</li>
+<li>Siswa perlu menggunakan AI sebagai alat bantu belajar, bukan sebagai pengganti pemahaman dan tanggung jawab.</li>
+</ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Prompt yang baik membantu AI memahami tujuan, tetapi manusia tetap bertanggung jawab untuk memeriksa, memahami, dan menggunakan hasil AI secara etis.”</div>
+</section>
+
+<section id="refleksi">
+<div class="kicker">Bagian 20</div>
+<h2>💭 Refleksi Siswa</h2>
+<ol>
+<li>Apa yang dimaksud dengan Generative AI?</li>
+<li>Apa perbedaan prompt sederhana dan prompt yang terstruktur?</li>
+<li>Bagian prompt apa yang paling membantu menghasilkan jawaban sesuai kebutuhanmu?</li>
+<li>Mengapa hasil AI perlu diverifikasi?</li>
+<li>Data apa yang tidak sebaiknya dimasukkan ke layanan AI tanpa memahami aturan dan izinnya?</li>
+<li>Apa contoh bias AI yang dapat terjadi?</li>
+<li>Apa hubungan AI dengan hak cipta dan plagiarisme?</li>
+<li>Bagaimana cara menggunakan AI untuk membantu belajar tanpa sekadar menyalin?</li>
+<li>Apa yang kamu pelajari dari eksperimen frekuensi kata di Google Colab?</li>
+<li>Jika kamu menggunakan AI untuk tugas sekolah, bagaimana kamu akan memastikan penggunaannya tetap bertanggung jawab?</li>
+</ol>
+<div class="tip"><strong>Refleksi lanjutan:</strong> Bayangkan kamu mendapat jawaban AI yang sangat meyakinkan tetapi tidak memiliki sumber. Langkah apa saja yang akan kamu lakukan sebelum menggunakan jawaban tersebut?</div>
+</section>
+
+<section>
+<div class="kicker">Referensi Praktik</div>
+<h2>📚 Google Colab</h2>
+<p>Gunakan <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a> untuk menjalankan seluruh contoh Python pada materi ini.</p>
+<p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Generative AI, Prompt Engineering, dan Etika AI</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+<div class="container">Generative AI, Prompt Engineering, dan Etika AI • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div>
+</footer>
+
+<script>
+function copyCode(button){
+  const code=button.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    const old=button.innerText;
+    button.innerText="Tersalin ✓";
+    setTimeout(()=>button.innerText=old,1400);
+  }).catch(()=>{
+    button.innerText="Gagal";
+    setTimeout(()=>button.innerText="Salin",1200);
+  });
+}
+</script>
+</body>
+</html>

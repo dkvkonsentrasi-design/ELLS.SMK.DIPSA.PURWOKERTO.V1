@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mengenal Machine Learning dalam Python pada Google Colab</title>
+<style>
+:root{
+  --bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;
+  --primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;
+  --border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;
+  --orange:#c2410c;--orange-soft:#fff7ed;--shadow:0 10px 30px rgba(15,23,42,.07)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(1180px,92%);margin:auto}
+.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff,#faf5ff 48%,#eff6ff);border-bottom:1px solid var(--border)}
+.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}
+h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}
+.lead{max-width:900px;color:#475467;font-size:1.08rem}
+.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text)}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}
+aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+aside h3{margin:2px 0 12px}
+.nav a{display:block;padding:9px 10px;border-radius:9px;color:#475467;font-size:.91rem}
+.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}
+main{min-width:0}
+section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}
+h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}
+h3{font-size:1.18rem;margin:26px 0 10px}
+p{margin:9px 0}ul,ol{padding-left:24px}
+.note,.tip,.warn{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}
+.tip{border-color:var(--green);background:var(--green-soft)}
+.warn{border-color:#f97316;background:var(--orange-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}
+.card strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}
+pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.91rem;line-height:1.6;margin:0}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}
+.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}
+.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}
+.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}
+.arrow{color:var(--primary);font-size:1.3rem}
+.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}
+.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}
+details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}
+.checklist label{display:block;margin:8px 0}
+.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+.small{font-size:.9rem;color:var(--muted)}
+footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}
+@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">🤖 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span>
+<h1>Mengenal Machine Learning dalam Python pada Google Colab</h1>
+<p class="lead">Mengenal cara kerja <strong>Machine Learning</strong> dengan contoh sederhana: menggunakan data <strong>jam belajar dan nilai</strong> untuk membuat model yang belajar dari data, kemudian melakukan prediksi nilai.</p>
+<div class="top-actions">
+<a class="btn primary" href="https://colab.research.google.com/" target="_blank">🚀 Buka Google Colab</a>
+<a class="btn" href="#praktik">🎯 Langsung ke Praktik</a>
+</div>
+</div>
+</header>
+
+<div class="container layout">
+<aside>
+<h3>📚 Navigasi Materi</h3>
+<nav class="nav">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a>
+<a href="#colab">2. Google Colab</a>
+<a href="#ml">3. Apa itu Machine Learning?</a>
+<a href="#konsep">4. Konsep Dasar ML</a>
+<a href="#dataset">5. Dataset</a>
+<a href="#fitur-target">6. Fitur dan Target</a>
+<a href="#regresi">7. Regresi Linear</a>
+<a href="#sklearn">8. Scikit-learn</a>
+<a href="#data">9. Menyiapkan Data</a>
+<a href="#split">10. Train dan Test</a>
+<a href="#model">11. Membuat Model</a>
+<a href="#prediksi">12. Prediksi</a>
+<a href="#evaluasi">13. Evaluasi Sederhana</a>
+<a href="#praktik">14. Praktik Lengkap</a>
+<a href="#diskusi">15. Diskusi</a>
+<a href="#latihan">16. 5 Latihan Soal</a>
+<a href="#tugas">17. 5 Tugas</a>
+<a href="#ringkasan">18. Ringkasan</a>
+<a href="#refleksi">19. Refleksi</a>
+</nav>
+</aside>
+
+<main>
+
+<section id="tujuan">
+<div class="kicker">Bagian 1</div>
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian Machine Learning dengan bahasa sederhana.</li>
+<li>Menjelaskan hubungan antara data, fitur, target, dan model.</li>
+<li>Membedakan data untuk belajar dan data untuk pengujian.</li>
+<li>Menggunakan Python pada Google Colab untuk membuat model sederhana.</li>
+<li>Mengenal regresi linear sebagai salah satu metode Machine Learning.</li>
+<li>Menggunakan library <code>scikit-learn</code>.</li>
+<li>Membuat model berdasarkan data jam belajar dan nilai.</li>
+<li>Menggunakan model untuk menghasilkan prediksi.</li>
+<li>Menjelaskan hasil model secara hati-hati berdasarkan data.</li>
+</ol>
+<div class="note"><strong>Tujuan utama:</strong> siswa memahami bahwa Machine Learning bukan sekadar “menebak”, tetapi proses membuat komputer mempelajari pola dari data untuk menghasilkan prediksi atau keputusan.</div>
+</section>
+
+<section id="colab">
+<div class="kicker">Bagian 2</div>
+<h2>☁️ Machine Learning di Google Colab</h2>
+<p>Google Colab memungkinkan kita menjalankan Python melalui browser. Untuk pembelajaran Machine Learning, Colab sangat praktis karena kode dapat ditulis, dijalankan, dan hasilnya langsung terlihat di notebook.</p>
+<div class="step"><div class="num">1</div><div>Buka <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>.</div></div>
+<div class="step"><div class="num">2</div><div>Pilih <strong>New Notebook</strong>.</div></div>
+<div class="step"><div class="num">3</div><div>Buat code cell untuk Python.</div></div>
+<div class="step"><div class="num">4</div><div>Jalankan kode dengan tombol ▶ atau <strong>Shift + Enter</strong>.</div></div>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Saya sedang belajar Machine Learning!")</code></pre></div>
+<div class="tip"><strong>Tips:</strong> Jalankan kode dari atas ke bawah agar variabel dan library yang dibutuhkan sudah tersedia ketika digunakan.</div>
+</section>
+
+<section id="ml">
+<div class="kicker">Bagian 3</div>
+<h2>🤖 Apa itu Machine Learning?</h2>
+<p><strong>Machine Learning (ML)</strong> adalah pendekatan dalam kecerdasan artifisial yang memungkinkan komputer mempelajari pola dari data sehingga dapat menghasilkan prediksi atau keputusan berdasarkan pola tersebut.</p>
+<p>Dalam pemrograman biasa, kita sering menuliskan aturan secara langsung. Dalam Machine Learning, kita memberikan contoh data kepada algoritma sehingga model dapat menemukan pola matematis dari data tersebut.</p>
+<div class="grid">
+<div class="card"><strong>🧑‍💻 Pemrograman biasa</strong>Kita menulis aturan → komputer menjalankan aturan → menghasilkan output.</div>
+<div class="card"><strong>🤖 Machine Learning</strong>Data + algoritma → model belajar pola → model digunakan untuk prediksi.</div>
+</div>
+<div class="flow">
+<div class="box">Data</div><div class="arrow">→</div><div class="box">Algoritma</div><div class="arrow">→</div><div class="box">Model</div><div class="arrow">→</div><div class="box">Prediksi</div>
+</div>
+<div class="note"><strong>Contoh sederhana:</strong> Kita memiliki data jam belajar dan nilai. Model dapat mempelajari pola hubungan pada data tersebut, lalu digunakan untuk memperkirakan nilai berdasarkan jumlah jam belajar tertentu.</div>
+</section>
+
+<section id="konsep">
+<div class="kicker">Bagian 4</div>
+<h2>🧠 Konsep Dasar Machine Learning</h2>
+<h3>1. Dataset</h3>
+<p><strong>Dataset</strong> adalah kumpulan data yang digunakan untuk analisis atau pembelajaran model.</p>
+<h3>2. Fitur (Feature)</h3>
+<p><strong>Fitur</strong> adalah informasi yang digunakan model sebagai masukan. Dalam contoh kita, <strong>jam belajar</strong> menjadi fitur.</p>
+<h3>3. Target</h3>
+<p><strong>Target</strong> adalah nilai yang ingin diprediksi. Dalam contoh kita, <strong>nilai</strong> menjadi target.</p>
+<h3>4. Model</h3>
+<p><strong>Model</strong> adalah hasil pembelajaran algoritma terhadap data. Model menerima input baru dan menghasilkan output berdasarkan pola yang telah dipelajari.</p>
+<h3>5. Prediksi</h3>
+<p><strong>Prediksi</strong> adalah hasil yang diberikan model ketika kita memasukkan data baru.</p>
+<table>
+<tr><th>Istilah</th><th>Contoh pada materi</th><th>Penjelasan sederhana</th></tr>
+<tr><td>Dataset</td><td>Jam belajar + nilai</td><td>Kumpulan contoh data.</td></tr>
+<tr><td>Feature</td><td>Jam belajar</td><td>Data masukan untuk model.</td></tr>
+<tr><td>Target</td><td>Nilai</td><td>Data yang ingin diprediksi.</td></tr>
+<tr><td>Model</td><td>Regresi Linear</td><td>Pola matematis yang dipelajari dari data.</td></tr>
+<tr><td>Prediksi</td><td>Nilai untuk jam belajar baru</td><td>Output model.</td></tr>
+</table>
+</section>
+
+<section id="dataset">
+<div class="kicker">Bagian 5</div>
+<h2>🗃️ Dataset Contoh: Jam Belajar dan Nilai</h2>
+<p>Kita akan menggunakan dataset sederhana agar konsep Machine Learning mudah dipahami.</p>
+<table>
+<tr><th>Jam Belajar</th><th>Nilai</th></tr>
+<tr><td>1</td><td>55</td></tr>
+<tr><td>2</td><td>60</td></tr>
+<tr><td>3</td><td>68</td></tr>
+<tr><td>4</td><td>75</td></tr>
+<tr><td>5</td><td>82</td></tr>
+<tr><td>6</td><td>88</td></tr>
+</table>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>jam_belajar = [1, 2, 3, 4, 5, 6]
+nilai = [55, 60, 68, 75, 82, 88]
+
+print("Jam belajar:", jam_belajar)
+print("Nilai:", nilai)</code></pre></div>
+<div class="tip"><strong>Perhatikan:</strong> setiap baris merupakan satu contoh. Jam belajar dan nilai pada posisi yang sama merupakan pasangan data.</div>
+</section>
+
+<section id="fitur-target">
+<div class="kicker">Bagian 6</div>
+<h2>🔍 Fitur dan Target</h2>
+<p>Sebelum membuat model, kita harus menentukan apa yang menjadi <strong>input</strong> dan apa yang menjadi <strong>output</strong>.</p>
+<div class="grid">
+<div class="card"><strong>Fitur / X</strong>Jam belajar → digunakan sebagai informasi masukan.</div>
+<div class="card"><strong>Target / y</strong>Nilai → menjadi informasi yang ingin diprediksi.</div>
+</div>
+<p>Secara sederhana:</p>
+<div class="flow">
+<div class="box">X = Jam Belajar</div><div class="arrow">→</div><div class="box">Model ML</div><div class="arrow">→</div><div class="box">y = Nilai</div>
+</div>
+<p>Dalam Python dan scikit-learn, fitur biasanya ditulis sebagai data berbentuk dua dimensi, sedangkan target biasanya berbentuk satu dimensi.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = [[1], [2], [3], [4], [5], [6]]
+y = [55, 60, 68, 75, 82, 88]</code></pre></div>
+<div class="warn"><strong>Kesalahan umum:</strong> <code>X</code> pada scikit-learn untuk satu fitur tetap perlu berbentuk seperti <code>[[1], [2], [3]]</code>, bukan hanya <code>[1, 2, 3]</code>.</div>
+</section>
+
+<section id="regresi">
+<div class="kicker">Bagian 7</div>
+<h2>📈 Mengenal Regresi Linear</h2>
+<p><strong>Regresi linear</strong> adalah salah satu metode yang dapat digunakan untuk memodelkan hubungan antara variabel input dan target menggunakan hubungan garis lurus.</p>
+<p>Untuk pembelajaran dasar, bayangkan kita memiliki titik-titik data pada grafik. Model regresi linear mencari garis yang paling sesuai dengan pola titik-titik tersebut.</p>
+<div class="flow">
+<div class="box">Data latihan</div><div class="arrow">→</div><div class="box">Cari pola garis</div><div class="arrow">→</div><div class="box">Model regresi</div><div class="arrow">→</div><div class="box">Prediksi</div>
+</div>
+<p>Bentuk sederhananya dapat ditulis:</p>
+<div class="note"><strong>y = a + bx</strong><br><br>
+<code>x</code> = fitur/input, <code>y</code> = nilai prediksi, <code>a</code> = intercept, dan <code>b</code> = koefisien/slope.</div>
+<p>Siswa tidak perlu menghitung rumus secara manual pada tahap awal. Library scikit-learn dapat membantu melakukan proses tersebut.</p>
+</section>
+
+<section id="sklearn">
+<div class="kicker">Bagian 8</div>
+<h2>🧰 Scikit-learn</h2>
+<p><strong>scikit-learn</strong> adalah library Python yang menyediakan banyak algoritma Machine Learning. Pada materi ini kita menggunakan <code>LinearRegression</code>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>from sklearn.linear_model import LinearRegression</code></pre></div>
+<table>
+<tr><th>Perintah</th><th>Fungsi</th></tr>
+<tr><td><code>LinearRegression()</code></td><td>Membuat objek model regresi linear.</td></tr>
+<tr><td><code>model.fit(X, y)</code></td><td>Melatih model menggunakan data.</td></tr>
+<tr><td><code>model.predict(X_baru)</code></td><td>Menghasilkan prediksi untuk data baru.</td></tr>
+<tr><td><code>model.coef_</code></td><td>Melihat koefisien model.</td></tr>
+<tr><td><code>model.intercept_</code></td><td>Melihat intercept model.</td></tr>
+</table>
+</section>
+
+<section id="data">
+<div class="kicker">Bagian 9</div>
+<h2>💾 Menyiapkan Data untuk Model</h2>
+<p>Kita ubah data menjadi bentuk yang mudah diproses scikit-learn.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = [[1], [2], [3], [4], [5], [6]]
+y = [55, 60, 68, 75, 82, 88]
+
+print("Fitur:", X)
+print("Target:", y)</code></pre></div>
+<h3>Mengapa X menggunakan tanda kurung ganda?</h3>
+<p>Karena scikit-learn mengharapkan fitur dalam bentuk <strong>jumlah data × jumlah fitur</strong>. Kita memiliki 6 data dan 1 fitur, sehingga bentuknya 6 × 1.</p>
+<div class="note"><strong>Bayangkan seperti tabel:</strong> setiap baris adalah satu siswa/contoh data, sedangkan kolom adalah fitur yang digunakan.</div>
+</section>
+
+<section id="split">
+<div class="kicker">Bagian 10</div>
+<h2>✂️ Data Training dan Data Testing</h2>
+<p>Dalam Machine Learning, kita sering membagi data menjadi data untuk <strong>training</strong> dan data untuk <strong>testing</strong>.</p>
+<ul>
+<li><strong>Training data</strong> digunakan untuk membantu model mempelajari pola.</li>
+<li><strong>Testing data</strong> digunakan untuk melihat bagaimana model bekerja pada data yang tidak digunakan saat pelatihan.</li>
+</ul>
+<p>Untuk dataset yang lebih besar, kita dapat menggunakan <code>train_test_split()</code>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)</code></pre></div>
+<div class="warn"><strong>Catatan:</strong> dataset contoh kita hanya memiliki 6 baris. Untuk pembelajaran konsep sederhana, kita dapat melatih model dengan seluruh data terlebih dahulu. Untuk evaluasi Machine Learning yang lebih serius, gunakan dataset yang lebih banyak dan pisahkan data training/testing atau gunakan validasi yang sesuai.</div>
+</section>
+
+<section id="model">
+<div class="kicker">Bagian 11</div>
+<h2>🧠 Membuat dan Melatih Model</h2>
+<p>Langkah utama berikutnya adalah membuat model dan melatihnya dengan data.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X, y)
+
+print("Model berhasil dilatih.")</code></pre></div>
+<h3>Apa yang terjadi saat <code>fit()</code>?</h3>
+<p>Metode <code>fit()</code> digunakan untuk membuat model mempelajari pola hubungan antara fitur dan target berdasarkan data yang diberikan.</p>
+<div class="tip"><strong>Ingat tiga langkah:</strong> buat model → <code>fit()</code> untuk belajar → <code>predict()</code> untuk memprediksi.</div>
+</section>
+
+<section id="prediksi">
+<div class="kicker">Bagian 12</div>
+<h2>🔮 Melakukan Prediksi</h2>
+<p>Setelah model dilatih, kita dapat memberikan data baru.</p>
+<p>Misalnya kita ingin melihat prediksi nilai untuk siswa yang belajar selama <strong>7 jam</strong>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>jam_baru = [[7]]
+
+prediksi = model.predict(jam_baru)
+
+print("Prediksi nilai:", prediksi[0])</code></pre></div>
+<p>Nilai yang keluar merupakan <strong>prediksi model</strong>, bukan jaminan nilai sebenarnya.</p>
+<div class="warn"><strong>Penting:</strong> contoh ini digunakan untuk memahami konsep. Model belajar dari dataset yang sangat kecil sehingga hasil prediksi tidak boleh dianggap sebagai aturan pasti bahwa jumlah jam belajar tertentu selalu menghasilkan nilai tertentu.</div>
+</section>
+
+<section id="evaluasi">
+<div class="kicker">Bagian 13</div>
+<h2>📏 Evaluasi Sederhana</h2>
+<p>Model perlu dievaluasi untuk mengetahui seberapa baik prediksinya pada data tertentu. Salah satu ukuran yang umum pada regresi adalah <strong>R² (R-squared)</strong>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>r2 = model.score(X, y)
+
+print("R²:", r2)</code></pre></div>
+<p>Nilai R² menggambarkan seberapa baik model menjelaskan variasi target pada data yang digunakan untuk menghitung skor tersebut. Pada contoh yang sangat kecil seperti ini, jangan menganggap nilai skor sebagai bukti bahwa model akan bekerja sama baiknya pada data baru.</p>
+<div class="note"><strong>Prinsip penting:</strong> semakin baik model pada data latihan belum tentu berarti semakin baik pada data yang belum pernah dilihat. Inilah salah satu alasan mengapa data testing penting.</div>
+</section>
+
+<section id="praktik">
+<div class="kicker">Bagian 14</div>
+<h2>🎯 Praktik Lengkap — Prediksi Nilai dari Jam Belajar</h2>
+<p>Ikuti langkah berikut di Google Colab. Kode dapat dijalankan dari atas ke bawah.</p>
+<h3>Langkah 1 — Import library</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression</code></pre></div>
+<h3>Langkah 2 — Membuat dataset</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = [[1], [2], [3], [4], [5], [6]]
+y = [55, 60, 68, 75, 82, 88]</code></pre></div>
+<h3>Langkah 3 — Membuat model</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>model = LinearRegression()
+model.fit(X, y)</code></pre></div>
+<h3>Langkah 4 — Melihat pola data</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>plt.scatter(X, y, label="Data")
+plt.plot(X, model.predict(X), label="Garis Model")
+
+plt.title("Jam Belajar dan Nilai")
+plt.xlabel("Jam Belajar")
+plt.ylabel("Nilai")
+plt.legend()
+plt.grid()
+plt.show()</code></pre></div>
+<h3>Langkah 5 — Prediksi</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>jam_baru = [[7]]
+prediksi = model.predict(jam_baru)
+
+print("Jika jam belajar =", jam_baru[0][0])
+print("Prediksi nilai =", round(prediksi[0], 2))</code></pre></div>
+<h3>Langkah 6 — Melihat parameter model</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Koefisien:", model.coef_[0])
+print("Intercept:", model.intercept_)</code></pre></div>
+<div class="tip"><strong>Aktivitas:</strong> ubah <code>jam_baru</code> menjadi <code>[[8]]</code>, <code>[[10]]</code>, atau nilai lain. Bandingkan hasil prediksi dan jelaskan bahwa hasil tersebut merupakan keluaran model berdasarkan pola data yang tersedia.</div>
+</section>
+
+<section id="diskusi">
+<div class="kicker">Bagian 15</div>
+<h2>💬 Diskusi dan Analisis</h2>
+<p>Setelah menjalankan praktik, diskusikan pertanyaan berikut:</p>
+<ol>
+<li>Bagaimana bentuk pola antara jam belajar dan nilai pada grafik?</li>
+<li>Apa yang terjadi pada prediksi ketika nilai jam belajar diubah?</li>
+<li>Mengapa prediksi tidak boleh dianggap sebagai nilai pasti?</li>
+<li>Apa kelemahan dataset yang hanya memiliki sedikit contoh?</li>
+<li>Data apa lagi yang mungkin relevan jika kita ingin membuat model prediksi nilai yang lebih lengkap?</li>
+</ol>
+<h3>Contoh kesimpulan yang aman</h3>
+<p>“Pada dataset contoh, terdapat pola nilai yang cenderung meningkat ketika jumlah jam belajar meningkat. Model regresi linear digunakan untuk mempelajari pola tersebut dan menghasilkan prediksi untuk input baru.”</p>
+<div class="warn"><strong>Jangan menyimpulkan sebab-akibat hanya dari dataset ini.</strong> Banyak faktor lain dapat memengaruhi nilai, misalnya metode belajar, tingkat kesulitan soal, kondisi siswa, waktu belajar efektif, dan faktor lainnya.</div>
+</section>
+
+<section id="latihan">
+<div class="kicker">Bagian 16</div>
+<h2>📝 5 Latihan Soal</h2>
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan Machine Learning?<details><summary>Lihat pedoman jawaban</summary><div>Machine Learning adalah pendekatan yang memungkinkan komputer mempelajari pola dari data untuk menghasilkan prediksi atau keputusan.</div></details></div>
+<div class="quiz"><strong>Soal 2.</strong> Pada dataset jam belajar dan nilai, mana yang menjadi fitur dan mana yang menjadi target?<details><summary>Lihat jawaban</summary><div>Fitur adalah jam belajar, sedangkan target adalah nilai yang ingin diprediksi.</div></details></div>
+<div class="quiz"><strong>Soal 3.</strong> Apa fungsi <code>model.fit(X, y)</code>?<details><summary>Lihat jawaban</summary><div><code>fit()</code> digunakan untuk melatih model dengan data fitur dan target sehingga model mempelajari pola dari data tersebut.</div></details></div>
+<div class="quiz"><strong>Soal 4.</strong> Apa fungsi <code>model.predict()</code>?<details><summary>Lihat jawaban</summary><div><code>predict()</code> digunakan untuk menghasilkan prediksi dari data input yang diberikan kepada model yang sudah dilatih.</div></details></div>
+<div class="quiz"><strong>Soal 5.</strong> Mengapa kita tidak boleh menganggap prediksi model sebagai nilai yang pasti benar?<details><summary>Lihat jawaban</summary><div>Karena model belajar dari data yang tersedia. Jika datanya sedikit, tidak lengkap, atau berbeda dengan kondisi baru, hasil prediksi dapat berbeda dari keadaan sebenarnya.</div></details></div>
+</section>
+
+<section id="tugas">
+<div class="kicker">Bagian 17</div>
+<h2>🛠️ 5 Tugas Praktik</h2>
+
+<div class="task">
+<h3>Tugas 1 — Mengenali Dataset</h3>
+<p>Buat dataset sederhana berisi minimal 8 baris data tentang satu objek yang memiliki satu fitur dan satu target. Tentukan mana yang menjadi fitur dan mana yang menjadi target.</p>
+<p><strong>Output:</strong> tabel dataset dan penjelasan fitur-target.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 2 — Grafik Data</h3>
+<p>Gunakan dataset jam belajar dan nilai. Buat scatter plot menggunakan Matplotlib. Tambahkan judul, label sumbu X dan Y, serta grid.</p>
+<p><strong>Output:</strong> grafik dan dua kesimpulan berdasarkan pola yang terlihat.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 3 — Model Regresi Linear</h3>
+<p>Buat model <code>LinearRegression</code> menggunakan dataset jam belajar dan nilai. Latih model dengan <code>fit()</code>, kemudian lakukan prediksi untuk minimal tiga input baru.</p>
+<p><strong>Output:</strong> kode, tiga hasil prediksi, dan penjelasan singkat.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 4 — Membandingkan Prediksi</h3>
+<p>Gunakan dataset buatan guru atau dataset sederhana minimal 10 baris. Buat model regresi linear dan tampilkan data asli serta garis model dalam satu grafik.</p>
+<p><strong>Output:</strong> grafik, hasil prediksi, dan minimal tiga kesimpulan.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 5 — Mini Proyek Machine Learning</h3>
+<p>Buat notebook Google Colab dengan alur lengkap: <strong>dataset → menentukan fitur dan target → visualisasi → membuat model → training → prediksi → evaluasi → kesimpulan</strong>.</p>
+<p>Gunakan minimal 10 baris data dan satu metode Machine Learning sederhana. Jelaskan setiap langkah dengan bahasa sendiri.</p>
+<p><strong>Bonus:</strong> Tambahkan satu fitur tambahan dan jelaskan apakah fitur tersebut dapat membantu menjelaskan target berdasarkan data yang tersedia.</p>
+</div>
+
+<h3>Checklist Pengumpulan</h3>
+<div class="checklist">
+<label>☐ Notebook dapat dijalankan di Google Colab.</label>
+<label>☐ Dataset ditampilkan dengan jelas.</label>
+<label>☐ Fitur dan target dijelaskan.</label>
+<label>☐ Library yang diperlukan di-import.</label>
+<label>☐ Model berhasil dibuat.</label>
+<label>☐ Model dilatih dengan data.</label>
+<label>☐ Prediksi berhasil ditampilkan.</label>
+<label>☐ Ada visualisasi data.</label>
+<label>☐ Ada evaluasi atau pembahasan keterbatasan model.</label>
+<label>☐ Ada minimal tiga kesimpulan berdasarkan data.</label>
+</div>
+</section>
+
+<section id="ringkasan">
+<div class="kicker">Bagian 18</div>
+<h2>📌 Ringkasan</h2>
+<ol>
+<li>Machine Learning membuat komputer mempelajari pola dari data.</li>
+<li>Dataset adalah kumpulan contoh yang digunakan dalam proses pembelajaran.</li>
+<li>Feature adalah data masukan yang digunakan model.</li>
+<li>Target adalah nilai yang ingin diprediksi.</li>
+<li>Model adalah pola matematis yang dipelajari dari data.</li>
+<li><code>LinearRegression</code> dapat digunakan untuk mengenal regresi linear.</li>
+<li><code>fit()</code> digunakan untuk melatih model.</li>
+<li><code>predict()</code> digunakan untuk membuat prediksi.</li>
+<li>Data training dan testing membantu kita memisahkan proses belajar dan pengujian.</li>
+<li>Visualisasi membantu memahami pola sebelum atau sesudah membuat model.</li>
+<li>Prediksi bukan jaminan hasil sebenarnya.</li>
+<li>Dataset yang sedikit dapat membuat pembelajaran model menjadi terbatas.</li>
+</ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Machine Learning belajar dari data untuk menemukan pola, lalu menggunakan pola tersebut untuk menghasilkan prediksi pada data baru.”</div>
+</section>
+
+<section id="refleksi">
+<div class="kicker">Bagian 19</div>
+<h2>💭 Refleksi Siswa</h2>
+<ol>
+<li>Apa yang dimaksud dengan Machine Learning?</li>
+<li>Apa perbedaan fitur dan target?</li>
+<li>Apa fungsi <code>fit()</code>?</li>
+<li>Apa fungsi <code>predict()</code>?</li>
+<li>Mengapa dataset yang lebih banyak dan beragam biasanya penting dalam pembelajaran model?</li>
+<li>Apa yang kamu pahami tentang regresi linear?</li>
+<li>Mengapa hasil prediksi tidak boleh dianggap sebagai kepastian?</li>
+<li>Bagian praktik mana yang paling mudah?</li>
+<li>Bagian mana yang masih membingungkan?</li>
+</ol>
+<div class="tip"><strong>Refleksi lanjutan:</strong> Jika kamu ingin membuat model untuk memprediksi harga rumah, data apa saja yang menurutmu dapat menjadi fitur? Jelaskan alasanmu.</div>
+</section>
+
+<section>
+<div class="kicker">Referensi Praktik</div>
+<h2>📚 Google Colab</h2>
+<p>Gunakan <a href="https://colab.research.google.com/" target="_blank">Google Colab</a> untuk menjalankan seluruh contoh kode pada materi ini.</p>
+<p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Mengenal Machine Learning</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+<div class="container">Mengenal Machine Learning dalam Python pada Google Colab • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div>
+</footer>
+
+<script>
+function copyCode(button){
+  const code=button.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    const old=button.innerText;
+    button.innerText="Tersalin ✓";
+    setTimeout(()=>button.innerText=old,1400);
+  }).catch(()=>{
+    button.innerText="Gagal";
+    setTimeout(()=>button.innerText="Salin",1200);
+  });
+}
+</script>
+</body>
+</html>

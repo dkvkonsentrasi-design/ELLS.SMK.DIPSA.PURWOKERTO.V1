@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selection pada Photoshop | SMK DIPSA Purwokerto</title>
+  <style>
+    :root{
+      --ink:#15171a;--muted:#626872;--paper:#f5f2eb;--white:#fff;
+      --accent:#8f1d2c;--accent2:#b72b3d;--line:#ded9cf;
+      --soft:#eee9df;--green:#236b4b;--shadow:0 12px 35px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
+    a{color:inherit}
+    .hero{background:linear-gradient(135deg,#17191d 0%,#292c31 58%,#8f1d2c 100%);color:#fff;padding:64px 20px 55px}
+    .container{width:min(1120px,calc(100% - 40px));margin:auto}
+    .badge{display:inline-block;padding:7px 13px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:13px;letter-spacing:.4px;margin-bottom:18px}
+    h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin:0 0 18px}
+    .hero p{max-width:780px;font-size:18px;color:#eee;margin:0}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+    .meta span{background:rgba(255,255,255,.1);padding:7px 12px;border-radius:8px;font-size:14px}
+    .toc{position:sticky;top:0;z-index:5;background:rgba(245,242,235,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+    .toc .container{display:flex;gap:8px;overflow:auto;padding-top:10px;padding-bottom:10px}
+    .toc a{text-decoration:none;white-space:nowrap;padding:8px 11px;border-radius:7px;font-size:13px}
+    .toc a:hover{background:var(--soft)}
+    main{padding:45px 0 70px}
+    section{margin-bottom:48px}
+    h2{font-size:31px;line-height:1.2;margin:0 0 18px;border-left:6px solid var(--accent);padding-left:14px}
+    h3{font-size:22px;margin:28px 0 10px}
+    h4{font-size:17px;margin:20px 0 7px}
+    p{margin:9px 0}
+    .lead{font-size:18px;color:#30343a}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--shadow);margin:18px 0}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .tool{border-top:4px solid var(--accent);height:100%}
+    .tool .num{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+    .tool h3{margin-top:5px}
+    .tip,.warning,.success{padding:16px 18px;border-radius:10px;margin:16px 0}
+    .tip{background:#f2eee5;border-left:4px solid #8a6b2f}
+    .warning{background:#fff0f0;border-left:4px solid var(--accent)}
+    .success{background:#edf7f1;border-left:4px solid var(--green)}
+    .steps{counter-reset:step;list-style:none;padding:0}
+    .steps li{counter-increment:step;position:relative;padding:14px 15px 14px 57px;background:#fff;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+    .steps li:before{content:counter(step);position:absolute;left:15px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:28px;font-weight:bold}
+    code{background:#eeeae2;border:1px solid #ded8ce;padding:2px 6px;border-radius:5px;font-family:Consolas,monospace}
+    kbd{background:#25272b;color:#fff;border-radius:5px;padding:3px 7px;font:13px Consolas,monospace}
+    table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    th,td{border-bottom:1px solid var(--line);padding:12px 13px;text-align:left;vertical-align:top}
+    th{background:#eee9df}
+    tr:last-child td{border-bottom:0}
+    .question{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0}
+    .question strong{color:var(--accent)}
+    details{background:#f8f6f1;border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin-top:10px}
+    summary{cursor:pointer;font-weight:700}
+    .task-number{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:50%;font-weight:bold;margin-right:8px}
+    .checklist{padding-left:22px}
+    .checklist li{margin:5px 0}
+    .footer{background:#17191d;color:#ddd;padding:35px 20px}
+    .footer p{margin:4px 0;color:#bbb}
+    @media(max-width:760px){.container{width:min(100% - 24px,1120px)}.grid{grid-template-columns:1fr}.hero{padding-top:42px}.card{padding:18px}h2{font-size:26px}.toc .container{width:100%}}
+    @media print{.toc{display:none}.hero{background:#222!important}.card{box-shadow:none}body{background:#fff}}
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <span class="badge">MATERI DKV • ADOBE PHOTOSHOP</span>
+    <h1>Selection pada Photoshop</h1>
+    <p>
+      Panduan lengkap untuk memahami dan menggunakan fitur <strong>Selection</strong>
+      di Adobe Photoshop, mulai dari konsep dasar hingga proyek memisahkan objek
+      dari background.
+    </p>
+    <div class="meta">
+      <span>📚 Materi Pembelajaran</span>
+      <span>🎨 Desain Komunikasi Visual</span>
+      <span>🧩 Praktik Photoshop</span>
+      <span>🏫 SMK DIPSA Purwokerto</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="container">
+        <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    </a>
+    <a href="#tujuan">Tujuan</a>
+    <a href="#konsep">Konsep</a>
+    <a href="#marquee">Marquee</a>
+    <a href="#lasso">Lasso</a>
+    <a href="#object">Object Selection</a>
+    <a href="#quick">Quick Selection</a>
+    <a href="#magic">Magic Wand</a>
+    <a href="#operasi">Operasi Selection</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#soal">5 Soal</a>
+    <a href="#tugas">5 Tugas</a>
+    <a href="#ringkasan">Ringkasan</a>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+<section id="tujuan">
+  <h2>1. Tujuan Pembelajaran</h2>
+  <div class="card">
+    <p class="lead">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+    <ol>
+      <li>Menjelaskan pengertian dan fungsi <strong>Selection</strong> pada Photoshop.</li>
+      <li>Membedakan penggunaan Rectangular Marquee, Elliptical Marquee, Lasso, Polygonal Lasso, dan Magnetic Lasso.</li>
+      <li>Menggunakan Object Selection, Quick Selection, dan Magic Wand untuk memilih objek atau area gambar.</li>
+      <li>Melakukan <strong>Add, Subtract, dan Inverse Selection</strong>.</li>
+      <li>Merapikan hasil selection agar objek dapat dipisahkan dari background dengan lebih baik.</li>
+      <li>Menerapkan teknik selection dalam proyek sederhana.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="konsep">
+  <h2>2. Konsep Dasar Selection</h2>
+  <div class="card">
+    <p>
+      <strong>Selection</strong> adalah proses memilih bagian tertentu dari sebuah gambar
+      agar bagian tersebut dapat diedit tanpa mengubah area lain. Area yang dipilih
+      biasanya ditandai dengan garis putus-putus yang sering disebut
+      <em>marching ants</em>.
+    </p>
+    <p>
+      Contohnya, kita mempunyai foto seseorang dengan background. Jika kita ingin
+      mengganti background tanpa mengubah orangnya, maka kita perlu membuat selection
+      pada orang tersebut terlebih dahulu.
+    </p>
+
+    <div class="tip">
+      <strong>💡 Cara mudah mengingat:</strong><br>
+      Selection = <strong>"pilih dulu, baru edit."</strong><br>
+      Photoshop akan lebih mudah melakukan perubahan jika kita sudah menentukan
+      bagian gambar mana yang ingin dikerjakan.
+    </div>
+
+    <h3>Mengapa Selection Penting?</h3>
+    <ul>
+      <li>Memisahkan objek dari background.</li>
+      <li>Mengganti atau menghapus background.</li>
+      <li>Mengubah warna hanya pada bagian tertentu.</li>
+      <li>Memindahkan objek tanpa memindahkan seluruh gambar.</li>
+      <li>Membuat efek atau manipulasi foto secara lebih terkontrol.</li>
+      <li>Membuat komposisi desain dengan menggabungkan beberapa objek.</li>
+    </ul>
+
+    <h3>Selection dan Layer</h3>
+    <p>
+      Selection menentukan <strong>area yang sedang dipilih</strong>, sedangkan layer
+      menentukan <strong>tempat objek berada</strong>. Keduanya sering digunakan
+      bersama-sama dalam pekerjaan Photoshop.
+    </p>
+
+    <div class="success">
+      <strong>Contoh sederhana:</strong> Foto siswa berada pada Layer 1.
+      Kita membuat selection pada siswa tersebut. Setelah itu siswa dapat disalin,
+      dipindahkan, diberi efek, atau ditempatkan di background lain tanpa harus
+      mengubah seluruh foto.
+    </div>
+  </div>
+</section>
+
+<section id="marquee">
+  <h2>3. Rectangular & Elliptical Marquee</h2>
+  <div class="grid">
+    <div class="card tool">
+      <div class="num">Tool 01</div>
+      <h3>Rectangular Marquee Tool</h3>
+      <p>
+        Digunakan untuk membuat selection berbentuk <strong>persegi atau persegi panjang</strong>.
+        Shortcut yang umum digunakan adalah <kbd>M</kbd>.
+      </p>
+      <h4>Cocok untuk:</h4>
+      <ul>
+        <li>Memilih bagian gambar berbentuk kotak.</li>
+        <li>Memotong area foto.</li>
+        <li>Membuat area desain berbentuk persegi panjang.</li>
+        <li>Memilih objek yang memang memiliki bentuk geometris sederhana.</li>
+      </ul>
+      <h4>Cara menggunakan:</h4>
+      <ol>
+        <li>Pilih Rectangular Marquee Tool.</li>
+        <li>Klik dan tahan mouse.</li>
+        <li>Seret sampai area yang diinginkan tertutup.</li>
+        <li>Lepaskan mouse.</li>
+        <li>Area tersebut sekarang menjadi selection.</li>
+      </ol>
+      <div class="tip"><strong>Tips:</strong> Tahan <kbd>Shift</kbd> saat membuat selection untuk membantu mendapatkan bentuk persegi yang proporsional.</div>
+    </div>
+
+    <div class="card tool">
+      <div class="num">Tool 02</div>
+      <h3>Elliptical Marquee Tool</h3>
+      <p>
+        Digunakan untuk membuat selection berbentuk <strong>lingkaran atau oval</strong>.
+        Tool ini berada dalam kelompok Marquee Tool.
+      </p>
+      <h4>Cocok untuk:</h4>
+      <ul>
+        <li>Memilih wajah atau objek berbentuk oval secara kasar.</li>
+        <li>Membuat lingkaran pada desain.</li>
+        <li>Membuat efek berbentuk radial.</li>
+        <li>Memilih bagian gambar yang berbentuk bulat.</li>
+      </ul>
+      <h4>Cara menggunakan:</h4>
+      <ol>
+        <li>Pilih Elliptical Marquee Tool.</li>
+        <li>Klik dan seret di area gambar.</li>
+        <li>Atur ukuran selection sesuai kebutuhan.</li>
+        <li>Lepaskan mouse untuk membuat selection.</li>
+      </ol>
+      <div class="tip"><strong>Tips:</strong> Tahan <kbd>Shift</kbd> untuk membuat lingkaran yang proporsional.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Perbedaan Marquee Tool</h3>
+    <table>
+      <thead><tr><th>Tool</th><th>Bentuk</th><th>Penggunaan utama</th></tr></thead>
+      <tbody>
+        <tr><td>Rectangular Marquee</td><td>Persegi/persegi panjang</td><td>Area geometris kotak.</td></tr>
+        <tr><td>Elliptical Marquee</td><td>Lingkaran/oval</td><td>Area berbentuk bulat atau oval.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="lasso">
+  <h2>4. Lasso, Polygonal Lasso & Magnetic Lasso</h2>
+  <div class="card">
+    <p>
+      Kelompok <strong>Lasso Tool</strong> digunakan ketika kita membutuhkan selection
+      yang lebih bebas atau mengikuti bentuk objek.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card tool">
+      <div class="num">Tool 03</div>
+      <h3>Lasso Tool</h3>
+      <p>
+        Lasso Tool membuat selection secara bebas seperti menggambar menggunakan pensil.
+        Shortcut-nya adalah <kbd>L</kbd>.
+      </p>
+      <h4>Cara menggunakan:</h4>
+      <ol>
+        <li>Pilih Lasso Tool.</li>
+        <li>Klik dan tahan mouse.</li>
+        <li>Gambar mengelilingi objek yang ingin dipilih.</li>
+        <li>Kembali ke titik awal.</li>
+        <li>Lepaskan mouse untuk menutup selection.</li>
+      </ol>
+      <div class="warning"><strong>Perhatian:</strong> Lasso Tool membutuhkan gerakan mouse yang cukup stabil. Untuk objek dengan bentuk rumit, hasilnya bisa kurang rapi jika dilakukan terlalu cepat.</div>
+    </div>
+
+    <div class="card tool">
+      <div class="num">Tool 04</div>
+      <h3>Polygonal Lasso Tool</h3>
+      <p>
+        Polygonal Lasso membuat selection menggunakan titik-titik atau garis lurus.
+        Sangat cocok untuk objek yang memiliki sisi tegas.
+      </p>
+      <h4>Cocok untuk:</h4>
+      <ul>
+        <li>Kotak.</li>
+        <li>Bangunan.</li>
+        <li>Kemasan.</li>
+        <li>Produk dengan sudut tajam.</li>
+        <li>Objek geometris.</li>
+      </ul>
+      <h4>Cara menggunakan:</h4>
+      <ol>
+        <li>Klik titik pertama.</li>
+        <li>Klik titik berikutnya mengikuti bentuk objek.</li>
+        <li>Teruskan sampai mengelilingi objek.</li>
+        <li>Kembali ke titik awal untuk menutup selection.</li>
+      </ol>
+    </div>
+
+    <div class="card tool">
+      <div class="num">Tool 05</div>
+      <h3>Magnetic Lasso Tool</h3>
+      <p>
+        Magnetic Lasso membantu mengikuti tepi objek berdasarkan perbedaan warna
+        atau kontras antara objek dan background.
+      </p>
+      <h4>Cocok untuk:</h4>
+      <ul>
+        <li>Objek yang memiliki tepi cukup jelas.</li>
+        <li>Foto produk dengan kontras tinggi.</li>
+        <li>Objek dengan bentuk tidak beraturan.</li>
+      </ul>
+      <h4>Cara menggunakan:</h4>
+      <ol>
+        <li>Pilih Magnetic Lasso Tool.</li>
+        <li>Klik pada tepi objek.</li>
+        <li>Gerakkan mouse mengikuti tepi objek.</li>
+        <li>Photoshop akan membantu menempatkan titik pada tepi.</li>
+        <li>Tutup selection ketika sudah mengelilingi objek.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Kapan menggunakan masing-masing Lasso?</h3>
+    <table>
+      <thead><tr><th>Tool</th><th>Paling cocok ketika...</th></tr></thead>
+      <tbody>
+        <tr><td>Lasso</td><td>Anda ingin menggambar selection secara bebas dan cepat.</td></tr>
+        <tr><td>Polygonal Lasso</td><td>Objek mempunyai banyak garis lurus dan sudut.</td></tr>
+        <tr><td>Magnetic Lasso</td><td>Tepi objek memiliki kontras yang jelas dengan background.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="object">
+  <h2>5. Object Selection Tool</h2>
+  <div class="card">
+    <p>
+      <strong>Object Selection Tool</strong> membantu Photoshop mengenali dan memilih
+      objek berdasarkan area yang kita tentukan. Tool ini sangat berguna ketika kita
+      ingin memilih satu objek dari sebuah foto dengan lebih cepat.
+    </p>
+
+    <h3>Cara menggunakan</h3>
+    <ol class="steps">
+      <li>Pilih <strong>Object Selection Tool</strong> dari toolbar.</li>
+      <li>Tentukan objek yang ingin dipilih. Anda dapat membuat area seleksi yang mencakup objek.</li>
+      <li>Photoshop akan mencoba mengenali objek di dalam area tersebut.</li>
+      <li>Periksa hasil selection pada bagian tepi objek.</li>
+      <li>Jika ada bagian yang kurang atau berlebih, gunakan Add/Subtract Selection.</li>
+    </ol>
+
+    <div class="success">
+      <strong>Kelebihan:</strong> lebih cepat untuk objek yang jelas dan mudah dikenali.
+      <br><strong>Catatan:</strong> hasil otomatis tetap harus diperiksa. Detail rambut,
+      objek yang warnanya mirip background, atau bagian yang sangat kecil dapat memerlukan perbaikan manual.
+    </div>
+  </div>
+</section>
+
+<section id="quick">
+  <h2>6. Quick Selection Tool</h2>
+  <div class="card">
+    <p>
+      <strong>Quick Selection Tool</strong> bekerja seperti kuas. Kita mengusap area
+      yang ingin dipilih, kemudian Photoshop mencoba mengenali area yang memiliki
+      karakteristik warna dan tekstur yang berdekatan.
+    </p>
+
+    <h3>Cara menggunakan</h3>
+    <ol class="steps">
+      <li>Pilih Quick Selection Tool.</li>
+      <li>Atur ukuran brush sesuai kebutuhan.</li>
+      <li>Usapkan brush pada bagian objek yang ingin dipilih.</li>
+      <li>Perhatikan apakah selection sudah mengikuti objek.</li>
+      <li>Gunakan Add Selection untuk menambah bagian yang belum terpilih.</li>
+      <li>Gunakan Subtract Selection untuk mengurangi bagian yang salah.</li>
+    </ol>
+
+    <div class="tip">
+      <strong>Tips penting:</strong> Gunakan ukuran brush yang lebih kecil saat bekerja
+      di area detail dan ukuran lebih besar pada area objek yang luas.
+    </div>
+  </div>
+</section>
+
+<section id="magic">
+  <h2>7. Magic Wand Tool</h2>
+  <div class="card">
+    <p>
+      <strong>Magic Wand Tool</strong> digunakan untuk memilih area berdasarkan kemiripan
+      warna. Tool ini sangat berguna ketika background memiliki warna yang relatif
+      seragam.
+    </p>
+
+    <h3>Contoh</h3>
+    <p>
+      Misalnya sebuah logo memiliki background putih polos. Dengan Magic Wand,
+      kita dapat mengklik area putih tersebut sehingga area dengan warna yang mirip
+      ikut terpilih.
+    </p>
+
+    <h3>Konsep Tolerance</h3>
+    <p>
+      <strong>Tolerance</strong> menentukan seberapa luas variasi warna yang dapat
+      dianggap mirip oleh Magic Wand.
+    </p>
+    <table>
+      <thead><tr><th>Nilai relatif</th><th>Efek</th></tr></thead>
+      <tbody>
+        <tr><td>Lebih rendah</td><td>Selection lebih ketat pada warna yang sangat mirip dengan warna yang diklik.</td></tr>
+        <tr><td>Lebih tinggi</td><td>Lebih banyak variasi warna dapat ikut terpilih.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Cara menggunakan</h3>
+    <ol class="steps">
+      <li>Pilih Magic Wand Tool.</li>
+      <li>Klik warna atau area yang ingin dipilih.</li>
+      <li>Periksa area yang terpilih.</li>
+      <li>Jika terlalu sedikit, sesuaikan Tolerance atau tambahkan selection.</li>
+      <li>Jika terlalu banyak, gunakan Subtract Selection.</li>
+    </ol>
+
+    <div class="warning">
+      <strong>Perhatian:</strong> Magic Wand tidak selalu cocok untuk background
+      dengan banyak variasi warna. Untuk foto kompleks, Object Selection atau
+      Quick Selection sering lebih praktis sebagai titik awal.
+    </div>
+  </div>
+</section>
+
+<section id="operasi">
+  <h2>8. Add, Subtract & Inverse Selection</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>➕ Add to Selection</h3>
+      <p>
+        Digunakan untuk <strong>menambahkan area</strong> ke selection yang sudah ada.
+      </p>
+      <p>
+        Cara praktis: tahan <kbd>Shift</kbd> saat membuat selection tambahan,
+        atau gunakan mode <em>Add to Selection</em> pada Options Bar.
+      </p>
+      <p><strong>Contoh:</strong> Anda memilih badan seseorang tetapi tangannya belum
+      masuk selection. Buat selection tambahan pada tangan dengan mode Add.</p>
+    </div>
+
+    <div class="card">
+      <h3>➖ Subtract from Selection</h3>
+      <p>
+        Digunakan untuk <strong>mengurangi area yang salah</strong> dari selection.
+      </p>
+      <p>
+        Cara praktis: tahan <kbd>Alt</kbd> pada Windows saat membuat selection
+        tambahan untuk mengurangi area, atau gunakan mode Subtract pada Options Bar.
+      </p>
+      <p><strong>Contoh:</strong> Background ikut terpilih. Gunakan Subtract untuk
+      menghapus bagian tersebut dari selection.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔄 Inverse Selection</h3>
+      <p>
+        Inverse digunakan untuk <strong>membalik selection</strong>.
+        Area yang sebelumnya dipilih menjadi tidak dipilih, sedangkan area yang
+        sebelumnya tidak dipilih menjadi dipilih.
+      </p>
+      <p>Shortcut yang umum: <kbd>Ctrl + Shift + I</kbd> pada Windows.</p>
+      <p><strong>Contoh:</strong> Anda sudah memilih objek, tetapi sebenarnya ingin
+      memilih background. Gunakan Inverse.</p>
+    </div>
+
+    <div class="card">
+      <h3>❌ Deselect</h3>
+      <p>
+        Deselect menghilangkan selection sehingga tidak ada area yang sedang dipilih.
+      </p>
+      <p>Shortcut yang umum: <kbd>Ctrl + D</kbd> pada Windows.</p>
+      <p>Gunakan setelah pekerjaan selection selesai agar Anda tidak secara tidak sengaja
+      mengedit area yang masih terseleksi.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Alur berpikir saat selection belum sempurna</h3>
+    <ol class="steps">
+      <li>Buat selection awal dengan tool yang paling sesuai.</li>
+      <li>Perbesar tampilan gambar jika perlu agar tepi objek mudah diperiksa.</li>
+      <li>Tambahkan bagian objek yang belum masuk dengan <strong>Add</strong>.</li>
+      <li>Kurangi bagian background yang ikut terpilih dengan <strong>Subtract</strong>.</li>
+      <li>Jika yang diperlukan justru background, gunakan <strong>Inverse</strong>.</li>
+      <li>Periksa kembali seluruh tepi objek sebelum melanjutkan ke tahap berikutnya.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="proyek">
+  <h2>9. Proyek: Memisahkan Objek dari Background</h2>
+  <div class="card">
+    <h3>🎯 Tujuan Proyek</h3>
+    <p>
+      Memisahkan sebuah objek dari background menggunakan teknik selection,
+      kemudian menghasilkan objek yang dapat ditempatkan pada background lain.
+    </p>
+
+    <h3>Alat yang dapat digunakan</h3>
+    <ul>
+      <li>Object Selection Tool</li>
+      <li>Quick Selection Tool</li>
+      <li>Magic Wand Tool</li>
+      <li>Lasso / Polygonal Lasso / Magnetic Lasso</li>
+      <li>Add dan Subtract Selection</li>
+      <li>Inverse Selection</li>
+      <li>Layer Mask sebagai tahap lanjutan yang disarankan</li>
+    </ul>
+
+    <h3>Langkah proyek dari awal</h3>
+    <ol class="steps">
+      <li>
+        <strong>Siapkan foto.</strong><br>
+        Gunakan foto dengan objek yang cukup jelas dan memiliki perbedaan
+        antara objek dengan background.
+      </li>
+      <li>
+        <strong>Buka foto di Photoshop.</strong><br>
+        Pilih <em>File → Open</em>, lalu pilih gambar yang akan digunakan.
+      </li>
+      <li>
+        <strong>Duplikasi layer.</strong><br>
+        Sebaiknya buat salinan layer asli agar foto awal tetap aman jika terjadi kesalahan.
+      </li>
+      <li>
+        <strong>Buat selection awal.</strong><br>
+        Untuk pemula, cobalah Object Selection Tool atau Quick Selection Tool.
+      </li>
+      <li>
+        <strong>Periksa hasil selection.</strong><br>
+        Jangan langsung menghapus background. Zoom gambar dan periksa apakah bagian
+        objek sudah masuk semua.
+      </li>
+      <li>
+        <strong>Gunakan Add.</strong><br>
+        Jika ada bagian objek yang belum terpilih, tambahkan bagian tersebut.
+      </li>
+      <li>
+        <strong>Gunakan Subtract.</strong><br>
+        Jika ada bagian background yang ikut masuk, kurangi dari selection.
+      </li>
+      <li>
+        <strong>Rapikan bagian tepi.</strong><br>
+        Perhatikan rambut, jari, ujung pakaian, roda, atau bagian kecil lainnya.
+      </li>
+      <li>
+        <strong>Gunakan Layer Mask.</strong><br>
+        Setelah selection cukup rapi, buat Layer Mask agar background dapat
+        disembunyikan tanpa langsung merusak gambar asli.
+      </li>
+      <li>
+        <strong>Tambahkan background baru.</strong><br>
+        Masukkan gambar background baru pada layer di bawah objek.
+      </li>
+      <li>
+        <strong>Periksa hasil akhir.</strong><br>
+        Pastikan tidak terdapat sisa background lama di sekitar objek.
+      </li>
+      <li>
+        <strong>Simpan pekerjaan.</strong><br>
+        Simpan file kerja dalam format PSD dan ekspor hasil akhir dalam format
+        yang diperlukan, misalnya PNG atau JPG.
+      </li>
+    </ol>
+
+    <h3>Contoh skenario proyek</h3>
+    <div class="success">
+      <strong>Situasi:</strong> Anda memiliki foto seorang siswa di depan background
+      sekolah. Anda ingin menempatkan siswa tersebut pada desain poster kegiatan sekolah.
+      <br><br>
+      <strong>Solusi:</strong> pilih siswa dengan Object Selection atau Quick Selection,
+      perbaiki menggunakan Add/Subtract, buat Layer Mask, kemudian letakkan background
+      poster pada layer di bawahnya.
+    </div>
+
+    <h3>Checklist hasil proyek</h3>
+    <ul class="checklist">
+      <li>☐ Objek utama terpilih dengan benar.</li>
+      <li>☐ Background lama tidak terlihat pada bagian yang seharusnya hilang.</li>
+      <li>☐ Tepi objek cukup rapi.</li>
+      <li>☐ Tidak ada bagian penting dari objek yang ikut terhapus.</li>
+      <li>☐ Layer tersusun dengan benar.</li>
+      <li>☐ File PSD sudah disimpan.</li>
+      <li>☐ Hasil akhir sudah diekspor sesuai kebutuhan.</li>
+    </ul>
+
+    <div class="warning">
+      <strong>Kesalahan yang sering terjadi:</strong> menghapus background secara langsung
+      sebelum memastikan selection sudah benar. Gunakan Layer Mask jika memungkinkan
+      supaya proses pengeditan lebih aman dan dapat diperbaiki kembali.
+    </div>
+  </div>
+</section>
+
+<section id="soal">
+  <h2>10. Latihan Soal — 5 Pertanyaan</h2>
+
+  <div class="question">
+    <strong>Soal 1</strong>
+    <p>Apa yang dimaksud dengan Selection pada Adobe Photoshop?</p>
+    <details><summary>Lihat pembahasan</summary>
+      <p>Selection adalah proses memilih area tertentu pada gambar agar area tersebut
+      dapat diedit tanpa memengaruhi area lain di luar selection.</p>
+    </details>
+  </div>
+
+  <div class="question">
+    <strong>Soal 2</strong>
+    <p>Tool apa yang paling sesuai untuk membuat selection berbentuk persegi panjang?</p>
+    <details><summary>Lihat jawaban</summary>
+      <p><strong>Rectangular Marquee Tool.</strong></p>
+    </details>
+  </div>
+
+  <div class="question">
+    <strong>Soal 3</strong>
+    <p>Jelaskan perbedaan Add to Selection dan Subtract from Selection.</p>
+    <details><summary>Lihat pembahasan</summary>
+      <p><strong>Add</strong> digunakan untuk menambahkan area ke selection,
+      sedangkan <strong>Subtract</strong> digunakan untuk mengurangi area dari
+      selection yang sudah ada.</p>
+    </details>
+  </div>
+
+  <div class="question">
+    <strong>Soal 4</strong>
+    <p>Jika Anda sudah memilih objek tetapi ingin memilih background-nya, fitur apa yang dapat digunakan?</p>
+    <details><summary>Lihat jawaban</summary>
+      <p>Gunakan <strong>Inverse Selection</strong>. Pada Windows, shortcut yang umum
+      digunakan adalah <kbd>Ctrl + Shift + I</kbd>.</p>
+    </details>
+  </div>
+
+  <div class="question">
+    <strong>Soal 5</strong>
+    <p>Mengapa hasil selection harus diperiksa sebelum background dihapus?</p>
+    <details><summary>Lihat pembahasan</summary>
+      <p>Karena selection yang kurang tepat dapat menyebabkan bagian objek ikut terhapus
+      atau background masih tersisa di sekitar objek. Pemeriksaan membantu memperbaiki
+      hasil sebelum tahap berikutnya.</p>
+    </details>
+  </div>
+</section>
+
+<section id="tugas">
+  <h2>11. Tugas Praktik — 5 Tugas</h2>
+
+  <div class="card">
+    <h3><span class="task-number">1</span>Latihan Marquee</h3>
+    <p>Buat sebuah dokumen Photoshop dan praktikkan:</p>
+    <ul>
+      <li>1 selection menggunakan Rectangular Marquee.</li>
+      <li>1 selection menggunakan Elliptical Marquee.</li>
+      <li>Gabungkan kedua selection menggunakan Add.</li>
+      <li>Simpan screenshot hasilnya.</li>
+    </ul>
+    <p><strong>Tujuan:</strong> memahami selection berbentuk geometris dan operasi Add.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="task-number">2</span>Latihan Lasso</h3>
+    <p>Pilih sebuah gambar benda dengan bentuk yang tidak beraturan.</p>
+    <ul>
+      <li>Buat selection menggunakan Lasso Tool.</li>
+      <li>Buat ulang menggunakan Polygonal Lasso.</li>
+      <li>Jika memungkinkan, coba Magnetic Lasso.</li>
+      <li>Bandingkan tingkat kemudahan dan hasil ketiganya.</li>
+    </ul>
+    <p><strong>Tujuan:</strong> memahami perbedaan karakter tiga jenis Lasso Tool.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="task-number">3</span>Latihan Object Selection & Quick Selection</h3>
+    <p>Gunakan foto seseorang atau sebuah produk.</p>
+    <ul>
+      <li>Buat selection awal menggunakan Object Selection.</li>
+      <li>Perbaiki hasil menggunakan Quick Selection.</li>
+      <li>Gunakan Add untuk bagian yang kurang.</li>
+      <li>Gunakan Subtract untuk bagian yang salah.</li>
+    </ul>
+    <p><strong>Tujuan:</strong> melatih kombinasi selection otomatis dan manual.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="task-number">4</span>Latihan Magic Wand</h3>
+    <p>Siapkan gambar dengan background berwarna relatif seragam.</p>
+    <ul>
+      <li>Pilih background menggunakan Magic Wand.</li>
+      <li>Coba gunakan beberapa nilai Tolerance.</li>
+      <li>Bandingkan area yang terpilih.</li>
+      <li>Gunakan Inverse untuk mendapatkan objek.</li>
+    </ul>
+    <p><strong>Tujuan:</strong> memahami hubungan Tolerance dengan hasil selection.</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="task-number">5</span>Proyek Utama — Memisahkan Objek</h3>
+    <p>
+      Pilih satu foto yang memiliki objek utama, misalnya orang, sepatu, tas,
+      kendaraan, atau produk.
+    </p>
+    <ol>
+      <li>Pilih objek menggunakan Object Selection atau Quick Selection.</li>
+      <li>Perbaiki menggunakan Add dan Subtract.</li>
+      <li>Jika diperlukan, gunakan Lasso untuk bagian yang sulit.</li>
+      <li>Buat Layer Mask.</li>
+      <li>Masukkan background baru.</li>
+      <li>Atur posisi dan ukuran objek.</li>
+      <li>Simpan file PSD.</li>
+      <li>Ekspor hasil akhir sebagai JPG atau PNG.</li>
+    </ol>
+
+    <h4>Ketentuan pengumpulan</h4>
+    <ul>
+      <li>File kerja PSD.</li>
+      <li>Hasil akhir JPG/PNG.</li>
+      <li>Screenshot proses selection.</li>
+      <li>Screenshot sebelum dan sesudah background diganti.</li>
+      <li>Nama file: <code>Nama_Siswa_Selection_Photoshop.psd</code></li>
+    </ul>
+
+    <h4>Kriteria penilaian</h4>
+    <table>
+      <thead><tr><th>Aspek</th><th>Yang dinilai</th></tr></thead>
+      <tbody>
+        <tr><td>Selection</td><td>Ketepatan area objek yang dipilih.</td></tr>
+        <tr><td>Kerapian</td><td>Tepi objek bersih dan tidak banyak sisa background.</td></tr>
+        <tr><td>Penggunaan tool</td><td>Pemilihan tool sesuai karakter objek.</td></tr>
+        <tr><td>Layer</td><td>File tersusun dan mudah diedit.</td></tr>
+        <tr><td>Hasil akhir</td><td>Objek terlihat menyatu dengan background baru.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="ringkasan">
+  <h2>12. Ringkasan Materi</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>Materi</th><th>Inti yang perlu diingat</th></tr></thead>
+      <tbody>
+        <tr><td>Selection</td><td>Memilih area tertentu agar dapat diedit secara terkontrol.</td></tr>
+        <tr><td>Rectangular Marquee</td><td>Selection persegi/persegi panjang.</td></tr>
+        <tr><td>Elliptical Marquee</td><td>Selection lingkaran/oval.</td></tr>
+        <tr><td>Lasso</td><td>Selection bebas.</td></tr>
+        <tr><td>Polygonal Lasso</td><td>Selection dengan garis lurus dan sudut.</td></tr>
+        <tr><td>Magnetic Lasso</td><td>Membantu mengikuti tepi berdasarkan kontras.</td></tr>
+        <tr><td>Object Selection</td><td>Membantu memilih objek secara cepat.</td></tr>
+        <tr><td>Quick Selection</td><td>Memilih dengan cara mengusap seperti brush.</td></tr>
+        <tr><td>Magic Wand</td><td>Memilih berdasarkan kemiripan warna.</td></tr>
+        <tr><td>Add</td><td>Menambahkan area ke selection.</td></tr>
+        <tr><td>Subtract</td><td>Mengurangi area dari selection.</td></tr>
+        <tr><td>Inverse</td><td>Membalik area selection.</td></tr>
+        <tr><td>Deselect</td><td>Menghilangkan selection.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="success">
+      <strong>🎯 Prinsip utama:</strong> Jangan terpaku pada satu tool.
+      Pilih tool berdasarkan bentuk objek dan kondisi background. Dalam pekerjaan nyata,
+      beberapa tool sering digunakan secara bersamaan untuk mendapatkan selection yang lebih rapi.
+    </div>
+
+    <h3>Shortcut penting</h3>
+    <table>
+      <thead><tr><th>Shortcut</th><th>Fungsi</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>M</kbd></td><td>Marquee Tool</td></tr>
+        <tr><td><kbd>L</kbd></td><td>Lasso Tool</td></tr>
+        <tr><td><kbd>Ctrl + D</kbd></td><td>Deselect</td></tr>
+        <tr><td><kbd>Ctrl + Shift + I</kbd></td><td>Inverse Selection</td></tr>
+        <tr><td><kbd>Shift</kbd></td><td>Umumnya digunakan untuk menambah selection pada banyak tool</td></tr>
+        <tr><td><kbd>Alt</kbd></td><td>Umumnya digunakan untuk mengurangi selection pada banyak tool di Windows</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2 style="border:0;padding:0">Penutup</h2>
+    <p>
+      Selection adalah salah satu kemampuan dasar yang sangat penting dalam Photoshop.
+      Semakin baik siswa menguasai selection, semakin mudah melakukan pekerjaan seperti
+      menghapus background, membuat poster, membuat komposit foto, mengganti warna objek,
+      dan membuat desain promosi.
+    </p>
+    <p>
+      Kunci latihan adalah <strong>teliti pada bagian tepi objek</strong>, jangan terburu-buru,
+      dan gunakan kombinasi tool sesuai kebutuhan.
+    </p>
+    <p><strong>Selamat berlatih dan berkarya! 🎨</strong></p>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <strong>SMK DIPSA PURWOKERTO</strong>
+    <p>Materi DKV — Selection pada Adobe Photoshop</p>
+    <p>Digunakan sebagai bahan pembelajaran dan praktik siswa.</p>
+  </div>
+</footer>
+
+</body>
+</html>

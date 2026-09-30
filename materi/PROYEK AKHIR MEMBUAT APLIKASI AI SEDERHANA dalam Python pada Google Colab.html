@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PROYEK AKHIR — MEMBUAT APLIKASI AI SEDERHANA dalam Python pada Google Colab</title>
+<meta name="description" content="Materi proyek akhir Koding dan Kecerdasan Artifisial: membuat aplikasi AI sederhana dengan Python dan Google Colab.">
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;--border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;--orange:#c2410c;--orange-soft:#fff7ed;--blue:#1d4ed8;--blue-soft:#eff6ff;--shadow:0 10px 30px rgba(15,23,42,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}.container{width:min(1180px,92%);margin:auto}
+.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff 0%,#faf5ff 48%,#eff6ff 100%);border-bottom:1px solid var(--border)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}.lead{max-width:940px;color:#475467;font-size:1.08rem;margin:0}.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text);box-shadow:0 3px 12px rgba(15,23,42,.04)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}aside h3{margin:2px 0 12px}.nav a{display:block;padding:8px 10px;border-radius:9px;color:#475467;font-size:.88rem}.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}main{min-width:0}
+section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}p{margin:9px 0}ul,ol{padding-left:24px}.note,.tip,.warn,.info{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}.tip{border-color:var(--green);background:var(--green-soft)}.warn{border-color:#f97316;background:var(--orange-soft)}.info{border-color:var(--blue);background:var(--blue-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.card strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.89rem;line-height:1.6;margin:0}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}.arrow{color:var(--primary);font-size:1.3rem}.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}.checklist label{display:block;margin:8px 0}.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.small{font-size:.9rem;color:var(--muted)}.metric{font-size:1.7rem;font-weight:850;color:var(--primary)}footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="container">
+<span class="badge">🤖 KODING &amp; KECERDASAN ARTIFISIAL • PROYEK AKHIR • GOOGLE COLAB</span>
+<h1>PROYEK AKHIR — MEMBUAT APLIKASI AI SEDERHANA</h1>
+<p class="lead">Pada proyek akhir, siswa menggabungkan materi Python, pengolahan data, visualisasi data, Machine Learning, classification, regression, dan konsep AI untuk membuat sebuah aplikasi sederhana yang memiliki input, proses, model atau analisis, output, serta kesimpulan.</p>
+<div class="top-actions"><a class="btn primary" href="https://colab.research.google.com/" target="_blank" rel="noopener">🚀 Buka Google Colab</a><a class="btn" href="#pilihan">🎯 Pilih Proyek</a><a class="btn" href="#rubrik">📋 Checklist Proyek</a></div>
+</div></header>
+
+<div class="container layout"><aside><h3>📚 Navigasi Proyek</h3><nav class="nav"> <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a><a href="#konsep">2. Gambaran Proyek Akhir</a><a href="#alur">3. Alur Pengerjaan</a><a href="#pilihan">4. Pilihan Proyek</a><a href="#persiapan">5. Persiapan Google Colab</a><a href="#proyek1">6. Proyek 1 — Prediksi Nilai</a><a href="#proyek2">7. Proyek 2 — Klasifikasi Bunga</a><a href="#proyek3">8. Proyek 3 — Prediksi Harga</a><a href="#proyek4">9. Proyek 4 — Analisis Nilai</a><a href="#proyek5">10. Proyek 5 — Klasifikasi</a><a href="#template">11. Template Notebook</a><a href="#evaluasi">12. Evaluasi &amp; Pengujian</a><a href="#etika">13. Etika &amp; Keterbatasan AI</a><a href="#latihan">14. 5 Latihan Soal</a><a href="#tugas">15. 5 Tugas</a><a href="#rubrik">16. Checklist &amp; Rubrik</a><a href="#presentasi">17. Presentasi</a><a href="#refleksi">18. Refleksi</a><a href="#ringkasan">19. Ringkasan</a>
+</nav></aside>
+<main>
+
+<section id="tujuan"><div class="kicker">Bagian 1</div><h2>🎯 Tujuan Pembelajaran</h2><p>Setelah menyelesaikan proyek akhir, siswa diharapkan mampu:</p><ol><li>Menggabungkan beberapa konsep Python yang telah dipelajari.</li><li>Membaca dan menyiapkan data sederhana.</li><li>Menentukan masalah yang dapat diselesaikan dengan analisis data atau Machine Learning.</li><li>Membuat aplikasi sederhana di Google Colab.</li><li>Menggunakan model classification atau regression sesuai kebutuhan proyek.</li><li>Membuat input, proses, dan output yang jelas.</li><li>Menguji program dengan beberapa contoh data.</li><li>Membaca hasil model secara kritis, bukan sekadar menerima output.</li><li>Membuat visualisasi bila diperlukan.</li><li>Menjelaskan proses, hasil, keterbatasan, dan kesimpulan dengan bahasa sendiri.</li></ol><div class="note"><strong>Tujuan utama:</strong> proyek bukan hanya tentang membuat kode berjalan, tetapi menunjukkan bahwa siswa memahami <strong>masalah → data → proses → hasil → evaluasi → kesimpulan</strong>.</div></section>
+
+<section id="konsep"><div class="kicker">Bagian 2</div><h2>🤖 Gambaran Proyek Akhir</h2><p>Pada pertemuan terakhir, siswa menggabungkan materi yang telah dipelajari menjadi sebuah aplikasi AI sederhana.</p><div class="grid"><div class="card"><strong>🐍 Python</strong>Digunakan untuk membuat program, mengolah input, melakukan perhitungan, dan menampilkan hasil.</div><div class="card"><strong>📊 Data</strong>Digunakan sebagai bahan analisis atau sebagai data untuk melatih dan menguji model.</div><div class="card"><strong>🧠 Machine Learning</strong>Digunakan pada proyek yang membutuhkan prediksi atau klasifikasi.</div><div class="card"><strong>📈 Visualisasi</strong>Digunakan untuk membantu memahami pola data dan menyampaikan hasil.</div></div><h3>Komponen minimal aplikasi</h3><div class="flow"><div class="box">Input / Dataset</div><div class="arrow">→</div><div class="box">Pengolahan</div><div class="arrow">→</div><div class="box">Model / Analisis</div><div class="arrow">→</div><div class="box">Output</div><div class="arrow">→</div><div class="box">Kesimpulan</div></div><div class="tip"><strong>Prinsip sederhana:</strong> orang lain yang melihat notebook Anda harus dapat memahami apa masalahnya, data apa yang dipakai, bagaimana prosesnya, dan apa arti hasilnya.</div></section>
+
+<section id="alur"><div class="kicker">Bagian 3</div><h2>🔄 Alur Pengerjaan Proyek</h2><div class="step"><div class="num">1</div><div><strong>Tentukan masalah.</strong><br>Contoh: “Saya ingin memperkirakan nilai siswa berdasarkan beberapa informasi.”</div></div><div class="step"><div class="num">2</div><div><strong>Tentukan data.</strong><br>Identifikasi kolom, jumlah data, feature, dan target jika menggunakan Machine Learning.</div></div><div class="step"><div class="num">3</div><div><strong>Pilih metode.</strong><br>Gunakan regression untuk target angka dan classification untuk target kategori.</div></div><div class="step"><div class="num">4</div><div><strong>Buat program.</strong><br>Tulis kode secara bertahap, bukan langsung membuat program yang sangat panjang.</div></div><div class="step"><div class="num">5</div><div><strong>Uji.</strong><br>Masukkan beberapa contoh dan periksa apakah output masuk akal.</div></div><div class="step"><div class="num">6</div><div><strong>Evaluasi.</strong><br>Gunakan metrik atau pemeriksaan yang sesuai dan jelaskan keterbatasannya.</div></div><div class="step"><div class="num">7</div><div><strong>Komunikasikan.</strong><br>Tulis kesimpulan berdasarkan hasil yang benar-benar diperoleh.</div></div></section>
+
+<section id="pilihan"><div class="kicker">Bagian 4</div><h2>🧩 Pilihan Proyek</h2><p>Pilih salah satu dari lima proyek berikut.</p><div class="grid"><div class="card"><div class="metric">01</div><strong>Prediksi Nilai Siswa</strong>Input: jam belajar, jumlah tugas, kehadiran. Output: prediksi nilai siswa.</div><div class="card"><div class="metric">02</div><strong>Klasifikasi Bunga</strong>Menggunakan dataset Iris untuk menentukan jenis bunga berdasarkan karakteristiknya.</div><div class="card"><div class="metric">03</div><strong>Prediksi Harga</strong>Input: luas tanah, luas bangunan, jumlah kamar. Output: prediksi harga.</div><div class="card"><div class="metric">04</div><strong>Analisis Nilai Siswa</strong>Membaca CSV, menghitung statistik, membuat grafik, dan memberikan kesimpulan.</div><div class="card"><div class="metric">05</div><strong>AI Klasifikasi Sederhana</strong>Mengklasifikasikan data menjadi dua kategori, misalnya Layak/Tidak Layak atau Kategori A/Kategori B.</div></div></section>
+
+<section id="persiapan"><div class="kicker">Bagian 5</div><h2>☁️ Persiapan di Google Colab</h2><p>Gunakan Google Colab untuk membuat satu notebook khusus proyek akhir.</p><h3>Struktur notebook yang disarankan</h3><ol><li>Judul proyek dan nama siswa.</li><li>Latar belakang masalah.</li><li>Tujuan proyek.</li><li>Dataset dan penjelasan kolom.</li><li>Import library.</li><li>Eksplorasi data.</li><li>Persiapan data.</li><li>Pembuatan model atau analisis.</li><li>Prediksi/hasil.</li><li>Evaluasi.</li><li>Visualisasi.</li><li>Kesimpulan.</li><li>Keterbatasan dan pengembangan.</li></ol><h3>Library yang sering digunakan</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Jika menggunakan Machine Learning
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, mean_absolute_error, r2_score
+
+# Pilih sesuai proyek:
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import load_iris</code></pre></div><div class="info"><strong>Catatan:</strong> tidak semua library harus digunakan. Import hanya library yang benar-benar diperlukan oleh proyek.</div></section>
+
+<section id="proyek1"><div class="kicker">Bagian 6</div><h2>📚 Proyek 1 — Prediksi Nilai Siswa</h2><p>Tujuan proyek adalah membuat model yang memperkirakan nilai siswa berdasarkan beberapa feature.</p><h3>Input</h3><ul><li>jam belajar</li><li>jumlah tugas</li><li>kehadiran</li></ul><h3>Output</h3><p><strong>Prediksi nilai siswa</strong>.</p><h3>Contoh dataset</h3><table><tr><th>Jam Belajar</th><th>Jumlah Tugas</th><th>Kehadiran (%)</th><th>Nilai</th></tr><tr><td>2</td><td>5</td><td>80</td><td>68</td></tr><tr><td>3</td><td>6</td><td>85</td><td>74</td></tr><tr><td>4</td><td>7</td><td>90</td><td>82</td></tr><tr><td>5</td><td>8</td><td>95</td><td>89</td></tr><tr><td>6</td><td>9</td><td>98</td><td>94</td></tr></table><h3>Contoh kode</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Dataset contoh
+data = {
+    "jam_belajar": [2,3,4,5,6,2,4,5,7,8,3,6],
+    "jumlah_tugas": [5,6,7,8,9,4,6,7,10,10,5,9],
+    "kehadiran": [80,85,90,95,98,78,88,93,99,100,82,97],
+    "nilai": [68,74,82,89,94,65,79,87,96,98,71,92]
+}
+
+df = pd.DataFrame(data)
+
+X = df[["jam_belajar", "jumlah_tugas", "kehadiran"]]
+y = df["nilai"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Contoh siswa baru
+siswa_baru = [[5, 8, 94]]
+prediksi = model.predict(siswa_baru)
+
+print("Prediksi nilai:", prediksi[0])</code></pre></div><div class="warn"><strong>Penting:</strong> dataset di atas adalah dataset latihan sederhana. Jangan menganggap prediksi sebagai nilai sebenarnya atau sebagai dasar keputusan penting tanpa data dan validasi yang memadai.</div><h3>Pengembangan</h3><ul><li>Tambahkan jumlah latihan.</li><li>Tambahkan nilai tugas atau ujian sebelumnya.</li><li>Buat input interaktif menggunakan <code>input()</code>.</li><li>Tampilkan grafik hubungan feature dengan nilai.</li><li>Hitung MAE dan R² pada data testing.</li></ul></section>
+
+<section id="proyek2"><div class="kicker">Bagian 7</div><h2>🌸 Proyek 2 — Klasifikasi Bunga</h2><p>Proyek ini menggunakan dataset Iris. Model belajar mengelompokkan bunga berdasarkan karakteristiknya.</p><h3>Feature</h3><ul><li>sepal length</li><li>sepal width</li><li>petal length</li><li>petal width</li></ul><h3>Target</h3><p>Jenis bunga Iris: <strong>setosa, versicolor, atau virginica</strong>.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+
+print("Akurasi:", accuracy_score(y_test, y_pred))
+
+# Contoh prediksi satu bunga
+contoh = [[5.1, 3.5, 1.4, 0.2]]
+hasil = model.predict(contoh)[0]
+print("Prediksi:", iris.target_names[hasil])</code></pre></div><div class="tip"><strong>Diskusi:</strong> akurasi adalah salah satu ukuran evaluasi. Siswa perlu melihat data, cara pembagian data, jenis kesalahan, dan konteks penggunaan model.</div></section>
+
+<section id="proyek3"><div class="kicker">Bagian 8</div><h2>🏠 Proyek 3 — Prediksi Harga</h2><p>Buat aplikasi untuk memperkirakan harga berdasarkan karakteristik properti.</p><h3>Input</h3><ul><li>luas tanah</li><li>luas bangunan</li><li>jumlah kamar</li></ul><h3>Output</h3><p><strong>Prediksi harga</strong>.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Contoh data latihan
+# harga dinyatakan dalam juta rupiah
+data = {
+    "luas_tanah": [60, 72, 90, 100, 120, 150, 180, 200],
+    "luas_bangunan": [45, 50, 70, 80, 90, 110, 130, 150],
+    "jumlah_kamar": [2, 2, 3, 3, 3, 4, 4, 5],
+    "harga": [350, 390, 500, 560, 650, 800, 950, 1100]
+}
+
+df = pd.DataFrame(data)
+X = df[["luas_tanah", "luas_bangunan", "jumlah_kamar"]]
+y = df["harga"]
+
+model = LinearRegression()
+model.fit(X, y)
+
+rumah_baru = [[120, 90, 3]]
+prediksi = model.predict(rumah_baru)
+
+print("Prediksi harga:", prediksi[0], "juta rupiah")</code></pre></div><div class="info"><strong>Pengembangan:</strong> gunakan <code>train_test_split()</code> agar model dapat dievaluasi pada data yang tidak digunakan saat training. Tambahkan MAE/R² dan grafik bila sesuai.</div></section>
+
+<section id="proyek4"><div class="kicker">Bagian 9</div><h2>📊 Proyek 4 — Analisis Nilai Siswa</h2><p>Program membaca dataset CSV kemudian mengolah data tanpa harus menggunakan Machine Learning.</p><h3>Target pekerjaan</h3><ul><li>menghitung rata-rata</li><li>mencari nilai tertinggi</li><li>mencari nilai terendah</li><li>membuat grafik</li><li>memberikan kesimpulan</li></ul><h3>Contoh membaca CSV</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Ganti dengan nama file CSV Anda
+# df = pd.read_csv("nilai_siswa.csv")
+
+# Contoh data jika belum memiliki file CSV
+data = {
+    "nama": ["Andi", "Budi", "Citra", "Dina", "Eko"],
+    "matematika": [80, 70, 90, 85, 75],
+    "bahasa": [75, 80, 95, 82, 78],
+    "informatika": [90, 75, 92, 88, 85]
+}
+
+df = pd.DataFrame(data)
+print(df)</code></pre></div><h3>Menghitung statistik</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>kolom_nilai = ["matematika", "bahasa", "informatika"]
+
+df["rata_rata"] = df[kolom_nilai].mean(axis=1)
+
+print("Rata-rata kelas:")
+print(df[kolom_nilai].mean())
+
+print("\nNilai tertinggi:")
+print(df[kolom_nilai].max())
+
+print("\nNilai terendah:")
+print(df[kolom_nilai].min())
+
+print("\nSiswa dengan rata-rata tertinggi:")
+print(df.loc[df["rata_rata"].idxmax(), ["nama", "rata_rata"]])</code></pre></div><h3>Membuat grafik</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df.plot(
+    x="nama",
+    y="rata_rata",
+    kind="bar",
+    legend=False,
+    title="Rata-rata Nilai Siswa"
+)
+plt.ylabel("Nilai")
+plt.xlabel("Nama")
+plt.tight_layout()
+plt.show()</code></pre></div><p>Kesimpulan harus berdasarkan hasil yang benar-benar terlihat pada data dan grafik. Hindari membuat kesimpulan yang tidak didukung data.</p></section>
+
+<section id="proyek5"><div class="kicker">Bagian 10</div><h2>🧠 Proyek 5 — AI Klasifikasi Sederhana</h2><p>Siswa membuat model yang mengklasifikasikan data menjadi dua kategori.</p><h3>Contoh kategori</h3><div class="grid"><div class="card"><strong>Layak / Tidak Layak</strong>Model menentukan kategori berdasarkan feature yang telah dipilih.</div><div class="card"><strong>Kategori A / Kategori B</strong>Model belajar dari contoh data berlabel untuk memprediksi label data baru.</div></div><h3>Contoh struktur dataset</h3><table><tr><th>Feature 1</th><th>Feature 2</th><th>Target</th></tr><tr><td>80</td><td>90</td><td>1</td></tr><tr><td>75</td><td>85</td><td>1</td></tr><tr><td>45</td><td>50</td><td>0</td></tr><tr><td>40</td><td>55</td><td>0</td></tr></table><h3>Contoh dengan Decision Tree</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+data = {
+    "feature_1": [80,75,90,85,45,40,50,55,88,92,42,48],
+    "feature_2": [90,85,95,88,50,55,48,52,92,96,45,49],
+    "target": [1,1,1,1,0,0,0,0,1,1,0,0]
+}
+
+df = pd.DataFrame(data)
+X = df[["feature_1", "feature_2"]]
+y = df["target"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y
+)
+
+model = DecisionTreeClassifier(max_depth=3, random_state=42)
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+print("Akurasi:", accuracy_score(y_test, y_pred))
+
+contoh_baru = [[70, 80]]
+hasil = model.predict(contoh_baru)[0]
+print("Kategori:", "Layak" if hasil == 1 else "Tidak Layak")</code></pre></div><div class="warn"><strong>Penting:</strong> kategori “Layak/Tidak Layak” hanya contoh pembelajaran. Untuk keputusan nyata, definisi kategori, kualitas data, risiko kesalahan, dan prosedur validasi harus dipertimbangkan dengan serius.</div></section>
+
+<section id="template"><div class="kicker">Bagian 11</div><h2>📝 Template Notebook Proyek</h2><p>Gunakan struktur berikut agar laporan proyek mudah dibaca.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code># PROYEK AKHIR — APLIKASI AI SEDERHANA
+# Nama:
+# Kelas:
+# Proyek:
+
+# 1. LATAR BELAKANG
+# Jelaskan masalah yang ingin diselesaikan.
+
+# 2. TUJUAN
+# Jelaskan tujuan aplikasi.
+
+# 3. DATA
+# Jelaskan sumber dan kolom data.
+
+# 4. IMPORT LIBRARY
+
+# 5. EKSPLORASI DATA
+
+# 6. PERSIAPAN DATA
+
+# 7. MODEL / ANALISIS
+
+# 8. PREDIKSI / HASIL
+
+# 9. EVALUASI
+
+# 10. VISUALISASI
+
+# 11. KESIMPULAN
+
+# 12. KETERBATASAN &amp; RENCANA PENGEMBANGAN</code></pre></div><div class="tip"><strong>Saran:</strong> pisahkan penjelasan dengan kode menggunakan Markdown Cell di Google Colab. Notebook yang baik bukan hanya kumpulan kode, tetapi juga memiliki cerita yang jelas dari masalah sampai kesimpulan.</div></section>
+
+<section id="evaluasi"><div class="kicker">Bagian 12</div><h2>🔎 Evaluasi &amp; Pengujian</h2><p>Setiap proyek harus memiliki cara untuk memeriksa apakah program bekerja dengan benar.</p><h3>Untuk Regression</h3><ul><li>MAE</li><li>R²</li><li>perbandingan nilai aktual dan prediksi</li><li>grafik bila relevan</li></ul><h3>Untuk Classification</h3><ul><li>accuracy</li><li>confusion matrix bila sesuai</li><li>precision/recall bila konteks membutuhkannya</li><li>pemeriksaan kesalahan prediksi</li></ul><h3>Untuk Analisis Data</h3><ul><li>periksa tipe data</li><li>periksa data kosong</li><li>periksa nilai yang tidak wajar</li><li>cek kembali hasil perhitungan</li><li>pastikan kesimpulan sesuai data</li></ul><div class="note"><strong>Uji dengan beberapa contoh:</strong> jangan hanya menjalankan satu input. Gunakan beberapa input normal dan, jika sesuai, contoh yang berada di batas agar siswa dapat melihat bagaimana program merespons.</div></section>
+
+<section id="etika"><div class="kicker">Bagian 13</div><h2>🔐 Etika, Keterbatasan, dan Tanggung Jawab</h2><p>Aplikasi AI sederhana tetap perlu digunakan secara bertanggung jawab.</p><div class="grid"><div class="card"><strong>Privasi</strong>Jangan memasukkan data pribadi atau data sensitif ke notebook atau layanan AI tanpa izin dan alasan yang jelas.</div><div class="card"><strong>Kualitas data</strong>Data yang salah atau tidak lengkap dapat menghasilkan output yang menyesatkan.</div><div class="card"><strong>Bias</strong>Jika data tidak mewakili kelompok atau kondisi tertentu, hasil model dapat berbeda kualitasnya antar kondisi.</div><div class="card"><strong>Transparansi</strong>Jelaskan sumber data, metode, dan keterbatasan model.</div><div class="card"><strong>Verifikasi</strong>Output AI atau Machine Learning perlu diperiksa, terutama untuk keputusan penting.</div><div class="card"><strong>Hak cipta</strong>Gunakan dataset, kode, gambar, dan sumber lain sesuai izin dan aturan yang berlaku.</div></div><div class="warn"><strong>Kalimat penting untuk laporan:</strong> “Hasil model merupakan keluaran berdasarkan data dan metode yang digunakan. Hasil tersebut memiliki keterbatasan dan perlu dievaluasi sebelum digunakan untuk keputusan nyata.”</div></section>
+
+<section id="latihan"><div class="kicker">Bagian 14</div><h2>📝 5 Latihan Soal</h2>
+<div class="quiz"><strong>Soal 1.</strong> Jelaskan perbedaan sederhana antara regression dan classification. Berikan satu contoh masing-masing.<details><summary>Lihat pedoman jawaban</summary><div>Regression memprediksi angka, misalnya harga. Classification memprediksi kategori, misalnya jenis bunga.</div></details></div>
+<div class="quiz"><strong>Soal 2.</strong> Pada proyek “jam belajar, jumlah tugas, kehadiran → nilai”, tentukan feature dan target.<details><summary>Lihat jawaban</summary><div>Feature: jam belajar, jumlah tugas, dan kehadiran. Target: nilai siswa.</div></details></div>
+<div class="quiz"><strong>Soal 3.</strong> Mengapa data perlu dibagi menjadi training dan testing pada proyek Machine Learning?<details><summary>Lihat pedoman jawaban</summary><div>Training digunakan untuk belajar, sedangkan testing membantu mengevaluasi model pada data yang tidak digunakan saat training.</div></details></div>
+<div class="quiz"><strong>Soal 4.</strong> Mengapa akurasi tidak selalu cukup untuk menilai sebuah model classification?<details><summary>Lihat pedoman jawaban</summary><div>Karena satu angka akurasi tidak selalu menunjukkan jenis kesalahan, distribusi kelas, atau dampak kesalahan dalam konteks tertentu. Metrik lain dapat diperlukan.</div></details></div>
+<div class="quiz"><strong>Soal 5.</strong> Sebutkan minimal tiga hal yang harus diperiksa sebelum hasil aplikasi AI digunakan untuk keputusan nyata.<details><summary>Lihat contoh jawaban</summary><div>Contohnya kualitas data, keterwakilan data, hasil evaluasi, jenis kesalahan, privasi, sumber data, dan keterbatasan model.</div></details></div>
+</section>
+
+<section id="tugas"><div class="kicker">Bagian 15</div><h2>🛠️ 5 Tugas Proyek</h2>
+<div class="task"><h3>Tugas 1 — Prediksi Nilai Siswa</h3><p>Buat aplikasi regression menggunakan minimal <strong>20 data siswa</strong> dengan feature jam belajar, jumlah tugas, dan kehadiran. Target adalah nilai.</p><ol><li>Buat atau siapkan dataset.</li><li>Eksplorasi data.</li><li>Bagi training/testing.</li><li>Latih model.</li><li>Buat minimal 3 prediksi.</li><li>Hitung MAE dan R².</li><li>Tulis kesimpulan dan keterbatasan.</li></ol></div>
+<div class="task"><h3>Tugas 2 — Klasifikasi Bunga Iris</h3><p>Gunakan dataset Iris untuk membuat aplikasi yang menentukan jenis bunga.</p><ol><li>Jelaskan empat feature.</li><li>Bagi data.</li><li>Gunakan model classification.</li><li>Uji beberapa data.</li><li>Hitung accuracy.</li><li>Jelaskan minimal dua contoh kesalahan atau keterbatasan model jika ada.</li></ol></div>
+<div class="task"><h3>Tugas 3 — Prediksi Harga Rumah</h3><p>Buat aplikasi berdasarkan luas tanah, luas bangunan, dan jumlah kamar.</p><ol><li>Dataset minimal 20 baris.</li><li>Gunakan regression.</li><li>Uji minimal 3 rumah baru.</li><li>Hitung MAE dan R² pada data testing.</li><li>Buat satu grafik yang membantu menjelaskan data atau hasil.</li></ol></div>
+<div class="task"><h3>Tugas 4 — Analisis Nilai dari CSV</h3><p>Gunakan dataset CSV nilai siswa.</p><ol><li>Baca CSV dengan Pandas.</li><li>Hitung rata-rata.</li><li>Cari nilai tertinggi dan terendah.</li><li>Tentukan siswa dengan rata-rata tertinggi.</li><li>Buat minimal dua grafik.</li><li>Tulis minimal tiga kesimpulan berbasis data.</li></ol></div>
+<div class="task"><h3>Tugas 5 — AI Klasifikasi Dua Kategori</h3><p>Buat model classification sederhana untuk dua kategori, misalnya <strong>Layak/Tidak Layak</strong> atau <strong>Kategori A/Kategori B</strong>.</p><ol><li>Buat dataset minimal 30 baris.</li><li>Tentukan minimal dua feature.</li><li>Jelaskan bagaimana label dibuat.</li><li>Bagi training/testing.</li><li>Latih model.</li><li>Uji data baru.</li><li>Hitung evaluasi.</li><li>Jelaskan risiko jika model salah mengklasifikasikan data.</li></ol></div></section>
+
+<section id="rubrik"><div class="kicker">Bagian 16</div><h2>📋 Checklist &amp; Rubrik Proyek</h2><h3>Checklist pengumpulan</h3><div class="checklist"><label>☐ Judul dan identitas proyek.</label><label>☐ Masalah dan tujuan dijelaskan.</label><label>☐ Dataset dan sumbernya dijelaskan.</label><label>☐ Feature dan target dijelaskan jika menggunakan Machine Learning.</label><label>☐ Kode dapat dijalankan dari awal sampai akhir.</label><label>☐ Ada proses pengujian.</label><label>☐ Ada hasil atau prediksi.</label><label>☐ Ada evaluasi yang sesuai.</label><label>☐ Ada visualisasi jika relevan.</label><label>☐ Ada kesimpulan berdasarkan hasil.</label><label>☐ Ada keterbatasan dan ide pengembangan.</label><label>☐ Sumber data/kode dicantumkan bila diperlukan.</label></div><h3>Komponen penilaian yang dapat digunakan guru</h3><table><tr><th>Komponen</th><th>Fokus</th></tr><tr><td>Pemahaman masalah</td><td>Siswa dapat menjelaskan tujuan dan input/output proyek.</td></tr><tr><td>Data</td><td>Data relevan, struktur jelas, dan diolah dengan benar.</td></tr><tr><td>Koding</td><td>Kode terstruktur, dapat dijalankan, dan diberi penjelasan.</td></tr><tr><td>Model/analisis</td><td>Metode sesuai dengan tujuan dan diterapkan dengan benar.</td></tr><tr><td>Evaluasi</td><td>Hasil diuji dan dibahas, termasuk keterbatasan.</td></tr><tr><td>Visualisasi</td><td>Grafik digunakan bila membantu menjelaskan hasil.</td></tr><tr><td>Komunikasi</td><td>Kesimpulan jelas dan didukung hasil.</td></tr><tr><td>Etika</td><td>Privasi, sumber data, bias, dan keterbatasan diperhatikan.</td></tr></table><p class="small">Guru dapat menyesuaikan bobot setiap komponen dengan kebutuhan kelas.</p></section>
+
+<section id="presentasi"><div class="kicker">Bagian 17</div><h2>🎤 Panduan Presentasi Proyek</h2><p>Presentasi dapat dibuat singkat, misalnya 5–7 menit per kelompok.</p><ol><li><strong>Masalah:</strong> apa yang ingin diselesaikan?</li><li><strong>Data:</strong> data apa yang digunakan?</li><li><strong>Metode:</strong> mengapa menggunakan regression, classification, atau analisis data?</li><li><strong>Demo:</strong> jalankan aplikasi atau tampilkan notebook.</li><li><strong>Hasil:</strong> apa yang diperoleh?</li><li><strong>Evaluasi:</strong> bagaimana mengetahui hasilnya dapat dipercaya untuk konteks latihan?</li><li><strong>Keterbatasan:</strong> apa yang belum dapat dilakukan model?</li><li><strong>Pengembangan:</strong> apa yang ingin diperbaiki jika memiliki lebih banyak waktu?</li></ol><div class="tip"><strong>Tips presentasi:</strong> jangan hanya membaca kode. Jelaskan alur berpikir dan alasan memilih data, metode, dan cara evaluasi.</div></section>
+
+<section id="refleksi"><div class="kicker">Bagian 18</div><h2>💭 Refleksi Siswa</h2><ol><li>Konsep Python apa yang paling banyak saya gunakan dalam proyek?</li><li>Apa masalah utama yang saya coba selesaikan?</li><li>Bagian data mana yang paling penting?</li><li>Mengapa saya memilih metode tersebut?</li><li>Bagaimana saya menguji program?</li><li>Apa hasil yang paling menarik?</li><li>Kesalahan apa yang saya temukan?</li><li>Apa keterbatasan aplikasi saya?</li><li>Apa yang akan saya perbaiki jika memiliki data lebih banyak?</li><li>Bagaimana saya akan menggunakan AI secara bertanggung jawab?</li></ol><div class="note"><strong>Refleksi akhir:</strong> aplikasi AI sederhana adalah latihan untuk memahami proses pemecahan masalah dengan data. Hasil model perlu dibaca secara kritis dan tidak otomatis berarti keputusan yang benar.</div></section>
+
+<section id="ringkasan"><div class="kicker">Bagian 19</div><h2>📌 Ringkasan Proyek Akhir</h2><ol><li>Tentukan masalah yang jelas.</li><li>Siapkan dan pahami data.</li><li>Tentukan feature dan target jika menggunakan Machine Learning.</li><li>Pilih metode yang sesuai: regression, classification, atau analisis data.</li><li>Bangun aplikasi secara bertahap.</li><li>Uji dengan data yang sesuai.</li><li>Evaluasi hasil.</li><li>Gunakan visualisasi untuk membantu memahami data.</li><li>Jelaskan keterbatasan.</li><li>Buat kesimpulan berdasarkan bukti dari data.</li></ol><div class="flow"><div class="box">Masalah</div><div class="arrow">→</div><div class="box">Data</div><div class="arrow">→</div><div class="box">Kode</div><div class="arrow">→</div><div class="box">Model / Analisis</div><div class="arrow">→</div><div class="box">Evaluasi</div><div class="arrow">→</div><div class="box">Kesimpulan</div></div><div class="tip"><strong>Kalimat kunci:</strong> “AI bukan hanya tentang membuat prediksi. Kita juga harus memahami data, menguji hasil, menjelaskan keterbatasan, dan menggunakan teknologi secara bertanggung jawab.”</div></section>
+
+<section><div class="kicker">Referensi Praktik</div><h2>📚 Google Colab</h2><p>Gunakan <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a> untuk membuat dan menjalankan notebook proyek akhir.</p><p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Proyek Akhir</p></section>
+
+</main></div>
+<footer><div class="container">PROYEK AKHIR — MEMBUAT APLIKASI AI SEDERHANA • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div></footer>
+<script>function copyCode(button){const code=button.parentElement.querySelector("code").innerText;navigator.clipboard.writeText(code).then(()=>{const old=button.innerText;button.innerText="Tersalin ✓";setTimeout(()=>button.innerText=old,1400)}).catch(()=>{button.innerText="Gagal";setTimeout(()=>button.innerText="Salin",1200)});}</script>
+</body></html>

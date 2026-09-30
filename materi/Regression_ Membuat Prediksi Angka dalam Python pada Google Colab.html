@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regression: Membuat Prediksi Angka dalam Python pada Google Colab</title>
+<meta name="description" content="Materi Koding dan Kecerdasan Artifisial tentang Regression, prediksi angka, dataset sederhana, Linear Regression, evaluasi model, dan praktik Google Colab.">
+<style>
+:root{
+  --bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;
+  --primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;
+  --border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;
+  --orange:#c2410c;--orange-soft:#fff7ed;--blue:#1d4ed8;--blue-soft:#eff6ff;
+  --shadow:0 10px 30px rgba(15,23,42,.07)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.container{width:min(1180px,92%);margin:auto}
+.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff 0%,#faf5ff 48%,#eff6ff 100%);border-bottom:1px solid var(--border)}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}
+h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}
+.lead{max-width:920px;color:#475467;font-size:1.08rem;margin:0}
+.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text);box-shadow:0 3px 12px rgba(15,23,42,.04)}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}
+aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+aside h3{margin:2px 0 12px}.nav a{display:block;padding:8px 10px;border-radius:9px;color:#475467;font-size:.9rem}
+.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}
+main{min-width:0}
+section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}
+h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}
+p{margin:9px 0}ul,ol{padding-left:24px}
+.note,.tip,.warn,.info{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}
+.tip{border-color:var(--green);background:var(--green-soft)}
+.warn{border-color:#f97316;background:var(--orange-soft)}
+.info{border-color:var(--blue);background:var(--blue-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}
+.card strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}
+th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}
+pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.9rem;line-height:1.6;margin:0}
+code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}
+.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}
+.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}
+.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}
+.arrow{color:var(--primary);font-size:1.3rem}
+.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}
+.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}
+details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}
+.checklist label{display:block;margin:8px 0}
+.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+.small{font-size:.9rem;color:var(--muted)}
+.metric{font-size:1.7rem;font-weight:850;color:var(--primary)}
+footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}
+@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">🤖 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span>
+<h1>Regression: Membuat Prediksi Angka</h1>
+<p class="lead">Belajar menggunakan Machine Learning untuk memprediksi nilai berupa angka. Kita mulai dari contoh sederhana: memprediksi harga rumah berdasarkan luas rumah, kemudian mencoba kasus lain seperti jam belajar → nilai dan umur kendaraan → harga.</p>
+<div class="top-actions">
+<a class="btn primary" href="https://colab.research.google.com/" target="_blank" rel="noopener">🚀 Buka Google Colab</a>
+<a class="btn" href="#praktik">🎯 Langsung ke Praktik</a>
+</div>
+</div>
+</header>
+
+<div class="container layout">
+<aside>
+<h3>📚 Navigasi Materi</h3>
+<nav class="nav">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a>
+<a href="#pengertian">2. Apa itu Regression?</a>
+<a href="#contoh">3. Contoh Kasus</a>
+<a href="#dataset">4. Dataset Sederhana</a>
+<a href="#fitur-target">5. Feature &amp; Target</a>
+<a href="#alur">6. Alur Machine Learning</a>
+<a href="#praktik">7. Praktik Google Colab</a>
+<a href="#split">8. Training &amp; Testing</a>
+<a href="#model">9. Membuat Model</a>
+<a href="#prediksi">10. Prediksi</a>
+<a href="#evaluasi">11. Evaluasi Model</a>
+<a href="#visualisasi">12. Visualisasi</a>
+<a href="#eksperimen">13. Ganti Dataset</a>
+<a href="#training">14. Data Training Representatif</a>
+<a href="#latihan">15. 5 Latihan Soal</a>
+<a href="#tugas">16. 5 Tugas</a>
+<a href="#refleksi">17. Refleksi</a>
+<a href="#ringkasan">18. Ringkasan</a>
+</nav>
+</aside>
+
+<main>
+
+<section id="tujuan">
+<div class="kicker">Bagian 1</div>
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian <strong>Regression</strong> dalam Machine Learning.</li>
+<li>Membedakan masalah prediksi angka dengan masalah klasifikasi kategori.</li>
+<li>Mengenali <strong>feature</strong> dan <strong>target</strong> pada sebuah dataset.</li>
+<li>Mempersiapkan dataset sederhana menggunakan Python.</li>
+<li>Membagi data menjadi data training dan testing.</li>
+<li>Membuat model <strong>Linear Regression</strong> menggunakan scikit-learn.</li>
+<li>Menggunakan model untuk membuat prediksi angka.</li>
+<li>Mengukur kesalahan prediksi dengan MAE dan R² secara sederhana.</li>
+<li>Membuat visualisasi hubungan data dan garis prediksi.</li>
+<li>Menjelaskan mengapa data training harus cukup mewakili kondisi sebenarnya.</li>
+</ol>
+<div class="note"><strong>Gagasan utama:</strong> Regression digunakan ketika target yang ingin diprediksi berupa <strong>angka</strong>, misalnya harga, nilai, jumlah penjualan, atau suhu.</div>
+</section>
+
+<section id="pengertian">
+<div class="kicker">Bagian 2</div>
+<h2>📈 Apa itu Regression?</h2>
+<p><strong>Regression</strong> adalah salah satu jenis masalah dalam Machine Learning yang digunakan untuk mempelajari hubungan antara data masukan dan nilai target berbentuk angka.</p>
+<p>Contohnya:</p>
+<div class="grid">
+<div class="card"><strong>🏠 Luas rumah → Harga rumah</strong>Semakin luas rumah, pada dataset tertentu harga dapat memiliki kecenderungan meningkat.</div>
+<div class="card"><strong>📚 Jam belajar → Nilai</strong>Data historis dapat digunakan untuk mempelajari hubungan antara waktu belajar dan nilai.</div>
+<div class="card"><strong>🚗 Umur kendaraan → Harga</strong>Model dapat mempelajari hubungan antara umur kendaraan dan harga berdasarkan data yang tersedia.</div>
+<div class="card"><strong>📢 Jumlah iklan → Penjualan</strong>Data pengeluaran atau jumlah iklan dapat digunakan sebagai salah satu fitur untuk memprediksi penjualan.</div>
+</div>
+<h3>Regression vs Classification</h3>
+<table>
+<tr><th>Regression</th><th>Classification</th></tr>
+<tr><td>Target berupa angka.</td><td>Target berupa kategori/kelas.</td></tr>
+<tr><td>Contoh: prediksi harga = 450 juta.</td><td>Contoh: lulus / tidak lulus.</td></tr>
+<tr><td>Contoh: prediksi nilai = 82,5.</td><td>Contoh: bunga Iris setosa / versicolor / virginica.</td></tr>
+</table>
+<div class="tip"><strong>Trik mengingat:</strong> jika pertanyaannya “berapa nilainya?”, sering kali kita sedang berhadapan dengan regression. Jika pertanyaannya “termasuk kategori apa?”, sering kali itu classification.</div>
+</section>
+
+<section id="contoh">
+<div class="kicker">Bagian 3</div>
+<h2>🏠 Contoh Kasus: Prediksi Harga Rumah</h2>
+<p>Misalkan seorang peneliti memiliki data beberapa rumah. Setiap baris berisi <strong>luas rumah</strong> dan <strong>harga rumah</strong>.</p>
+<table>
+<tr><th>Luas Rumah (m²)</th><th>Harga (juta rupiah)</th></tr>
+<tr><td>40</td><td>200</td></tr>
+<tr><td>50</td><td>250</td></tr>
+<tr><td>60</td><td>300</td></tr>
+<tr><td>70</td><td>350</td></tr>
+<tr><td>80</td><td>400</td></tr>
+<tr><td>90</td><td>450</td></tr>
+</table>
+<p>Kita ingin menggunakan data tersebut untuk memperkirakan harga rumah dengan luas yang belum ada di dataset.</p>
+<p>Misalnya: <strong>berapa perkiraan harga rumah dengan luas 75 m²?</strong></p>
+<div class="flow">
+<div class="box">Data luas rumah</div><div class="arrow">→</div><div class="box">Training model</div><div class="arrow">→</div><div class="box">Masukkan 75 m²</div><div class="arrow">→</div><div class="box">Prediksi harga</div>
+</div>
+<div class="warn"><strong>Perlu diingat:</strong> model bukan “mengetahui” harga rumah yang sebenarnya. Model hanya membuat perkiraan berdasarkan pola data yang diberikan.</div>
+</section>
+
+<section id="dataset">
+<div class="kicker">Bagian 4</div>
+<h2>📊 Dataset Sederhana</h2>
+<p>Dataset adalah kumpulan data yang digunakan untuk analisis atau pembelajaran model.</p>
+<p>Untuk pembelajaran awal, kita dapat membuat dataset langsung menggunakan Python:</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+data = {
+    "luas": [40, 50, 60, 70, 80, 90, 100, 110],
+    "harga": [200, 250, 300, 350, 400, 450, 500, 550]
+}
+
+df = pd.DataFrame(data)
+
+print(df)</code></pre></div>
+<p>Setelah kode dijalankan, <code>df</code> menjadi tabel yang berisi dua kolom: <code>luas</code> dan <code>harga</code>.</p>
+<h3>Melihat informasi dataset</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Jumlah baris:", len(df))
+print("Kolom:", df.columns.tolist())
+print(df.describe())</code></pre></div>
+<div class="info"><strong>Mengapa memeriksa dataset?</strong> Karena model Machine Learning sangat bergantung pada data. Kesalahan data, data terlalu sedikit, atau data yang tidak mewakili kondisi sebenarnya dapat memengaruhi hasil model.</div>
+</section>
+
+<section id="fitur-target">
+<div class="kicker">Bagian 5</div>
+<h2>🔍 Feature dan Target</h2>
+<p>Dalam Machine Learning, kita sering membedakan data menjadi <strong>feature</strong> dan <strong>target</strong>.</p>
+<div class="grid">
+<div class="card"><strong>Feature (X)</strong>Data yang digunakan model sebagai masukan untuk membuat prediksi.</div>
+<div class="card"><strong>Target (y)</strong>Nilai yang ingin diprediksi oleh model.</div>
+</div>
+<p>Pada kasus rumah:</p>
+<ul>
+<li><strong>Feature X = luas rumah</strong></li>
+<li><strong>Target y = harga rumah</strong></li>
+</ul>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = df[["luas"]]
+y = df["harga"]
+
+print("Feature:")
+print(X)
+
+print("\nTarget:")
+print(y)</code></pre></div>
+<div class="tip"><strong>Mudahnya:</strong> X adalah “petunjuk” yang diberikan kepada model, sedangkan y adalah “jawaban” yang ingin dipelajari model.</div>
+</section>
+
+<section id="alur">
+<div class="kicker">Bagian 6</div>
+<h2>🔄 Alur Regression Machine Learning</h2>
+<div class="flow">
+<div class="box">Dataset</div><div class="arrow">→</div>
+<div class="box">Feature &amp; Target</div><div class="arrow">→</div>
+<div class="box">Training / Testing</div><div class="arrow">→</div>
+<div class="box">Model</div><div class="arrow">→</div>
+<div class="box">Prediksi</div><div class="arrow">→</div>
+<div class="box">Evaluasi</div>
+</div>
+<h3>Penjelasan setiap tahap</h3>
+<div class="step"><div class="num">1</div><div><strong>Dataset</strong><br>Siapkan data yang relevan dengan masalah.</div></div>
+<div class="step"><div class="num">2</div><div><strong>Feature dan target</strong><br>Tentukan data masukan dan angka yang ingin diprediksi.</div></div>
+<div class="step"><div class="num">3</div><div><strong>Training dan testing</strong><br>Gunakan sebagian data untuk belajar dan sebagian untuk menguji model.</div></div>
+<div class="step"><div class="num">4</div><div><strong>Membuat model</strong><br>Gunakan algoritma regression, misalnya Linear Regression.</div></div>
+<div class="step"><div class="num">5</div><div><strong>Prediksi</strong><br>Berikan data baru kepada model.</div></div>
+<div class="step"><div class="num">6</div><div><strong>Evaluasi</strong><br>Ukur seberapa dekat hasil prediksi dengan nilai sebenarnya.</div></div>
+</section>
+
+<section id="praktik">
+<div class="kicker">Bagian 7</div>
+<h2>💻 Praktik Lengkap di Google Colab</h2>
+<p>Kita akan menggunakan <strong>Linear Regression</strong> karena konsepnya cukup mudah untuk pembelajaran awal.</p>
+<h3>Langkah 1 — Import library</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score</code></pre></div>
+<h3>Langkah 2 — Membuat dataset</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>data = {
+    "luas": [40, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    "harga": [200, 250, 300, 350, 400, 450, 500, 550, 600, 650]
+}
+
+df = pd.DataFrame(data)
+
+display(df)</code></pre></div>
+<h3>Langkah 3 — Menentukan X dan y</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = df[["luas"]]
+y = df["harga"]</code></pre></div>
+</section>
+
+<section id="split">
+<div class="kicker">Bagian 8</div>
+<h2>✂️ Membagi Data Training dan Testing</h2>
+<p>Kita dapat membagi data menjadi dua bagian. <strong>Data training</strong> digunakan untuk melatih model, sedangkan <strong>data testing</strong> digunakan untuk melihat bagaimana model bekerja pada data yang tidak digunakan saat proses belajar.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,
+    random_state=42
+)
+
+print("Jumlah data training:", len(X_train))
+print("Jumlah data testing :", len(X_test))</code></pre></div>
+<p><code>test_size=0.2</code> berarti sekitar 20% data digunakan untuk testing dan sisanya untuk training.</p>
+<div class="note"><strong>Mengapa tidak menggunakan semua data untuk training?</strong> Karena kita membutuhkan data yang tidak digunakan saat belajar untuk mendapatkan gambaran apakah model dapat bekerja pada data lain.</div>
+</section>
+
+<section id="model">
+<div class="kicker">Bagian 9</div>
+<h2>🧠 Membuat Model Linear Regression</h2>
+<p>Sekarang kita membuat objek model dan melatihnya dengan data training.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>model = LinearRegression()
+
+model.fit(X_train, y_train)
+
+print("Model selesai dilatih.")</code></pre></div>
+<p>Perintah <code>fit()</code> berarti model mempelajari hubungan antara feature dan target berdasarkan data training.</p>
+<h3>Gambaran matematis sederhana</h3>
+<p>Linear Regression berusaha menemukan hubungan yang dapat digambarkan secara sederhana dengan persamaan:</p>
+<div class="info"><strong>y = a × x + b</strong><br><br>
+<code>y</code> = prediksi target<br>
+<code>x</code> = feature<br>
+<code>a</code> = koefisien/kemiringan<br>
+<code>b</code> = intercept</div>
+<p>Dalam contoh rumah, model mencoba mempelajari hubungan antara luas dan harga berdasarkan data yang tersedia.</p>
+</section>
+
+<section id="prediksi">
+<div class="kicker">Bagian 10</div>
+<h2>🔮 Membuat Prediksi</h2>
+<h3>Prediksi data testing</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>y_pred = model.predict(X_test)
+
+print("Prediksi:")
+print(y_pred)</code></pre></div>
+<h3>Prediksi rumah baru</h3>
+<p>Misalnya kita ingin memperkirakan harga rumah dengan luas <strong>75 m²</strong>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>data_baru = [[75]]
+
+prediksi = model.predict(data_baru)
+
+print("Perkiraan harga rumah:",
+      prediksi[0], "juta rupiah")</code></pre></div>
+<div class="warn"><strong>Catatan:</strong> angka prediksi hanya masuk akal jika data training dan konteks masalah cukup sesuai dengan kondisi yang ingin diprediksi. Dataset latihan di atas sengaja sederhana agar konsep mudah dipelajari.</div>
+</section>
+
+<section id="evaluasi">
+<div class="kicker">Bagian 11</div>
+<h2>📏 Evaluasi Model Regression</h2>
+<p>Prediksi tidak cukup hanya dilihat. Kita perlu mengukur seberapa jauh prediksi dari nilai sebenarnya.</p>
+<h3>1. MAE — Mean Absolute Error</h3>
+<p>MAE menghitung rata-rata jarak absolut antara nilai sebenarnya dan nilai prediksi.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>mae = mean_absolute_error(y_test, y_pred)
+
+print("MAE:", mae)</code></pre></div>
+<p>Jika MAE = 10 pada contoh harga dalam juta rupiah, secara sederhana rata-rata kesalahan absolut prediksi sekitar 10 juta rupiah pada data evaluasi tersebut.</p>
+<h3>2. R² — R-squared</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>r2 = r2_score(y_test, y_pred)
+
+print("R²:", r2)</code></pre></div>
+<p>R² memberikan ukuran seberapa baik variasi target dapat dijelaskan oleh model pada data yang dievaluasi. Nilainya perlu dibaca bersama konteks, dataset, dan metrik lainnya.</p>
+<div class="tip"><strong>Jangan terjebak pada satu angka.</strong> Model sebaiknya dinilai dengan data evaluasi yang tepat dan metrik yang sesuai dengan tujuan penggunaan.</div>
+</section>
+
+<section id="visualisasi">
+<div class="kicker">Bagian 12</div>
+<h2>📉 Visualisasi Data dan Garis Prediksi</h2>
+<p>Visualisasi membantu kita melihat hubungan antara data dan hasil model.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>plt.figure(figsize=(8, 5))
+
+plt.scatter(X, y, label="Data asli")
+
+plt.plot(
+    X,
+    model.predict(X),
+    label="Garis regresi"
+)
+
+plt.xlabel("Luas rumah (m²)")
+plt.ylabel("Harga (juta rupiah)")
+plt.title("Regression: Luas Rumah vs Harga")
+plt.legend()
+plt.show()</code></pre></div>
+<p>Pada grafik, titik menunjukkan data yang tersedia, sedangkan garis menunjukkan hubungan yang dipelajari model.</p>
+<div class="info"><strong>Aktivitas pengamatan:</strong> apakah titik-titik data berada dekat dengan garis? Apakah ada titik yang jauh? Apa yang mungkin menyebabkan perbedaan tersebut?</div>
+</section>
+
+<section id="eksperimen">
+<div class="kicker">Bagian 13</div>
+<h2>🧪 Mengganti Dataset dengan Contoh Lain</h2>
+<p>Setelah memahami contoh rumah, siswa dapat mengganti masalah dengan contoh yang lebih dekat dengan kehidupan sehari-hari.</p>
+<table>
+<tr><th>Feature (X)</th><th>Target (y)</th><th>Pertanyaan</th></tr>
+<tr><td>Jam belajar</td><td>Nilai</td><td>Berapa nilai yang diperkirakan dari jumlah jam belajar tertentu?</td></tr>
+<tr><td>Umur kendaraan</td><td>Harga</td><td>Berapa perkiraan harga kendaraan berdasarkan umurnya?</td></tr>
+<tr><td>Luas tanah</td><td>Harga</td><td>Berapa perkiraan harga tanah berdasarkan luas?</td></tr>
+<tr><td>Jumlah iklan</td><td>Penjualan</td><td>Berapa perkiraan penjualan berdasarkan jumlah iklan?</td></tr>
+</table>
+<h3>Contoh: Jam Belajar → Nilai</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+data = {
+    "jam_belajar": [1, 2, 3, 4, 5, 6, 7, 8],
+    "nilai": [55, 60, 68, 72, 78, 84, 88, 92]
+}
+
+df = pd.DataFrame(data)
+
+display(df)</code></pre></div>
+<p>Kemudian ubah bagian feature dan target:</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>X = df[["jam_belajar"]]
+y = df["nilai"]</code></pre></div>
+<p>Setelah itu, langkah <code>train_test_split()</code>, <code>LinearRegression()</code>, <code>fit()</code>, <code>predict()</code>, dan evaluasi dapat digunakan kembali.</p>
+<div class="tip"><strong>Eksperimen:</strong> ubah beberapa angka pada dataset. Jalankan kembali model. Perhatikan apakah garis regresi dan hasil prediksi ikut berubah.</div>
+</section>
+
+<section id="training">
+<div class="kicker">Bagian 14</div>
+<h2>🧩 Mengapa Data Training Harus Mewakili Kondisi Sebenarnya?</h2>
+<p>Model belajar dari data. Jika data training terlalu sedikit, terlalu sempit, atau berbeda jauh dari kondisi ketika model digunakan, hasil prediksi dapat menjadi kurang sesuai.</p>
+<h3>Contoh sederhana</h3>
+<p>Misalnya kita membuat model harga rumah hanya menggunakan rumah dengan luas 40–100 m² di satu wilayah. Kemudian model digunakan untuk memprediksi rumah 500 m² di wilayah yang sangat berbeda. Model mungkin tidak memiliki cukup informasi untuk membuat prediksi yang dapat diandalkan.</p>
+<div class="grid">
+<div class="card"><strong>Data terlalu sedikit</strong>Model memiliki informasi terbatas tentang pola yang mungkin terjadi.</div>
+<div class="card"><strong>Rentang terlalu sempit</strong>Model belum tentu bekerja baik di luar rentang data yang dipelajari.</div>
+<div class="card"><strong>Kondisi berbeda</strong>Data training mungkin tidak menggambarkan lingkungan penggunaan model.</div>
+<div class="card"><strong>Data bias</strong>Kelompok atau kondisi tertentu mungkin terlalu banyak atau terlalu sedikit terwakili.</div>
+</div>
+<div class="warn"><strong>Hati-hati dengan extrapolation:</strong> memprediksi jauh di luar rentang data training dapat berisiko karena model tidak memiliki banyak contoh untuk mendukung prediksi tersebut.</div>
+<h3>Pertanyaan utama</h3>
+<p><strong>Apa yang terjadi jika data training yang digunakan tidak mewakili kondisi sebenarnya?</strong></p>
+<p>Model dapat menghasilkan prediksi yang kurang akurat atau kurang sesuai ketika digunakan pada kondisi nyata. Karena itu, kualitas dan keterwakilan data merupakan bagian penting dari Machine Learning.</p>
+</section>
+
+<section id="latihan">
+<div class="kicker">Bagian 15</div>
+<h2>📝 5 Latihan Soal</h2>
+
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan Regression dalam Machine Learning? Berikan dua contoh masalah regression.<details><summary>Lihat pedoman jawaban</summary><div>Regression adalah masalah Machine Learning untuk memprediksi target berupa angka. Contoh: luas rumah → harga dan jam belajar → nilai.</div></details></div>
+
+<div class="quiz"><strong>Soal 2.</strong> Pada kasus “luas rumah → harga rumah”, manakah yang menjadi feature dan manakah yang menjadi target?<details><summary>Lihat jawaban</summary><div>Feature (X) adalah luas rumah. Target (y) adalah harga rumah.</div></details></div>
+
+<div class="quiz"><strong>Soal 3.</strong> Mengapa dataset perlu dibagi menjadi data training dan testing?<details><summary>Lihat pedoman jawaban</summary><div>Data training digunakan untuk melatih model, sedangkan data testing digunakan untuk mengevaluasi model pada data yang tidak digunakan saat proses belajar.</div></details></div>
+
+<div class="quiz"><strong>Soal 4.</strong> Apa arti sederhana MAE = 8 jika satuan target adalah juta rupiah?<details><summary>Lihat pedoman jawaban</summary><div>Secara sederhana, rata-rata kesalahan absolut prediksi pada data yang dievaluasi adalah sekitar 8 juta rupiah.</div></details></div>
+
+<div class="quiz"><strong>Soal 5.</strong> Mengapa data training yang tidak mewakili kondisi sebenarnya dapat menjadi masalah?<details><summary>Lihat pedoman jawaban</summary><div>Karena model belajar dari pola data tersebut. Jika data terlalu sempit, sedikit, atau berbeda dari kondisi penggunaan, model dapat menghasilkan prediksi yang kurang sesuai pada data nyata.</div></details></div>
+</section>
+
+<section id="tugas">
+<div class="kicker">Bagian 16</div>
+<h2>🛠️ 5 Tugas Praktik</h2>
+
+<div class="task">
+<h3>Tugas 1 — Regression Harga Rumah</h3>
+<p>Buat kembali model prediksi harga rumah menggunakan dataset minimal 10 baris.</p>
+<ul>
+<li>Tentukan feature luas rumah.</li>
+<li>Tentukan target harga.</li>
+<li>Bagi data training dan testing.</li>
+<li>Buat Linear Regression.</li>
+<li>Lakukan prediksi.</li>
+<li>Hitung MAE dan R².</li>
+</ul>
+<p><strong>Output:</strong> kode, tabel dataset, hasil prediksi, nilai evaluasi, dan kesimpulan.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 2 — Jam Belajar → Nilai</h3>
+<p>Buat dataset minimal 12 siswa dengan kolom <strong>jam_belajar</strong> dan <strong>nilai</strong>. Gunakan regression untuk memprediksi nilai berdasarkan jumlah jam belajar.</p>
+<p><strong>Bonus:</strong> prediksi nilai untuk siswa yang belajar 6,5 jam.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 3 — Umur Kendaraan → Harga</h3>
+<p>Buat dataset minimal 12 kendaraan dengan feature <strong>umur_kendaraan</strong> dan target <strong>harga</strong>.</p>
+<p>Buat model, lakukan prediksi satu kendaraan baru, lalu jelaskan apakah hasil prediksi masuk akal berdasarkan rentang data training.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 4 — Bandingkan Dua Dataset</h3>
+<p>Buat dua dataset untuk masalah yang sama. Dataset A dibuat cukup beragam, sedangkan Dataset B dibuat sangat sempit.</p>
+<p>Latih model pada keduanya dan bandingkan hasilnya. Jelaskan bagaimana keterwakilan data dapat memengaruhi prediksi.</p>
+</div>
+
+<div class="task">
+<h3>Tugas 5 — Proyek Mini Regression</h3>
+<p>Pilih salah satu kasus berikut:</p>
+<ul>
+<li>Luas tanah → harga tanah</li>
+<li>Jumlah iklan → penjualan</li>
+<li>Jam belajar → nilai</li>
+<li>Umur kendaraan → harga</li>
+</ul>
+<p>Dataset minimal <strong>20 baris</strong>. Program harus melakukan:</p>
+<ol>
+<li>Membaca atau membuat dataset.</li>
+<li>Menampilkan data.</li>
+<li>Menentukan feature dan target.</li>
+<li>Membagi training/testing.</li>
+<li>Membuat model regression.</li>
+<li>Membuat minimal 3 prediksi.</li>
+<li>Menghitung MAE dan R².</li>
+<li>Membuat grafik data dan garis regression.</li>
+<li>Menjelaskan keterbatasan model.</li>
+<li>Menjawab pertanyaan: <strong>“Apa yang terjadi jika data training tidak mewakili kondisi sebenarnya?”</strong></li>
+</ol>
+<p><strong>Output:</strong> notebook Google Colab + laporan singkat berisi dataset, proses, hasil, grafik, evaluasi, dan kesimpulan.</p>
+</div>
+
+<h3>Checklist Pengumpulan</h3>
+<div class="checklist">
+<label>☐ Dataset tersedia dan memiliki jumlah data yang cukup untuk latihan.</label>
+<label>☐ Feature dan target ditentukan dengan benar.</label>
+<label>☐ Data training dan testing dibuat.</label>
+<label>☐ Model Linear Regression dibuat dan dilatih.</label>
+<label>☐ Prediksi dilakukan pada data baru atau data testing.</label>
+<label>☐ MAE dan R² dihitung.</label>
+<label>☐ Grafik dibuat.</label>
+<label>☐ Hasil dijelaskan dengan bahasa sendiri.</label>
+<label>☐ Keterbatasan dataset dan model dibahas.</label>
+<label>☐ Pertanyaan refleksi dijawab.</label>
+</div>
+</section>
+
+<section id="refleksi">
+<div class="kicker">Bagian 17</div>
+<h2>💭 Pertanyaan Refleksi</h2>
+<ol>
+<li>Apa perbedaan utama Regression dan Classification?</li>
+<li>Mengapa harga rumah termasuk target berbentuk angka?</li>
+<li>Apa fungsi data training?</li>
+<li>Apa fungsi data testing?</li>
+<li>Apa arti sederhana MAE dalam hasil evaluasi?</li>
+<li>Mengapa kita perlu melihat grafik selain angka evaluasi?</li>
+<li>Apa yang terjadi jika dataset terlalu sedikit?</li>
+<li>Apa yang terjadi jika data training tidak mewakili kondisi sebenarnya?</li>
+<li>Mengapa memprediksi jauh di luar rentang data training dapat berisiko?</li>
+<li>Menurutmu, apa saja data tambahan yang dapat membuat prediksi harga rumah menjadi lebih realistis?</li>
+</ol>
+<div class="tip"><strong>Pikirkan lebih jauh:</strong> harga rumah tidak hanya dipengaruhi luas. Lokasi, jumlah kamar, kondisi bangunan, akses jalan, fasilitas, dan banyak faktor lain dapat berpengaruh. Ini menunjukkan bahwa masalah nyata sering membutuhkan lebih dari satu feature.</div>
+</section>
+
+<section id="ringkasan">
+<div class="kicker">Bagian 18</div>
+<h2>📌 Ringkasan</h2>
+<ol>
+<li><strong>Regression</strong> digunakan untuk memprediksi nilai berbentuk angka.</li>
+<li>Contohnya adalah luas rumah → harga rumah dan jam belajar → nilai.</li>
+<li><strong>Feature (X)</strong> adalah data masukan yang digunakan untuk membuat prediksi.</li>
+<li><strong>Target (y)</strong> adalah nilai yang ingin diprediksi.</li>
+<li>Data dapat dibagi menjadi training dan testing.</li>
+<li>Linear Regression dapat digunakan sebagai model sederhana untuk mempelajari hubungan antarvariabel.</li>
+<li>Model dapat digunakan untuk membuat prediksi pada data baru.</li>
+<li>MAE membantu mengukur rata-rata kesalahan absolut prediksi.</li>
+<li>R² memberikan ukuran tambahan tentang seberapa baik variasi target dijelaskan model pada data evaluasi.</li>
+<li>Visualisasi membantu memahami hubungan data dan hasil model.</li>
+<li>Data training harus cukup relevan dan mewakili kondisi penggunaan.</li>
+<li>Prediksi Machine Learning adalah perkiraan berdasarkan data, bukan jaminan nilai sebenarnya.</li>
+</ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Model yang baik bukan hanya tentang algoritmanya, tetapi juga tentang data yang digunakan untuk melatih dan mengujinya.”</div>
+</section>
+
+<section>
+<div class="kicker">Praktik Mandiri</div>
+<h2>🚀 Tantangan Tambahan</h2>
+<p>Setelah menyelesaikan proyek, coba ubah kasus dari satu feature menjadi beberapa feature.</p>
+<p>Contoh prediksi harga rumah menggunakan:</p>
+<ul>
+<li>luas rumah,</li>
+<li>jumlah kamar,</li>
+<li>umur bangunan.</li>
+</ul>
+<p>Diskusikan: apakah menambahkan feature selalu membuat model menjadi lebih baik? Bagaimana cara membuktikannya dengan data testing?</p>
+<div class="info"><strong>Catatan:</strong> semakin banyak feature tidak otomatis berarti model semakin baik. Feature perlu relevan, datanya berkualitas, dan evaluasi harus dilakukan dengan benar.</div>
+</section>
+
+<section>
+<div class="kicker">Referensi Praktik</div>
+<h2>📚 Google Colab</h2>
+<p>Gunakan <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a> untuk menjalankan seluruh contoh Python pada materi ini.</p>
+<p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Machine Learning • Regression • Python • Google Colab</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+<div class="container">Regression: Membuat Prediksi Angka • Materi Koding &amp; Kecerdasan Artifisial</div>
+</footer>
+
+<script>
+function copyCode(button){
+  const code=button.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    const old=button.innerText;
+    button.innerText="Tersalin ✓";
+    setTimeout(()=>button.innerText=old,1400);
+  }).catch(()=>{
+    button.innerText="Gagal";
+    setTimeout(()=>button.innerText="Salin",1200);
+  });
+}
+</script>
+</body>
+</html>

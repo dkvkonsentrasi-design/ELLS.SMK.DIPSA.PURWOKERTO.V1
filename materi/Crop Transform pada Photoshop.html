@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop & Transform pada Photoshop | SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#15171a;--muted:#626872;--paper:#f5f2eb;--white:#fff;
+  --accent:#8f1d2c;--line:#ded9cf;--soft:#eee9df;--green:#236b4b;
+  --shadow:0 12px 35px rgba(0,0,0,.08)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
+a{color:inherit}
+.hero{background:linear-gradient(135deg,#17191d 0%,#292c31 58%,#8f1d2c 100%);color:#fff;padding:64px 20px 55px}
+.container{width:min(1120px,calc(100% - 40px));margin:auto}
+.badge{display:inline-block;padding:7px 13px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:13px;letter-spacing:.4px;margin-bottom:18px}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin:0 0 18px}
+.hero p{max-width:820px;font-size:18px;color:#eee;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.meta span{background:rgba(255,255,255,.1);padding:7px 12px;border-radius:8px;font-size:14px}
+.toc{position:sticky;top:0;z-index:5;background:rgba(245,242,235,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.toc .container{display:flex;gap:8px;overflow:auto;padding-top:10px;padding-bottom:10px}
+.toc a{text-decoration:none;white-space:nowrap;padding:8px 11px;border-radius:7px;font-size:13px}
+.toc a:hover{background:var(--soft)}
+main{padding:45px 0 70px}
+section{margin-bottom:48px}
+h2{font-size:31px;line-height:1.2;margin:0 0 18px;border-left:6px solid var(--accent);padding-left:14px}
+h3{font-size:22px;margin:28px 0 10px}
+h4{font-size:17px;margin:20px 0 7px}
+p{margin:9px 0}
+.lead{font-size:18px;color:#30343a}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--shadow);margin:18px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tool{border-top:4px solid var(--accent);height:100%}
+.tool .num{font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.tool h3{margin-top:5px}
+.tip,.warning,.success{padding:16px 18px;border-radius:10px;margin:16px 0}
+.tip{background:#f2eee5;border-left:4px solid #8a6b2f}
+.warning{background:#fff0f0;border-left:4px solid var(--accent)}
+.success{background:#edf7f1;border-left:4px solid var(--green)}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{counter-increment:step;position:relative;padding:14px 15px 14px 57px;background:#fff;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+.steps li:before{content:counter(step);position:absolute;left:15px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:28px;font-weight:bold}
+code{background:#eeeae2;border:1px solid #ded8ce;padding:2px 6px;border-radius:5px;font-family:Consolas,monospace}
+kbd{background:#25272b;color:#fff;border-radius:5px;padding:3px 7px;font:13px Consolas,monospace}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{border-bottom:1px solid var(--line);padding:12px 13px;text-align:left;vertical-align:top}
+th{background:#eee9df}
+tr:last-child td{border-bottom:0}
+.question{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin:14px 0}
+.question strong{color:var(--accent)}
+details{background:#f8f6f1;border:1px solid var(--line);border-radius:9px;padding:11px 14px;margin-top:10px}
+summary{cursor:pointer;font-weight:700}
+.task-number{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:50%;font-weight:bold;margin-right:8px}
+.checklist{padding-left:22px}.checklist li{margin:5px 0}
+.footer{background:#17191d;color:#ddd;padding:35px 20px}
+.footer p{margin:4px 0;color:#bbb}
+@media(max-width:760px){
+  .container{width:min(100% - 24px,1120px)}
+  .grid{grid-template-columns:1fr}.hero{padding-top:42px}.card{padding:18px}
+  h2{font-size:26px}.toc .container{width:100%}
+}
+@media print{.toc{display:none}.hero{background:#222!important}.card{box-shadow:none}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">MATERI DKV • ADOBE PHOTOSHOP</span>
+<h1>Crop & Transform pada Photoshop</h1>
+<p>
+Panduan lengkap dan mudah dipahami untuk memperbaiki komposisi foto,
+mengubah ukuran, memutar, membalik, memiringkan, mendistorsi, mengatur perspektif,
+dan memposisikan objek menggunakan Adobe Photoshop.
+</p>
+<div class="meta">
+<span>📚 Materi Pembelajaran</span>
+<span>🎨 Desain Komunikasi Visual</span>
+<span>🖼️ Pengolahan Foto</span>
+<span>🏫 SMK DIPSA Purwokerto</span>
+</div>
+</div>
+</header>
+
+<nav class="toc">
+<div class="container">
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">Tujuan</a>
+<a href="#konsep">Konsep</a>
+<a href="#crop">Crop Tool</a>
+<a href="#straighten">Straighten</a>
+<a href="#ukuran">Ukuran Gambar</a>
+<a href="#transform">Transform</a>
+<a href="#rotate">Rotate</a>
+<a href="#scale">Scale</a>
+<a href="#flip">Flip</a>
+<a href="#skew">Skew</a>
+<a href="#distort">Distort</a>
+<a href="#perspective">Perspective</a>
+<a href="#posisi">Posisi Objek</a>
+<a href="#proyek">Proyek</a>
+<a href="#soal">5 Soal</a>
+<a href="#tugas">5 Tugas</a>
+<a href="#ringkasan">Ringkasan</a>
+</div>
+</nav>
+
+<main><div class="container">
+
+<section id="tujuan">
+<h2>1. Tujuan Pembelajaran</h2>
+<div class="card">
+<p class="lead">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan fungsi Crop dan Transform pada Photoshop.</li>
+<li>Menggunakan Crop Tool untuk memperbaiki komposisi foto.</li>
+<li>Meluruskan foto menggunakan Straighten.</li>
+<li>Mengubah ukuran gambar dengan mempertimbangkan kualitas dan proporsi.</li>
+<li>Melakukan Rotate, Scale, Flip, Skew, Distort, dan Perspective.</li>
+<li>Mengatur posisi objek secara tepat di dalam canvas.</li>
+<li>Menerapkan Crop dan Transform dalam proyek pengolahan foto.</li>
+</ol>
+</div>
+</section>
+
+<section id="konsep">
+<h2>2. Konsep Dasar Crop & Transform</h2>
+<div class="card">
+<p>
+Dalam Photoshop, <strong>Crop</strong> dan <strong>Transform</strong> merupakan dua kelompok
+teknik penting untuk mengatur tampilan serta bentuk gambar atau objek.
+</p>
+<p>
+<strong>Crop</strong> berarti memotong atau membatasi area gambar sehingga bagian yang
+tidak diperlukan dapat dibuang dari komposisi. Sementara itu,
+<strong>Transform</strong> berarti mengubah ukuran, arah, kemiringan, bentuk, atau
+posisi sebuah objek.
+</p>
+
+<div class="tip">
+<strong>💡 Cara mudah mengingat:</strong><br>
+<strong>Crop = menentukan bagian gambar yang ingin ditampilkan.</strong><br>
+<strong>Transform = mengubah bentuk, ukuran, arah, atau posisi objek.</strong>
+</div>
+
+<h3>Contoh penggunaan dalam desain</h3>
+<ul>
+<li>Memotong foto agar cocok untuk poster.</li>
+<li>Meluruskan foto bangunan yang terlihat miring.</li>
+<li>Mengubah foto horizontal menjadi komposisi yang lebih sesuai.</li>
+<li>Mengecilkan logo agar muat di poster.</li>
+<li>Memutar objek agar menghadap arah tertentu.</li>
+<li>Membalik foto secara horizontal.</li>
+<li>Membuat objek terlihat miring atau memiliki sudut tertentu.</li>
+<li>Menyesuaikan objek agar terlihat mengikuti bidang perspektif.</li>
+</ul>
+
+<h3>Perbedaan Resize dan Transform</h3>
+<table>
+<thead><tr><th>Istilah</th><th>Makna sederhana</th><th>Contoh</th></tr></thead>
+<tbody>
+<tr><td>Resize Image</td><td>Mengubah ukuran keseluruhan gambar/dokumen.</td><td>Foto 4000 × 3000 px menjadi 2000 × 1500 px.</td></tr>
+<tr><td>Scale</td><td>Mengubah ukuran objek/layer dalam dokumen.</td><td>Logo diperkecil agar sesuai dengan poster.</td></tr>
+<tr><td>Crop</td><td>Memotong area yang tidak diperlukan.</td><td>Membuang bagian kosong di pinggir foto.</td></tr>
+<tr><td>Transform</td><td>Mengubah ukuran, arah, kemiringan, bentuk, atau posisi objek.</td><td>Memutar atau mendistorsi sebuah objek.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="crop">
+<h2>3. Crop Tool</h2>
+<div class="card">
+<p>
+<strong>Crop Tool</strong> digunakan untuk memotong bagian gambar sehingga komposisi
+menjadi lebih fokus dan sesuai kebutuhan. Crop bukan hanya berarti "memotong foto",
+tetapi juga merupakan salah satu cara penting untuk memperbaiki komposisi visual.
+</p>
+
+<h3>Kapan Crop digunakan?</h3>
+<ul>
+<li>Menghilangkan area kosong yang tidak penting.</li>
+<li>Membuat objek utama menjadi lebih dominan.</li>
+<li>Mengubah rasio foto, misalnya dari landscape menjadi portrait.</li>
+<li>Menyesuaikan gambar dengan ukuran media sosial atau poster.</li>
+<li>Memperbaiki komposisi berdasarkan prinsip rule of thirds.</li>
+</ul>
+
+<h3>Cara menggunakan Crop Tool</h3>
+<ol class="steps">
+<li>Pilih <strong>Crop Tool</strong> pada toolbar. Shortcut yang umum digunakan adalah <kbd>C</kbd>.</li>
+<li>Garis crop akan muncul di sekitar gambar.</li>
+<li>Tarik sisi atau sudut crop untuk menentukan area yang ingin dipertahankan.</li>
+<li>Tempatkan objek utama pada posisi komposisi yang lebih baik.</li>
+<li>Tekan <kbd>Enter</kbd> untuk menerapkan crop.</li>
+</ol>
+
+<h3>Mengatur rasio Crop</h3>
+<p>
+Pada Options Bar, Photoshop menyediakan pilihan rasio tertentu. Rasio membantu
+mempertahankan perbandingan lebar dan tinggi gambar.
+</p>
+<table>
+<thead><tr><th>Rasio</th><th>Contoh penggunaan</th></tr></thead>
+<tbody>
+<tr><td>1 : 1</td><td>Foto persegi atau beberapa format profil.</td></tr>
+<tr><td>4 : 5</td><td>Komposisi portrait yang relatif tinggi.</td></tr>
+<tr><td>16 : 9</td><td>Video, presentasi, banner, dan layar lebar.</td></tr>
+<tr><td>Custom</td><td>Ukuran khusus sesuai kebutuhan desain.</td></tr>
+</tbody>
+</table>
+
+<div class="warning">
+<strong>Kesalahan umum:</strong> memotong terlalu dekat dengan objek sehingga bagian
+penting seperti kepala, tangan, kaki, atau produk menjadi terpotong tanpa alasan desain.
+Selalu periksa seluruh komposisi sebelum menekan Enter.
+</div>
+</div>
+</section>
+
+<section id="straighten">
+<h2>4. Straighten — Meluruskan Foto</h2>
+<div class="card">
+<p>
+<strong>Straighten</strong> digunakan untuk membantu meluruskan foto yang garis
+horizontal atau vertikalnya terlihat miring. Fitur ini sangat berguna pada foto
+bangunan, pemandangan, meja, horizon laut, atau foto dengan garis yang seharusnya lurus.
+</p>
+
+<h3>Contoh masalah</h3>
+<p>
+Misalnya foto pantai terlihat miring sehingga garis horizon tidak sejajar dengan
+bagian atas dan bawah gambar. Dengan Straighten, kita dapat membuat horizon lebih lurus.
+</p>
+
+<h3>Langkah menggunakan Straighten</h3>
+<ol class="steps">
+<li>Pilih <strong>Crop Tool</strong>.</li>
+<li>Pada opsi Crop, pilih fungsi <strong>Straighten</strong> jika tersedia pada versi Photoshop yang digunakan.</li>
+<li>Klik dan tarik garis mengikuti garis yang seharusnya lurus, misalnya horizon.</li>
+<li>Photoshop akan menyesuaikan kemiringan gambar.</li>
+<li>Periksa kembali hasil crop dan komposisinya.</li>
+<li>Tekan <kbd>Enter</kbd> jika hasil sudah sesuai.</li>
+</ol>
+
+<div class="tip">
+<strong>Tips:</strong> gunakan garis yang memang seharusnya lurus sebagai acuan.
+Jangan menggunakan objek yang memang secara alami miring sebagai garis referensi.
+</div>
+</div>
+</section>
+
+<section id="ukuran">
+<h2>5. Mengubah Ukuran Gambar</h2>
+<div class="card">
+<p>
+Mengubah ukuran gambar berarti mengatur dimensi gambar, biasanya dalam satuan pixel.
+Pada Photoshop, pengaturan ini dapat dilakukan melalui <strong>Image → Image Size</strong>.
+</p>
+
+<h3>Width dan Height</h3>
+<p>
+<strong>Width</strong> adalah lebar gambar, sedangkan <strong>Height</strong> adalah tinggi gambar.
+Keduanya menentukan dimensi pixel gambar.
+</p>
+
+<h3>Mempertahankan proporsi</h3>
+<p>
+Ketika mengubah ukuran gambar, penting untuk mempertahankan perbandingan lebar dan tinggi
+agar objek tidak terlihat melebar atau memanjang secara tidak wajar.
+</p>
+
+<ol class="steps">
+<li>Buka gambar di Photoshop.</li>
+<li>Pilih menu <strong>Image → Image Size</strong>.</li>
+<li>Periksa nilai Width dan Height.</li>
+<li>Pastikan pengaturan proporsi/rasio terhubung jika ingin mempertahankan bentuk gambar.</li>
+<li>Masukkan ukuran baru.</li>
+<li>Periksa pilihan <strong>Resample</strong> sesuai kebutuhan.</li>
+<li>Klik <strong>OK</strong>.</li>
+</ol>
+
+<h3>Contoh</h3>
+<p>
+Jika foto memiliki ukuran 4000 × 3000 px dan ingin diperkecil dengan proporsi yang sama,
+jangan mengubah Width dan Height secara sembarangan. Perubahan satu dimensi sebaiknya
+diikuti oleh dimensi lainnya agar foto tetap proporsional.
+</p>
+
+<div class="warning">
+<strong>Perhatikan kualitas:</strong> memperbesar gambar terlalu jauh dapat membuat gambar
+terlihat kurang tajam atau pixelated. Karena itu, sebaiknya gunakan sumber gambar dengan
+resolusi yang cukup sejak awal.
+</div>
+</div>
+</section>
+
+<section id="transform">
+<h2>6. Free Transform</h2>
+<div class="card">
+<p>
+<strong>Free Transform</strong> merupakan fitur penting untuk mengubah objek atau layer.
+Dengan transform, kita dapat melakukan beberapa perubahan seperti Scale, Rotate,
+Skew, Distort, Perspective, dan mengatur posisi.
+</p>
+
+<h3>Cara dasar menggunakan Free Transform</h3>
+<ol class="steps">
+<li>Pilih layer atau objek yang ingin diubah.</li>
+<li>Gunakan <strong>Edit → Free Transform</strong> atau shortcut yang umum digunakan <kbd>Ctrl + T</kbd> pada Windows.</li>
+<li>Handle transform akan muncul di sekitar objek.</li>
+<li>Tarik handle atau gunakan pengaturan transform sesuai kebutuhan.</li>
+<li>Perhatikan perubahan objek.</li>
+<li>Tekan <kbd>Enter</kbd> untuk menerapkan transform atau batalkan jika hasil tidak sesuai.</li>
+</ol>
+
+<div class="tip">
+<strong>Tips penting:</strong> sebelum melakukan transform, pastikan layer yang benar
+sudah dipilih. Banyak kesalahan terjadi karena siswa melakukan transform pada layer
+yang salah.
+</div>
+</div>
+</section>
+
+<section id="rotate">
+<h2>7. Rotate — Memutar Objek</h2>
+<div class="card">
+<p>
+<strong>Rotate</strong> berarti memutar objek berdasarkan titik pusat transform.
+Fitur ini berguna ketika arah objek belum sesuai dengan komposisi.
+</p>
+
+<h3>Contoh penggunaan</h3>
+<ul>
+<li>Memiringkan foto sedikit agar lebih dinamis.</li>
+<li>Memutar logo.</li>
+<li>Mengubah arah sebuah gambar dekorasi.</li>
+<li>Membuat variasi posisi objek pada poster.</li>
+</ul>
+
+<h3>Langkah</h3>
+<ol class="steps">
+<li>Pilih layer objek.</li>
+<li>Tekan <kbd>Ctrl + T</kbd>.</li>
+<li>Arahkan cursor ke luar sudut transform hingga muncul indikator rotate.</li>
+<li>Klik dan tarik untuk memutar objek.</li>
+<li>Gunakan <kbd>Shift</kbd> bila ingin membantu mengunci arah pada interval tertentu, tergantung versi Photoshop.</li>
+<li>Tekan <kbd>Enter</kbd> untuk menerapkan.</li>
+</ol>
+
+<div class="success">
+<strong>Prinsip desain:</strong> rotasi kecil sering cukup untuk membuat komposisi lebih
+dinamis. Jangan memutar objek secara berlebihan jika tidak memiliki tujuan visual.
+</div>
+</div>
+</section>
+
+<section id="scale">
+<h2>8. Scale — Mengubah Ukuran Objek</h2>
+<div class="card">
+<p>
+<strong>Scale</strong> digunakan untuk memperbesar atau memperkecil ukuran sebuah
+layer atau objek tanpa harus mengubah ukuran seluruh dokumen.
+</p>
+
+<h3>Contoh</h3>
+<p>
+Anda sedang membuat poster dan memiliki logo sekolah yang terlalu besar.
+Pilih layer logo, gunakan Free Transform, kemudian Scale agar logo sesuai dengan
+ruang yang tersedia.
+</p>
+
+<ol class="steps">
+<li>Pilih layer objek.</li>
+<li>Tekan <kbd>Ctrl + T</kbd>.</li>
+<li>Tarik sudut transform untuk memperbesar atau memperkecil.</li>
+<li>Pastikan proporsi objek tetap sesuai kebutuhan.</li>
+<li>Posisikan objek kembali jika diperlukan.</li>
+<li>Tekan <kbd>Enter</kbd>.</li>
+</ol>
+
+<div class="warning">
+<strong>Hindari:</strong> menarik handle samping secara sembarangan jika tujuan Anda
+hanya memperbesar atau memperkecil. Hal tersebut dapat membuat objek terlihat gepeng
+atau terlalu tinggi.
+</div>
+</div>
+</section>
+
+<section id="flip">
+<h2>9. Flip — Membalik Objek</h2>
+<div class="card">
+<p>
+<strong>Flip</strong> berarti membalik objek seperti melihatnya melalui cermin.
+Ada dua arah utama: horizontal dan vertical.
+</p>
+
+<table>
+<thead><tr><th>Jenis</th><th>Hasil</th><th>Contoh</th></tr></thead>
+<tbody>
+<tr><td>Flip Horizontal</td><td>Kiri dan kanan bertukar posisi.</td><td>Orang yang menghadap kanan menjadi menghadap kiri.</td></tr>
+<tr><td>Flip Vertical</td><td>Atas dan bawah bertukar posisi.</td><td>Objek menjadi terbalik secara vertikal.</td></tr>
+</tbody>
+</table>
+
+<h3>Langkah</h3>
+<ol class="steps">
+<li>Pilih layer objek.</li>
+<li>Gunakan <kbd>Ctrl + T</kbd>.</li>
+<li>Klik kanan pada area transform.</li>
+<li>Pilih <strong>Flip Horizontal</strong> atau <strong>Flip Vertical</strong>.</li>
+<li>Tekan <kbd>Enter</kbd>.</li>
+</ol>
+
+<div class="tip">
+<strong>Contoh kreatif:</strong> Flip Horizontal dapat digunakan untuk mengubah arah
+pandangan seseorang atau kendaraan agar komposisi desain menjadi lebih seimbang.
+</div>
+</div>
+</section>
+
+<section id="skew">
+<h2>10. Skew — Memiringkan Sisi Objek</h2>
+<div class="card">
+<p>
+<strong>Skew</strong> digunakan untuk membuat sisi objek bergeser sehingga objek
+terlihat miring atau condong. Berbeda dengan Rotate yang memutar seluruh objek,
+Skew mengubah kemiringan sisi atau sudut objek.
+</p>
+
+<h3>Contoh penggunaan</h3>
+<ul>
+<li>Membuat desain terlihat miring secara kreatif.</li>
+<li>Menyesuaikan gambar dengan bidang tertentu.</li>
+<li>Membuat efek perspektif sederhana.</li>
+</ul>
+
+<h3>Langkah</h3>
+<ol class="steps">
+<li>Pilih layer.</li>
+<li>Tekan <kbd>Ctrl + T</kbd>.</li>
+<li>Klik kanan pada area transform.</li>
+<li>Pilih <strong>Skew</strong>.</li>
+<li>Geser handle sisi untuk membuat kemiringan.</li>
+<li>Periksa apakah hasil masih terlihat masuk akal.</li>
+<li>Tekan <kbd>Enter</kbd>.</li>
+</ol>
+
+<div class="warning">
+Skew sebaiknya digunakan dengan tujuan yang jelas. Jika dilakukan terlalu banyak,
+objek dapat terlihat terdistorsi dan tidak alami.
+</div>
+</div>
+</section>
+
+<section id="distort">
+<h2>11. Distort — Mengubah Sudut Secara Bebas</h2>
+<div class="card">
+<p>
+<strong>Distort</strong> memberikan kontrol yang lebih bebas terhadap sudut-sudut
+objek. Setiap sudut dapat dipindahkan secara lebih independen sehingga bentuk
+persegi dapat dibuat menjadi bentuk yang tidak lagi benar-benar persegi.
+</p>
+
+<h3>Kapan Distort digunakan?</h3>
+<ul>
+<li>Menyesuaikan gambar dengan bidang yang memiliki kemiringan.</li>
+<li>Membuat manipulasi visual.</li>
+<li>Menempatkan desain pada bidang yang bentuknya tidak beraturan.</li>
+</ul>
+
+<h3>Langkah</h3>
+<ol class="steps">
+<li>Pilih layer yang akan diubah.</li>
+<li>Tekan <kbd>Ctrl + T</kbd>.</li>
+<li>Klik kanan pada transform.</li>
+<li>Pilih <strong>Distort</strong>.</li>
+<li>Geser sudut atau handle sesuai bidang tujuan.</li>
+<li>Periksa bentuk objek dari keseluruhan komposisi.</li>
+<li>Tekan <kbd>Enter</kbd>.</li>
+</ol>
+</div>
+</section>
+
+<section id="perspective">
+<h2>12. Perspective — Mengatur Perspektif</h2>
+<div class="card">
+<p>
+<strong>Perspective</strong> digunakan untuk membuat objek seolah-olah mengikuti
+perubahan perspektif. Teknik ini berguna ketika kita ingin menempatkan desain
+pada bidang yang tampak memiliki kedalaman.
+</p>
+
+<h3>Contoh penggunaan</h3>
+<ul>
+<li>Menempatkan desain poster pada dinding yang difoto dari sudut tertentu.</li>
+<li>Menempatkan gambar pada layar perangkat.</li>
+<li>Membuat objek terlihat mengikuti arah bidang.</li>
+<li>Membuat simulasi desain pada permukaan tertentu.</li>
+</ul>
+
+<h3>Langkah dasar</h3>
+<ol class="steps">
+<li>Pilih layer objek.</li>
+<li>Tekan <kbd>Ctrl + T</kbd>.</li>
+<li>Klik kanan pada area transform.</li>
+<li>Pilih <strong>Perspective</strong>.</li>
+<li>Tarik salah satu sudut untuk mengubah hubungan perspektif sisi objek.</li>
+<li>Bandingkan objek dengan bidang yang ingin diikuti.</li>
+<li>Tekan <kbd>Enter</kbd> jika sudah sesuai.</li>
+</ol>
+
+<div class="success">
+<strong>Tips:</strong> gunakan garis-garis pada bidang tujuan sebagai panduan.
+Semakin baik objek mengikuti arah bidang, semakin meyakinkan hasil transformasinya.
+</div>
+</div>
+</section>
+
+<section id="posisi">
+<h2>13. Mengatur Posisi Objek</h2>
+<div class="card">
+<p>
+Mengatur posisi berarti memindahkan objek ke tempat yang tepat dalam canvas.
+Posisi sangat penting dalam desain karena objek tidak hanya harus memiliki ukuran
+yang benar, tetapi juga harus ditempatkan dengan komposisi yang baik.
+</p>
+
+<h3>Move Tool</h3>
+<p>
+Gunakan <strong>Move Tool</strong> untuk memindahkan layer. Shortcut yang umum digunakan
+adalah <kbd>V</kbd>.
+</p>
+
+<ol class="steps">
+<li>Pilih layer objek yang ingin dipindahkan.</li>
+<li>Pilih Move Tool.</li>
+<li>Klik objek dan seret ke posisi baru.</li>
+<li>Gunakan panel atau garis bantu untuk membantu penyelarasan jika tersedia.</li>
+<li>Periksa jarak objek dengan elemen lain.</li>
+</ol>
+
+<h3>Prinsip posisi objek</h3>
+<ul>
+<li><strong>Keseimbangan:</strong> jangan membuat satu sisi desain terlalu berat.</li>
+<li><strong>Fokus:</strong> objek utama sebaiknya mudah ditemukan oleh mata.</li>
+<li><strong>Ruang kosong:</strong> sisakan ruang agar desain tidak terasa penuh.</li>
+<li><strong>Alignment:</strong> gunakan garis atau elemen lain untuk menjaga kerapian.</li>
+<li><strong>Hierarki:</strong> ukuran dan posisi membantu menunjukkan elemen yang paling penting.</li>
+</ul>
+
+<div class="tip">
+<strong>Tips siswa:</strong> jangan langsung mengatakan "posisinya sudah bagus".
+Coba lihat desain secara keseluruhan dan tanyakan: apakah objek utama terlihat jelas?
+Apakah ada ruang yang terlalu kosong? Apakah ada elemen yang bertabrakan?
+</div>
+</div>
+</section>
+
+<section id="proyek">
+<h2>14. Proyek: Memperbaiki Komposisi Foto & Variasi Transformasi</h2>
+
+<div class="card">
+<h3>🎯 Tujuan Proyek</h3>
+<p>
+Siswa diminta memperbaiki sebuah foto menggunakan Crop dan membuat beberapa variasi
+transformasi pada objek sehingga memahami fungsi masing-masing teknik secara langsung.
+</p>
+
+<h3>Bagian A — Memperbaiki Komposisi Foto</h3>
+<ol class="steps">
+<li><strong>Pilih foto.</strong> Gunakan foto landscape, portrait, produk, kegiatan sekolah, atau objek lain yang cukup jelas.</li>
+<li><strong>Buka foto di Photoshop.</strong> Periksa ukuran dan orientasi gambar.</li>
+<li><strong>Analisis komposisi.</strong> Tentukan objek utama dan area yang tidak diperlukan.</li>
+<li><strong>Gunakan Crop Tool.</strong> Buang bagian yang tidak membantu pesan visual.</li>
+<li><strong>Atur posisi objek utama.</strong> Coba manfaatkan ruang kosong dan prinsip rule of thirds.</li>
+<li><strong>Luruskan foto jika diperlukan.</strong> Gunakan Straighten pada garis horizon, bangunan, atau garis lain yang seharusnya lurus.</li>
+<li><strong>Periksa hasil.</strong> Pastikan objek utama tidak terpotong secara tidak sengaja.</li>
+</ol>
+
+<h3>Bagian B — Variasi Transformasi Objek</h3>
+<p>
+Duplikasi sebuah objek atau gunakan beberapa layer salinan. Buat variasi transformasi
+berikut pada masing-masing versi.
+</p>
+
+<table>
+<thead><tr><th>Variasi</th><th>Instruksi</th></tr></thead>
+<tbody>
+<tr><td>Original</td><td>Biarkan objek tanpa transform sebagai pembanding.</td></tr>
+<tr><td>Scale</td><td>Buat objek lebih kecil atau lebih besar dengan proporsi yang tepat.</td></tr>
+<tr><td>Rotate</td><td>Putar objek dengan sudut yang berbeda.</td></tr>
+<tr><td>Flip</td><td>Buat versi Flip Horizontal.</td></tr>
+<tr><td>Skew</td><td>Buat objek sedikit miring.</td></tr>
+<tr><td>Distort</td><td>Ubah posisi sudut untuk membuat bentuk berbeda.</td></tr>
+<tr><td>Perspective</td><td>Buat objek mengikuti bidang perspektif.</td></tr>
+</tbody>
+</table>
+
+<h3>Langkah proyek lengkap</h3>
+<ol class="steps">
+<li>Siapkan satu foto utama dan satu objek tambahan.</li>
+<li>Masukkan objek tambahan ke dalam dokumen.</li>
+<li>Gunakan Move Tool untuk menempatkan objek.</li>
+<li>Gunakan Scale agar ukuran objek sesuai dengan lingkungan.</li>
+<li>Coba Rotate untuk mengubah arah.</li>
+<li>Duplikasi objek untuk membuat variasi Flip.</li>
+<li>Buat variasi Skew.</li>
+<li>Buat variasi Distort.</li>
+<li>Buat variasi Perspective pada objek yang cocok.</li>
+<li>Bandingkan semua variasi.</li>
+<li>Pilih variasi yang paling sesuai dengan tujuan desain Anda.</li>
+<li>Simpan file PSD agar semua layer dan transform dapat diperiksa.</li>
+<li>Ekspor hasil akhir dalam format JPG atau PNG.</li>
+</ol>
+
+<h3>Contoh skenario</h3>
+<div class="success">
+<strong>Skenario:</strong> Anda memiliki foto halaman sekolah dan ingin menambahkan
+poster kegiatan ke sebuah dinding pada foto tersebut.
+<br><br>
+<strong>Penerapan:</strong> Crop untuk memperbaiki komposisi foto → masukkan desain poster
+→ Scale untuk menyesuaikan ukuran → Perspective atau Distort untuk mengikuti bidang dinding
+→ atur posisi → periksa hasil akhir.
+</div>
+
+<h3>Checklist proyek</h3>
+<ul class="checklist">
+<li>☐ Foto sudah memiliki komposisi yang lebih baik.</li>
+<li>☐ Foto yang miring sudah diluruskan jika diperlukan.</li>
+<li>☐ Ukuran objek sudah sesuai.</li>
+<li>☐ Posisi objek sudah tepat.</li>
+<li>☐ Sudah mencoba Rotate.</li>
+<li>☐ Sudah mencoba Flip.</li>
+<li>☐ Sudah mencoba Skew.</li>
+<li>☐ Sudah mencoba Distort.</li>
+<li>☐ Sudah mencoba Perspective.</li>
+<li>☐ File PSD tersimpan.</li>
+<li>☐ Hasil akhir sudah diekspor.</li>
+</ul>
+
+<h3>Kesalahan yang sering terjadi</h3>
+<ul>
+<li>Crop memotong bagian penting objek.</li>
+<li>Foto diperbesar terlalu jauh sehingga kualitas turun.</li>
+<li>Objek di-scale tidak proporsional sehingga terlihat gepeng.</li>
+<li>Rotate dilakukan tanpa memperhatikan komposisi.</li>
+<li>Perspective digunakan tanpa mengikuti arah bidang.</li>
+<li>Objek ditempatkan terlalu dekat dengan elemen lain.</li>
+<li>Transform dilakukan pada layer yang salah.</li>
+</ul>
+</div>
+</section>
+
+<section id="soal">
+<h2>15. Latihan Soal — 5 Pertanyaan</h2>
+
+<div class="question">
+<strong>Soal 1</strong>
+<p>Apa fungsi utama Crop Tool dalam Photoshop?</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Crop Tool digunakan untuk menentukan dan mempertahankan area gambar yang diperlukan
+serta membuang bagian yang tidak diperlukan. Crop juga dapat digunakan untuk membantu
+memperbaiki komposisi dan rasio gambar.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 2</strong>
+<p>Apa perbedaan Resize Image dengan Scale pada sebuah layer?</p>
+<details><summary>Lihat jawaban</summary>
+<p>Resize Image mengubah ukuran keseluruhan gambar/dokumen, sedangkan Scale pada Transform
+digunakan untuk mengubah ukuran objek atau layer tertentu di dalam dokumen.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 3</strong>
+<p>Jika sebuah objek ingin diputar, fitur Transform apa yang digunakan?</p>
+<details><summary>Lihat jawaban</summary>
+<p><strong>Rotate.</strong> Rotate digunakan untuk memutar objek berdasarkan titik pusat transform.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 4</strong>
+<p>Jelaskan perbedaan Flip Horizontal dan Flip Vertical.</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Flip Horizontal membalik objek dari kiri ke kanan, sedangkan Flip Vertical membalik
+objek dari atas ke bawah.</p>
+</details>
+</div>
+
+<div class="question">
+<strong>Soal 5</strong>
+<p>Kapan Perspective atau Distort dapat digunakan dalam sebuah desain?</p>
+<details><summary>Lihat pembahasan</summary>
+<p>Keduanya dapat digunakan ketika objek perlu disesuaikan dengan bidang atau bentuk tertentu.
+Misalnya menempatkan desain pada permukaan yang terlihat miring atau memiliki perspektif.</p>
+</details>
+</div>
+</section>
+
+<section id="tugas">
+<h2>16. Tugas Praktik — 5 Tugas</h2>
+
+<div class="card">
+<h3><span class="task-number">1</span>Latihan Crop & Komposisi</h3>
+<p>Pilih satu foto kegiatan sekolah atau foto pemandangan.</p>
+<ul>
+<li>Buat versi asli sebagai pembanding.</li>
+<li>Gunakan Crop Tool untuk menghilangkan bagian yang tidak diperlukan.</li>
+<li>Buat komposisi yang lebih fokus pada objek utama.</li>
+<li>Simpan screenshot sebelum dan sesudah crop.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami fungsi Crop sebagai alat untuk memperbaiki komposisi.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">2</span>Latihan Straighten & Resize</h3>
+<p>Gunakan foto bangunan, jalan, meja, atau objek yang memiliki garis lurus.</p>
+<ul>
+<li>Gunakan Straighten jika foto terlihat miring.</li>
+<li>Catat ukuran gambar sebelum diubah.</li>
+<li>Ubah ukuran gambar menjadi lebih kecil dengan proporsi yang benar.</li>
+<li>Bandingkan hasil sebelum dan sesudah.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami pelurusan dan perubahan dimensi gambar.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">3</span>Latihan Transform Dasar</h3>
+<p>Siapkan satu objek, misalnya logo, foto produk, ikon, atau gambar kendaraan.</p>
+<ul>
+<li>Buat versi Scale.</li>
+<li>Buat versi Rotate.</li>
+<li>Buat versi Flip Horizontal.</li>
+<li>Atur posisi masing-masing objek pada canvas.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami Scale, Rotate, Flip, dan posisi objek.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">4</span>Latihan Skew, Distort & Perspective</h3>
+<p>Gunakan satu gambar persegi panjang seperti poster atau desain kartu.</p>
+<ul>
+<li>Buat satu versi Skew.</li>
+<li>Buat satu versi Distort.</li>
+<li>Buat satu versi Perspective.</li>
+<li>Susun ketiganya pada satu canvas agar mudah dibandingkan.</li>
+<li>Berikan label pada masing-masing hasil.</li>
+</ul>
+<p><strong>Tujuan:</strong> memahami perbedaan perubahan bentuk pada masing-masing fitur.</p>
+</div>
+
+<div class="card">
+<h3><span class="task-number">5</span>Proyek Utama — Perbaikan Foto & Variasi Objek</h3>
+<p>
+Buat sebuah komposisi desain dengan foto utama dan minimal satu objek tambahan.
+Gunakan seluruh kemampuan Crop & Transform yang telah dipelajari.
+</p>
+<ol>
+<li>Perbaiki komposisi foto menggunakan Crop.</li>
+<li>Gunakan Straighten jika diperlukan.</li>
+<li>Tambahkan objek baru.</li>
+<li>Atur ukuran objek dengan Scale.</li>
+<li>Atur posisi objek menggunakan Move Tool.</li>
+<li>Buat satu variasi Rotate.</li>
+<li>Buat satu variasi Flip.</li>
+<li>Buat satu variasi Skew.</li>
+<li>Buat satu variasi Distort atau Perspective.</li>
+<li>Pilih hasil transform yang paling sesuai untuk komposisi akhir.</li>
+<li>Simpan PSD dan ekspor JPG/PNG.</li>
+</ol>
+
+<h4>Ketentuan pengumpulan</h4>
+<ul>
+<li>File PSD.</li>
+<li>Hasil akhir JPG/PNG.</li>
+<li>Screenshot foto sebelum Crop.</li>
+<li>Screenshot foto sesudah Crop.</li>
+<li>Screenshot variasi Transform.</li>
+<li>Nama file: <code>Nama_Siswa_Crop_Transform_Photoshop.psd</code></li>
+</ul>
+
+<h4>Kriteria penilaian</h4>
+<table>
+<thead><tr><th>Aspek</th><th>Yang dinilai</th></tr></thead>
+<tbody>
+<tr><td>Crop</td><td>Ketepatan pemotongan dan kualitas komposisi.</td></tr>
+<tr><td>Straighten</td><td>Ketepatan meluruskan garis yang diperlukan.</td></tr>
+<tr><td>Transform</td><td>Penggunaan Scale, Rotate, Flip, Skew, Distort, dan Perspective.</td></tr>
+<tr><td>Posisi</td><td>Penempatan objek rapi dan memiliki keseimbangan visual.</td></tr>
+<tr><td>Kreativitas</td><td>Variasi transform memiliki tujuan visual yang jelas.</td></tr>
+<tr><td>File</td><td>Layer tersusun dan file PSD dapat diperiksa.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="ringkasan">
+<h2>17. Ringkasan Materi</h2>
+<div class="card">
+<table>
+<thead><tr><th>Materi</th><th>Inti yang perlu diingat</th></tr></thead>
+<tbody>
+<tr><td>Crop Tool</td><td>Memotong area gambar untuk memperbaiki komposisi.</td></tr>
+<tr><td>Straighten</td><td>Membantu meluruskan foto atau garis yang miring.</td></tr>
+<tr><td>Resize Image</td><td>Mengubah ukuran keseluruhan gambar.</td></tr>
+<tr><td>Rotate</td><td>Memutar objek.</td></tr>
+<tr><td>Scale</td><td>Memperbesar atau memperkecil objek.</td></tr>
+<tr><td>Flip</td><td>Membalik objek secara horizontal atau vertical.</td></tr>
+<tr><td>Skew</td><td>Membuat objek menjadi miring dengan menggeser sisi.</td></tr>
+<tr><td>Distort</td><td>Mengubah sudut objek secara lebih bebas.</td></tr>
+<tr><td>Perspective</td><td>Menyesuaikan bentuk objek terhadap perspektif.</td></tr>
+<tr><td>Move / Position</td><td>Memindahkan objek ke posisi yang sesuai.</td></tr>
+</tbody>
+</table>
+
+<div class="success">
+<strong>🎯 Prinsip utama:</strong> Jangan menggunakan Transform hanya karena bisa.
+Setiap perubahan ukuran, rotasi, kemiringan, atau perspektif sebaiknya mempunyai
+tujuan visual. Crop digunakan untuk memperbaiki apa yang terlihat di dalam frame,
+sedangkan Transform digunakan untuk menyesuaikan objek di dalam komposisi.
+</div>
+
+<h3>Shortcut yang perlu diingat</h3>
+<table>
+<thead><tr><th>Shortcut</th><th>Fungsi</th></tr></thead>
+<tbody>
+<tr><td><kbd>C</kbd></td><td>Crop Tool</td></tr>
+<tr><td><kbd>V</kbd></td><td>Move Tool</td></tr>
+<tr><td><kbd>Ctrl + T</kbd></td><td>Free Transform pada Windows</td></tr>
+<tr><td><kbd>Enter</kbd></td><td>Menerapkan transform/crop pada konteks yang sesuai</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Membatalkan transform yang sedang dilakukan pada konteks yang sesuai</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h2 style="border:0;padding:0">Penutup</h2>
+<p>
+Crop dan Transform merupakan kemampuan dasar yang sangat penting dalam Photoshop.
+Dengan menguasai teknik ini, siswa dapat memperbaiki komposisi foto, menyesuaikan
+ukuran objek, mengatur arah dan posisi, serta membuat berbagai variasi visual untuk
+poster, media sosial, fotografi, dan kebutuhan desain lainnya.
+</p>
+<p>
+Kunci latihan adalah <strong>memahami tujuan setiap perubahan</strong>. Jangan hanya
+mengubah objek secara acak. Perhatikan komposisi, keseimbangan, proporsi, ruang,
+arah, dan perspektif.
+</p>
+<p><strong>Selamat berlatih dan berkarya! 🎨</strong></p>
+</div>
+</section>
+
+</div></main>
+
+<footer class="footer">
+<div class="container">
+<strong>SMK DIPSA PURWOKERTO</strong>
+<p>Materi DKV — Crop & Transform pada Adobe Photoshop</p>
+<p>Digunakan sebagai bahan pembelajaran dan praktik siswa.</p>
+</div>
+</footer>
+</body>
+</html>

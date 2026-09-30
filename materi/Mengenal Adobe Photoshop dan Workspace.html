@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Materi DKV - Mengenal Adobe Photoshop dan Workspace untuk siswa SMK">
+<meta name="author" content="SMK DIPSA Purwokerto">
+<title>Mengenal Adobe Photoshop &amp; Workspace</title>
+<style>
+:root{
+  --primary:#1f4f8f; --secondary:#eaf2fb; --accent:#f0a202;
+  --dark:#1e293b; --muted:#64748b; --bg:#f6f8fb; --white:#fff;
+  --border:#dbe3ee; --success:#e9f7ef;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;line-height:1.7;color:var(--dark);background:var(--bg)}
+header{background:linear-gradient(135deg,#172554,#2563a8);color:white;padding:48px 20px}
+.hero{max-width:1100px;margin:auto}
+.badge{display:inline-block;background:rgba(255,255,255,.15);padding:6px 12px;border-radius:20px;font-size:.9rem}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;margin:18px 0 10px}
+.subtitle{font-size:1.12rem;max-width:850px;color:#e6eef9}
+.container{max-width:1100px;margin:auto;padding:28px 20px 60px}
+nav{position:sticky;top:0;z-index:10;background:white;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.nav-inner{max-width:1100px;margin:auto;padding:10px 20px;display:flex;gap:8px;overflow:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--primary);padding:8px 12px;border-radius:8px;font-size:.9rem}
+nav a:hover{background:var(--secondary)}
+section{background:white;border:1px solid var(--border);border-radius:14px;padding:28px;margin:22px 0;box-shadow:0 3px 12px rgba(15,23,42,.04)}
+h2{color:var(--primary);margin-top:0;border-bottom:2px solid var(--secondary);padding-bottom:10px}
+h3{color:#24476f;margin-top:28px}
+h4{margin-bottom:6px}
+p{margin:10px 0}
+ul,ol{padding-left:25px}
+li{margin:7px 0}
+.info,.tip,.warning,.project{padding:16px 18px;border-radius:10px;margin:18px 0}
+.info{background:#eef6ff;border-left:5px solid #3284d6}
+.tip{background:#eefaf2;border-left:5px solid #2f9e62}
+.warning{background:#fff7e6;border-left:5px solid var(--accent)}
+.project{background:#f5f0ff;border-left:5px solid #7c4dff}
+table{width:100%;border-collapse:collapse;margin:15px 0}
+th,td{border:1px solid var(--border);padding:11px;text-align:left;vertical-align:top}
+th{background:var(--secondary);color:#183b67}
+code{background:#eef2f7;padding:2px 6px;border-radius:4px}
+kbd{background:#263238;color:white;border-radius:4px;padding:2px 6px;font-size:.85em}
+.step{display:flex;gap:15px;margin:15px 0}
+.num{min-width:34px;height:34px;border-radius:50%;background:var(--primary);color:white;text-align:center;padding-top:3px;font-weight:bold}
+.exercise{background:#fafcff;border:1px solid var(--border);border-radius:10px;padding:18px;margin:15px 0}
+.answer{background:#f8fafc;border:1px dashed #b8c4d3;padding:14px;border-radius:8px}
+footer{background:#172554;color:#dbeafe;padding:30px 20px;text-align:center}
+.small{color:var(--muted);font-size:.92rem}
+.highlight{font-weight:bold;color:var(--primary)}
+.workspace{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px;margin-top:18px}
+.card{border:1px solid var(--border);padding:18px;border-radius:10px;background:#fbfdff}
+.card strong{display:block;color:var(--primary);margin-bottom:5px}
+.checklist label{display:block;margin:8px 0}
+@media(max-width:600px){section{padding:20px 16px}.step{gap:10px}table{font-size:.9rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hero">
+    <span class="badge">MATERI DKV • SMK</span>
+    <h1>Mengenal Adobe Photoshop &amp; Workspace</h1>
+    <p class="subtitle">Panduan lengkap untuk mengenal Adobe Photoshop, memahami bagian-bagian workspace, membuat dokumen baru, mengatur tampilan canvas, serta membuka dan menyimpan file.</p>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    </a>
+    <a href="#tujuan">Tujuan</a>
+    <a href="#pengertian">Pengertian</a>
+    <a href="#fungsi">Fungsi DKV</a>
+    <a href="#dokumen">Dokumen Baru</a>
+    <a href="#workspace">Workspace</a>
+    <a href="#canvas">Canvas</a>
+    <a href="#file">File</a>
+    <a href="#proyek">Proyek</a>
+    <a href="#soal">5 Soal</a>
+    <a href="#tugas">5 Tugas</a>
+    <a href="#ringkasan">Ringkasan</a>
+  </div>
+</nav>
+
+<main class="container">
+
+<section id="tujuan">
+<h2>1. Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+<ol>
+<li>Menjelaskan pengertian Adobe Photoshop dengan bahasa sendiri.</li>
+<li>Menjelaskan fungsi Photoshop dalam bidang Desain Komunikasi Visual (DKV).</li>
+<li>Membuat dokumen baru dengan ukuran yang ditentukan.</li>
+<li>Mengenali bagian utama workspace Photoshop.</li>
+<li>Menjelaskan fungsi Menu Bar, Toolbar, Options Bar, Panel, Layers Panel, Properties, dan area canvas.</li>
+<li>Menggunakan zoom dan navigasi canvas secara sederhana.</li>
+<li>Membuka, menyimpan, dan menyimpan ulang dokumen Photoshop dengan benar.</li>
+</ol>
+<div class="info"><strong>Catatan untuk siswa:</strong> Jangan hanya menghafalkan nama bagian Photoshop. Yang lebih penting adalah memahami <em>fungsi</em> setiap bagian dan mengetahui kapan bagian tersebut digunakan.</div>
+</section>
+
+<section id="pengertian">
+<h2>2. Pengertian Adobe Photoshop</h2>
+<p><strong>Adobe Photoshop</strong> adalah perangkat lunak pengolah gambar digital yang dikembangkan oleh Adobe. Photoshop banyak digunakan untuk mengedit foto, membuat komposisi gambar, mengolah elemen grafis, membuat desain visual, dan berbagai kebutuhan kreatif lainnya.</p>
+<p>Photoshop bekerja terutama dengan gambar berbasis <strong>raster/pixel</strong>. Artinya, gambar tersusun dari titik-titik kecil yang disebut pixel. Semakin banyak pixel yang dimiliki gambar, semakin banyak detail yang dapat ditampilkan pada ukuran tertentu.</p>
+
+<h3>2.1 Apa itu pixel?</h3>
+<p>Pixel adalah unit terkecil penyusun gambar digital. Jika sebuah foto diperbesar sangat jauh, kita dapat melihat kumpulan titik atau kotak kecil yang menyusun gambar tersebut.</p>
+<div class="info"><strong>Analogi sederhana:</strong> Bayangkan sebuah gambar seperti mosaik. Mosaik tersusun dari banyak keping kecil. Pada gambar digital, keping-keping tersebut dapat dibayangkan sebagai pixel.</div>
+
+<h3>2.2 Photoshop bukan sekadar aplikasi edit foto</h3>
+<p>Bagi siswa DKV, Photoshop dapat dipahami sebagai <strong>alat kerja visual</strong>. Kita dapat menggunakannya untuk mengolah gambar sekaligus menyusun berbagai elemen menjadi sebuah komunikasi visual.</p>
+
+<table>
+<tr><th>Contoh kebutuhan</th><th>Peran Photoshop</th></tr>
+<tr><td>Foto produk</td><td>Memperbaiki pencahayaan, warna, crop, dan komposisi.</td></tr>
+<tr><td>Poster</td><td>Menggabungkan foto, teks, bentuk, dan elemen grafis.</td></tr>
+<tr><td>Konten media sosial</td><td>Membuat visual sesuai ukuran platform yang diperlukan.</td></tr>
+<tr><td>Mockup sederhana</td><td>Menempatkan desain pada visual produk atau media.</td></tr>
+<tr><td>Manipulasi gambar</td><td>Menggabungkan atau mengubah beberapa elemen gambar secara kreatif.</td></tr>
+</table>
+</section>
+
+<section id="fungsi">
+<h2>3. Fungsi Adobe Photoshop dalam Bidang DKV</h2>
+<p>Dalam DKV, pesan visual perlu disampaikan dengan jelas dan menarik. Photoshop membantu desainer mengolah berbagai unsur visual sehingga dapat menjadi karya yang sesuai tujuan komunikasi.</p>
+
+<h3>3.1 Mengolah foto</h3>
+<p>Photoshop dapat digunakan untuk melakukan crop, mengatur ukuran, memperbaiki warna, menyesuaikan pencahayaan, dan melakukan retouching sesuai kebutuhan desain.</p>
+
+<h3>3.2 Membuat komposisi visual</h3>
+<p>Desainer dapat menggabungkan beberapa gambar, teks, bentuk, dan elemen visual dalam satu dokumen. Teknik ini banyak digunakan ketika membuat poster, banner, iklan, dan materi promosi.</p>
+
+<h3>3.3 Membuat materi publikasi</h3>
+<p>Photoshop dapat membantu membuat berbagai visual digital seperti poster, konten media sosial, thumbnail, banner, dan materi promosi.</p>
+
+<h3>3.4 Mengembangkan ide visual</h3>
+<p>Photoshop juga dapat digunakan untuk eksperimen. Desainer dapat mencoba berbagai susunan, warna, ukuran, dan efek untuk menemukan komposisi yang sesuai.</p>
+
+<div class="tip"><strong>Prinsip penting:</strong> Photoshop adalah alat. Kualitas desain tetap bergantung pada ide, konsep, tujuan komunikasi, komposisi, tipografi, warna, dan kemampuan desainer dalam menggunakan alat tersebut.</div>
+</section>
+
+<section id="dokumen">
+<h2>4. Membuat Dokumen Baru</h2>
+<p>Sebelum mulai bekerja, kita perlu membuat dokumen. Dokumen merupakan ruang kerja tempat desain dibuat.</p>
+
+<h3>4.1 Membuka jendela dokumen baru</h3>
+<div class="step"><div class="num">1</div><div>Buka Adobe Photoshop.</div></div>
+<div class="step"><div class="num">2</div><div>Pilih <strong>File &gt; New</strong>. Pada beberapa versi Photoshop, shortcut yang umum digunakan adalah <kbd>Ctrl</kbd> + <kbd>N</kbd> di Windows.</div></div>
+<div class="step"><div class="num">3</div><div>Jendela pengaturan dokumen baru akan muncul.</div></div>
+<div class="step"><div class="num">4</div><div>Tentukan ukuran, orientasi, resolusi, mode warna, dan pengaturan lain sesuai kebutuhan.</div></div>
+<div class="step"><div class="num">5</div><div>Klik <strong>Create</strong> untuk membuat dokumen.</div></div>
+
+<h3>4.2 Bagian penting pengaturan dokumen</h3>
+<table>
+<tr><th>Pengaturan</th><th>Penjelasan mudah</th></tr>
+<tr><td>Width</td><td>Lebar dokumen.</td></tr>
+<tr><td>Height</td><td>Tinggi dokumen.</td></tr>
+<tr><td>Units</td><td>Satuan ukuran, misalnya pixel, inch, atau centimeter.</td></tr>
+<tr><td>Orientation</td><td>Arah dokumen, yaitu Portrait atau Landscape.</td></tr>
+<tr><td>Resolution</td><td>Kerapatan pixel. Untuk kebutuhan cetak, nilai yang digunakan perlu disesuaikan dengan kebutuhan produksi; 300 ppi sering digunakan sebagai titik awal untuk materi cetak.</td></tr>
+<tr><td>Color Mode</td><td>Mode warna dokumen, misalnya RGB untuk banyak kebutuhan digital dan CMYK untuk kebutuhan cetak tertentu.</td></tr>
+<tr><td>Background</td><td>Pengaturan awal latar belakang dokumen.</td></tr>
+</table>
+
+<div class="warning"><strong>Perhatian:</strong> Jangan asal memilih ukuran dan resolusi. Dokumen untuk layar dan dokumen untuk cetak dapat memiliki kebutuhan yang berbeda.</div>
+
+<h3>4.3 Contoh dokumen latihan</h3>
+<p>Untuk latihan pengenalan workspace, buat dokumen dengan spesifikasi berikut:</p>
+<ul>
+<li>Width: <strong>1920 px</strong></li>
+<li>Height: <strong>1080 px</strong></li>
+<li>Orientation: <strong>Landscape</strong></li>
+<li>Resolution: <strong>72 ppi</strong> untuk latihan berbasis layar</li>
+<li>Color Mode: <strong>RGB Color</strong></li>
+</ul>
+<p>Tujuan latihan ini bukan membuat desain yang rumit, melainkan membiasakan diri membaca pengaturan dokumen.</p>
+</section>
+
+<section id="workspace">
+<h2>5. Mengenal Photoshop Workspace</h2>
+<p><strong>Workspace</strong> adalah lingkungan kerja Photoshop yang berisi berbagai bagian untuk membantu kita membuat dan mengedit desain.</p>
+
+<div class="workspace">
+<div class="card"><strong>1. Menu Bar</strong>Berisi kumpulan menu utama seperti File, Edit, Image, Layer, Type, Select, Filter, View, Window, dan Help. Susunan dapat berbeda menurut versi Photoshop.</div>
+<div class="card"><strong>2. Toolbar / Tools Panel</strong>Berisi alat untuk memilih, memindahkan, menggambar, menghapus, memotong, menulis teks, dan pekerjaan lainnya.</div>
+<div class="card"><strong>3. Options Bar</strong>Menampilkan pengaturan yang berubah sesuai tool yang sedang dipilih.</div>
+<div class="card"><strong>4. Canvas / Document Area</strong>Area tempat gambar atau desain dikerjakan.</div>
+<div class="card"><strong>5. Panels</strong>Panel berisi informasi dan kontrol untuk membantu proses kerja, misalnya Layers, Properties, History, dan lainnya.</div>
+<div class="card"><strong>6. Layers Panel</strong>Digunakan untuk mengatur susunan layer, visibilitas, urutan, dan beberapa pengaturan layer.</div>
+<div class="card"><strong>7. Properties</strong>Menampilkan pengaturan atau informasi sesuai objek, layer, atau fitur yang sedang dipilih.</div>
+</div>
+
+<h3 id="menubar">5.1 Menu Bar</h3>
+<p>Menu Bar berada di bagian atas aplikasi. Menu ini berisi perintah Photoshop yang dikelompokkan berdasarkan fungsi.</p>
+<table>
+<tr><th>Menu</th><th>Gambaran fungsi</th></tr>
+<tr><td>File</td><td>Membuat, membuka, menyimpan, mengekspor, dan mengelola dokumen.</td></tr>
+<tr><td>Edit</td><td>Perintah seperti undo, redo, copy, paste, dan pengaturan tertentu.</td></tr>
+<tr><td>Image</td><td>Pengaturan gambar seperti ukuran gambar dan ukuran canvas.</td></tr>
+<tr><td>Layer</td><td>Perintah untuk mengelola layer dan efek tertentu.</td></tr>
+<tr><td>Type</td><td>Perintah yang berkaitan dengan teks.</td></tr>
+<tr><td>Select</td><td>Perintah yang berkaitan dengan seleksi.</td></tr>
+<tr><td>Filter</td><td>Berisi berbagai efek dan pengolahan gambar.</td></tr>
+<tr><td>View</td><td>Mengatur tampilan dan pembesaran dokumen.</td></tr>
+<tr><td>Window</td><td>Mengatur panel dan workspace.</td></tr>
+<tr><td>Help</td><td>Membantu menemukan informasi dan bantuan terkait Photoshop.</td></tr>
+</table>
+
+<h3>5.2 Toolbar</h3>
+<p>Toolbar berisi alat-alat utama Photoshop. Setiap tool memiliki fungsi berbeda. Jangan berusaha menghafalkan semuanya sekaligus. Mulailah dengan tool yang sering digunakan.</p>
+<table>
+<tr><th>Tool</th><th>Fungsi sederhana</th></tr>
+<tr><td>Move Tool</td><td>Memindahkan objek atau layer.</td></tr>
+<tr><td>Marquee Tools</td><td>Membuat seleksi berbentuk geometris seperti persegi panjang atau elips.</td></tr>
+<tr><td>Lasso Tools</td><td>Membuat seleksi dengan bentuk yang lebih bebas.</td></tr>
+<tr><td>Crop Tool</td><td>Memotong area gambar.</td></tr>
+<tr><td>Eyedropper Tool</td><td>Mengambil sampel warna dari gambar.</td></tr>
+<tr><td>Brush Tool</td><td>Menggambar atau mengecat menggunakan kuas digital.</td></tr>
+<tr><td>Eraser Tool</td><td>Menghapus bagian tertentu pada layer yang mendukung penghapusan.</td></tr>
+<tr><td>Type Tool</td><td>Membuat teks.</td></tr>
+<tr><td>Shape Tools</td><td>Membuat bentuk seperti persegi, lingkaran, dan bentuk lainnya.</td></tr>
+<tr><td>Hand Tool</td><td>Menggeser tampilan canvas tanpa memindahkan objek.</td></tr>
+<tr><td>Zoom Tool</td><td>Memperbesar atau memperkecil tampilan canvas.</td></tr>
+</table>
+
+<div class="tip"><strong>Kebiasaan baik:</strong> Saat bingung dengan sebuah tool, arahkan pointer ke ikon tool dan baca nama atau tooltip yang muncul. Pelajari fungsi tool melalui praktik, bukan hanya hafalan.</div>
+
+<h3>5.3 Options Bar</h3>
+<p>Options Bar terletak di bagian atas area kerja, biasanya di bawah Menu Bar. Isinya berubah sesuai tool yang sedang aktif.</p>
+<p>Contohnya, ketika Brush Tool dipilih, Options Bar dapat menampilkan pengaturan seperti ukuran brush, hardness, dan opacity. Ketika Type Tool dipilih, pengaturan teks seperti font dan ukuran teks dapat ditampilkan.</p>
+<div class="info"><strong>Kesimpulan:</strong> Toolbar menentukan <em>alat apa</em> yang digunakan, sedangkan Options Bar membantu menentukan <em>bagaimana alat tersebut bekerja</em>.</div>
+
+<h3>5.4 Panels</h3>
+<p>Panel adalah jendela kecil yang berisi kontrol dan informasi. Panel membantu kita mengatur dokumen tanpa harus selalu membuka Menu Bar.</p>
+<p>Beberapa panel yang umum ditemui adalah Layers, Properties, History, Color, Swatches, Character, dan Paragraph. Ketersediaan serta susunannya dapat berbeda tergantung versi dan workspace.</p>
+
+<h3>5.5 Layers Panel</h3>
+<p>Layers Panel adalah salah satu bagian yang sangat penting dalam Photoshop. Layer dapat dibayangkan seperti <strong>lembar transparan yang ditumpuk</strong>. Setiap lembar dapat berisi elemen berbeda.</p>
+<div class="info"><strong>Analogi:</strong> Bayangkan membuat poster menggunakan beberapa lembar plastik transparan. Lembar pertama berisi background, lembar kedua berisi foto, lembar ketiga berisi judul, dan lembar keempat berisi logo. Jika salah satu lembar dipindahkan, elemen pada lembar lain tidak otomatis ikut berpindah.</div>
+
+<h4>Bagian yang perlu dikenali di Layers Panel</h4>
+<ul>
+<li><strong>Thumbnail:</strong> gambaran kecil isi layer.</li>
+<li><strong>Nama layer:</strong> membantu kita mengetahui isi layer.</li>
+<li><strong>Visibility:</strong> digunakan untuk menampilkan atau menyembunyikan layer.</li>
+<li><strong>Urutan layer:</strong> layer yang berada lebih atas biasanya tampil di depan layer di bawahnya.</li>
+<li><strong>Selected layer:</strong> layer yang sedang aktif untuk diedit.</li>
+<li><strong>Lock:</strong> dapat digunakan untuk mencegah perubahan tertentu pada layer.</li>
+</ul>
+
+<div class="warning"><strong>Kebiasaan buruk yang harus dihindari:</strong> Membiarkan semua layer bernama “Layer 1”, “Layer 2”, dan seterusnya. Biasakan memberi nama seperti <code>Background</code>, <code>Foto Produk</code>, <code>Judul</code>, atau <code>Logo</code>.</div>
+
+<h3>5.6 Properties</h3>
+<p>Properties menampilkan pengaturan yang berkaitan dengan objek atau fitur yang sedang dipilih. Isi Properties dapat berubah sesuai konteks.</p>
+<p>Karena itu, jangan menganggap Properties selalu berisi menu yang sama. Jika siswa memilih objek atau layer yang berbeda, informasi dan pengaturannya dapat berubah.</p>
+
+<h3>5.7 Workspace</h3>
+<p>Photoshop menyediakan susunan workspace untuk membantu pekerjaan tertentu. Workspace pada dasarnya adalah pengaturan tata letak panel dan alat agar sesuai dengan kebutuhan kerja.</p>
+<p>Contohnya, pekerjaan fotografi membutuhkan panel yang berbeda dari pekerjaan desain grafis. Pengguna dapat menyesuaikan workspace agar panel yang sering digunakan lebih mudah diakses.</p>
+</section>
+
+<section id="canvas">
+<h2>6. Zoom dan Navigasi Canvas</h2>
+<p>Canvas adalah area dokumen yang sedang kita kerjakan. Zoom tidak mengubah ukuran file secara otomatis; zoom terutama mengubah <strong>tingkat pembesaran tampilan</strong> di layar.</p>
+
+<h3>6.1 Zoom in</h3>
+<p>Zoom in berarti memperbesar tampilan sehingga detail lebih mudah dilihat.</p>
+
+<h3>6.2 Zoom out</h3>
+<p>Zoom out berarti memperkecil tampilan sehingga area dokumen yang lebih luas dapat terlihat.</p>
+
+<h3>6.3 Hand Tool</h3>
+<p>Hand Tool digunakan untuk menggeser posisi tampilan canvas ketika kita sedang memperbesar gambar.</p>
+
+<h3>6.4 Mengapa navigasi penting?</h3>
+<p>Ketika mengedit detail kecil, kita membutuhkan zoom tinggi. Setelah selesai, kita perlu melihat keseluruhan desain untuk memastikan komposisinya tetap baik. Karena itu, kemampuan berpindah antara tampilan detail dan keseluruhan sangat penting.</p>
+
+<div class="tip"><strong>Latihan cepat:</strong> Buat dokumen latihan, zoom hingga 200%, geser canvas menggunakan Hand Tool, kemudian kembalikan tampilan sehingga seluruh dokumen terlihat.</div>
+</section>
+
+<section id="file">
+<h2>7. Membuka dan Menyimpan File</h2>
+
+<h3>7.1 Membuka file</h3>
+<div class="step"><div class="num">1</div><div>Pilih <strong>File &gt; Open</strong> atau gunakan shortcut <kbd>Ctrl</kbd> + <kbd>O</kbd> di Windows.</div></div>
+<div class="step"><div class="num">2</div><div>Cari lokasi file gambar atau dokumen yang ingin dibuka.</div></div>
+<div class="step"><div class="num">3</div><div>Pilih file, lalu klik Open.</div></div>
+<div class="step"><div class="num">4</div><div>Periksa dokumen sebelum mulai mengedit.</div></div>
+
+<h3>7.2 Menyimpan dokumen</h3>
+<p>Saat pertama kali menyimpan dokumen kerja, gunakan <strong>File &gt; Save As</strong> atau perintah penyimpanan yang tersedia pada versi Photoshop yang digunakan. Pilih format sesuai kebutuhan.</p>
+
+<table>
+<tr><th>Format</th><th>Kegunaan umum</th></tr>
+<tr><td>PSD</td><td>Format kerja Photoshop yang mempertahankan banyak informasi seperti layer. Cocok untuk menyimpan file kerja agar dapat diedit kembali.</td></tr>
+<tr><td>JPEG/JPG</td><td>Format gambar terkompresi yang umum digunakan untuk berbagi atau publikasi digital.</td></tr>
+<tr><td>PNG</td><td>Umum digunakan untuk gambar digital yang membutuhkan kualitas tertentu dan dapat mendukung transparansi.</td></tr>
+<tr><td>PDF</td><td>Dapat digunakan untuk berbagi dokumen/desain dalam bentuk PDF sesuai kebutuhan.</td></tr>
+</table>
+
+<div class="warning"><strong>Tips penting:</strong> Simpan file kerja dalam format yang mempertahankan informasi yang masih diperlukan untuk pengeditan. Jangan hanya menyimpan satu versi final jika pekerjaan kemungkinan masih akan direvisi.</div>
+
+<h3>7.3 Kebiasaan menyimpan yang baik</h3>
+<ul>
+<li>Beri nama file yang jelas.</li>
+<li>Simpan pada folder proyek yang benar.</li>
+<li>Simpan file kerja utama dalam format yang dapat diedit kembali.</li>
+<li>Buat versi jika terjadi revisi besar, misalnya <code>Poster_v01</code>, <code>Poster_v02</code>.</li>
+<li>Jangan menunggu sampai pekerjaan selesai untuk pertama kali menyimpan.</li>
+</ul>
+</section>
+
+<section id="proyek">
+<h2>8. Proyek/Latihan Praktik: Mengenali Workspace Photoshop</h2>
+<div class="project">
+<strong>Nama proyek:</strong> Mengenal Adobe Photoshop &amp; Workspace<br>
+<strong>Tujuan:</strong> Siswa mampu membuat dokumen baru dan menunjukkan fungsi bagian-bagian utama workspace.
+</div>
+
+<h3>8.1 Spesifikasi proyek</h3>
+<ul>
+<li>Buat dokumen baru berukuran <strong>1920 × 1080 pixel</strong>.</li>
+<li>Gunakan orientasi <strong>Landscape</strong>.</li>
+<li>Gunakan <strong>RGB Color</strong>.</li>
+<li>Buat minimal <strong>4 layer</strong>.</li>
+<li>Beri nama setiap layer sesuai fungsinya.</li>
+<li>Gunakan minimal satu bentuk, satu teks, dan satu elemen gambar sederhana.</li>
+<li>Simpan file kerja sebagai <strong>PSD</strong>.</li>
+</ul>
+
+<h3>8.2 Langkah kerja</h3>
+<div class="step"><div class="num">1</div><div>Buka Photoshop dan buat dokumen baru sesuai spesifikasi.</div></div>
+<div class="step"><div class="num">2</div><div>Amati Menu Bar, Toolbar, Options Bar, Canvas, dan Panels.</div></div>
+<div class="step"><div class="num">3</div><div>Buat layer bernama <code>Background</code>.</div></div>
+<div class="step"><div class="num">4</div><div>Buat layer bernama <code>Shape</code> dan tambahkan sebuah bentuk.</div></div>
+<div class="step"><div class="num">5</div><div>Buat layer teks bernama <code>Judul</code>.</div></div>
+<div class="step"><div class="num">6</div><div>Tambahkan satu elemen gambar atau objek sederhana pada layer terpisah.</div></div>
+<div class="step"><div class="num">7</div><div>Ubah urutan layer dan amati perubahan tampilan.</div></div>
+<div class="step"><div class="num">8</div><div>Sembunyikan salah satu layer menggunakan kontrol visibility, lalu tampilkan kembali.</div></div>
+<div class="step"><div class="num">9</div><div>Gunakan Zoom untuk melihat detail dan Hand Tool untuk menggeser tampilan.</div></div>
+<div class="step"><div class="num">10</div><div>Simpan dokumen dalam format PSD.</div></div>
+
+<h3>8.3 Hasil yang harus dikumpulkan</h3>
+<ul>
+<li>File Photoshop <code>.PSD</code>.</li>
+<li>Satu screenshot workspace yang menunjukkan bagian-bagian Photoshop.</li>
+<li>Catatan singkat fungsi minimal 7 bagian workspace.</li>
+</ul>
+</section>
+
+<section id="soal">
+<h2>9. Latihan Soal — 5 Pertanyaan</h2>
+
+<div class="exercise"><strong>Soal 1</strong><p>Apa yang dimaksud dengan Adobe Photoshop? Jelaskan menggunakan kalimatmu sendiri dan sebutkan minimal dua contoh penggunaannya.</p>
+</div>
+<div class="exercise"><strong>Soal 2</strong><p>Jelaskan perbedaan fungsi Toolbar dan Options Bar.</p>
+</div>
+<div class="exercise"><strong>Soal 3</strong><p>Mengapa Layers Panel penting dalam pembuatan desain? Jelaskan dengan menggunakan analogi sederhana.</p>
+</div>
+<div class="exercise"><strong>Soal 4</strong><p>Seorang siswa ingin membuat desain untuk ditampilkan di layar komputer. Ia membuat dokumen berukuran 1920 × 1080 pixel. Jelaskan apa arti angka tersebut dan mengapa satuan pixel sesuai untuk kebutuhan layar.</p>
+</div>
+<div class="exercise"><strong>Soal 5</strong><p>Jelaskan perbedaan tujuan menyimpan file kerja dalam PSD dengan menyimpan gambar dalam JPEG atau PNG.</p>
+</div>
+
+<h3>Kunci Jawaban/Pedoman</h3>
+<div class="answer">
+<p><strong>1.</strong> Photoshop adalah perangkat lunak pengolah gambar digital yang digunakan antara lain untuk mengedit foto dan membuat komposisi/desain visual.</p>
+<p><strong>2.</strong> Toolbar berisi pilihan alat, sedangkan Options Bar berisi pengaturan yang menyesuaikan tool yang sedang aktif.</p>
+<p><strong>3.</strong> Layers membantu memisahkan elemen desain sehingga setiap elemen dapat diatur secara lebih mandiri. Analogi yang sesuai adalah beberapa lembar transparan yang ditumpuk.</p>
+<p><strong>4.</strong> 1920 adalah lebar dan 1080 adalah tinggi dalam satuan pixel. Pixel merupakan unit yang digunakan untuk membentuk gambar digital pada layar.</p>
+<p><strong>5.</strong> PSD digunakan untuk mempertahankan struktur kerja Photoshop seperti layer, sedangkan JPEG/PNG umumnya digunakan sebagai format gambar hasil untuk dibagikan atau digunakan sesuai kebutuhan.</p>
+</div>
+</section>
+
+<section id="tugas">
+<h2>10. Lima Tugas Praktik</h2>
+
+<div class="exercise">
+<h3>Tugas 1 — Peta Workspace</h3>
+<p>Buka Photoshop. Buat screenshot workspace kemudian beri penanda pada minimal 7 bagian: Menu Bar, Toolbar, Options Bar, Canvas, Layers Panel, Properties/Panel, dan area dokumen.</p>
+<p><strong>Output:</strong> 1 gambar beranotasi + penjelasan fungsi setiap bagian.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 2 — Membuat Dokumen Baru</h3>
+<p>Buat dokumen berukuran 1920 × 1080 pixel dengan RGB Color. Tulis spesifikasi dokumen pada catatan tugas.</p>
+<p><strong>Output:</strong> Screenshot pengaturan dokumen dan screenshot canvas.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 3 — Latihan Layers</h3>
+<p>Buat komposisi sederhana yang terdiri atas background, dua bentuk, dan satu teks. Buat minimal empat layer dan beri nama setiap layer.</p>
+<p><strong>Output:</strong> File PSD dan screenshot Layers Panel.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 4 — Latihan Navigasi Canvas</h3>
+<p>Buka sebuah gambar. Lakukan zoom in, zoom out, kemudian geser tampilan menggunakan Hand Tool. Catat apa yang berubah dan apa yang tidak berubah.</p>
+<p><strong>Output:</strong> Catatan singkat 5–7 kalimat + screenshot.</p>
+</div>
+
+<div class="exercise">
+<h3>Tugas 5 — Simulasi File Proyek</h3>
+<p>Buat sebuah dokumen sederhana bertema <strong>“Saya Belajar DKV”</strong>. Gunakan teks, bentuk, dan minimal satu gambar. Simpan file kerja sebagai PSD dan buat satu versi gambar untuk ditampilkan.</p>
+<p><strong>Output:</strong> File PSD + file gambar hasil + screenshot Layers Panel.</p>
+</div>
+
+<h3>Checklist Penilaian Mandiri</h3>
+<div class="checklist">
+<label>☐ Saya dapat membuat dokumen baru.</label>
+<label>☐ Saya dapat menjelaskan fungsi Menu Bar.</label>
+<label>☐ Saya dapat mengenali Toolbar dan beberapa tool dasar.</label>
+<label>☐ Saya memahami fungsi Options Bar.</label>
+<label>☐ Saya dapat membuat dan menamai layer.</label>
+<label>☐ Saya dapat menggunakan zoom dan navigasi canvas.</label>
+<label>☐ Saya dapat membuka file.</label>
+<label>☐ Saya dapat menyimpan file kerja dengan format yang sesuai.</label>
+</div>
+</section>
+
+<section id="ringkasan">
+<h2>11. Ringkasan Materi</h2>
+<ol>
+<li><strong>Adobe Photoshop</strong> adalah perangkat lunak pengolah gambar digital yang banyak digunakan dalam pekerjaan visual.</li>
+<li>Dalam <strong>DKV</strong>, Photoshop dapat digunakan untuk mengolah foto, membuat komposisi, membuat materi publikasi, dan mengembangkan ide visual.</li>
+<li><strong>Dokumen baru</strong> harus dibuat dengan ukuran dan pengaturan yang sesuai tujuan.</li>
+<li><strong>Menu Bar</strong> berisi kelompok perintah utama Photoshop.</li>
+<li><strong>Toolbar</strong> berisi alat yang digunakan untuk mengerjakan berbagai aktivitas.</li>
+<li><strong>Options Bar</strong> menampilkan pengaturan sesuai tool yang sedang aktif.</li>
+<li><strong>Panels</strong> menyediakan kontrol dan informasi tambahan.</li>
+<li><strong>Layers Panel</strong> digunakan untuk mengatur elemen-elemen desain dalam layer.</li>
+<li><strong>Properties</strong> menampilkan pengaturan atau informasi sesuai objek/fitur yang dipilih.</li>
+<li><strong>Zoom</strong> mengubah pembesaran tampilan, sedangkan <strong>Hand Tool</strong> membantu menggeser tampilan canvas.</li>
+<li>File kerja sebaiknya disimpan dalam format yang mempertahankan informasi yang diperlukan untuk proses editing, seperti <strong>PSD</strong>.</li>
+</ol>
+
+<div class="tip"><strong>Kalimat kunci untuk diingat:</strong> “Kenali alatnya, pahami fungsinya, lalu praktikkan.” Kemampuan Photoshop akan berkembang melalui latihan yang berulang dan terarah.</div>
+</section>
+
+<section>
+<h2>12. Refleksi Siswa</h2>
+<p>Jawablah pertanyaan berikut setelah menyelesaikan materi:</p>
+<ol>
+<li>Bagian workspace mana yang paling mudah saya pahami?</li>
+<li>Bagian mana yang masih membingungkan?</li>
+<li>Tool apa yang paling ingin saya pelajari lebih lanjut?</li>
+<li>Mengapa pengelolaan layer penting dalam desain?</li>
+<li>Apa kebiasaan kerja Photoshop yang akan saya terapkan mulai sekarang?</li>
+</ol>
+</section>
+
+</main>
+
+<footer>
+<p><strong>Mengenal Adobe Photoshop &amp; Workspace</strong></p>
+<p>Materi pembelajaran Desain Komunikasi Visual • SMK</p>
+<p class="small">Materi ini menggunakan istilah umum Photoshop. Tampilan dan nama beberapa fitur dapat berbeda sesuai versi Adobe Photoshop yang digunakan.</p>
+</footer>
+
+</body>
+</html>

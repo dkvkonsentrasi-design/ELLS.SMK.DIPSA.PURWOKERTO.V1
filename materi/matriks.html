@@ -1,0 +1,2937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Materi Matematika Kelas XI - Matriks">
+    <meta name="author" content="SMK DIPSA Purwokerto">
+
+    <title>Materi Matriks | SMK DIPSA</title>
+
+    <!-- =========================================================
+         MATHJAX
+         ========================================================= -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [
+                    ['\\(', '\\)'],
+                    ['$', '$']
+                ],
+                displayMath: [
+                    ['\\[', '\\]'],
+                    ['$$', '$$']
+                ]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+        async>
+    </script>
+
+
+    <style>
+
+        /* =========================================================
+           RESET
+           ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================================================
+           BODY
+           ========================================================= */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #26352c;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #075b3a,
+                #0b7a4b
+            );
+
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+
+        /* =========================================================
+           NAVIGASI
+           ========================================================= */
+
+        .menu {
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+
+            overflow-x: auto;
+            white-space: nowrap;
+
+            box-shadow:
+                0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .menu-inner {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .menu a {
+            display: inline-block;
+
+            padding: 14px 16px;
+
+            color: #075b3a;
+
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            background: #e8f5ee;
+        }
+
+
+        /* =========================================================
+           CONTAINER
+           ========================================================= */
+
+        .container {
+            max-width: 1050px;
+
+            margin: 30px auto;
+
+            padding:
+                0 18px;
+        }
+
+
+        /* =========================================================
+           SECTION
+           ========================================================= */
+
+        section {
+            background: white;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.06);
+        }
+
+
+        /* =========================================================
+           JUDUL
+           ========================================================= */
+
+        h2 {
+            color: #075b3a;
+
+            font-size: 25px;
+
+            border-left:
+                6px solid #0b7a4b;
+
+            padding-left: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #0b6b43;
+
+            margin-top: 25px;
+            margin-bottom: 12px;
+
+            font-size: 20px;
+        }
+
+        h4 {
+            margin-top: 18px;
+            margin-bottom: 8px;
+
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================================================
+           LIST
+           ========================================================= */
+
+        ul,
+        ol {
+            margin:
+                10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+
+        /* =========================================================
+           KARTU INFORMASI
+           ========================================================= */
+
+        .intro {
+            background: #eaf7f0;
+
+            border-left:
+                5px solid #0b7a4b;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .important {
+            background: #fff8df;
+
+            border-left:
+                5px solid #e0a800;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+        .tip {
+            background: #eef5ff;
+
+            border-left:
+                5px solid #3978c8;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+        .warning {
+            background: #fff0f0;
+
+            border-left:
+                5px solid #d9534f;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+
+        /* =========================================================
+           KOTAK RUMUS / MATRIKS
+           ========================================================= */
+
+        .formula {
+            background: #f8faf9;
+
+            border:
+                1px solid #dce7e0;
+
+            border-radius: 12px;
+
+            padding: 22px 18px;
+
+            margin: 18px 0;
+
+            text-align: center;
+
+            /*
+             * Supaya rumus panjang tidak merusak
+             * layout pada HP.
+             */
+            overflow-x: auto;
+
+            /*
+             * Scroll hanya muncul jika
+             * rumus memang terlalu panjang.
+             */
+            -webkit-overflow-scrolling: touch;
+        }
+
+
+        /*
+         * MathJax display
+         */
+        .formula mjx-container[display="true"] {
+            margin:
+                0.5em auto !important;
+        }
+
+
+        /*
+         * Ukuran rumus desktop
+         */
+        .formula mjx-container {
+            font-size: 115%;
+        }
+
+
+        /*
+         * Matriks dibuat sedikit lebih besar
+         */
+        .matrix {
+            font-size: 1.15em;
+        }
+
+
+        /*
+         * Rumus yang menggunakan boxed
+         */
+        .formula mjx-math {
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           CONTOH
+           ========================================================= */
+
+        .example {
+            border:
+                1px solid #dfe7e2;
+
+            border-radius: 10px;
+
+            padding: 22px;
+
+            margin: 20px 0;
+
+            background: #fcfefd;
+        }
+
+        .example-title {
+            color: #075b3a;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+        }
+
+        .answer {
+            background: #eef8f2;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================================================
+           TABEL
+           ========================================================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+
+            margin: 20px 0;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 600px;
+        }
+
+        th {
+            background: #075b3a;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+        td {
+            border:
+                1px solid #ddd;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f7faf8;
+        }
+
+
+        /* =========================================================
+           SOAL
+           ========================================================= */
+
+        .question {
+            background: #f8faf9;
+
+            border:
+                1px solid #dce7e0;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin: 15px 0;
+        }
+
+        .question-number {
+            font-weight: bold;
+
+            color: #075b3a;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================================================
+           TUGAS
+           ========================================================= */
+
+        .task {
+            border-left:
+                5px solid #075b3a;
+
+            background: #f1f7f3;
+
+            padding: 20px;
+
+            margin: 15px 0;
+
+            border-radius: 8px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        footer {
+            background: #075b3a;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+
+        /* =========================================================
+           INLINE MATH
+           ========================================================= */
+
+        mjx-container[jax="SVG"] {
+            outline: none;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE TABLET / HP
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 28px 15px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .menu-inner {
+                justify-content: flex-start;
+            }
+
+            .menu a {
+                padding:
+                    12px 13px;
+
+                font-size: 13px;
+            }
+
+            section {
+                padding:
+                    20px 17px;
+
+                border-radius: 10px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            body {
+                font-size: 15px;
+            }
+
+            .formula {
+                padding:
+                    18px 12px;
+
+                margin:
+                    15px 0;
+            }
+
+            .formula mjx-container {
+                font-size: 105%;
+            }
+
+            .example {
+                padding:
+                    17px;
+            }
+
+            .answer {
+                padding:
+                    15px;
+            }
+        }
+
+
+        /* =========================================================
+           HP SANGAT KECIL
+           ========================================================= */
+
+        @media (max-width: 400px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            section {
+                padding:
+                    18px 14px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            .formula {
+                padding:
+                    15px 8px;
+            }
+
+            .formula mjx-container {
+                font-size: 95%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+
+<header>
+
+    <h1>MATRIKS</h1>
+
+    <p>
+        Matematika Kelas XI SMK DIPSA Purwokerto
+    </p>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGASI
+     ========================================================= -->
+
+<nav class="menu">
+
+    <div class="menu-inner">
+
+        <a href="#jenis">Jenis</a>
+        <a href="#operasi">Operasi</a>
+        <a href="#perkalian">Perkalian</a>
+        <a href="#determinan">Determinan</a>
+        <a href="#invers">Invers</a>
+        <a href="#contoh">Contoh</a>
+        <a href="#latihan">Latihan</a>
+        <a href="#tugas">Tugas</a>
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    </a>
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     A. PENGERTIAN
+     ========================================================= -->
+
+<section id="pengertian">
+
+    <h2>A. Pengertian Matriks</h2>
+
+    <div class="intro">
+
+        <strong>Matriks</strong> adalah susunan bilangan yang disusun
+        dalam baris dan kolom serta dituliskan di dalam tanda kurung.
+
+    </div>
+
+    <p>
+        Contoh matriks:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 4 \\
+        3 & 5
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+
+        Matriks tersebut memiliki
+        <strong>2 baris</strong>
+        dan
+        <strong>2 kolom</strong>.
+
+    </p>
+
+
+    <div class="important">
+
+        <strong>Ingat:</strong><br>
+
+        Ordo matriks =
+        banyak baris × banyak kolom.
+
+    </div>
+
+
+    <div class="formula">
+
+        \[
+        \boxed{
+        \text{Ordo} =
+        \text{Baris} \times \text{Kolom}
+        }
+        \]
+
+    </div>
+
+
+    <h3>
+        Contoh Matriks 2 × 3
+    </h3>
+
+
+    <div class="formula matrix">
+
+        \[
+        B =
+        \begin{pmatrix}
+        1 & 3 & 5 \\
+        2 & 4 & 6
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+
+        Matriks B mempunyai
+        2 baris dan 3 kolom sehingga
+        ordonya adalah
+
+        <strong>2 × 3</strong>.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================================================
+     B. UNSUR
+     ========================================================= -->
+
+<section>
+
+    <h2>B. Unsur-Unsur Matriks</h2>
+
+    <p>
+        Perhatikan matriks berikut:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        3 & 5 & 7 \\
+        2 & 4 & 6
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+
+        Setiap bilangan di dalam matriks disebut
+        <strong>elemen atau unsur matriks</strong>.
+
+    </p>
+
+
+    <p>
+
+        Elemen matriks biasanya ditulis
+        \(a_{ij}\), dengan:
+
+    </p>
+
+
+    <ul>
+
+        <li>
+            \(i\) = nomor baris
+        </li>
+
+        <li>
+            \(j\) = nomor kolom
+        </li>
+
+    </ul>
+
+
+    <p>
+        Contohnya:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        a_{12}=5
+        \]
+
+    </div>
+
+
+    <p>
+
+        Artinya elemen pada baris ke-1
+        kolom ke-2 adalah 5.
+
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        a_{23}=6
+        \]
+
+    </div>
+
+
+    <p>
+
+        Artinya elemen pada baris ke-2
+        kolom ke-3 adalah 6.
+
+    </p>
+
+</section>
+
+
+
+<!-- =========================================================
+     C. JENIS
+     ========================================================= -->
+
+<section id="jenis">
+
+    <h2>C. Jenis-Jenis Matriks</h2>
+
+
+    <h3>1. Matriks Baris</h3>
+
+    <p>
+        Matriks yang hanya mempunyai satu baris.
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 4 & 6 & 8
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Ordonya adalah \(1\times4\).
+    </p>
+
+
+
+    <h3>2. Matriks Kolom</h3>
+
+    <p>
+        Matriks yang hanya mempunyai satu kolom.
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        B =
+        \begin{pmatrix}
+        2 \\
+        4 \\
+        6
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Ordonya adalah \(3\times1\).
+    </p>
+
+
+
+    <h3>3. Matriks Persegi</h3>
+
+    <p>
+        Matriks yang jumlah baris dan kolomnya sama.
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Ordonya adalah \(2\times2\).
+    </p>
+
+
+
+    <h3>4. Matriks Nol</h3>
+
+    <p>
+        Semua elemennya bernilai nol.
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        0 & 0 \\
+        0 & 0
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+
+    <h3>5. Matriks Identitas</h3>
+
+    <p>
+
+        Matriks persegi yang memiliki angka 1
+        pada diagonal utama dan angka 0
+        di luar diagonal utama.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        I_2 =
+        \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+
+    <h3>6. Matriks Diagonal</h3>
+
+    <p>
+
+        Matriks persegi yang semua elemen
+        di luar diagonal utamanya bernilai nol.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        3 & 0 & 0 \\
+        0 & 5 & 0 \\
+        0 & 0 & 7
+        \end{pmatrix}
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     D. KESAMAAN
+     ========================================================= -->
+
+<section>
+
+    <h2>D. Kesamaan Dua Matriks</h2>
+
+    <p>
+        Dua matriks dikatakan sama apabila:
+    </p>
+
+    <ol>
+
+        <li>
+            Memiliki ordo yang sama.
+        </li>
+
+        <li>
+            Setiap elemen yang bersesuaian
+            memiliki nilai yang sama.
+        </li>
+
+    </ol>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 3 \\
+        4 & 5
+        \end{pmatrix}
+        \qquad
+        B =
+        \begin{pmatrix}
+        2 & 3 \\
+        4 & 5
+        \end{pmatrix}
+        \]
+
+        \[
+        \boxed{A=B}
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     E. TRANSPOSE
+     ========================================================= -->
+
+<section>
+
+    <h2>E. Transpose Matriks</h2>
+
+    <p>
+
+        Transpose adalah proses mengubah
+        <strong>baris menjadi kolom</strong>
+        dan kolom menjadi baris.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6
+        \end{pmatrix}
+        \]
+
+        \[
+        A^T =
+        \begin{pmatrix}
+        1 & 4 \\
+        2 & 5 \\
+        3 & 6
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <div class="tip">
+
+        <strong>Tips:</strong>
+
+        Bayangkan matriks seperti tabel.
+        Ketika ditranspose, baris yang awalnya
+        mendatar berubah menjadi kolom.
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     F. OPERASI
+     ========================================================= -->
+
+<section id="operasi">
+
+    <h2>
+        F. Operasi Penjumlahan dan Pengurangan Matriks
+    </h2>
+
+
+    <h3>1. Penjumlahan Matriks</h3>
+
+    <p>
+
+        Dua matriks dapat dijumlahkan apabila
+        mempunyai <strong>ordo yang sama</strong>.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 3 \\
+        4 & 5
+        \end{pmatrix}
+        \qquad
+        B =
+        \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+        \end{pmatrix}
+        \]
+
+        \[
+        A+B =
+        \begin{pmatrix}
+        2+1 & 3+2 \\
+        4+3 & 5+4
+        \end{pmatrix}
+        \]
+
+        \[
+        \boxed{
+        A+B =
+        \begin{pmatrix}
+        3 & 5 \\
+        7 & 9
+        \end{pmatrix}
+        }
+        \]
+
+    </div>
+
+
+    <div class="important">
+
+        <strong>Ingat:</strong>
+
+        Penjumlahan dilakukan pada elemen
+        yang memiliki posisi sama.
+
+    </div>
+
+
+    <h3>2. Pengurangan Matriks</h3>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        8 & 7 \\
+        6 & 5
+        \end{pmatrix}
+        \qquad
+        B =
+        \begin{pmatrix}
+        2 & 3 \\
+        4 & 1
+        \end{pmatrix}
+        \]
+
+        \[
+        A-B =
+        \begin{pmatrix}
+        8-2 & 7-3 \\
+        6-4 & 5-1
+        \end{pmatrix}
+        \]
+
+        \[
+        \boxed{
+        A-B =
+        \begin{pmatrix}
+        6 & 4 \\
+        2 & 4
+        \end{pmatrix}
+        }
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     G. PERKALIAN SKALAR
+     ========================================================= -->
+
+<section>
+
+    <h2>
+        G. Perkalian Matriks dengan Bilangan
+    </h2>
+
+    <p>
+
+        Sebuah matriks dapat dikalikan dengan sebuah bilangan.
+        Bilangan tersebut dikalikan ke setiap elemen matriks.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 3 \\
+        4 & 5
+        \end{pmatrix}
+        \]
+
+        \[
+        2A =
+        \begin{pmatrix}
+        2(2) & 2(3) \\
+        2(4) & 2(5)
+        \end{pmatrix}
+        \]
+
+        \[
+        \boxed{
+        2A =
+        \begin{pmatrix}
+        4 & 6 \\
+        8 & 10
+        \end{pmatrix}
+        }
+        \]
+
+    </div>
+
+
+    <div class="tip">
+
+        <strong>Cara mudah:</strong>
+
+        angka di luar matriks dikalikan
+        ke semua angka di dalam matriks.
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     H. PERKALIAN
+     ========================================================= -->
+
+<section id="perkalian">
+
+    <h2>H. Perkalian Dua Matriks</h2>
+
+    <p>
+
+        Perkalian matriks dilakukan dengan konsep
+        <strong>baris × kolom</strong>.
+
+    </p>
+
+
+    <div class="important">
+
+        <strong>Syarat perkalian:</strong><br>
+
+        Jumlah kolom matriks pertama harus sama
+        dengan jumlah baris matriks kedua.
+
+    </div>
+
+
+    <h3>Contoh</h3>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        1 & 2 \\
+        3 & 4
+        \end{pmatrix}
+        \]
+
+        \[
+        B =
+        \begin{pmatrix}
+        5 & 6 \\
+        7 & 8
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Elemen kiri atas:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        (1\times5)+(2\times7)
+        =
+        5+14
+        =
+        19
+        \]
+
+    </div>
+
+
+    <p>
+        Elemen kanan atas:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        (1\times6)+(2\times8)
+        =
+        6+16
+        =
+        22
+        \]
+
+    </div>
+
+
+    <p>
+        Elemen kiri bawah:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        (3\times5)+(4\times7)
+        =
+        15+28
+        =
+        43
+        \]
+
+    </div>
+
+
+    <p>
+        Elemen kanan bawah:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        (3\times6)+(4\times8)
+        =
+        18+32
+        =
+        50
+        \]
+
+    </div>
+
+
+    <div class="formula matrix">
+
+        \[
+        \boxed{
+        AB =
+        \begin{pmatrix}
+        19 & 22 \\
+        43 & 50
+        \end{pmatrix}
+        }
+        \]
+
+    </div>
+
+
+    <h3>
+        Menentukan Apakah Perkalian Bisa Dilakukan
+    </h3>
+
+
+    <p>
+        Misalnya:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        (2\times3)(3\times4)
+        \]
+
+    </div>
+
+
+    <p>
+
+        Bisa dikalikan karena jumlah kolom matriks
+        pertama adalah 3 dan jumlah baris matriks
+        kedua juga 3.
+
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        \boxed{
+        (2\times3)(3\times4)
+        =
+        2\times4
+        }
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     I. DETERMINAN
+     ========================================================= -->
+
+<section id="determinan">
+
+    <h2>
+        I. Determinan Matriks 2 × 2
+    </h2>
+
+
+    <p>
+        Misalkan:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        a & b \\
+        c & d
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Determinan matriks \(A\) adalah:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        \boxed{|A|=ad-bc}
+        \]
+
+    </div>
+
+
+    <h3>Contoh</h3>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        3 & 2 \\
+        4 & 5
+        \end{pmatrix}
+        \]
+
+        \[
+        |A|
+        =
+        (3\times5)-(2\times4)
+        \]
+
+        \[
+        =15-8
+        \]
+
+        \[
+        \boxed{|A|=7}
+        \]
+
+    </div>
+
+
+    <div class="tip">
+
+        <strong>Cara mudah mengingat:</strong><br>
+
+        Diagonal utama dikali, kemudian dikurangi
+        hasil perkalian diagonal lainnya.
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     J. INVERS
+     ========================================================= -->
+
+<section id="invers">
+
+    <h2>
+        J. Invers Matriks 2 × 2
+    </h2>
+
+
+    <p>
+        Jika:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        a & b \\
+        c & d
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Maka:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        \boxed{
+        A^{-1}
+        =
+        \frac{1}{ad-bc}
+        \begin{pmatrix}
+        d & -b \\
+        -c & a
+        \end{pmatrix}
+        }
+        \]
+
+    </div>
+
+
+    <div class="warning">
+
+        <strong>Penting!</strong><br>
+
+        Matriks hanya mempunyai invers apabila
+        determinannya tidak sama dengan nol.
+
+    </div>
+
+
+    <div class="formula">
+
+        \[
+        \boxed{|A|\neq0}
+        \]
+
+    </div>
+
+
+    <h3>Contoh</h3>
+
+
+    <div class="formula matrix">
+
+        \[
+        A =
+        \begin{pmatrix}
+        2 & 1 \\
+        3 & 2
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Determinan:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        |A|
+        =
+        (2\times2)-(1\times3)
+        =
+        4-3
+        =
+        1
+        \]
+
+    </div>
+
+
+    <p>
+
+        Karena determinan tidak sama dengan nol,
+        maka invers ada.
+
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        A^{-1}
+        =
+        \begin{pmatrix}
+        2 & -1 \\
+        -3 & 2
+        \end{pmatrix}
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     K. SPL
+     ========================================================= -->
+
+<section>
+
+    <h2>
+        K. Matriks untuk Menyelesaikan SPL
+    </h2>
+
+
+    <p>
+
+        Matriks dapat digunakan untuk menyelesaikan
+        <strong>Sistem Persamaan Linear (SPL)</strong>.
+
+    </p>
+
+
+    <p>
+        Contoh:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        2x+y=7
+        \]
+
+        \[
+        x+y=5
+        \]
+
+    </div>
+
+
+    <p>
+        Bentuk matriksnya:
+    </p>
+
+
+    <div class="formula matrix">
+
+        \[
+        \begin{pmatrix}
+        2 & 1 \\
+        1 & 1
+        \end{pmatrix}
+        \begin{pmatrix}
+        x \\
+        y
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+        7 \\
+        5
+        \end{pmatrix}
+        \]
+
+    </div>
+
+
+    <p>
+        Dapat ditulis:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        AX=B
+        \]
+
+    </div>
+
+
+    <p>
+        Jika \(A\) mempunyai invers, maka:
+    </p>
+
+
+    <div class="formula">
+
+        \[
+        \boxed{X=A^{-1}B}
+        \]
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     L. RANGKUMAN
+     ========================================================= -->
+
+<section>
+
+    <h2>
+        L. Rangkuman Rumus Penting
+    </h2>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Materi
+                    </th>
+
+                    <th>
+                        Rumus / Keterangan
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        Ordo
+                    </td>
+
+                    <td>
+                        Baris × Kolom
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Penjumlahan
+                    </td>
+
+                    <td>
+                        Elemen yang bersesuaian dijumlahkan
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Pengurangan
+                    </td>
+
+                    <td>
+                        Elemen yang bersesuaian dikurangkan
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Perkalian skalar
+                    </td>
+
+                    <td>
+                        Semua elemen dikalikan bilangan
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Perkalian matriks
+                    </td>
+
+                    <td>
+                        Baris × Kolom
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Transpose
+                    </td>
+
+                    <td>
+                        Baris menjadi kolom
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Determinan 2×2
+                    </td>
+
+                    <td>
+                        \(ad-bc\)
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Invers 2×2
+                    </td>
+
+                    <td>
+
+                        \[
+                        \frac{1}{ad-bc}
+                        \begin{pmatrix}
+                        d & -b \\
+                        -c & a
+                        \end{pmatrix}
+                        \]
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>
+                        Syarat invers
+                    </td>
+
+                    <td>
+                        Determinan ≠ 0
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     M. CONTOH SOAL
+     ========================================================= -->
+
+<section id="contoh">
+
+    <h2>
+        M. 5 Contoh Soal dan Pembahasan
+    </h2>
+
+
+    <!-- CONTOH 1 -->
+
+    <div class="example">
+
+        <div class="example-title">
+            Contoh 1 – Menentukan Ordo
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            2 & 4 & 6 \\
+            1 & 3 & 5
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan ordo matriks \(A\).
+        </p>
+
+
+        <div class="answer">
+
+            <strong>Pembahasan:</strong>
+
+            <p>
+                Matriks mempunyai 2 baris dan 3 kolom.
+            </p>
+
+            <p>
+                Jadi:
+            </p>
+
+
+            <div class="formula">
+
+                \[
+                \boxed{
+                A \text{ berordo } 2\times3
+                }
+                \]
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTOH 2 -->
+
+    <div class="example">
+
+        <div class="example-title">
+            Contoh 2 – Penjumlahan Matriks
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            2 & 3 \\
+            4 & 5
+            \end{pmatrix}
+            \]
+
+            \[
+            B =
+            \begin{pmatrix}
+            1 & 4 \\
+            2 & 3
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan \(A+B\).
+        </p>
+
+
+        <div class="answer">
+
+
+            <div class="formula matrix">
+
+                \[
+                A+B =
+                \begin{pmatrix}
+                2+1 & 3+4 \\
+                4+2 & 5+3
+                \end{pmatrix}
+                \]
+
+                \[
+                \boxed{
+                A+B =
+                \begin{pmatrix}
+                3 & 7 \\
+                6 & 8
+                \end{pmatrix}
+                }
+                \]
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTOH 3 -->
+
+    <div class="example">
+
+        <div class="example-title">
+            Contoh 3 – Perkalian Matriks
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            1 & 2 \\
+            3 & 4
+            \end{pmatrix}
+            \]
+
+            \[
+            B =
+            \begin{pmatrix}
+            2 & 1 \\
+            3 & 2
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan \(AB\).
+        </p>
+
+
+        <div class="answer">
+
+            <div class="formula matrix">
+
+                \[
+                AB =
+                \begin{pmatrix}
+                (1\times2)+(2\times3)
+                &
+                (1\times1)+(2\times2)
+                \\[8pt]
+                (3\times2)+(4\times3)
+                &
+                (3\times1)+(4\times2)
+                \end{pmatrix}
+                \]
+
+                \[
+                \boxed{
+                AB =
+                \begin{pmatrix}
+                8 & 5 \\
+                18 & 11
+                \end{pmatrix}
+                }
+                \]
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTOH 4 -->
+
+    <div class="example">
+
+        <div class="example-title">
+            Contoh 4 – Determinan
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            4 & 3 \\
+            2 & 5
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan determinan \(A\).
+        </p>
+
+
+        <div class="answer">
+
+            <div class="formula">
+
+                \[
+                |A|
+                =
+                (4\times5)-(3\times2)
+                \]
+
+                \[
+                =20-6
+                \]
+
+                \[
+                \boxed{|A|=14}
+                \]
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CONTOH 5 -->
+
+    <div class="example">
+
+        <div class="example-title">
+            Contoh 5 – Invers Matriks
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            3 & 1 \\
+            2 & 1
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan \(A^{-1}\).
+        </p>
+
+
+        <div class="answer">
+
+            <p>
+                Determinan:
+            </p>
+
+
+            <div class="formula">
+
+                \[
+                |A|
+                =
+                (3\times1)-(1\times2)
+                =
+                1
+                \]
+
+            </div>
+
+
+            <p>
+
+                Karena determinan ≠ 0,
+                maka invers ada.
+
+            </p>
+
+
+            <div class="formula matrix">
+
+                \[
+                \boxed{
+                A^{-1}
+                =
+                \begin{pmatrix}
+                1 & -1 \\
+                -2 & 3
+                \end{pmatrix}
+                }
+                \]
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     N. LATIHAN
+     ========================================================= -->
+
+<section id="latihan">
+
+    <h2>
+        N. 5 Latihan Soal
+    </h2>
+
+
+    <!-- LATIHAN 1 -->
+
+    <div class="question">
+
+        <div class="question-number">
+            Latihan 1
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            3 & 5 & 7 \\
+            2 & 4 & 6
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan:
+        </p>
+
+
+        <ol type="a">
+
+            <li>
+                Ordo matriks \(A\)
+            </li>
+
+            <li>
+                Nilai \(a_{12}\)
+            </li>
+
+            <li>
+                Nilai \(a_{23}\)
+            </li>
+
+        </ol>
+
+    </div>
+
+
+
+    <!-- LATIHAN 2 -->
+
+    <div class="question">
+
+        <div class="question-number">
+            Latihan 2
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            4 & 2 \\
+            3 & 5
+            \end{pmatrix}
+            \]
+
+            \[
+            B =
+            \begin{pmatrix}
+            1 & 3 \\
+            2 & 4
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan:
+        </p>
+
+
+        <div class="formula">
+
+            \[
+            A+B
+            \]
+
+        </div>
+
+
+        <p>
+            dan
+        </p>
+
+
+        <div class="formula">
+
+            \[
+            A-B
+            \]
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LATIHAN 3 -->
+
+    <div class="question">
+
+        <div class="question-number">
+            Latihan 3
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            2 & 1 \\
+            3 & 2
+            \end{pmatrix}
+            \]
+
+            \[
+            B =
+            \begin{pmatrix}
+            4 & 2 \\
+            1 & 3
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan:
+        </p>
+
+
+        <div class="formula">
+
+            \[
+            AB
+            \]
+
+        </div>
+
+    </div>
+
+
+
+    <!-- LATIHAN 4 -->
+
+    <div class="question">
+
+        <div class="question-number">
+            Latihan 4
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            5 & 2 \\
+            3 & 4
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan determinan matriks \(A\).
+        </p>
+
+    </div>
+
+
+
+    <!-- LATIHAN 5 -->
+
+    <div class="question">
+
+        <div class="question-number">
+            Latihan 5
+        </div>
+
+
+        <p>
+            Diketahui:
+        </p>
+
+
+        <div class="formula matrix">
+
+            \[
+            A =
+            \begin{pmatrix}
+            2 & 1 \\
+            1 & 1
+            \end{pmatrix}
+            \]
+
+        </div>
+
+
+        <p>
+            Tentukan:
+        </p>
+
+
+        <div class="formula">
+
+            \[
+            A^{-1}
+            \]
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     O. TUGAS
+     ========================================================= -->
+
+<section id="tugas">
+
+    <h2>
+        O. 5 Tugas
+    </h2>
+
+
+    <!-- TUGAS 1 -->
+
+    <div class="task">
+
+        <h3>
+            Tugas 1 – Mengenal Matriks
+        </h3>
+
+
+        <p>
+            Buatlah 3 contoh matriks dengan ketentuan:
+        </p>
+
+
+        <ol>
+
+            <li>
+                Matriks \(2\times2\)
+            </li>
+
+            <li>
+                Matriks \(2\times3\)
+            </li>
+
+            <li>
+                Matriks \(3\times3\)
+            </li>
+
+        </ol>
+
+
+        <p>
+            Kemudian tentukan ordo masing-masing matriks.
+        </p>
+
+    </div>
+
+
+
+    <!-- TUGAS 2 -->
+
+    <div class="task">
+
+        <h3>
+            Tugas 2 – Operasi Matriks
+        </h3>
+
+
+        <p>
+            Buat dua matriks \(A\) dan \(B\)
+            berordo \(3\times3\).
+        </p>
+
+
+        <p>
+            Hitung:
+        </p>
+
+
+        <ol>
+
+            <li>
+                \(A+B\)
+            </li>
+
+            <li>
+                \(A-B\)
+            </li>
+
+            <li>
+                \(2A\)
+            </li>
+
+        </ol>
+
+    </div>
+
+
+
+    <!-- TUGAS 3 -->
+
+    <div class="task">
+
+        <h3>
+            Tugas 3 – Perkalian Matriks
+        </h3>
+
+
+        <p>
+            Buat dua matriks
+            \(A_{2\times2}\)
+            dan
+            \(B_{2\times2}\).
+        </p>
+
+
+        <p>
+            Kemudian hitung:
+        </p>
+
+
+        <div class="formula">
+
+            \[
+            AB
+            \]
+
+        </div>
+
+
+        <p>
+            Tuliskan seluruh langkah perhitungannya.
+        </p>
+
+    </div>
+
+
+
+    <!-- TUGAS 4 -->
+
+    <div class="task">
+
+        <h3>
+            Tugas 4 – Determinan dan Invers
+        </h3>
+
+
+        <p>
+            Buat sebuah matriks \(2\times2\).
+        </p>
+
+
+        <p>
+            Tentukan:
+        </p>
+
+
+        <ol>
+
+            <li>
+                Determinan matriks.
+            </li>
+
+            <li>
+                Apakah matriks tersebut mempunyai invers?
+            </li>
+
+            <li>
+                Jika mempunyai invers, tentukan inversnya.
+            </li>
+
+        </ol>
+
+    </div>
+
+
+
+    <!-- TUGAS 5 -->
+
+    <div class="task">
+
+        <h3>
+            Tugas 5 – Matriks dalam Kehidupan Sehari-hari
+        </h3>
+
+
+        <p>
+
+            Carilah satu contoh penggunaan matriks
+            dalam kehidupan sehari-hari.
+
+        </p>
+
+
+        <p>
+            Contohnya:
+        </p>
+
+
+        <ul>
+
+            <li>
+                Data nilai siswa
+            </li>
+
+            <li>
+                Penjualan barang
+            </li>
+
+            <li>
+                Stok barang
+            </li>
+
+            <li>
+                Jadwal pelajaran
+            </li>
+
+            <li>
+                Data harga
+            </li>
+
+            <li>
+                Data produksi
+            </li>
+
+        </ul>
+
+
+        <p>
+
+            Buat data tersebut dalam bentuk matriks
+            dan jelaskan mengapa matriks cocok digunakan
+            untuk menyajikan data tersebut.
+
+        </p>
+
+
+        <p>
+            <strong>Format tugas:</strong>
+        </p>
+
+
+        <ol>
+
+            <li>
+                Judul
+            </li>
+
+            <li>
+                Permasalahan
+            </li>
+
+            <li>
+                Data
+            </li>
+
+            <li>
+                Bentuk Matriks
+            </li>
+
+            <li>
+                Penjelasan
+            </li>
+
+            <li>
+                Kesimpulan
+            </li>
+
+        </ol>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     P. KESIMPULAN
+     ========================================================= -->
+
+<section>
+
+    <h2>
+        P. Kesimpulan
+    </h2>
+
+
+    <div class="intro">
+
+        <p>
+
+            Matriks merupakan susunan bilangan dalam
+            baris dan kolom yang dapat digunakan untuk
+            menyajikan dan mengolah data secara terstruktur.
+
+        </p>
+
+
+        <p>
+
+            Dalam materi ini kita telah mempelajari
+            pengertian matriks, ordo, elemen matriks,
+            jenis-jenis matriks, transpose, penjumlahan,
+            pengurangan, perkalian, determinan, invers,
+            serta penggunaan matriks untuk menyelesaikan
+            sistem persamaan linear.
+
+        </p>
+
+
+        <p>
+            <strong>
+                Kunci utama yang perlu diingat:
+            </strong>
+        </p>
+
+
+        <ul>
+
+            <li>
+                Ordo = baris × kolom.
+            </li>
+
+            <li>
+                Penjumlahan dan pengurangan harus
+                memiliki ordo yang sama.
+            </li>
+
+            <li>
+                Perkalian matriks menggunakan konsep
+                baris × kolom.
+            </li>
+
+            <li>
+                Determinan matriks 2 × 2 adalah
+                \(ad-bc\).
+            </li>
+
+            <li>
+                Matriks mempunyai invers jika
+                determinannya tidak sama dengan nol.
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+    
+    <p>
+        <strong>MATEMATIKA KELAS XI</strong>
+    </p>
+
+    <p>
+        Materi Matriks
+    </p>
+
+    <p>
+        SMK DIPSA Purwokerto
+    </p>
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desain Poster pada Photoshop - SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#17191d;
+  --muted:#626872;
+  --paper:#f5f2ec;
+  --white:#ffffff;
+  --accent:#8f1d2c;
+  --accent-dark:#67131f;
+  --line:#ddd8cf;
+  --soft:#eee9e1;
+  --success:#e8f3ec;
+  --warning:#fff4df;
+  --shadow:0 12px 35px rgba(23,25,29,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header{
+  background:var(--ink);
+  color:#fff;
+  padding:18px 6%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.brand{font-weight:800;letter-spacing:.08em;font-size:14px}
+.brand span{display:block;color:#cfc9bf;font-size:11px;margin-top:2px;font-weight:500}
+.container{width:min(1180px,92%);margin:auto}
+.hero{
+  background:linear-gradient(135deg,#17191d 0%,#35131a 55%,#8f1d2c 100%);
+  color:#fff;
+  padding:70px 6% 75px;
+}
+.hero-inner{width:min(1180px,100%);margin:auto}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  color:#e5cbd0;
+  font-weight:700;
+}
+.hero h1{
+  font-size:clamp(36px,6vw,68px);
+  line-height:1.05;
+  margin:12px 0 18px;
+  max-width:850px;
+}
+.hero p{max-width:800px;color:#eee7e5;font-size:18px;margin:0}
+.layout{
+  width:min(1180px,92%);
+  margin:35px auto 70px;
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:28px;
+}
+.sidebar{
+  position:sticky;
+  top:20px;
+  align-self:start;
+  background:var(--white);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:22px;
+  border-radius:16px;
+}
+.sidebar h3{margin:0 0 14px;font-size:16px}
+.sidebar a{
+  display:block;
+  padding:8px 0;
+  border-bottom:1px solid #eee;
+  color:var(--ink);
+  font-size:14px;
+}
+.sidebar a:last-child{border-bottom:0}
+main section{
+  background:var(--white);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:32px;
+  margin-bottom:25px;
+  border-radius:18px;
+}
+h2{
+  font-size:30px;
+  line-height:1.2;
+  margin:0 0 18px;
+}
+h3{font-size:21px;margin-top:28px}
+h4{font-size:17px;margin-bottom:8px}
+p{margin:10px 0 16px}
+ul,ol{padding-left:24px}
+li{margin:7px 0}
+.lead{font-size:17px;color:#34373c}
+.tag{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:999px;
+  background:#f0e4e6;
+  color:var(--accent-dark);
+  font-size:12px;
+  font-weight:700;
+  margin:3px 4px 3px 0;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.card{
+  background:#faf9f6;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:20px;
+}
+.card h3,.card h4{margin-top:0}
+.note,.tip,.warning,.success{
+  padding:17px 19px;
+  border-left:5px solid var(--accent);
+  border-radius:8px;
+  margin:18px 0;
+}
+.note{background:#f5f1eb}
+.tip{background:#f3f0f8;border-color:#5d477d}
+.warning{background:var(--warning);border-color:#c78316}
+.success{background:var(--success);border-color:#2d7a4d}
+.step{
+  counter-increment:steps;
+  position:relative;
+  padding-left:58px;
+  margin:24px 0;
+}
+.steps{counter-reset:steps}
+.step:before{
+  content:counter(steps);
+  position:absolute;
+  left:0;top:0;
+  width:38px;height:38px;
+  display:grid;place-items:center;
+  background:var(--accent);
+  color:#fff;
+  border-radius:50%;
+  font-weight:800;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:18px 0;
+  font-size:14px;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  vertical-align:top;
+}
+th{background:#f0ece5}
+kbd{
+  background:#24272c;
+  color:#fff;
+  padding:2px 7px;
+  border-radius:5px;
+  font-size:12px;
+}
+.example{
+  border:1px dashed #bdb5aa;
+  background:#fbfaf7;
+  border-radius:12px;
+  padding:18px;
+  margin:15px 0;
+}
+.poster-demo{
+  width:min(330px,100%);
+  aspect-ratio:2/3;
+  margin:18px auto;
+  padding:25px 22px;
+  color:#fff;
+  background:linear-gradient(145deg,#17191d,#8f1d2c);
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+.poster-demo small{letter-spacing:.12em;text-transform:uppercase}
+.poster-demo h3{font-size:32px;line-height:1;margin:15px 0}
+.poster-demo .cta{
+  display:inline-block;
+  background:#fff;
+  color:#17191d;
+  padding:9px 13px;
+  border-radius:5px;
+  font-weight:800;
+  font-size:12px;
+}
+.checklist li::marker{color:var(--accent)}
+details{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 16px;
+  margin:12px 0;
+  background:#faf9f6;
+}
+summary{cursor:pointer;font-weight:700}
+footer{
+  background:var(--ink);
+  color:#cfcfcf;
+  padding:35px 6%;
+  text-align:center;
+  font-size:13px;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  header{padding:15px 4%}
+  .hero{padding:52px 5% 58px}
+  .layout{width:94%;margin-top:20px}
+  main section{padding:22px 18px;border-radius:14px}
+  h2{font-size:25px}
+  .hero p{font-size:16px}
+  table{font-size:13px}
+  th,td{padding:9px}
+}
+@media print{
+  body{background:#fff}
+  header,.sidebar,footer{display:none}
+  .layout{display:block;width:100%;margin:0}
+  main section{box-shadow:none;border:0;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    SMK DIPSA PURWOKERTO
+    <span>Materi Pembelajaran Desain Grafis & Photoshop</span>
+  </div>
+  <div>DESAIN POSTER</div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Materi Photoshop • Desain Grafis</div>
+    <h1>Desain Poster pada Photoshop</h1>
+    <p>
+      Belajar membuat poster yang menarik, mudah dibaca, memiliki hierarki visual yang jelas,
+      dan mampu menyampaikan pesan kepada target audiens. Materi ini disusun dari dasar sampai
+      proyek poster kegiatan sekolah.
+    </p>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    <a href="#tujuan">Tujuan Pembelajaran</a>
+    <a href="#pengertian">1. Pengertian Poster</a>
+    <a href="#konsep">2. Menentukan Konsep</a>
+    <a href="#ukuran">3. Ukuran Poster</a>
+    <a href="#layout">4. Layout</a>
+    <a href="#hierarchy">5. Visual Hierarchy</a>
+    <a href="#tipografi">6. Tipografi</a>
+    <a href="#warna">7. Warna</a>
+    <a href="#gambar">8. Pemilihan Gambar</a>
+    <a href="#cta">9. Call to Action</a>
+    <a href="#photoshop">10. Menyusun Poster di Photoshop</a>
+    <a href="#workflow">11. Alur Kerja</a>
+    <a href="#proyek">12. Proyek Poster Sekolah</a>
+    <a href="#kesalahan">13. Kesalahan Umum</a>
+    <a href="#soal">14. 5 Latihan Soal</a>
+    <a href="#tugas">15. 5 Tugas Praktik</a>
+    <a href="#ringkasan">16. Ringkasan</a>
+  </aside>
+
+  <main>
+    <section id="tujuan">
+      <h2>Tujuan Pembelajaran</h2>
+      <p class="lead">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+      <ul class="checklist">
+        <li>Menjelaskan pengertian, fungsi, dan tujuan poster.</li>
+        <li>Menentukan konsep poster berdasarkan tema dan target audiens.</li>
+        <li>Memilih ukuran dan orientasi poster sesuai kebutuhan.</li>
+        <li>Menyusun layout yang rapi dan seimbang.</li>
+        <li>Menerapkan visual hierarchy agar informasi mudah dipahami.</li>
+        <li>Menggunakan tipografi, warna, dan gambar secara tepat.</li>
+        <li>Membuat call to action yang jelas.</li>
+        <li>Menyusun poster kegiatan sekolah menggunakan Adobe Photoshop.</li>
+        <li>Mengekspor desain ke format yang sesuai untuk digital maupun cetak.</li>
+      </ul>
+    </section>
+
+    <section id="pengertian">
+      <h2>1. Pengertian dan Tujuan Poster</h2>
+      <p class="lead">
+        Poster adalah media komunikasi visual yang menggabungkan teks, gambar, warna, dan komposisi
+        untuk menyampaikan informasi atau mengajak audiens melakukan sesuatu.
+      </p>
+      <p>
+        Poster biasanya dibuat agar dapat dipahami dalam waktu singkat. Karena itu, poster tidak boleh
+        berisi terlalu banyak informasi yang tidak penting. Pesan utama harus terlihat jelas sejak
+        pertama kali orang melihatnya.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Tujuan Informasi</h3>
+          <p>Memberikan informasi seperti waktu, tempat, tema, pembicara, jadwal, atau ketentuan kegiatan.</p>
+        </div>
+        <div class="card">
+          <h3>Tujuan Promosi</h3>
+          <p>Menarik perhatian audiens agar tertarik terhadap acara, produk, jasa, atau kegiatan tertentu.</p>
+        </div>
+        <div class="card">
+          <h3>Tujuan Persuasi</h3>
+          <p>Mendorong audiens melakukan tindakan, misalnya mendaftar, datang, mengikuti lomba, atau membeli.</p>
+        </div>
+        <div class="card">
+          <h3>Tujuan Identitas</h3>
+          <p>Membangun kesan visual melalui logo, warna, tipografi, dan gaya desain yang konsisten.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Prinsip sederhana:</strong> poster yang baik bukan poster yang paling ramai.
+        Poster yang baik adalah poster yang pesannya cepat ditangkap oleh orang yang melihatnya.
+      </div>
+    </section>
+
+    <section id="konsep">
+      <h2>2. Menentukan Konsep Poster</h2>
+      <p>
+        Sebelum membuka Photoshop, tentukan terlebih dahulu konsep. Jangan langsung memilih font,
+        warna, atau gambar sebelum mengetahui apa yang ingin disampaikan.
+      </p>
+
+      <h3>Pertanyaan yang harus dijawab</h3>
+      <ol>
+        <li><strong>Apa acaranya?</strong> Contoh: lomba desain poster.</li>
+        <li><strong>Siapa target audiensnya?</strong> Contoh: siswa SMK.</li>
+        <li><strong>Apa pesan utamanya?</strong> Contoh: “Tunjukkan kreativitasmu”.</li>
+        <li><strong>Apa tindakan yang diharapkan?</strong> Contoh: daftar sebelum 10 Oktober.</li>
+        <li><strong>Di mana dan kapan kegiatan berlangsung?</strong></li>
+        <li><strong>Gaya visual apa yang sesuai?</strong> Modern, formal, energik, minimalis, atau kreatif.</li>
+      </ol>
+
+      <div class="example">
+        <strong>Contoh konsep:</strong><br>
+        Tema: Seminar Desain Grafis<br>
+        Target: Siswa kelas X–XII<br>
+        Gaya: Modern dan profesional<br>
+        Warna: Merah marun, hitam, putih<br>
+        Pesan utama: “Kenali Dunia Desain Grafis”<br>
+        CTA: “Daftar Sekarang”
+      </div>
+
+      <h3>Membuat sketsa sederhana</h3>
+      <p>
+        Sebelum membuat desain final, buat thumbnail atau sketsa kasar. Tidak harus bagus.
+        Tujuannya hanya untuk menentukan posisi judul, gambar, informasi, dan tombol/CTA.
+      </p>
+    </section>
+
+    <section id="ukuran">
+      <h2>3. Menentukan Ukuran Poster</h2>
+      <p>
+        Ukuran poster ditentukan berdasarkan media penggunaannya. Poster yang akan dicetak memiliki
+        kebutuhan resolusi dan ukuran dokumen yang berbeda dengan poster untuk Instagram atau layar.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Kebutuhan</th>
+            <th>Contoh Ukuran</th>
+            <th>Catatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Poster cetak A4</td>
+            <td>210 × 297 mm</td>
+            <td>Cocok untuk pengumuman kelas atau papan informasi kecil.</td>
+          </tr>
+          <tr>
+            <td>Poster cetak A3</td>
+            <td>297 × 420 mm</td>
+            <td>Lebih mudah terlihat dari jarak tertentu.</td>
+          </tr>
+          <tr>
+            <td>Poster digital</td>
+            <td>Misalnya 1080 × 1350 px</td>
+            <td>Cocok untuk media sosial dengan orientasi portrait.</td>
+          </tr>
+          <tr>
+            <td>Poster layar</td>
+            <td>Misalnya 1920 × 1080 px</td>
+            <td>Untuk presentasi, layar informasi, atau tampilan digital tertentu.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warning">
+        <strong>Perhatikan resolusi:</strong> untuk kebutuhan cetak, gunakan pengaturan resolusi yang
+        sesuai dengan percetakan. Jangan memperbesar gambar beresolusi rendah karena hasil cetak dapat
+        terlihat pecah atau buram.
+      </div>
+    </section>
+
+    <section id="layout">
+      <h2>4. Layout Poster</h2>
+      <p>
+        Layout adalah cara menyusun seluruh elemen dalam poster. Elemen tersebut dapat berupa judul,
+        foto, ilustrasi, logo, informasi, tanggal, lokasi, dan call to action.
+      </p>
+
+      <h3>Elemen layout yang perlu diperhatikan</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Alignment</h4>
+          <p>Atur elemen agar memiliki garis atau posisi yang teratur sehingga desain terlihat rapi.</p>
+        </div>
+        <div class="card">
+          <h4>Spacing</h4>
+          <p>Berikan ruang antar elemen. Jangan memenuhi seluruh bidang poster.</p>
+        </div>
+        <div class="card">
+          <h4>Balance</h4>
+          <p>Seimbangkan elemen berat dan ringan agar komposisi tidak terasa jatuh ke satu sisi.</p>
+        </div>
+        <div class="card">
+          <h4>Contrast</h4>
+          <p>Gunakan perbedaan ukuran, warna, atau bentuk untuk membedakan informasi penting.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Tips:</strong> aktifkan ruler dan gunakan guides di Photoshop agar posisi elemen lebih
+        mudah disejajarkan. Gunakan margin aman supaya teks tidak terlalu dekat dengan tepi.
+      </div>
+    </section>
+
+    <section id="hierarchy">
+      <h2>5. Visual Hierarchy</h2>
+      <p>
+        Visual hierarchy adalah pengaturan tingkat kepentingan visual. Tujuannya agar mata audiens
+        mengetahui bagian mana yang harus dibaca terlebih dahulu, kemudian bagian berikutnya.
+      </p>
+
+      <h3>Urutan sederhana</h3>
+      <ol>
+        <li><strong>Headline:</strong> judul atau pesan utama.</li>
+        <li><strong>Visual utama:</strong> gambar atau ilustrasi yang mendukung pesan.</li>
+        <li><strong>Informasi penting:</strong> tanggal, waktu, tempat, pembicara, atau ketentuan.</li>
+        <li><strong>Call to action:</strong> tindakan yang harus dilakukan audiens.</li>
+        <li><strong>Informasi tambahan:</strong> kontak, media sosial, sponsor, atau catatan.</li>
+      </ol>
+
+      <div class="poster-demo">
+        <div>
+          <small>SMK DIPSA PURWOKERTO</small>
+          <h3>LOMBA<br>DESAIN<br>POSTER</h3>
+          <p>Ekspresikan ide. Tunjukkan kreativitasmu.</p>
+        </div>
+        <div>
+          <p><strong>20 OKTOBER • AULA SEKOLAH</strong></p>
+          <span class="cta">DAFTAR SEKARANG</span>
+        </div>
+      </div>
+
+      <div class="note">
+        Jika semua tulisan dibuat sama besar dan sama tebal, audiens akan kesulitan menentukan
+        informasi yang paling penting. Itulah sebabnya hierarchy sangat diperlukan.
+      </div>
+    </section>
+
+    <section id="tipografi">
+      <h2>6. Tipografi</h2>
+      <p>
+        Tipografi adalah pengaturan huruf agar teks mudah dibaca sekaligus memiliki karakter visual
+        yang sesuai dengan tema poster.
+      </p>
+
+      <h3>Hal yang perlu diatur</h3>
+      <ul>
+        <li><strong>Jenis font:</strong> pilih font yang sesuai dengan karakter poster.</li>
+        <li><strong>Ukuran font:</strong> judul harus lebih dominan daripada informasi pendukung.</li>
+        <li><strong>Weight:</strong> gunakan regular, medium, semibold, atau bold sesuai kebutuhan.</li>
+        <li><strong>Tracking:</strong> atur jarak antarhuruf jika diperlukan.</li>
+        <li><strong>Leading:</strong> atur jarak antarbaris agar teks nyaman dibaca.</li>
+        <li><strong>Alignment:</strong> pilih rata kiri, tengah, kanan, atau justified dengan pertimbangan desain.</li>
+      </ul>
+
+      <h3>Kombinasi font</h3>
+      <p>
+        Untuk pemula, gunakan maksimal dua atau tiga keluarga font dalam satu poster. Contohnya:
+      </p>
+      <ul>
+        <li>Font display/bold untuk headline.</li>
+        <li>Font sans-serif sederhana untuk informasi.</li>
+        <li>Font aksen hanya jika benar-benar diperlukan.</li>
+      </ul>
+
+      <div class="warning">
+        Hindari penggunaan terlalu banyak jenis font. Poster dapat terlihat tidak konsisten dan
+        informasi menjadi sulit dibaca.
+      </div>
+    </section>
+
+    <section id="warna">
+      <h2>7. Warna</h2>
+      <p>
+        Warna membantu membangun suasana, menarik perhatian, membedakan informasi, dan memperkuat
+        identitas visual. Pilih warna berdasarkan tema dan target audiens.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Warna utama</h3>
+          <p>Warna yang paling dominan dan menjadi identitas visual poster.</p>
+        </div>
+        <div class="card">
+          <h3>Warna pendukung</h3>
+          <p>Membantu membangun komposisi tanpa mengambil perhatian dari pesan utama.</p>
+        </div>
+        <div class="card">
+          <h3>Warna aksen</h3>
+          <p>Digunakan untuk menonjolkan informasi penting seperti tanggal atau CTA.</p>
+        </div>
+        <div class="card">
+          <h3>Kontras</h3>
+          <p>Pastikan teks dan background memiliki kontras yang cukup agar mudah dibaca.</p>
+        </div>
+      </div>
+
+      <h3>Contoh pendekatan warna</h3>
+      <ul>
+        <li><strong>Formal:</strong> warna gelap dengan aksen yang terkontrol.</li>
+        <li><strong>Enerjik:</strong> warna cerah dengan kontras kuat.</li>
+        <li><strong>Elegan:</strong> warna netral dengan satu warna aksen.</li>
+        <li><strong>Teknologi:</strong> warna gelap dengan aksen warna terang.</li>
+      </ul>
+
+      <div class="tip">
+        Jangan memilih warna hanya karena terlihat bagus. Tanyakan apakah warna tersebut membantu
+        pesan poster menjadi lebih jelas.
+      </div>
+    </section>
+
+    <section id="gambar">
+      <h2>8. Pemilihan Gambar</h2>
+      <p>
+        Gambar merupakan salah satu elemen yang paling cepat menarik perhatian. Pilih gambar yang
+        relevan dengan isi poster dan memiliki kualitas yang cukup.
+      </p>
+
+      <h3>Kriteria gambar yang baik</h3>
+      <ul>
+        <li>Relevan dengan tema kegiatan.</li>
+        <li>Memiliki kualitas dan resolusi yang memadai.</li>
+        <li>Memiliki komposisi yang mendukung ruang untuk teks.</li>
+        <li>Tidak terlalu ramai sehingga mengganggu informasi.</li>
+        <li>Memiliki hak penggunaan yang sesuai untuk kebutuhan desain.</li>
+      </ul>
+
+      <h3>Memilih gambar untuk poster</h3>
+      <p>
+        Misalnya poster pentas seni. Foto panggung atau siswa yang sedang tampil dapat digunakan
+        sebagai visual utama. Jika gambar sangat ramai, tambahkan overlay atau area warna transparan
+        agar teks tetap terbaca.
+      </p>
+
+      <div class="note">
+        <strong>Ingat:</strong> gambar adalah pendukung pesan, bukan pengganti pesan. Jangan memilih
+        gambar hanya karena menarik jika tidak berhubungan dengan kegiatan.
+      </div>
+    </section>
+
+    <section id="cta">
+      <h2>9. Call to Action (CTA)</h2>
+      <p>
+        Call to action adalah ajakan atau instruksi yang memberi tahu audiens apa yang harus dilakukan
+        setelah melihat poster.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Contoh CTA</h3>
+          <ul>
+            <li>Daftar Sekarang</li>
+            <li>Scan QR untuk Mendaftar</li>
+            <li>Hadiri Seminar</li>
+            <li>Ikuti Lomba</li>
+            <li>Hubungi Panitia</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>CTA yang baik</h3>
+          <p>Singkat, jelas, mudah ditemukan, dan memiliki hubungan langsung dengan tujuan kegiatan.</p>
+        </div>
+      </div>
+
+      <p>
+        Jika poster mengajak siswa mengikuti lomba, CTA harus terlihat jelas. Jangan menempatkan
+        tulisan “DAFTAR SEKARANG” terlalu kecil di bagian yang sulit ditemukan.
+      </p>
+    </section>
+
+    <section id="photoshop">
+      <h2>10. Menyusun Poster di Photoshop</h2>
+      <p class="lead">
+        Berikut langkah praktik dari dokumen kosong sampai poster siap disimpan.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Tentukan brief</h3>
+          <p>
+            Tuliskan tema, target audiens, ukuran, pesan utama, informasi acara, CTA, warna,
+            dan kebutuhan logo.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat dokumen baru</h3>
+          <p>
+            Buka Photoshop lalu pilih <strong>File &gt; New</strong>. Masukkan ukuran sesuai kebutuhan.
+            Untuk poster digital, gunakan ukuran piksel sesuai platform. Untuk cetak, tentukan ukuran
+            fisik dan resolusi sesuai kebutuhan percetakan.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat background</h3>
+          <p>
+            Buat warna atau gambar background. Pastikan background tidak membuat teks sulit dibaca.
+            Gunakan layer terpisah agar mudah diedit.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Masukkan gambar utama</h3>
+          <p>
+            Gunakan <strong>File &gt; Place Embedded</strong> atau metode penempatan gambar yang tersedia
+            pada versi Photoshop Anda. Atur ukuran dan posisi dengan <strong>Transform</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat headline</h3>
+          <p>
+            Gunakan <strong>Type Tool (T)</strong>. Tulis judul yang singkat dan kuat. Atur ukuran,
+            jenis font, weight, warna, dan posisi.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Susun informasi pendukung</h3>
+          <p>
+            Tambahkan tanggal, waktu, tempat, nama pembicara, biaya, ketentuan, atau informasi lain
+            yang benar-benar diperlukan.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Buat CTA</h3>
+          <p>
+            Buat area yang menonjol untuk CTA. Gunakan kontras yang cukup dan ukuran yang mudah dibaca.
+            Contohnya: “DAFTAR SEKARANG”.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Tambahkan logo</h3>
+          <p>
+            Letakkan logo sekolah, organisasi, atau penyelenggara secara proporsional. Jangan sampai
+            logo mengalahkan judul acara jika bukan elemen utama.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Rapikan alignment dan spacing</h3>
+          <p>
+            Gunakan ruler, guides, dan panel Properties/Align sesuai versi Photoshop. Pastikan jarak
+            antar elemen konsisten dan tidak terlalu rapat.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Periksa hierarchy</h3>
+          <p>
+            Zoom out atau lihat poster dari jarak jauh. Tanyakan: apakah judul langsung terlihat?
+            Apakah orang dapat menemukan tanggal, lokasi, dan CTA dengan cepat?
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Periksa kesalahan</h3>
+          <p>
+            Periksa ejaan, tanggal, jam, lokasi, nomor kontak, nama pembicara, logo, dan kualitas gambar.
+          </p>
+        </div>
+
+        <div class="step">
+          <h3>Simpan dan ekspor</h3>
+          <p>
+            Simpan file kerja dalam format <strong>PSD</strong> agar layer tetap dapat diedit.
+            Kemudian ekspor salinan sesuai kebutuhan, misalnya JPEG atau PNG untuk penggunaan digital.
+            Untuk cetak, ikuti spesifikasi dari percetakan.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <h2>11. Alur Kerja Desain Poster</h2>
+      <p>
+        Agar pekerjaan tidak berantakan, gunakan alur kerja berikut:
+      </p>
+      <ol>
+        <li>Brief → pahami kebutuhan.</li>
+        <li>Riset → cari referensi visual yang relevan.</li>
+        <li>Konsep → tentukan pesan, target, warna, dan gaya.</li>
+        <li>Sketsa → buat beberapa alternatif layout sederhana.</li>
+        <li>Produksi → susun desain di Photoshop.</li>
+        <li>Review → cek hierarchy, ejaan, warna, dan informasi.</li>
+        <li>Revisi → perbaiki bagian yang kurang.</li>
+        <li>Finalisasi → simpan PSD dan ekspor file final.</li>
+      </ol>
+
+      <div class="success">
+        <strong>Workflow yang baik:</strong> jangan terlalu cepat masuk ke tahap dekorasi.
+        Pastikan konsep, informasi, layout, dan hierarchy sudah benar terlebih dahulu.
+      </div>
+    </section>
+
+    <section id="proyek">
+      <h2>12. Proyek: Poster Kegiatan Sekolah</h2>
+      <p class="lead">
+        Buat satu poster kegiatan sekolah. Pilih salah satu tema: lomba, seminar, pentas seni,
+        atau kegiatan DKV.
+      </p>
+
+      <h3>Pilihan tema proyek</h3>
+      <div class="grid">
+        <div class="card">
+          <h3>Lomba</h3>
+          <p>Contoh: Lomba Desain Poster, Fotografi, atau Video Kreatif.</p>
+        </div>
+        <div class="card">
+          <h3>Seminar</h3>
+          <p>Contoh: Seminar Karier, Desain Grafis, atau Industri Kreatif.</p>
+        </div>
+        <div class="card">
+          <h3>Pentas Seni</h3>
+          <p>Contoh: Pentas Seni dan Kreativitas Siswa.</p>
+        </div>
+        <div class="card">
+          <h3>Kegiatan DKV</h3>
+          <p>Contoh: Pameran Karya Desain Komunikasi Visual.</p>
+        </div>
+      </div>
+
+      <h3>Contoh brief proyek</h3>
+      <div class="example">
+        <strong>Judul:</strong> FESTIVAL KREATIVITAS SISWA<br>
+        <strong>Jenis:</strong> Kegiatan sekolah<br>
+        <strong>Target:</strong> Siswa SMK DIPSA Purwokerto<br>
+        <strong>Pesan:</strong> Tampilkan ide dan karya terbaikmu<br>
+        <strong>Informasi:</strong> Sabtu, 20 Oktober • Aula Sekolah<br>
+        <strong>CTA:</strong> DAFTAR SEKARANG<br>
+        <strong>Gaya:</strong> Modern, energik, dan kreatif
+      </div>
+
+      <h3>Isi minimal poster</h3>
+      <ul class="checklist">
+        <li>Nama/judul kegiatan.</li>
+        <li>Visual utama yang relevan.</li>
+        <li>Tanggal kegiatan.</li>
+        <li>Waktu kegiatan.</li>
+        <li>Lokasi kegiatan.</li>
+        <li>Informasi penting lainnya jika diperlukan.</li>
+        <li>Call to action.</li>
+        <li>Logo atau identitas penyelenggara.</li>
+      </ul>
+
+      <h3>Langkah pengerjaan proyek</h3>
+      <ol>
+        <li>Buat brief singkat.</li>
+        <li>Tentukan ukuran poster.</li>
+        <li>Buat moodboard/referensi visual.</li>
+        <li>Buat minimal dua sketsa layout.</li>
+        <li>Pilih satu konsep terbaik untuk dikembangkan.</li>
+        <li>Produksi poster di Photoshop.</li>
+        <li>Periksa hierarchy dan keterbacaan.</li>
+        <li>Periksa ejaan dan seluruh informasi acara.</li>
+        <li>Simpan PSD dan ekspor hasil final.</li>
+      </ol>
+
+      <h3>Checklist sebelum dikumpulkan</h3>
+      <ul class="checklist">
+        <li>Judul mudah ditemukan.</li>
+        <li>Informasi penting mudah dibaca.</li>
+        <li>Gambar tidak pecah dan relevan.</li>
+        <li>Warna memiliki kontras yang cukup.</li>
+        <li>Font konsisten.</li>
+        <li>CTA terlihat jelas.</li>
+        <li>Layout tidak terlalu penuh.</li>
+        <li>Tidak ada salah ketik.</li>
+        <li>File PSD tersimpan.</li>
+        <li>File final sudah diekspor sesuai kebutuhan.</li>
+      </ul>
+
+      <h3>Kriteria penilaian proyek</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspek</th>
+            <th>Yang Dinilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Konsep</td>
+            <td>Kesesuaian ide, tema, target audiens, dan pesan.</td>
+          </tr>
+          <tr>
+            <td>Layout</td>
+            <td>Kerapian, keseimbangan, alignment, dan spacing.</td>
+          </tr>
+          <tr>
+            <td>Hierarchy</td>
+            <td>Kejelasan urutan informasi dan fokus utama.</td>
+          </tr>
+          <tr>
+            <td>Tipografi</td>
+            <td>Keterbacaan, pemilihan font, ukuran, dan konsistensi.</td>
+          </tr>
+          <tr>
+            <td>Warna</td>
+            <td>Harmoni, kontras, dan kesesuaian dengan tema.</td>
+          </tr>
+          <tr>
+            <td>Visual</td>
+            <td>Relevansi dan kualitas gambar/ilustrasi.</td>
+          </tr>
+          <tr>
+            <td>CTA</td>
+            <td>Kejelasan ajakan dan kemudahan ditemukan.</td>
+          </tr>
+          <tr>
+            <td>Teknis</td>
+            <td>Kerapian layer, ukuran dokumen, dan kualitas ekspor.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="kesalahan">
+      <h2>13. Kesalahan Umum dalam Desain Poster</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Terlalu banyak teks</h3>
+          <p>Solusi: pilih informasi yang paling penting dan sederhanakan kalimat.</p>
+        </div>
+        <div class="card">
+          <h3>Terlalu banyak font</h3>
+          <p>Solusi: gunakan sedikit keluarga font dan buat hierarchy melalui ukuran/weight.</p>
+        </div>
+        <div class="card">
+          <h3>Warna tidak kontras</h3>
+          <p>Solusi: uji keterbacaan teks terhadap background.</p>
+        </div>
+        <div class="card">
+          <h3>Semua elemen terlalu besar</h3>
+          <p>Solusi: tentukan satu fokus utama dan bedakan tingkat kepentingan.</p>
+        </div>
+        <div class="card">
+          <h3>Gambar berkualitas rendah</h3>
+          <p>Solusi: gunakan sumber gambar dengan kualitas yang sesuai kebutuhan output.</p>
+        </div>
+        <div class="card">
+          <h3>CTA tidak terlihat</h3>
+          <p>Solusi: beri ruang dan kontras yang cukup agar ajakan mudah ditemukan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="soal">
+      <h2>14. 5 Latihan Soal</h2>
+
+      <details>
+        <summary>Soal 1 — Apa tujuan utama visual hierarchy pada poster?</summary>
+        <p><strong>Jawaban:</strong> Mengatur tingkat kepentingan elemen visual agar audiens mengetahui informasi mana yang harus dilihat atau dibaca terlebih dahulu.</p>
+      </details>
+
+      <details>
+        <summary>Soal 2 — Mengapa konsep poster sebaiknya ditentukan sebelum membuka Photoshop?</summary>
+        <p><strong>Jawaban:</strong> Agar proses desain memiliki arah yang jelas. Desainer sudah mengetahui target audiens, pesan, gaya, warna, ukuran, dan informasi yang harus dimasukkan.</p>
+      </details>
+
+      <details>
+        <summary>Soal 3 — Apa fungsi call to action?</summary>
+        <p><strong>Jawaban:</strong> Memberikan instruksi atau ajakan kepada audiens mengenai tindakan yang diharapkan, misalnya “Daftar Sekarang”, “Scan QR”, atau “Hubungi Panitia”.</p>
+      </details>
+
+      <details>
+        <summary>Soal 4 — Sebutkan minimal tiga hal yang harus diperhatikan dalam tipografi poster.</summary>
+        <p><strong>Jawaban:</strong> Jenis font, ukuran font, ketebalan/weight, tracking, leading, alignment, dan keterbacaan. Minimal tiga dari unsur tersebut sudah benar.</p>
+      </details>
+
+      <details>
+        <summary>Soal 5 — Mengapa gambar pada poster harus relevan dengan tema?</summary>
+        <p><strong>Jawaban:</strong> Karena gambar membantu memperkuat pesan dan memberikan konteks kepada audiens. Gambar yang tidak relevan dapat mengganggu komunikasi poster.</p>
+      </details>
+    </section>
+
+    <section id="tugas">
+      <h2>15. 5 Tugas Praktik</h2>
+
+      <div class="card">
+        <h3>Tugas 1 — Poster Lomba Sekolah</h3>
+        <p>Buat poster lomba untuk siswa. Tentukan sendiri jenis lombanya, target audiens, warna, gambar, informasi acara, dan CTA.</p>
+        <p><strong>Output:</strong> 1 poster digital + file PSD.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 2 — Poster Seminar</h3>
+        <p>Buat poster seminar bertema pendidikan, teknologi, desain, karier, atau industri kreatif. Terapkan visual hierarchy yang jelas.</p>
+        <p><strong>Output:</strong> 1 poster dengan headline, informasi acara, dan CTA.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 3 — Poster Pentas Seni</h3>
+        <p>Buat poster pentas seni sekolah dengan gaya visual yang energik. Gunakan satu gambar utama dan maksimal dua atau tiga jenis font.</p>
+        <p><strong>Output:</strong> 1 poster final + file PSD ber-layer.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 4 — Poster Kegiatan DKV</h3>
+        <p>Buat poster pameran karya DKV. Tampilkan karya atau ilustrasi sebagai visual utama dan susun informasi agar tetap mudah dibaca.</p>
+        <p><strong>Output:</strong> 1 poster + penjelasan singkat konsep desain.</p>
+      </div>
+
+      <div class="card">
+        <h3>Tugas 5 — Dua Versi Poster</h3>
+        <p>Buat satu konsep poster kegiatan sekolah dalam dua versi: versi dengan visual dominan dan versi dengan tipografi dominan. Bandingkan hierarchy kedua desain.</p>
+        <p><strong>Output:</strong> 2 poster + penjelasan singkat mengenai perbedaan layout dan hierarchy.</p>
+      </div>
+
+      <div class="success">
+        <strong>Ketentuan pengumpulan:</strong> sertakan file PSD agar proses dan layer dapat diperiksa,
+        serta file final JPEG/PNG sesuai kebutuhan. Beri nama file dengan format yang rapi, misalnya
+        <em>NamaSiswa_PosterLomba_SMKDIPSA.psd</em>.
+      </div>
+    </section>
+
+    <section id="ringkasan">
+      <h2>16. Ringkasan</h2>
+      <p>
+        Desain poster adalah proses komunikasi visual yang bertujuan menyampaikan pesan secara cepat,
+        jelas, dan menarik. Poster yang baik dimulai dari konsep yang tepat, bukan dari dekorasi.
+      </p>
+      <ul>
+        <li>Tentukan tujuan dan target audiens.</li>
+        <li>Buat konsep dan pesan utama.</li>
+        <li>Pilih ukuran yang sesuai media.</li>
+        <li>Susun layout dengan alignment, spacing, dan balance.</li>
+        <li>Gunakan visual hierarchy agar informasi memiliki urutan yang jelas.</li>
+        <li>Pilih tipografi yang mudah dibaca.</li>
+        <li>Gunakan warna dengan kontras yang cukup.</li>
+        <li>Pilih gambar yang relevan dan berkualitas.</li>
+        <li>Buat CTA yang singkat dan jelas.</li>
+        <li>Susun semua elemen di Photoshop dengan layer yang rapi.</li>
+        <li>Periksa kembali ejaan, informasi, ukuran, dan kualitas sebelum ekspor.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Inti materi:</strong> poster bukan sekadar membuat desain terlihat menarik.
+        Poster harus mampu menjawab tiga hal: <strong>apa yang disampaikan, kepada siapa pesan ditujukan,
+        dan tindakan apa yang diharapkan dari audiens.</strong>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <strong>SMK DIPSA PURWOKERTO</strong><br>
+  Materi Desain Poster pada Photoshop • Pembelajaran Desain Grafis
+</footer>
+
+</body>
+</html>

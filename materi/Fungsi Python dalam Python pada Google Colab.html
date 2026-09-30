@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fungsi Python dalam Python pada Google Colab</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;--border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;--orange:#c2410c;--orange-soft:#fff7ed;--shadow:0 10px 30px rgba(15,23,42,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}.container{width:min(1180px,92%);margin:auto}
+header.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff,#faf5ff 48%,#eff6ff);border-bottom:1px solid var(--border)}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}.lead{max-width:850px;color:#475467;font-size:1.08rem}.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}aside h3{margin:2px 0 12px}.nav a{display:block;padding:9px 10px;border-radius:9px;color:#475467;font-size:.92rem}.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}main{min-width:0}section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}p{margin:9px 0}ul,ol{padding-left:24px}.note,.tip,.warn{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}.tip{border-color:var(--green);background:var(--green-soft)}.warn{border-color:#f97316;background:var(--orange-soft)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.card strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f8fafc}.code-wrap{position:relative;margin:15px 0}pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.92rem;line-height:1.6;margin:0}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}.arrow{color:var(--primary);font-size:1.3rem}.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}.checklist label{display:block;margin:8px 0}.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.small{font-size:.9rem;color:var(--muted)}footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style></head><body>
+<header class="hero"><div class="container"><span class="badge">💻 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span><h1>Fungsi Python dalam Python pada Google Colab</h1><p class="lead">Materi lengkap dan mudah untuk memahami <strong>fungsi Python</strong>, yaitu cara membuat blok kode yang dapat digunakan kembali. Siswa belajar fungsi dengan parameter dan <strong>return</strong>, lalu mempraktikkan fungsi untuk menghitung luas, keliling, rata-rata, dan menentukan predikat nilai.</p><div class="top-actions"><a class="btn primary" href="#proyek" target="_blank">🎯 Langsung ke Mini Library</a><a class="btn" href="#proyek">🎯 Langsung ke Proyek</a></div></div></header>
+<div class="container layout"><aside><h3>📚 Navigasi Materi</h3><nav class="nav"><a href="../index.html" class="back-btn">
+        ← Kembali ke Materi <a href="#tujuan">1. Tujuan Pembelajaran</a><a href="#colab">2. Google Colab</a><a href="#konsep">3. Mengenal Fungsi</a><a href="#struktur">4. Struktur Fungsi</a><a href="#parameter">5. Parameter &amp; Argumen</a><a href="#return">6. Fungsi dengan Return</a><a href="#luas">7. Fungsi Luas</a><a href="#keliling">8. Fungsi Keliling</a><a href="#rata">9. Fungsi Rata-rata</a><a href="#predikat">10. Fungsi Predikat</a><a href="#gabung">11. Menggabungkan Fungsi</a><a href="#proyek">12. Mini Library Matematika</a><a href="#latihan">13. 5 Latihan Soal</a><a href="#tugas">14. 5 Tugas</a><a href="#ringkasan">15. Ringkasan</a><a href="#refleksi">16. Refleksi</a></nav></aside><main><section id="tujuan"><div class="kicker">Bagian 1</div><h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa mampu:</p>
+<ol><li>Menjelaskan pengertian dan manfaat fungsi dalam Python.</li><li>Membuat fungsi menggunakan <code>def</code>.</li><li>Membedakan parameter dan argumen.</li><li>Membuat fungsi yang menerima input.</li><li>Menggunakan <code>return</code> untuk mengembalikan hasil.</li><li>Membuat fungsi menghitung luas dan keliling.</li><li>Membuat fungsi menghitung rata-rata.</li><li>Membuat fungsi menentukan predikat nilai.</li><li>Menggabungkan beberapa fungsi menjadi program yang rapi.</li><li>Membuat <strong>Mini Library Matematika</strong> dengan minimal 5 fungsi.</li></ol>
+<div class="note"><strong>Ide utama:</strong> Fungsi adalah cara membungkus langkah-langkah tertentu menjadi satu blok kode sehingga dapat dipanggil kembali saat diperlukan. Dengan fungsi, program menjadi lebih rapi, mudah dibaca, diuji, dan digunakan kembali.</div></section><section id="colab"><div class="kicker">Bagian 2</div><h2>☁️ Praktik di Google Colab</h2>
+<p>Google Colab digunakan untuk menulis dan menjalankan kode Python langsung melalui browser.</p>
+<div class="step"><div class="num">1</div><div>Buka <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>.</div></div>
+<div class="step"><div class="num">2</div><div>Pilih <strong>New Notebook</strong>.</div></div>
+<div class="step"><div class="num">3</div><div>Buat sebuah <strong>code cell</strong>.</div></div>
+<div class="step"><div class="num">4</div><div>Ketik kode fungsi, lalu jalankan dengan ▶ atau <strong>Shift + Enter</strong>.</div></div><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def sapa():
+    print("Halo, selamat belajar Python!")
+
+sapa()</code></pre></div>
+<div class="tip"><strong>Kebiasaan baik:</strong> Saat belajar fungsi, jalankan kode sedikit demi sedikit. Buat fungsi terlebih dahulu, kemudian panggil fungsi tersebut dan periksa hasilnya.</div></section><section id="konsep"><div class="kicker">Bagian 3</div><h2>🧩 Mengenal Fungsi Python</h2>
+<p><strong>Fungsi</strong> adalah blok kode yang dibuat untuk melakukan pekerjaan tertentu. Fungsi dapat dipanggil berkali-kali tanpa harus menulis ulang seluruh kodenya.</p>
+<h3>Mengapa fungsi diperlukan?</h3>
+<div class="grid">
+<div class="card"><strong>♻️ Dapat digunakan kembali</strong>Kode cukup dibuat sekali lalu dapat dipanggil berkali-kali.</div>
+<div class="card"><strong>🧹 Kode lebih rapi</strong>Program besar dapat dibagi menjadi bagian-bagian kecil.</div>
+<div class="card"><strong>🔎 Mudah dipahami</strong>Nama fungsi dapat menjelaskan pekerjaan yang dilakukan.</div>
+<div class="card"><strong>🛠️ Mudah diperbaiki</strong>Jika ada kesalahan pada satu pekerjaan, kita dapat memperbaiki fungsi tersebut.</div>
+</div>
+<h3>Contoh tanpa fungsi</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Halo Andi")
+print("Halo Budi")
+print("Halo Citra")</code></pre></div>
+<h3>Contoh menggunakan fungsi</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def sapa(nama):
+    print("Halo", nama)
+
+sapa("Andi")
+sapa("Budi")
+sapa("Citra")</code></pre></div>
+<div class="note"><strong>Perhatikan:</strong> Logika sapaan hanya dibuat sekali. Fungsi <code>sapa()</code> kemudian dipanggil dengan nama yang berbeda.</div></section><section id="struktur"><div class="kicker">Bagian 4</div><h2>🏗️ Struktur Dasar Fungsi</h2>
+<p>Fungsi Python dibuat menggunakan kata kunci <code>def</code>.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def nama_fungsi():
+    # perintah yang dijalankan
+    print("Isi fungsi")
+
+nama_fungsi()</code></pre></div>
+<table><tr><th>Bagian</th><th>Penjelasan</th></tr>
+<tr><td><code>def</code></td><td>Kata kunci untuk membuat fungsi.</td></tr>
+<tr><td><code>nama_fungsi</code></td><td>Nama yang digunakan untuk memanggil fungsi.</td></tr>
+<tr><td><code>()</code></td><td>Tempat parameter ditulis jika fungsi membutuhkannya.</td></tr>
+<tr><td><code>:</code></td><td>Menandai awal blok kode fungsi.</td></tr>
+<tr><td>Indentasi</td><td>Baris yang masuk ke dalam blok fungsi adalah bagian dari fungsi.</td></tr>
+<tr><td>Pemanggilan</td><td>Menjalankan fungsi dengan menulis nama fungsi diikuti tanda kurung.</td></tr></table>
+<h3>Contoh sederhana</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def tampilkan_pesan():
+    print("Belajar fungsi Python itu menyenangkan!")
+
+tampilkan_pesan()
+tampilkan_pesan()</code></pre></div>
+<div class="warn"><strong>Kesalahan umum:</strong> Membuat fungsi saja belum berarti fungsi dijalankan. Kita harus memanggilnya, misalnya <code>tampilkan_pesan()</code>.</div></section><section id="parameter"><div class="kicker">Bagian 5</div><h2>📥 Parameter dan Argumen</h2>
+<p><strong>Parameter</strong> adalah variabel yang disiapkan di dalam definisi fungsi. <strong>Argumen</strong> adalah nilai yang diberikan ketika fungsi dipanggil.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def sapa(nama):      # nama adalah parameter
+    print("Halo", nama)
+
+sapa("Dina")          # "Dina" adalah argumen
+sapa("Eko")</code></pre></div>
+<div class="flow"><div class="box">Argumen</div><div class="arrow">→</div><div class="box">Parameter</div><div class="arrow">→</div><div class="box">Proses fungsi</div><div class="arrow">→</div><div class="box">Hasil</div></div>
+<h3>Fungsi dengan dua parameter</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def luas_persegi_panjang(panjang, lebar):
+    luas = panjang * lebar
+    print("Luas:", luas)
+
+luas_persegi_panjang(10, 5)</code></pre></div>
+<p><code>panjang</code> dan <code>lebar</code> adalah parameter. Angka <code>10</code> dan <code>5</code> adalah argumen.</p></section><section id="return"><div class="kicker">Bagian 6</div><h2>↩️ Fungsi dengan Return</h2>
+<p><code>return</code> digunakan untuk <strong>mengembalikan sebuah nilai</strong> dari fungsi kepada bagian program yang memanggilnya.</p>
+<table><tr><th><code>print()</code></th><th><code>return</code></th></tr>
+<tr><td>Menampilkan hasil ke layar.</td><td>Mengembalikan hasil dari fungsi.</td></tr>
+<tr><td>Hasil tidak otomatis disimpan ke variabel.</td><td>Hasil dapat disimpan dalam variabel.</td></tr>
+<tr><td>Cocok untuk menampilkan informasi.</td><td>Cocok untuk hasil yang akan diproses lagi.</td></tr></table>
+<h3>Contoh fungsi dengan return</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def tambah(a, b):
+    hasil = a + b
+    return hasil
+
+jumlah = tambah(10, 5)
+print("Hasil:", jumlah)</code></pre></div>
+<p>Alurnya: <strong>10 dan 5 masuk ke fungsi → dihitung → hasil 15 dikembalikan → disimpan dalam <code>jumlah</code>.</strong></p>
+<h3>Return dapat digunakan dalam perhitungan berikutnya</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def luas_persegi(sisi):
+    return sisi * sisi
+
+hasil_luas = luas_persegi(8)
+hasil_dua_kali = hasil_luas * 2
+
+print("Luas:", hasil_luas)
+print("Dua kali luas:", hasil_dua_kali)</code></pre></div>
+<div class="tip"><strong>Ingat:</strong> Untuk fungsi yang menghasilkan nilai dan hasilnya masih akan digunakan oleh program, <code>return</code> biasanya lebih berguna daripada hanya <code>print()</code>.</div></section><section id="luas"><div class="kicker">Bagian 7</div><h2>📐 Praktik 1 — Fungsi Menghitung Luas</h2>
+<p>Kita dapat membuat fungsi khusus untuk menghitung luas beberapa bangun datar.</p>
+<h3>Luas persegi</h3><p>Rumus: sisi × sisi.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def luas_persegi(sisi):
+    return sisi * sisi
+
+luas = luas_persegi(6)
+print("Luas persegi:", luas)</code></pre></div>
+<h3>Luas persegi panjang</h3><p>Rumus: panjang × lebar.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def luas_persegi_panjang(panjang, lebar):
+    return panjang * lebar
+
+luas = luas_persegi_panjang(10, 4)
+print("Luas persegi panjang:", luas)</code></pre></div>
+<h3>Luas lingkaran</h3><p>Rumus: π × r × r.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import math
+
+def luas_lingkaran(jari_jari):
+    return math.pi * jari_jari ** 2
+
+luas = luas_lingkaran(7)
+print("Luas lingkaran:", luas)</code></pre></div>
+<div class="note"><strong>Konsep penting:</strong> Satu fungsi sebaiknya memiliki satu tujuan yang jelas. Misalnya <code>luas_persegi()</code> fokus menghitung luas persegi.</div></section><section id="keliling"><div class="kicker">Bagian 8</div><h2>📏 Praktik 2 — Fungsi Menghitung Keliling</h2>
+<h3>Keliling persegi</h3><p>Rumus: 4 × sisi.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def keliling_persegi(sisi):
+    return 4 * sisi
+
+print("Keliling:", keliling_persegi(6))</code></pre></div>
+<h3>Keliling persegi panjang</h3><p>Rumus: 2 × (panjang + lebar).</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def keliling_persegi_panjang(panjang, lebar):
+    return 2 * (panjang + lebar)
+
+print("Keliling:", keliling_persegi_panjang(10, 4))</code></pre></div>
+<h3>Keliling lingkaran</h3><p>Rumus: 2 × π × r.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import math
+
+def keliling_lingkaran(jari_jari):
+    return 2 * math.pi * jari_jari
+
+print("Keliling:", keliling_lingkaran(7))</code></pre></div>
+<div class="tip"><strong>Latihan berpikir:</strong> Setiap fungsi menerima input, melakukan satu perhitungan, lalu mengembalikan hasil.</div></section><section id="rata"><div class="kicker">Bagian 9</div><h2>📊 Praktik 3 — Fungsi Menghitung Rata-rata</h2>
+<p>Rata-rata dihitung dengan <strong>jumlah seluruh data ÷ jumlah data</strong>.</p>
+<h3>Versi menggunakan list</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def hitung_rata_rata(nilai):
+    total = sum(nilai)
+    jumlah_data = len(nilai)
+    return total / jumlah_data
+
+data = [80, 75, 90, 85, 70]
+rata_rata = hitung_rata_rata(data)
+
+print("Rata-rata:", rata_rata)</code></pre></div>
+<p>Fungsi menerima sebuah list nilai. <code>sum()</code> menghitung total dan <code>len()</code> menghitung jumlah data.</p>
+<h3>Versi aman untuk list kosong</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def hitung_rata_rata(nilai):
+    if len(nilai) == 0:
+        return 0
+    return sum(nilai) / len(nilai)
+
+data = [80, 75, 90]
+print("Rata-rata:", hitung_rata_rata(data))</code></pre></div>
+<div class="warn"><strong>Mengapa perlu pemeriksaan?</strong> Jika list kosong, pembagian dengan <code>len(nilai)</code> akan menghasilkan pembagian dengan nol. Pemeriksaan membuat fungsi lebih aman.</div></section><section id="predikat"><div class="kicker">Bagian 10</div><h2>🏅 Praktik 4 — Fungsi Menentukan Predikat Nilai</h2>
+<p>Fungsi juga dapat berisi percabangan. Kita dapat mengubah nilai menjadi predikat.</p>
+<table><tr><th>Rentang Nilai</th><th>Predikat</th></tr><tr><td>90–100</td><td>A</td></tr><tr><td>80–89</td><td>B</td></tr><tr><td>70–79</td><td>C</td></tr><tr><td>60–69</td><td>D</td></tr><tr><td>Di bawah 60</td><td>E</td></tr></table><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def tentukan_predikat(nilai):
+    if nilai &gt;= 90:
+        return "A"
+    elif nilai &gt;= 80:
+        return "B"
+    elif nilai &gt;= 70:
+        return "C"
+    elif nilai &gt;= 60:
+        return "D"
+    else:
+        return "E"
+
+print(tentukan_predikat(92))
+print(tentukan_predikat(76))
+print(tentukan_predikat(55))</code></pre></div>
+<p>Python memeriksa kondisi dari atas ke bawah dan menggunakan kondisi pertama yang benar.</p>
+<h3>Menentukan keterangan lulus</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def keterangan_kelulusan(nilai):
+    if nilai &gt;= 75:
+        return "Lulus"
+    return "Tidak Lulus"
+
+nilai = 82
+print(keterangan_kelulusan(nilai))</code></pre></div>
+<div class="note"><strong>Perhatikan:</strong> Fungsi dengan <code>return</code> dapat digunakan sebagai bagian dari fungsi atau program lain.</div></section><section id="gabung"><div class="kicker">Bagian 11</div><h2>🧩 Menggabungkan Beberapa Fungsi</h2>
+<p>Program akan lebih terstruktur jika pekerjaan yang berbeda dipisahkan ke dalam fungsi masing-masing.</p>
+<div class="flow"><div class="box">Input</div><div class="arrow">→</div><div class="box">Fungsi hitung</div><div class="arrow">→</div><div class="box">Return</div><div class="arrow">→</div><div class="box">Tampilkan</div></div><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>def hitung_rata_rata(nilai):
+    if len(nilai) == 0:
+        return 0
+    return sum(nilai) / len(nilai)
+
+def tentukan_predikat(nilai):
+    if nilai &gt;= 90:
+        return "A"
+    elif nilai &gt;= 80:
+        return "B"
+    elif nilai &gt;= 70:
+        return "C"
+    elif nilai &gt;= 60:
+        return "D"
+    else:
+        return "E"
+
+data_nilai = [80, 75, 90, 85, 70]
+
+rata_rata = hitung_rata_rata(data_nilai)
+predikat = tentukan_predikat(rata_rata)
+
+print("Data:", data_nilai)
+print("Rata-rata:", rata_rata)
+print("Predikat:", predikat)</code></pre></div>
+<h3>Manfaat cara ini</h3><ul><li>Setiap fungsi memiliki tugas yang jelas.</li><li>Fungsi dapat dipanggil berkali-kali.</li><li>Perubahan rumus cukup dilakukan di fungsi terkait.</li><li>Program utama menjadi lebih singkat dan mudah dibaca.</li></ul></section><section id="proyek"><div class="kicker">Bagian 12</div><h2>🎯 Proyek: Mini Library Matematika</h2>
+<p>Buat sebuah <strong>Mini Library Matematika</strong> yang memiliki minimal <strong>5 fungsi</strong>. Setiap fungsi harus mempunyai tujuan jelas dan dapat digunakan kembali.</p>
+<h3>Target minimal fungsi</h3><ol><li><code>luas_persegi(sisi)</code></li><li><code>luas_persegi_panjang(panjang, lebar)</code></li><li><code>keliling_persegi(sisi)</code></li><li><code>keliling_persegi_panjang(panjang, lebar)</code></li><li><code>hitung_rata_rata(nilai)</code></li></ol>
+<p><strong>Bonus:</strong> tambahkan <code>luas_lingkaran()</code>, <code>keliling_lingkaran()</code>, dan <code>tentukan_predikat()</code>.</p>
+<h3>Langkah 1–5</h3>
+<ol><li>Buat fungsi luas persegi.</li><li>Buat fungsi luas persegi panjang.</li><li>Buat fungsi keliling persegi.</li><li>Buat fungsi keliling persegi panjang.</li><li>Buat fungsi rata-rata yang aman untuk list kosong.</li></ol>
+<h3>Kode lengkap Mini Library</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code># ==========================================
+# MINI LIBRARY MATEMATIKA
+# ==========================================
+
+def luas_persegi(sisi):
+    return sisi * sisi
+
+def luas_persegi_panjang(panjang, lebar):
+    return panjang * lebar
+
+def keliling_persegi(sisi):
+    return 4 * sisi
+
+def keliling_persegi_panjang(panjang, lebar):
+    return 2 * (panjang + lebar)
+
+def hitung_rata_rata(nilai):
+    if len(nilai) == 0:
+        return 0
+    return sum(nilai) / len(nilai)
+
+def luas_lingkaran(jari_jari):
+    import math
+    return math.pi * jari_jari ** 2
+
+def keliling_lingkaran(jari_jari):
+    import math
+    return 2 * math.pi * jari_jari
+
+def tentukan_predikat(nilai):
+    if nilai &gt;= 90:
+        return "A"
+    elif nilai &gt;= 80:
+        return "B"
+    elif nilai &gt;= 70:
+        return "C"
+    elif nilai &gt;= 60:
+        return "D"
+    else:
+        return "E"
+
+# Pengujian
+nilai_siswa = [80, 75, 90, 85, 70]
+
+print("=== MINI LIBRARY MATEMATIKA ===")
+print("Luas persegi:", luas_persegi(6))
+print("Luas persegi panjang:", luas_persegi_panjang(10, 4))
+print("Keliling persegi:", keliling_persegi(6))
+print("Keliling persegi panjang:", keliling_persegi_panjang(10, 4))
+print("Luas lingkaran:", luas_lingkaran(7))
+print("Keliling lingkaran:", keliling_lingkaran(7))
+print("Rata-rata nilai:", hitung_rata_rata(nilai_siswa))
+print("Predikat rata-rata:", tentukan_predikat(
+    hitung_rata_rata(nilai_siswa)
+))</code></pre></div>
+<h3>Contoh hasil</h3>
+<pre><code>=== MINI LIBRARY MATEMATIKA ===
+Luas persegi: 36
+Luas persegi panjang: 40
+Keliling persegi: 24
+Keliling persegi panjang: 28
+Luas lingkaran: 153.93804002589985
+Keliling lingkaran: 43.982297150257104
+Rata-rata nilai: 80.0
+Predikat rata-rata: B</code></pre>
+<div class="tip"><strong>Target pembelajaran:</strong> Siswa tidak hanya menulis fungsi, tetapi memahami bahwa setiap fungsi dapat dipanggil kembali dari program utama. Inilah dasar kode yang dapat digunakan kembali.</div></section><section id="latihan"><div class="kicker">Bagian 13</div><h2>📝 5 Latihan Soal</h2>
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan fungsi dalam Python?<details><summary>Lihat pedoman jawaban</summary><div>Fungsi adalah blok kode untuk melakukan pekerjaan tertentu dan dapat dipanggil kembali sehingga kode dapat digunakan kembali.</div></details></div>
+<div class="quiz"><strong>Soal 2.</strong> Apa fungsi kata kunci <code>def</code>?<details><summary>Lihat jawaban</summary><div><code>def</code> digunakan untuk mendefinisikan atau membuat sebuah fungsi.</div></details></div>
+<div class="quiz"><strong>Soal 3.</strong> Pada <code>def tambah(a, b): return a + b</code>, apa yang dimaksud dengan <code>a</code> dan <code>b</code>?<details><summary>Lihat jawaban</summary><div><code>a</code> dan <code>b</code> adalah parameter fungsi.</div></details></div>
+<div class="quiz"><strong>Soal 4.</strong> Apa perbedaan <code>print()</code> dan <code>return</code>?<details><summary>Lihat pedoman jawaban</summary><div><code>print()</code> menampilkan informasi ke layar, sedangkan <code>return</code> mengembalikan nilai dari fungsi sehingga dapat disimpan atau diproses kembali.</div></details></div>
+<div class="quiz"><strong>Soal 5.</strong> Tentukan output <code>def kuadrat(x): return x*x; print(kuadrat(5))</code>.<details><summary>Lihat jawaban</summary><div><strong>25</strong>, karena fungsi mengembalikan 5 × 5.</div></details></div></section><section id="tugas"><div class="kicker">Bagian 14</div><h2>🛠️ 5 Tugas Praktik</h2>
+<div class="task"><h3>Tugas 1 — Fungsi Luas Bangun Datar</h3><p>Buat minimal 3 fungsi untuk menghitung luas persegi, persegi panjang, dan segitiga. Semua fungsi harus menggunakan parameter dan <code>return</code>.</p></div>
+<div class="task"><h3>Tugas 2 — Fungsi Keliling Bangun Datar</h3><p>Buat minimal 3 fungsi untuk menghitung keliling persegi, persegi panjang, dan segitiga. Uji setiap fungsi dengan beberapa nilai berbeda.</p></div>
+<div class="task"><h3>Tugas 3 — Fungsi Pengolah Nilai</h3><p>Buat fungsi <code>hitung_rata_rata()</code> yang menerima list nilai dan mengembalikan rata-rata. Tambahkan fungsi <code>nilai_tertinggi()</code> dan <code>nilai_terendah()</code>.</p></div>
+<div class="task"><h3>Tugas 4 — Fungsi Predikat Nilai</h3><p>Buat fungsi <code>tentukan_predikat()</code> yang menerima nilai 0–100 dan mengembalikan A, B, C, D, atau E. Tambahkan fungsi untuk menentukan <strong>Lulus</strong> atau <strong>Tidak Lulus</strong>.</p></div>
+<div class="task"><h3>Tugas 5 — Mini Library Matematika</h3><p>Buat <strong>Mini Library Matematika</strong> minimal 5 fungsi. Program harus memiliki fungsi yang dapat digunakan kembali untuk menghitung luas, keliling, rata-rata, atau operasi matematika lainnya.</p><p><strong>Bonus:</strong> Buat menu pilihan menggunakan <code>input()</code>, lalu panggil fungsi sesuai pilihan pengguna.</p></div>
+<h3>Checklist Pengumpulan</h3><div class="checklist"><label>☐ Program berjalan di Google Colab.</label><label>☐ Minimal 5 fungsi dibuat.</label><label>☐ Fungsi menggunakan parameter jika diperlukan.</label><label>☐ Fungsi perhitungan menggunakan <code>return</code>.</label><label>☐ Setiap fungsi sudah diuji.</label><label>☐ Hasil/output terlihat jelas.</label><label>☐ Ada screenshot hasil atau link notebook.</label></div></section><section id="ringkasan"><div class="kicker">Bagian 15</div><h2>📌 Ringkasan</h2>
+<ol><li>Fungsi adalah blok kode untuk pekerjaan tertentu.</li><li>Fungsi dibuat menggunakan <code>def</code>.</li><li>Fungsi dipanggil dengan menuliskan nama fungsi dan tanda kurung.</li><li>Parameter adalah variabel yang disiapkan oleh fungsi.</li><li>Argumen adalah nilai yang diberikan ketika fungsi dipanggil.</li><li><code>return</code> digunakan untuk mengembalikan hasil.</li><li>Fungsi dapat digunakan untuk menghitung luas dan keliling.</li><li>Fungsi dapat mengolah list dan menghitung rata-rata.</li><li>Fungsi dapat berisi percabangan untuk menentukan predikat.</li><li>Beberapa fungsi dapat digabung menjadi sebuah Mini Library.</li></ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Buat sekali, panggil berkali-kali.” Itulah inti penggunaan fungsi untuk membuat kode yang dapat digunakan kembali.</div></section><section id="refleksi"><div class="kicker">Bagian 16</div><h2>💭 Refleksi Siswa</h2>
+<ol><li>Mengapa fungsi dapat membuat program lebih rapi?</li><li>Apa perbedaan parameter dan argumen?</li><li>Mengapa <code>return</code> berguna dalam fungsi perhitungan?</li><li>Fungsi apa yang paling mudah kamu buat?</li><li>Bagian mana yang masih membuat kamu bingung?</li><li>Bagaimana fungsi dapat membantu ketika sebuah program memiliki banyak kode yang berulang?</li><li>Jika kamu membuat aplikasi kasir, fungsi apa saja yang menurutmu perlu dibuat?</li></ol>
+<div class="tip"><strong>Refleksi lanjutan:</strong> Bayangkan program besar memiliki ribuan baris kode. Bagaimana pembagian kode menjadi banyak fungsi dapat membantu programmer bekerja lebih teratur?</div></section><section><div class="kicker">Referensi Praktik</div><h2>📚 Google Colab</h2><p>Gunakan <a href="https://colab.research.google.com/" target="_blank">Google Colab</a> untuk menjalankan seluruh contoh kode pada materi ini.</p><p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Fungsi Python</p></section></main></div><footer><div class="container">Fungsi Python dalam Python pada Google Colab • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div></footer>
+<script>function copyCode(button){const code=button.parentElement.querySelector("code").innerText;navigator.clipboard.writeText(code).then(()=>{const old=button.innerText;button.innerText="Tersalin ✓";setTimeout(()=>button.innerText=old,1400)}).catch(()=>{button.innerText="Gagal";setTimeout(()=>button.innerText="Salin",1200)})}</script>
+</body></html>

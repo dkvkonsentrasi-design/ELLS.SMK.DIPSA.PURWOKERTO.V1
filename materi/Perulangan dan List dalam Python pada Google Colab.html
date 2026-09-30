@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perulangan dan List dalam Python pada Google Colab</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;--border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;--orange:#c2410c;--orange-soft:#fff7ed;--shadow:0 10px 30px rgba(15,23,42,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}.container{width:min(1180px,92%);margin:auto}
+header.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff,#faf5ff 48%,#eff6ff);border-bottom:1px solid var(--border)}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}.lead{max-width:850px;color:#475467;font-size:1.08rem}.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}aside h3{margin:2px 0 12px}.nav a{display:block;padding:9px 10px;border-radius:9px;color:#475467;font-size:.92rem}.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}main{min-width:0}section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}p{margin:9px 0}ul,ol{padding-left:24px}.note,.tip,.warn{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}.tip{border-color:var(--green);background:var(--green-soft)}.warn{border-color:#f97316;background:var(--orange-soft)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.card strong{display:block;margin-bottom:5px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f8fafc}.code-wrap{position:relative;margin:15px 0}pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.92rem;line-height:1.6;margin:0}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}.arrow{color:var(--primary);font-size:1.3rem}.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}.checklist label{display:block;margin:8px 0}.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.small{font-size:.9rem;color:var(--muted)}footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style></head><body>
+<header class="hero"><div class="container"><span class="badge">💻 KODING & KECERDASAN ARTIFISIAL • GOOGLE COLAB</span><h1>Perulangan dan List dalam Python pada Google Colab</h1><p class="lead">Materi lengkap dan mudah untuk memahami <strong>list</strong> sebagai tempat menyimpan banyak data dan <strong>perulangan</strong> untuk memproses data berkali-kali. Di akhir materi, siswa membuat program untuk menyimpan minimal 10 nilai, menghitung rata-rata, mencari nilai tertinggi, dan mencari nilai terendah.</p><div class="top-actions"><a class="btn primary" href="https://colab.research.google.com/" target="_blank">🚀 Buka Google Colab</a><a class="btn" href="#proyek">🎯 Langsung ke Proyek</a></div></div></header>
+<div class="container layout"><aside><h3>📚 Navigasi Materi</h3><nav class="nav"> <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi <a href="#tujuan">1. Tujuan Pembelajaran</a><a href="#colab">2. Google Colab</a><a href="#list">3. Mengenal List</a><a href="#akses">4. Mengakses List</a><a href="#ubah">5. Menambah & Mengubah</a><a href="#for">6. Perulangan for</a><a href="#while">7. Perulangan while</a><a href="#range">8. range()</a><a href="#gabung">9. List + Perulangan</a><a href="#hitung">10. Menghitung Nilai</a><a href="#proyek">11. Proyek Mini</a><a href="#latihan">12. 5 Latihan Soal</a><a href="#tugas">13. 5 Tugas</a><a href="#ringkasan">14. Ringkasan</a><a href="#refleksi">15. Refleksi</a></nav></aside><main>
+<section id="tujuan"><div class="kicker">Bagian 1</div><h2>🎯 Tujuan Pembelajaran</h2><p>Setelah mempelajari materi ini, siswa mampu:</p><ol><li>Menjelaskan pengertian list.</li><li>Membuat, membaca, mengubah, dan menambah data pada list.</li><li>Menjelaskan fungsi perulangan.</li><li>Menggunakan <code>for</code> dan <code>while</code>.</li><li>Menggunakan <code>range()</code>.</li><li>Menggabungkan list dan perulangan untuk mengolah banyak data.</li><li>Menghitung jumlah, rata-rata, nilai tertinggi, dan terendah.</li><li>Membuat program pengolahan minimal 10 nilai di Google Colab.</li></ol><div class="note"><strong>Ide utama:</strong> List menyimpan banyak data, sedangkan perulangan membantu kita memproses data tersebut satu per satu tanpa menulis kode yang sama berkali-kali.</div></section>
+<section id="colab"><div class="kicker">Bagian 2</div><h2>☁️ Praktik di Google Colab</h2><p>Google Colab memungkinkan kita menulis dan menjalankan Python melalui browser.</p><div class="step"><div class="num">1</div><div>Buka <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>.</div></div><div class="step"><div class="num">2</div><div>Pilih <strong>New Notebook</strong>.</div></div><div class="step"><div class="num">3</div><div>Masukkan kode ke dalam code cell.</div></div><div class="step"><div class="num">4</div><div>Jalankan dengan ▶ atau <strong>Shift + Enter</strong>.</div></div><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Saya siap belajar List dan Perulangan Python!")</code></pre></div><div class="tip"><strong>Kebiasaan baik:</strong> Jalankan kode sedikit demi sedikit dan periksa output setiap kali selesai menjalankan sebuah cell.</div></section>
+<section id="list"><div class="kicker">Bagian 3</div><h2>📦 Mengenal List dalam Python</h2><p><strong>List</strong> adalah struktur data untuk menyimpan beberapa nilai dalam satu variabel. List ditulis dengan tanda kurung siku <code>[ ]</code>.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nama_siswa = ["Andi", "Budi", "Citra", "Dina"]
+print(nama_siswa)</code></pre></div><p>Dengan list, kita tidak perlu membuat variabel <code>nama1</code>, <code>nama2</code>, dan seterusnya.</p><h3>List berisi angka</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85, 70]
+print(nilai)</code></pre></div><div class="grid"><div class="card"><strong>List kosong</strong><code>nilai = []</code><br>Dapat diisi kemudian.</div><div class="card"><strong>List angka</strong><code>nilai = [70, 80, 90]</code><br>Cocok untuk pengolahan nilai.</div><div class="card"><strong>List teks</strong><code>buah = ["Apel", "Mangga"]</code><br>Cocok untuk nama atau kategori.</div><div class="card"><strong>List campuran</strong>Python juga dapat menyimpan tipe data berbeda, walaupun untuk data nilai sebaiknya konsisten.</div></div></section>
+<section id="akses"><div class="kicker">Bagian 4</div><h2>🔎 Mengakses Data dalam List</h2><p>Posisi data disebut <strong>index</strong>. Python mulai menghitung dari <strong>0</strong>.</p><table><tr><th>Index</th><th>0</th><th>1</th><th>2</th><th>3</th></tr><tr><th>Data</th><td>80</td><td>75</td><td>90</td><td>85</td></tr></table><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85]
+print(nilai[0])
+print(nilai[1])
+print(nilai[2])</code></pre></div><p><code>nilai[0]</code> berarti data pertama. <code>nilai[-1]</code> berarti data terakhir.</p><div class="warn"><strong>Kesalahan umum:</strong> Jika list memiliki empat data, index yang tersedia adalah 0, 1, 2, dan 3. Index 4 tidak tersedia.</div></section>
+<section id="ubah"><div class="kicker">Bagian 5</div><h2>✏️ Mengubah dan Menambah Data</h2><h3>Mengubah data</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90]
+nilai[1] = 78
+print(nilai)</code></pre></div><h3>Menambah satu data dengan <code>append()</code></h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90]
+nilai.append(85)
+print(nilai)</code></pre></div><p><code>append()</code> menambahkan satu data ke bagian akhir list.</p><h3>Menambah beberapa data</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90]
+nilai.extend([85, 88])
+print(nilai)</code></pre></div><div class="tip"><strong>Ingat:</strong> <code>append()</code> untuk satu item; <code>extend()</code> untuk menambahkan beberapa item dari iterable seperti list lain.</div></section>
+<section id="for"><div class="kicker">Bagian 6</div><h2>🔁 Perulangan <code>for</code></h2><p>Perulangan menjalankan instruksi berkali-kali. <code>for</code> sangat cocok untuk membaca setiap data dalam list.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nama_siswa = ["Andi", "Budi", "Citra", "Dina"]
+
+for nama in nama_siswa:
+    print(nama)</code></pre></div><p>Cara membacanya: <strong>untuk setiap nama di dalam <code>nama_siswa</code>, tampilkan nama tersebut.</strong></p><div class="flow"><div class="box">Ambil data</div><div class="arrow">→</div><div class="box">Jalankan perintah</div><div class="arrow">→</div><div class="box">Data berikutnya</div><div class="arrow">→</div><div class="box">Selesai</div></div><h3>Contoh menghitung total</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85]
+total = 0
+
+for n in nilai:
+    total = total + n
+
+print("Total:", total)</code></pre></div><p>Variabel <code>total</code> dimulai dari 0, lalu setiap nilai ditambahkan satu per satu.</p></section>
+<section id="while"><div class="kicker">Bagian 7</div><h2>🔄 Perulangan <code>while</code></h2><p><code>while</code> menjalankan kode selama kondisi masih benar.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>angka = 1
+
+while angka &lt;= 5:
+    print(angka)
+    angka = angka + 1</code></pre></div><p>Nilai <code>angka</code> berubah setiap putaran sehingga akhirnya kondisi menjadi salah dan perulangan berhenti.</p><div class="warn"><strong>Hati-hati infinite loop:</strong> Jika variabel pengendali tidak berubah menuju kondisi berhenti, perulangan dapat berjalan terus.</div><table><tr><th>for</th><th>while</th></tr><tr><td>Cocok untuk memproses item dalam list atau sejumlah langkah tertentu.</td><td>Cocok ketika jumlah putaran bergantung pada kondisi.</td></tr><tr><td>Contoh: memproses 10 nilai.</td><td>Contoh: meminta input sampai kondisi terpenuhi.</td></tr></table></section>
+<section id="range"><div class="kicker">Bagian 8</div><h2>🔢 Menggunakan <code>range()</code></h2><p><code>range()</code> menghasilkan urutan angka yang sering digunakan bersama <code>for</code>.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>for i in range(5):
+    print(i)</code></pre></div><p>Hasilnya 0, 1, 2, 3, 4. Batas akhir tidak ikut dihitung.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>for i in range(1, 6):
+    print(i)</code></pre></div><p>Hasilnya 1 sampai 5.</p><h3>Meminta 10 nilai</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = []
+
+for i in range(10):
+    angka = float(input(f"Masukkan nilai ke-{i+1}: "))
+    nilai.append(angka)
+
+print("Data nilai:", nilai)</code></pre></div><div class="note"><strong>Gabungan konsep:</strong> <code>range(10)</code> membuat 10 putaran, <code>input()</code> mengambil data, dan <code>append()</code> menyimpan data ke list.</div></section>
+<section id="gabung"><div class="kicker">Bagian 9</div><h2>🧩 Menggabungkan List dan Perulangan</h2><p>List menyimpan banyak data, sedangkan perulangan memproses data tersebut satu per satu.</p><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85, 70]
+
+for i, n in enumerate(nilai, start=1):
+    print(f"Nilai ke-{i}: {n}")</code></pre></div><p><code>enumerate()</code> memberi nomor urut sekaligus nilai.</p><h3>Menghitung rata-rata secara bertahap</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85, 70]
+total = 0
+
+for n in nilai:
+    total += n
+
+rata_rata = total / len(nilai)
+print("Rata-rata:", rata_rata)</code></pre></div><p>Rumusnya adalah <strong>rata-rata = total nilai ÷ jumlah data</strong>.</p></section>
+<section id="hitung"><div class="kicker">Bagian 10</div><h2>📊 Menghitung Nilai</h2><table><tr><th>Fungsi</th><th>Kegunaan</th></tr><tr><td><code>sum(list)</code></td><td>Menjumlahkan semua angka.</td></tr><tr><td><code>len(list)</code></td><td>Menghitung jumlah data.</td></tr><tr><td><code>max(list)</code></td><td>Mencari nilai terbesar.</td></tr><tr><td><code>min(list)</code></td><td>Mencari nilai terkecil.</td></tr></table><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85, 70]
+
+print("Jumlah data    :", len(nilai))
+print("Total nilai    :", sum(nilai))
+print("Rata-rata      :", sum(nilai) / len(nilai))
+print("Nilai tertinggi:", max(nilai))
+print("Nilai terendah :", min(nilai))</code></pre></div><div class="tip"><strong>Belajar konsep:</strong> Cobalah lebih dulu menghitung total menggunakan <code>for</code>. Setelah memahami logikanya, gunakan <code>sum()</code>, <code>max()</code>, dan <code>min()</code> untuk membuat kode lebih ringkas.</div><h3>Mencari nilai tertinggi dengan perulangan</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = [80, 75, 90, 85, 70]
+tertinggi = nilai[0]
+
+for n in nilai:
+    if n &gt; tertinggi:
+        tertinggi = n
+
+print("Nilai tertinggi:", tertinggi)</code></pre></div></section>
+<section id="proyek"><div class="kicker">Bagian 11</div><h2>🎯 Proyek Mini: Pengolahan 10 Nilai Siswa</h2><p>Proyek ini menjadi latihan utama. Program harus:</p><ol><li>Menyimpan minimal 10 nilai.</li><li>Menghitung rata-rata.</li><li>Menampilkan nilai tertinggi.</li><li>Menampilkan nilai terendah.</li></ol><h3>Langkah 1 — List kosong</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = []</code></pre></div><h3>Langkah 2 — Input 10 nilai</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>for i in range(10):
+    angka = float(input(f"Masukkan nilai ke-{i+1}: "))
+    nilai.append(angka)</code></pre></div><h3>Langkah 3 — Hitung hasil</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>total = sum(nilai)
+rata_rata = total / len(nilai)
+tertinggi = max(nilai)
+terendah = min(nilai)</code></pre></div><h3>Langkah 4 — Tampilkan hasil</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("\n===== HASIL PENGOLAHAN NILAI =====")
+print("Data nilai     :", nilai)
+print("Jumlah data    :", len(nilai))
+print("Total nilai    :", total)
+print("Rata-rata      :", rata_rata)
+print("Nilai tertinggi:", tertinggi)
+print("Nilai terendah :", terendah)</code></pre></div><h3>Kode lengkap</h3><div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>nilai = []
+
+# Menyimpan minimal 10 nilai
+for i in range(10):
+    angka = float(input(f"Masukkan nilai ke-{i+1}: "))
+    nilai.append(angka)
+
+# Menghitung hasil
+total = sum(nilai)
+rata_rata = total / len(nilai)
+tertinggi = max(nilai)
+terendah = min(nilai)
+
+# Menampilkan hasil
+print("\n===== HASIL PENGOLAHAN NILAI =====")
+print("Data nilai     :", nilai)
+print("Jumlah data    :", len(nilai))
+print("Total nilai    :", total)
+print("Rata-rata      :", rata_rata)
+print("Nilai tertinggi:", tertinggi)
+print("Nilai terendah :", terendah)</code></pre></div><h3>Contoh hasil</h3><pre><code>Data nilai     : [80, 75, 90, 85, 70, 88, 92, 78, 84, 76]
+Jumlah data    : 10
+Total nilai    : 818
+Rata-rata      : 81.8
+Nilai tertinggi: 92
+Nilai terendah : 70</code></pre><div class="note"><strong>Pengembangan:</strong> Setelah berhasil, tambahkan nama siswa, validasi nilai 0–100, predikat A/B/C/D, jumlah siswa lulus, dan grafik nilai.</div></section>
+<section id="latihan"><div class="kicker">Bagian 12</div><h2>📝 5 Latihan Soal</h2><div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan list dalam Python?<details><summary>Lihat pedoman jawaban</summary><div>List adalah struktur data untuk menyimpan beberapa data dalam satu variabel.</div></details></div><div class="quiz"><strong>Soal 2.</strong> Mengapa index pertama list adalah 0?<details><summary>Lihat pedoman jawaban</summary><div>Python menggunakan sistem index berbasis nol; item pertama berada di index 0.</div></details></div><div class="quiz"><strong>Soal 3.</strong> Apa output <code>nilai = [70, 80, 90]; print(nilai[1])</code>?<details><summary>Lihat jawaban</summary><div><strong>80</strong>, karena index 1 menunjuk item kedua.</div></details></div><div class="quiz"><strong>Soal 4.</strong> Apa perbedaan utama <code>for</code> dan <code>while</code>?<details><summary>Lihat pedoman jawaban</summary><div><code>for</code> cocok untuk item atau jumlah langkah tertentu; <code>while</code> berjalan selama kondisi masih benar.</div></details></div><div class="quiz"><strong>Soal 5.</strong> Apa fungsi <code>len()</code>, <code>max()</code>, dan <code>min()</code>?<details><summary>Lihat jawaban</summary><div><code>len()</code> menghitung jumlah data, <code>max()</code> mencari nilai terbesar, dan <code>min()</code> mencari nilai terkecil.</div></details></div></section>
+<section id="tugas"><div class="kicker">Bagian 13</div><h2>🛠️ 5 Tugas Praktik</h2><div class="task"><h3>Tugas 1 — List Nama Siswa</h3><p>Buat list berisi minimal 10 nama siswa dan tampilkan semua nama menggunakan <code>for</code>. Jangan menulis 10 <code>print()</code> terpisah.</p></div><div class="task"><h3>Tugas 2 — Analisis 10 Bilangan</h3><p>Buat list berisi minimal 10 bilangan. Tampilkan jumlah data, total, rata-rata, tertinggi, dan terendah menggunakan <code>sum()</code>, <code>len()</code>, <code>max()</code>, dan <code>min()</code>.</p></div><div class="task"><h3>Tugas 3 — Input 10 Nilai</h3><p>Buat program yang meminta pengguna memasukkan 10 nilai. Gunakan <code>for</code> dan <code>append()</code> untuk menyimpan semuanya ke dalam list.</p></div><div class="task"><h3>Tugas 4 — Analisis Nilai Lulus</h3><p>Kembangkan tugas 3 agar menampilkan rata-rata, nilai tertinggi, nilai terendah, dan jumlah nilai yang lebih besar atau sama dengan 75. Gunakan perulangan dan percabangan.</p></div><div class="task"><h3>Tugas 5 — Proyek Pengolahan Nilai Siswa</h3><p>Buat program yang menerima nama dan nilai minimal 10 siswa. Tampilkan daftar siswa, rata-rata, nilai tertinggi, nilai terendah, dan jumlah siswa lulus.</p><p><strong>Bonus:</strong> tambahkan predikat A/B/C/D dan grafik nilai.</p></div><h3>Checklist Pengumpulan</h3><div class="checklist"><label>☐ Program berjalan di Google Colab.</label><label>☐ Menggunakan list.</label><label>☐ Menggunakan perulangan.</label><label>☐ Hasil terbaca jelas.</label><label>☐ Ada screenshot hasil atau link notebook.</label></div></section>
+<section id="ringkasan"><div class="kicker">Bagian 14</div><h2>📌 Ringkasan</h2><ol><li>List menyimpan banyak data dalam satu variabel.</li><li>Index Python dimulai dari 0.</li><li><code>append()</code> menambahkan item ke akhir list.</li><li>Perulangan menjalankan instruksi berkali-kali.</li><li><code>for</code> cocok untuk memproses item dalam list.</li><li><code>while</code> berjalan selama kondisinya benar.</li><li><code>range()</code> membantu membuat urutan untuk perulangan.</li><li><code>sum()</code>, <code>len()</code>, <code>max()</code>, dan <code>min()</code> membantu mengolah data angka.</li><li>List dan perulangan adalah dasar penting untuk pengolahan dataset.</li></ol><div class="note"><strong>Kalimat kunci:</strong> “Simpan banyak data dalam list, lalu gunakan perulangan untuk memproses data satu per satu.”</div></section>
+<section id="refleksi"><div class="kicker">Bagian 15</div><h2>💭 Refleksi Siswa</h2><ol><li>Apa perbedaan variabel biasa dengan list?</li><li>Mengapa index dimulai dari 0?</li><li>Kapan kamu memilih <code>for</code> daripada <code>while</code>?</li><li>Bagian mana yang paling sulit saat mengolah 10 nilai?</li><li>Bagaimana list dan perulangan dapat membantu ketika mengolah data dalam AI?</li></ol><div class="tip"><strong>Refleksi lanjutan:</strong> Bayangkan kamu memiliki 10.000 data. Mengapa perulangan dan struktur data menjadi penting?</div></section>
+<section><div class="kicker">Referensi Praktik</div><h2>📚 Google Colab</h2><p>Gunakan <a href="https://colab.research.google.com/" target="_blank">Google Colab</a> untuk menjalankan contoh kode pada materi ini.</p><p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab</p></section>
+</main></div><footer><div class="container">Perulangan dan List dalam Python pada Google Colab • Materi Pembelajaran Koding & Kecerdasan Artifisial</div></footer>
+<script>function copyCode(button){const code=button.parentElement.querySelector("code").innerText;navigator.clipboard.writeText(code).then(()=>{const old=button.innerText;button.innerText="Tersalin ✓";setTimeout(()=>button.innerText=old,1400)}).catch(()=>{button.innerText="Gagal";setTimeout(()=>button.innerText="Salin",1200)})}</script>
+</body></html>

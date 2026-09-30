@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python untuk Pengolahan Data pada Google Colab</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#172033;--muted:#667085;--primary:#4f46e5;--primary2:#7c3aed;--soft:#eef2ff;--border:#e5e7eb;--code:#111827;--green:#047857;--green-soft:#ecfdf5;--orange:#c2410c;--orange-soft:#fff7ed;--shadow:0 10px 30px rgba(15,23,42,.07)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.72}a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}.container{width:min(1180px,92%);margin:auto}
+header.hero{padding:58px 0 34px;background:linear-gradient(135deg,#eef2ff,#faf5ff 48%,#eff6ff);border-bottom:1px solid var(--border)}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #ddd6fe;color:#5b21b6;font-weight:800;font-size:.84rem}h1{font-size:clamp(2rem,4vw,3.35rem);line-height:1.12;margin:18px 0 12px;letter-spacing:-.03em}.lead{max-width:880px;color:#475467;font-size:1.08rem}.top-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.btn{display:inline-flex;padding:11px 16px;border-radius:12px;font-weight:750;border:1px solid var(--border);background:#fff;color:var(--text)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;padding:30px 0 70px}aside{position:sticky;top:18px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}aside h3{margin:2px 0 12px}.nav a{display:block;padding:9px 10px;border-radius:9px;color:#475467;font-size:.92rem}.nav a:hover{background:var(--soft);color:var(--primary);text-decoration:none}main{min-width:0}section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:24px;box-shadow:var(--shadow);scroll-margin-top:20px}h2{font-size:1.7rem;line-height:1.25;margin:0 0 18px}h3{font-size:1.18rem;margin:26px 0 10px}p{margin:9px 0}ul,ol{padding-left:24px}.note,.tip,.warn{padding:16px 18px;border-left:4px solid var(--primary);background:var(--soft);border-radius:10px;margin:18px 0}.tip{border-color:var(--green);background:var(--green-soft)}.warn{border-color:#f97316;background:var(--orange-soft)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);border-radius:15px;padding:18px;background:#fff}.card strong{display:block;margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.95rem}th,td{padding:12px 13px;border:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f8fafc}
+.code-wrap{position:relative;margin:15px 0}pre{background:var(--code);color:#e5e7eb;padding:20px;border-radius:14px;overflow:auto;font-size:.92rem;line-height:1.6;margin:0}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}:not(pre)>code{background:#f1f5f9;padding:2px 6px;border-radius:6px;color:#b42318}.copy{position:absolute;right:10px;top:10px;border:1px solid #374151;background:#1f2937;color:#e5e7eb;border-radius:8px;padding:6px 9px;cursor:pointer}
+.step{display:grid;grid-template-columns:40px 1fr;gap:13px;margin:16px 0}.num{width:40px;height:40px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:800}.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:20px 0}.flow .box{padding:13px 17px;background:#fff;border:1px solid #c7d2fe;border-radius:12px;font-weight:750}.arrow{color:var(--primary);font-size:1.3rem}
+.quiz{border:1px solid var(--border);border-radius:14px;padding:18px;margin:14px 0;background:#fcfcfd}.task{border-left:5px solid var(--primary2);padding:18px 20px;background:#faf5ff;border-radius:0 14px 14px 0;margin:15px 0}details{margin-top:10px}summary{cursor:pointer;font-weight:750;color:var(--primary)}.checklist label{display:block;margin:8px 0}.kicker{color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.small{font-size:.9rem;color:var(--muted)}footer{padding:30px 0 55px;color:var(--muted);text-align:center;font-size:.9rem}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:relative;top:auto}.grid{grid-template-columns:1fr}}@media(max-width:560px){section{padding:21px}table{font-size:.84rem}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+<div class="container">
+<span class="badge">💻 KODING &amp; KECERDASAN ARTIFISIAL • GOOGLE COLAB</span>
+<h1>Python untuk Pengolahan Data pada Google Colab</h1>
+<p class="lead">Materi lengkap dan mudah untuk mengenal <strong>dataset, baris dan kolom, DataFrame, Pandas, serta membaca file CSV</strong>. Siswa akan berlatih membuat DataFrame sederhana, membaca data, mencari rata-rata setiap mata pelajaran, nilai tertinggi, dan siswa dengan rata-rata tertinggi.</p>
+<div class="top-actions">
+<a class="btn primary" href="https://colab.research.google.com/" target="_blank">🚀 Buka Google Colab</a>
+<a class="btn" href="#aktivitas">🎯 Langsung ke Aktivitas</a>
+</div>
+</div>
+</header>
+
+<div class="container layout">
+<aside>
+<h3>📚 Navigasi Materi</h3>
+<nav class="nav">
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+<a href="#tujuan">1. Tujuan Pembelajaran</a>
+<a href="#colab">2. Google Colab</a>
+<a href="#dataset">3. Mengenal Dataset</a>
+<a href="#baris-kolom">4. Baris dan Kolom</a>
+<a href="#dataframe">5. Mengenal DataFrame</a>
+<a href="#pandas">6. Pandas</a>
+<a href="#import">7. Import Pandas</a>
+<a href="#buat">8. Membuat DataFrame</a>
+<a href="#akses">9. Mengakses Data</a>
+<a href="#operasi">10. Mengolah Data</a>
+<a href="#csv">11. Membaca CSV</a>
+<a href="#aktivitas">12. Aktivitas Analisis Data</a>
+<a href="#proyek">13. Proyek Mini</a>
+<a href="#latihan">14. 5 Latihan Soal</a>
+<a href="#tugas">15. 5 Tugas</a>
+<a href="#ringkasan">16. Ringkasan</a>
+<a href="#refleksi">17. Refleksi</a>
+</nav>
+</aside>
+
+<main>
+
+<section id="tujuan">
+<div class="kicker">Bagian 1</div>
+<h2>🎯 Tujuan Pembelajaran</h2>
+<p>Setelah mempelajari materi ini, siswa mampu:</p>
+<ol>
+<li>Menjelaskan pengertian dataset.</li>
+<li>Membedakan baris dan kolom dalam data.</li>
+<li>Menjelaskan pengertian DataFrame.</li>
+<li>Menjelaskan kegunaan library Pandas.</li>
+<li>Mengimpor Pandas di Google Colab.</li>
+<li>Membuat DataFrame dari data sederhana.</li>
+<li>Mengakses kolom dan baris DataFrame.</li>
+<li>Menghitung jumlah, rata-rata, nilai tertinggi, dan nilai terendah.</li>
+<li>Membaca dataset dari file CSV.</li>
+<li>Menganalisis dataset sederhana menggunakan Python dan Pandas.</li>
+</ol>
+<div class="note"><strong>Ide utama:</strong> Pengolahan data dimulai dari memahami bentuk data. <strong>Dataset</strong> berisi kumpulan data, sedangkan <strong>DataFrame</strong> membantu kita mengatur dan mengolah data dalam bentuk tabel menggunakan Pandas.</div>
+</section>
+
+<section id="colab">
+<div class="kicker">Bagian 2</div>
+<h2>☁️ Praktik di Google Colab</h2>
+<p>Google Colab memungkinkan kita menjalankan Python langsung melalui browser tanpa harus memasang Python secara manual di komputer.</p>
+<div class="step"><div class="num">1</div><div>Buka <a href="https://colab.research.google.com/" target="_blank">Google Colab</a>.</div></div>
+<div class="step"><div class="num">2</div><div>Pilih <strong>New Notebook</strong>.</div></div>
+<div class="step"><div class="num">3</div><div>Buat <strong>code cell</strong> untuk menulis kode Python.</div></div>
+<div class="step"><div class="num">4</div><div>Jalankan kode dengan tombol ▶ atau <strong>Shift + Enter</strong>.</div></div>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Saya siap belajar pengolahan data!")</code></pre></div>
+<div class="tip"><strong>Kebiasaan baik:</strong> Jalankan program secara bertahap. Setelah satu cell berhasil, lanjutkan ke cell berikutnya dan periksa hasilnya.</div>
+</section>
+
+<section id="dataset">
+<div class="kicker">Bagian 3</div>
+<h2>🗂️ Mengenal Dataset</h2>
+<p><strong>Dataset</strong> adalah kumpulan data yang disusun agar dapat dibaca, dipelajari, dan diolah. Dataset dapat berasal dari nilai siswa, penjualan, cuaca, pelanggan, hasil survei, dan banyak sumber lainnya.</p>
+<h3>Contoh dataset nilai siswa</h3>
+<table>
+<tr><th>Nama</th><th>Matematika</th><th>Bahasa</th><th>Informatika</th></tr>
+<tr><td>Andi</td><td>80</td><td>75</td><td>90</td></tr>
+<tr><td>Budi</td><td>70</td><td>80</td><td>75</td></tr>
+<tr><td>Citra</td><td>90</td><td>95</td><td>92</td></tr>
+<tr><td>Dina</td><td>85</td><td>80</td><td>88</td></tr>
+</table>
+<p>Dataset di atas memiliki informasi tentang nama siswa dan nilai pada tiga mata pelajaran.</p>
+<div class="grid">
+<div class="card"><strong>📌 Nama</strong>Berisi identitas siswa.</div>
+<div class="card"><strong>📐 Matematika</strong>Berisi nilai mata pelajaran Matematika.</div>
+<div class="card"><strong>📖 Bahasa</strong>Berisi nilai mata pelajaran Bahasa.</div>
+<div class="card"><strong>💻 Informatika</strong>Berisi nilai mata pelajaran Informatika.</div>
+</div>
+</section>
+
+<section id="baris-kolom">
+<div class="kicker">Bagian 4</div>
+<h2>↔️ Memahami Baris dan Kolom</h2>
+<p>Dalam tabel data, <strong>baris</strong> dan <strong>kolom</strong> memiliki fungsi yang berbeda.</p>
+<table>
+<tr><th>Istilah</th><th>Pengertian</th><th>Contoh</th></tr>
+<tr><td><strong>Baris (row)</strong></td><td>Satu record atau satu objek data.</td><td>Baris Andi berisi semua data milik Andi.</td></tr>
+<tr><td><strong>Kolom (column)</strong></td><td>Satu jenis informasi atau atribut.</td><td>Kolom Matematika berisi nilai Matematika semua siswa.</td></tr>
+</table>
+<div class="flow">
+<div class="box">Dataset</div><div class="arrow">→</div>
+<div class="box">Baris = data siswa</div><div class="arrow">→</div>
+<div class="box">Kolom = jenis informasi</div>
+</div>
+<div class="note"><strong>Cara mudah mengingat:</strong> Baris biasanya dibaca mendatar, sedangkan kolom biasanya dibaca tegak dari atas ke bawah.</div>
+</section>
+
+<section id="dataframe">
+<div class="kicker">Bagian 5</div>
+<h2>📊 Mengenal DataFrame</h2>
+<p><strong>DataFrame</strong> adalah struktur data berbentuk tabel yang disediakan oleh Pandas. DataFrame memiliki baris dan kolom sehingga sangat cocok untuk pengolahan dataset.</p>
+<div class="grid">
+<div class="card"><strong>Baris</strong>Mewakili record atau objek data.</div>
+<div class="card"><strong>Kolom</strong>Mewakili atribut atau jenis data.</div>
+<div class="card"><strong>Index</strong>Memberi penanda posisi baris.</div>
+<div class="card"><strong>Nama kolom</strong>Membantu kita memilih data yang ingin diolah.</div>
+</div>
+<h3>Gambaran sederhana</h3>
+<pre><code>DataFrame
+┌────────┬────────┬───────────┬────────────┐
+│ Nama   │ Matematika │ Bahasa │ Informatika│
+├────────┼────────┼───────────┼────────────┤
+│ Andi   │ 80     │ 75        │ 90         │
+│ Budi   │ 70     │ 80        │ 75         │
+│ Citra  │ 90     │ 95        │ 92         │
+│ Dina   │ 85     │ 80        │ 88         │
+└────────┴────────┴───────────┴────────────┘</code></pre>
+<p>Dengan DataFrame, kita dapat memilih kolom tertentu, menghitung rata-rata, menyaring data, dan melakukan berbagai analisis lainnya.</p>
+</section>
+
+<section id="pandas">
+<div class="kicker">Bagian 6</div>
+<h2>🐼 Mengenal Pandas</h2>
+<p><strong>Pandas</strong> adalah library Python yang banyak digunakan untuk bekerja dengan data berbentuk tabel.</p>
+<h3>Mengapa menggunakan Pandas?</h3>
+<div class="grid">
+<div class="card"><strong>📥 Membaca data</strong>Dapat digunakan untuk membaca file seperti CSV.</div>
+<div class="card"><strong>📋 Mengatur data</strong>Data dapat disimpan dalam DataFrame.</div>
+<div class="card"><strong>🔎 Mencari data</strong>Kita dapat memilih kolom atau menyaring baris.</div>
+<div class="card"><strong>📈 Menganalisis data</strong>Rata-rata, jumlah, nilai maksimum, dan minimum dapat dihitung dengan mudah.</div>
+</div>
+<div class="tip"><strong>Analogi sederhana:</strong> Jika dataset adalah sebuah tabel nilai di spreadsheet, maka Pandas adalah alat Python yang membantu kita membaca dan mengolah tabel tersebut secara terprogram.</div>
+</section>
+
+<section id="import">
+<div class="kicker">Bagian 7</div>
+<h2>📦 Import Pandas</h2>
+<p>Sebelum menggunakan Pandas, kita perlu mengimpornya. Nama alias yang umum digunakan adalah <code>pd</code>.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd</code></pre></div>
+<p>Setelah itu, kita dapat menggunakan perintah seperti <code>pd.DataFrame()</code> dan <code>pd.read_csv()</code>.</p>
+<div class="warn"><strong>Kesalahan umum:</strong> Jika lupa menjalankan <code>import pandas as pd</code>, Python tidak mengenali nama <code>pd</code>.</div>
+</section>
+
+<section id="buat">
+<div class="kicker">Bagian 8</div>
+<h2>🧱 Membuat DataFrame</h2>
+<p>Kita dapat membuat DataFrame langsung dari dictionary Python.</p>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+data = {
+    "Nama": ["Andi", "Budi", "Citra", "Dina"],
+    "Matematika": [80, 70, 90, 85],
+    "Bahasa": [75, 80, 95, 80],
+    "Informatika": [90, 75, 92, 88]
+}
+
+df = pd.DataFrame(data)
+
+print(df)</code></pre></div>
+<h3>Memahami kode</h3>
+<ol>
+<li><code>import pandas as pd</code> memanggil library Pandas.</li>
+<li><code>data</code> menyimpan data dalam dictionary.</li>
+<li>Setiap key seperti <code>Nama</code> dan <code>Matematika</code> menjadi nama kolom.</li>
+<li>List di dalam dictionary menjadi isi setiap kolom.</li>
+<li><code>pd.DataFrame(data)</code> mengubah data menjadi tabel.</li>
+<li><code>print(df)</code> menampilkan DataFrame.</li>
+</ol>
+</section>
+
+<section id="akses">
+<div class="kicker">Bagian 9</div>
+<h2>🔎 Mengakses DataFrame</h2>
+<h3>Melihat seluruh DataFrame</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df</code></pre></div>
+<h3>Memilih satu kolom</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df["Nama"]</code></pre></div>
+<h3>Memilih beberapa kolom</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df[["Nama", "Matematika"]]</code></pre></div>
+<h3>Melihat beberapa baris pertama</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df.head()</code></pre></div>
+<h3>Melihat informasi struktur data</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>df.info()</code></pre></div>
+<h3>Melihat ukuran DataFrame</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Jumlah baris:", df.shape[0])
+print("Jumlah kolom:", df.shape[1])</code></pre></div>
+<div class="note"><strong>Ingat:</strong> <code>shape</code> memberikan informasi ukuran DataFrame dalam bentuk <code>(jumlah_baris, jumlah_kolom)</code>.</div>
+</section>
+
+<section id="operasi">
+<div class="kicker">Bagian 10</div>
+<h2>🧮 Mengolah Data dengan Pandas</h2>
+<h3>Rata-rata nilai Matematika</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>rata_matematika = df["Matematika"].mean()
+print("Rata-rata Matematika:", rata_matematika)</code></pre></div>
+<h3>Nilai tertinggi</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>tertinggi = df["Matematika"].max()
+print("Nilai tertinggi:", tertinggi)</code></pre></div>
+<h3>Nilai terendah</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>terendah = df["Matematika"].min()
+print("Nilai terendah:", terendah)</code></pre></div>
+<h3>Rata-rata semua mata pelajaran</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>kolom_nilai = ["Matematika", "Bahasa", "Informatika"]
+
+df["Rata-rata"] = df[kolom_nilai].mean(axis=1)
+
+print(df)</code></pre></div>
+<p><code>axis=1</code> berarti perhitungan dilakukan mendatar untuk setiap baris siswa.</p>
+<div class="tip"><strong>Konsep penting:</strong> <code>mean()</code> untuk rata-rata, <code>max()</code> untuk nilai terbesar, dan <code>min()</code> untuk nilai terkecil.</div>
+</section>
+
+<section id="csv">
+<div class="kicker">Bagian 11</div>
+<h2>📄 Membaca File CSV</h2>
+<p>CSV adalah format file yang sering digunakan untuk menyimpan data dalam bentuk tabel. Pandas menyediakan <code>read_csv()</code> untuk membaca file tersebut.</p>
+<h3>Jika file CSV tersedia di Google Colab</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+df = pd.read_csv("data_nilai.csv")
+
+print(df)</code></pre></div>
+<h3>Mengunggah CSV ke Colab</h3>
+<div class="step"><div class="num">1</div><div>Siapkan file CSV, misalnya <code>data_nilai.csv</code>.</div></div>
+<div class="step"><div class="num">2</div><div>Gunakan panel <strong>Files</strong> di sebelah kiri Google Colab.</div></div>
+<div class="step"><div class="num">3</div><div>Upload file CSV ke sesi Colab.</div></div>
+<div class="step"><div class="num">4</div><div>Jalankan <code>pd.read_csv()</code> untuk membacanya.</div></div>
+<div class="warn"><strong>Perhatikan nama file:</strong> Nama yang ditulis dalam <code>pd.read_csv()</code> harus sesuai dengan nama file yang tersedia di lingkungan Colab.</div>
+</section>
+
+<section id="aktivitas">
+<div class="kicker">Bagian 12</div>
+<h2>🎯 Aktivitas — Analisis Dataset Nilai Siswa</h2>
+<p>Siswa diberikan dataset sederhana berikut.</p>
+<table>
+<tr><th>Nama</th><th>Matematika</th><th>Bahasa</th><th>Informatika</th></tr>
+<tr><td>Andi</td><td>80</td><td>75</td><td>90</td></tr>
+<tr><td>Budi</td><td>70</td><td>80</td><td>75</td></tr>
+<tr><td>Citra</td><td>90</td><td>95</td><td>92</td></tr>
+<tr><td>Dina</td><td>85</td><td>80</td><td>88</td></tr>
+</table>
+<h3>Target analisis</h3>
+<ul>
+<li>Menghitung rata-rata setiap mata pelajaran.</li>
+<li>Mencari siswa dengan nilai tertinggi pada setiap mata pelajaran.</li>
+<li>Menghitung rata-rata setiap siswa.</li>
+<li>Mencari siswa dengan rata-rata tertinggi.</li>
+</ul>
+<h3>Langkah 1 — Membuat DataFrame</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+data = {
+    "Nama": ["Andi", "Budi", "Citra", "Dina"],
+    "Matematika": [80, 70, 90, 85],
+    "Bahasa": [75, 80, 95, 80],
+    "Informatika": [90, 75, 92, 88]
+}
+
+df = pd.DataFrame(data)
+
+df</code></pre></div>
+<h3>Langkah 2 — Rata-rata setiap mata pelajaran</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>print("Rata-rata Matematika:", df["Matematika"].mean())
+print("Rata-rata Bahasa:", df["Bahasa"].mean())
+print("Rata-rata Informatika:", df["Informatika"].mean())</code></pre></div>
+<h3>Langkah 3 — Menambahkan kolom rata-rata siswa</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>kolom_nilai = ["Matematika", "Bahasa", "Informatika"]
+
+df["Rata-rata"] = df[kolom_nilai].mean(axis=1)
+
+print(df)</code></pre></div>
+<h3>Langkah 4 — Mencari siswa dengan rata-rata tertinggi</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>index_tertinggi = df["Rata-rata"].idxmax()
+
+print("Siswa dengan rata-rata tertinggi:")
+print(df.loc[index_tertinggi])</code></pre></div>
+<h3>Contoh hasil analisis</h3>
+<pre><code>Rata-rata Matematika: 81.25
+Rata-rata Bahasa: 82.5
+Rata-rata Informatika: 86.25
+
+Siswa dengan rata-rata tertinggi:
+Nama            Citra
+Matematika      90
+Bahasa          95
+Informatika     92
+Rata-rata       92.33...</code></pre>
+<div class="tip"><strong>Temuan dari dataset contoh:</strong> Citra memiliki rata-rata keseluruhan paling tinggi berdasarkan tiga nilai mata pelajaran pada dataset yang diberikan.</div>
+</section>
+
+<section id="proyek">
+<div class="kicker">Bagian 13</div>
+<h2>🚀 Proyek Mini — Analisis Data Nilai Siswa</h2>
+<p>Buat notebook Google Colab yang dapat membuat atau membaca dataset nilai siswa, kemudian melakukan analisis sederhana.</p>
+<h3>Ketentuan minimal</h3>
+<ol>
+<li>Dataset memiliki minimal 5 siswa.</li>
+<li>Memiliki kolom <code>Nama</code>.</li>
+<li>Memiliki minimal 3 kolom mata pelajaran.</li>
+<li>Data disimpan dalam DataFrame.</li>
+<li>Menampilkan rata-rata setiap mata pelajaran.</li>
+<li>Menambahkan kolom rata-rata setiap siswa.</li>
+<li>Menampilkan siswa dengan rata-rata tertinggi.</li>
+<li>Menampilkan siswa dengan nilai tertinggi dan terendah pada salah satu mata pelajaran.</li>
+</ol>
+<h3>Kode proyek contoh</h3>
+<div class="code-wrap"><button class="copy" onclick="copyCode(this)">Salin</button><pre><code>import pandas as pd
+
+# 1. Membuat dataset
+data = {
+    "Nama": ["Andi", "Budi", "Citra", "Dina", "Eko"],
+    "Matematika": [80, 70, 90, 85, 78],
+    "Bahasa": [75, 80, 95, 80, 82],
+    "Informatika": [90, 75, 92, 88, 85]
+}
+
+# 2. Membuat DataFrame
+df = pd.DataFrame(data)
+
+# 3. Menampilkan dataset
+print("=== DATASET NILAI SISWA ===")
+print(df)
+
+# 4. Menentukan kolom nilai
+kolom_nilai = ["Matematika", "Bahasa", "Informatika"]
+
+# 5. Menghitung rata-rata setiap siswa
+df["Rata-rata"] = df[kolom_nilai].mean(axis=1)
+
+# 6. Rata-rata setiap mata pelajaran
+print("\n=== RATA-RATA MATA PELAJARAN ===")
+for kolom in kolom_nilai:
+    print(kolom, ":", df[kolom].mean())
+
+# 7. Siswa dengan rata-rata tertinggi
+index_tertinggi = df["Rata-rata"].idxmax()
+siswa_tertinggi = df.loc[index_tertinggi]
+
+print("\n=== SISWA DENGAN RATA-RATA TERTINGGI ===")
+print(siswa_tertinggi)
+
+# 8. Menampilkan hasil akhir
+print("\n=== DATA AKHIR ===")
+print(df)</code></pre></div>
+<h3>Pengembangan proyek</h3>
+<div class="grid">
+<div class="card"><strong>Level 1</strong>Tambahkan minimal 10 siswa.</div>
+<div class="card"><strong>Level 2</strong>Tambahkan kolom predikat A–E.</div>
+<div class="card"><strong>Level 3</strong>Hitung jumlah siswa yang rata-ratanya minimal 75.</div>
+<div class="card"><strong>Level 4</strong>Buat grafik nilai menggunakan Matplotlib.</div>
+</div>
+</section>
+
+<section id="latihan">
+<div class="kicker">Bagian 14</div>
+<h2>📝 5 Latihan Soal</h2>
+<div class="quiz"><strong>Soal 1.</strong> Apa yang dimaksud dengan dataset?<details><summary>Lihat pedoman jawaban</summary><div>Dataset adalah kumpulan data yang disusun untuk dapat dibaca, dipelajari, atau diolah.</div></details></div>
+<div class="quiz"><strong>Soal 2.</strong> Apa perbedaan baris dan kolom pada DataFrame?<details><summary>Lihat jawaban</summary><div>Baris mewakili satu record atau objek data, sedangkan kolom mewakili satu jenis informasi atau atribut.</div></details></div>
+<div class="quiz"><strong>Soal 3.</strong> Apa fungsi <code>pd.DataFrame()</code>?<details><summary>Lihat jawaban</summary><div><code>pd.DataFrame()</code> digunakan untuk membuat struktur data berbentuk tabel/DataFrame dari data yang diberikan.</div></details></div>
+<div class="quiz"><strong>Soal 4.</strong> Apa fungsi <code>df["Matematika"].mean()</code>?<details><summary>Lihat jawaban</summary><div>Menghitung nilai rata-rata pada kolom Matematika.</div></details></div>
+<div class="quiz"><strong>Soal 5.</strong> Apa fungsi <code>pd.read_csv()</code>?<details><summary>Lihat jawaban</summary><div>Untuk membaca data dari file CSV menjadi DataFrame.</div></details></div>
+</section>
+
+<section id="tugas">
+<div class="kicker">Bagian 15</div>
+<h2>🛠️ 5 Tugas Praktik</h2>
+<div class="task"><h3>Tugas 1 — Membuat DataFrame</h3><p>Buat DataFrame berisi minimal 5 siswa dengan kolom <code>Nama</code>, <code>Matematika</code>, <code>Bahasa</code>, dan <code>Informatika</code>. Tampilkan DataFrame tersebut.</p></div>
+<div class="task"><h3>Tugas 2 — Eksplorasi Data</h3><p>Gunakan <code>head()</code>, <code>info()</code>, dan <code>shape</code> untuk mengetahui isi dan struktur DataFrame yang dibuat.</p></div>
+<div class="task"><h3>Tugas 3 — Analisis Nilai</h3><p>Hitung rata-rata, nilai tertinggi, dan nilai terendah untuk setiap mata pelajaran. Tampilkan hasilnya dengan jelas.</p></div>
+<div class="task"><h3>Tugas 4 — Analisis Siswa</h3><p>Tambahkan kolom <code>Rata-rata</code> untuk setiap siswa. Kemudian cari siswa dengan rata-rata tertinggi dan terendah menggunakan Pandas.</p></div>
+<div class="task"><h3>Tugas 5 — Proyek Dataset CSV</h3><p>Buat atau gunakan file CSV berisi minimal 10 siswa. Upload ke Google Colab, baca dengan <code>pd.read_csv()</code>, lakukan analisis rata-rata setiap mata pelajaran, cari siswa dengan rata-rata tertinggi, dan buat satu visualisasi sederhana.</p><p><strong>Bonus:</strong> Tambahkan kolom predikat dan filter siswa yang rata-ratanya minimal 75.</p></div>
+<h3>Checklist Pengumpulan</h3>
+<div class="checklist">
+<label>☐ Notebook berjalan di Google Colab.</label>
+<label>☐ Menggunakan Pandas.</label>
+<label>☐ Dataset memiliki baris dan kolom yang jelas.</label>
+<label>☐ DataFrame berhasil dibuat atau dibaca dari CSV.</label>
+<label>☐ Ada hasil analisis rata-rata.</label>
+<label>☐ Ada siswa dengan nilai/rata-rata tertinggi yang berhasil ditemukan.</label>
+<label>☐ Output mudah dibaca.</label>
+<label>☐ Ada screenshot hasil atau link notebook.</label>
+</div>
+</section>
+
+<section id="ringkasan">
+<div class="kicker">Bagian 16</div>
+<h2>📌 Ringkasan</h2>
+<ol>
+<li>Dataset adalah kumpulan data yang akan dianalisis.</li>
+<li>Baris mewakili record, sedangkan kolom mewakili atribut.</li>
+<li>DataFrame adalah struktur data berbentuk tabel dari Pandas.</li>
+<li>Pandas digunakan untuk membaca, mengatur, dan menganalisis data.</li>
+<li><code>import pandas as pd</code> digunakan untuk mengimpor Pandas dengan alias <code>pd</code>.</li>
+<li><code>pd.DataFrame()</code> dapat digunakan untuk membuat DataFrame.</li>
+<li><code>df["Kolom"]</code> digunakan untuk memilih sebuah kolom.</li>
+<li><code>mean()</code>, <code>max()</code>, dan <code>min()</code> membantu melakukan perhitungan data.</li>
+<li><code>pd.read_csv()</code> digunakan untuk membaca dataset CSV.</li>
+<li>DataFrame membuat proses pengolahan data menjadi lebih terstruktur dan mudah dilakukan dengan Python.</li>
+</ol>
+<div class="note"><strong>Kalimat kunci:</strong> “Data disimpan dalam bentuk tabel, Pandas membantu membacanya, lalu Python membantu kita mengolah dan menemukan informasi dari data tersebut.”</div>
+</section>
+
+<section id="refleksi">
+<div class="kicker">Bagian 17</div>
+<h2>💭 Refleksi Siswa</h2>
+<ol>
+<li>Apa yang dimaksud dengan dataset?</li>
+<li>Apa perbedaan baris dan kolom?</li>
+<li>Mengapa DataFrame cocok untuk pengolahan data?</li>
+<li>Apa fungsi Pandas?</li>
+<li>Bagian mana yang paling mudah dan paling sulit?</li>
+<li>Apa manfaat <code>mean()</code>, <code>max()</code>, dan <code>min()</code>?</li>
+<li>Mengapa membaca data dari CSV dapat membantu ketika jumlah data semakin banyak?</li>
+</ol>
+<div class="tip"><strong>Refleksi lanjutan:</strong> Bayangkan kamu memiliki 10.000 data siswa. Menurutmu, mengapa pengolahan data menggunakan Python dan Pandas lebih praktis dibanding menghitung satu per satu secara manual?</div>
+</section>
+
+<section>
+<div class="kicker">Referensi Praktik</div>
+<h2>📚 Google Colab</h2>
+<p>Gunakan <a href="https://colab.research.google.com/" target="_blank">Google Colab</a> untuk menjalankan seluruh contoh kode pada materi ini.</p>
+<p class="small">Materi Pembelajaran Koding dan Kecerdasan Artifisial • Python • Google Colab • Pengolahan Data</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+<div class="container">Python untuk Pengolahan Data pada Google Colab • Materi Pembelajaran Koding &amp; Kecerdasan Artifisial</div>
+</footer>
+
+<script>
+function copyCode(button){
+  const code=button.parentElement.querySelector("code").innerText;
+  navigator.clipboard.writeText(code).then(()=>{
+    const old=button.innerText;
+    button.innerText="Tersalin ✓";
+    setTimeout(()=>button.innerText=old,1400);
+  }).catch(()=>{
+    button.innerText="Gagal";
+    setTimeout(()=>button.innerText="Salin",1200);
+  });
+}
+</script>
+</body>
+</html>

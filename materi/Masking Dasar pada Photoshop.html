@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masking Dasar pada Photoshop - SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#17191d;
+  --muted:#626872;
+  --paper:#f5f2ec;
+  --white:#fff;
+  --accent:#8f1d2c;
+  --accent-dark:#6e1420;
+  --line:#ddd8cf;
+  --soft:#eee9e1;
+  --green:#176b4d;
+  --blue:#245b8f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+}
+a{color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  background:var(--ink);
+  color:#fff;
+  padding:22px 0;
+}
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand h1{margin:0;font-size:1.15rem;letter-spacing:.04em}
+.brand p{margin:3px 0 0;color:#cfd2d6;font-size:.88rem}
+.hero{
+  background:#fff;
+  padding:70px 0 55px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  color:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+}
+.hero h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.2rem,5vw,4.4rem);
+  line-height:1.08;
+  margin:12px 0 18px;
+  max-width:900px;
+}
+.hero .lead{font-size:1.1rem;color:var(--muted);max-width:820px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.badge{
+  border:1px solid var(--line);
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--paper);
+  font-size:.85rem;
+}
+.layout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:35px;
+  align-items:start;
+  padding:45px 0 80px;
+}
+.toc{
+  position:sticky;
+  top:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  padding:20px;
+}
+.toc h3{margin-top:0;font-family:Georgia,serif}
+.toc a{
+  display:block;
+  padding:7px 0;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:.92rem;
+  border-bottom:1px solid #eee;
+}
+.toc a:hover{color:var(--accent)}
+section{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:34px;
+  margin-bottom:25px;
+}
+section h2{
+  font-family:Georgia,serif;
+  font-size:2rem;
+  line-height:1.2;
+  margin:0 0 18px;
+}
+section h3{
+  font-size:1.3rem;
+  margin-top:30px;
+  color:var(--accent-dark);
+}
+section h4{margin-bottom:7px}
+.note,.tip,.warning,.success{
+  padding:17px 19px;
+  margin:20px 0;
+  border-left:5px solid;
+  background:var(--soft);
+}
+.note{border-color:var(--blue)}
+.tip{border-color:var(--green);background:#edf6f1}
+.warning{border-color:#a66b00;background:#fbf4e6}
+.success{border-color:var(--green);background:#edf6f1}
+strong{color:#202228}
+code{
+  background:#eeeae4;
+  padding:2px 6px;
+  border-radius:4px;
+  font-family:Consolas,monospace;
+}
+.step{
+  border:1px solid var(--line);
+  padding:20px;
+  margin:16px 0;
+  background:#fcfbf8;
+}
+.step-number{
+  display:inline-flex;
+  width:32px;height:32px;
+  align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-weight:bold;
+  margin-right:8px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
+  margin:20px 0;
+}
+.card{
+  border:1px solid var(--line);
+  padding:20px;
+  background:#fcfbf8;
+}
+.card h4{margin-top:0;color:var(--accent-dark)}
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  margin:20px 0;
+}
+.compare th,.compare td{
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  vertical-align:top;
+}
+.compare th{background:var(--ink);color:#fff}
+ol li,ul li{margin:7px 0}
+kbd{
+  border:1px solid #bbb;
+  border-bottom-width:2px;
+  border-radius:4px;
+  padding:2px 6px;
+  background:#fafafa;
+  font-family:Arial,sans-serif;
+}
+details{
+  border:1px solid var(--line);
+  padding:15px 18px;
+  margin:12px 0;
+  background:#fcfbf8;
+}
+summary{cursor:pointer;font-weight:700;color:var(--accent-dark)}
+footer{
+  background:var(--ink);
+  color:#ddd;
+  text-align:center;
+  padding:30px 20px;
+}
+.project-box{
+  border:2px solid var(--accent);
+  padding:25px;
+  background:#fff8f8;
+}
+.checklist{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.check{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.small{font-size:.9rem;color:var(--muted)}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .toc{position:relative;top:0}
+  .grid,.checklist{grid-template-columns:1fr}
+  section{padding:25px 20px}
+}
+@media print{
+  header,.toc{display:none}
+  .layout{display:block;padding-top:0}
+  section{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container brand">
+    <div>
+      <h1>SMK DIPSA PURWOKERTO</h1>
+      <p>Materi Pembelajaran Desain Grafis &amp; Photoshop</p>
+    </div>
+    <div>ADOBE PHOTOSHOP</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <div class="eyebrow">Materi Photoshop</div>
+    <h2>Masking Dasar pada Photoshop</h2>
+    <p class="lead">
+      Pelajari cara menyembunyikan, menampilkan kembali, dan menggabungkan bagian gambar
+      tanpa menghapus gambar asli. Materi ini disusun dari konsep paling dasar sampai
+      praktik membuat komposit dua atau lebih foto menggunakan Layer Mask.
+    </p>
+    <div class="badges">
+      <span class="badge">Layer Mask</span>
+      <span class="badge">White &amp; Black Mask</span>
+      <span class="badge">Selection</span>
+      <span class="badge">Masking Objek</span>
+      <span class="badge">Komposit Foto</span>
+    </div>
+  </div>
+</div>
+
+<div class="container layout">
+
+  <aside class="toc">
+    <h3>Daftar Materi</h3>
+    <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+    <a href="#tujuan">Tujuan Pembelajaran</a>
+    <a href="#pengertian">1. Pengertian Masking</a>
+    <a href="#fungsi">2. Fungsi Layer Mask</a>
+    <a href="#warna">3. White &amp; Black pada Mask</a>
+    <a href="#hide-show">4. Menyembunyikan &amp; Menampilkan</a>
+    <a href="#selection">5. Masking dengan Selection</a>
+    <a href="#objek">6. Masking Objek</a>
+    <a href="#workflow">7. Alur Kerja Masking</a>
+    <a href="#project">8. Proyek Komposit Foto</a>
+    <a href="#kesalahan">9. Kesalahan Umum</a>
+    <a href="#soal">10. 5 Latihan Soal</a>
+    <a href="#tugas">11. 5 Tugas Praktik</a>
+    <a href="#ringkasan">12. Ringkasan</a>
+  </aside>
+
+  <main>
+
+    <section id="tujuan">
+      <h2>Tujuan Pembelajaran</h2>
+      <p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+      <ul>
+        <li>Menjelaskan pengertian masking pada Photoshop dengan bahasa sendiri.</li>
+        <li>Memahami fungsi <strong>Layer Mask</strong> dan perbedaannya dengan menghapus objek secara langsung.</li>
+        <li>Memahami arti warna <strong>putih</strong> dan <strong>hitam</strong> pada mask.</li>
+        <li>Menyembunyikan bagian tertentu dari gambar tanpa merusak gambar asli.</li>
+        <li>Menampilkan kembali bagian gambar yang sebelumnya disembunyikan.</li>
+        <li>Membuat mask berdasarkan <strong>selection</strong>.</li>
+        <li>Membuat masking sederhana pada objek.</li>
+        <li>Menggabungkan dua atau lebih foto menjadi sebuah komposit dengan masking.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Inti materi:</strong> Masking bukan berarti menghapus gambar.
+        Masking digunakan untuk mengatur bagian mana dari sebuah layer yang terlihat dan
+        bagian mana yang disembunyikan. Karena gambar aslinya tetap ada, masking sangat
+        mudah diperbaiki.
+      </div>
+    </section>
+
+    <section id="pengertian">
+      <h2>1. Pengertian Masking</h2>
+      <p>
+        <strong>Masking</strong> adalah teknik pada Photoshop untuk mengatur bagian gambar
+        yang ingin ditampilkan atau disembunyikan tanpa menghapus pixel asli dari layer.
+        Teknik ini sangat penting dalam desain grafis karena memungkinkan kita menggabungkan
+        gambar dengan lebih aman dan fleksibel.
+      </p>
+
+      <p>
+        Bayangkan sebuah foto berada di atas meja. Kita ingin menutupi sebagian foto dengan
+        selembar kertas, tetapi kita tidak ingin memotong atau merusak foto tersebut.
+        Kertas itu dapat dibayangkan seperti <strong>mask</strong>.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h4>Tanpa Masking</h4>
+          <p>
+            Jika bagian gambar dihapus menggunakan Eraser, pixel pada area tersebut dapat
+            hilang. Untuk mengembalikannya, kita mungkin harus menggunakan Undo atau
+            menyimpan file cadangan.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Dengan Masking</h4>
+          <p>
+            Bagian gambar hanya disembunyikan. Pixel aslinya tetap berada di layer sehingga
+            kita dapat menampilkan kembali bagian tersebut kapan saja.
+          </p>
+        </div>
+      </div>
+
+      <h3>Masking bersifat non-destructive</h3>
+      <p>
+        Istilah <strong>non-destructive editing</strong> berarti proses editing dilakukan
+        tanpa menghancurkan data gambar asli. Ini adalah salah satu alasan mengapa Layer
+        Mask sangat disukai dalam pekerjaan desain profesional.
+      </p>
+
+      <div class="note">
+        <strong>Contoh sederhana:</strong> Kamu mempunyai foto seseorang dengan latar
+        belakang. Kamu ingin menyembunyikan latarnya. Dengan masking, latar belakang dapat
+        disembunyikan tanpa menghapus foto asli. Jika ternyata ada bagian rambut yang ikut
+        tersembunyi, bagian tersebut dapat dikembalikan lagi dengan warna putih pada mask.
+      </div>
+    </section>
+
+    <section id="fungsi">
+      <h2>2. Fungsi Layer Mask</h2>
+      <p>
+        <strong>Layer Mask</strong> adalah fitur yang digunakan untuk mengontrol transparansi
+        bagian tertentu pada sebuah layer.
+      </p>
+
+      <p>
+        Secara sederhana, Layer Mask seperti sebuah "pintu" yang menentukan bagian gambar
+        mana yang boleh terlihat dan bagian mana yang tidak terlihat.
+      </p>
+
+      <h3>Fungsi utama Layer Mask</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>1. Menyembunyikan bagian gambar</h4>
+          <p>Bagian tertentu dapat dibuat tidak terlihat tanpa menghapus pixel aslinya.</p>
+        </div>
+        <div class="card">
+          <h4>2. Menampilkan kembali gambar</h4>
+          <p>Bagian yang sebelumnya disembunyikan dapat dikembalikan dengan mengecat mask menggunakan putih.</p>
+        </div>
+        <div class="card">
+          <h4>3. Menggabungkan foto</h4>
+          <p>Masking memungkinkan dua foto terlihat menyatu sehingga batas pergantian gambar tidak terlalu kasar.</p>
+        </div>
+        <div class="card">
+          <h4>4. Memperbaiki kesalahan dengan mudah</h4>
+          <p>Jika masking terlalu banyak atau terlalu sedikit, mask dapat diedit kembali tanpa merusak foto.</p>
+        </div>
+      </div>
+
+      <h3>Cara menambahkan Layer Mask</h3>
+      <div class="step">
+        <span class="step-number">1</span>
+        Buka gambar di Photoshop.
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        Pilih layer yang ingin diberi mask pada panel <strong>Layers</strong>.
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        Cari tombol <strong>Add Layer Mask</strong> pada bagian bawah panel Layers.
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        Klik tombol tersebut. Akan muncul thumbnail mask di samping thumbnail gambar.
+      </div>
+
+      <div class="warning">
+        <strong>Perhatikan:</strong> Pastikan kamu memilih thumbnail <strong>mask</strong>
+        ketika ingin mengecat area mask. Jika yang terpilih adalah thumbnail gambar,
+        brush justru akan mengubah gambar.
+      </div>
+    </section>
+
+    <section id="warna">
+      <h2>3. White dan Black pada Mask</h2>
+      <p>
+        Salah satu konsep paling penting dalam Layer Mask adalah aturan sederhana berikut:
+      </p>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Warna Mask</th>
+            <th>Fungsi</th>
+            <th>Hasil pada Gambar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Putih (White)</strong></td>
+            <td>Menampilkan</td>
+            <td>Bagian gambar terlihat.</td>
+          </tr>
+          <tr>
+            <td><strong>Hitam (Black)</strong></td>
+            <td>Menyembunyikan</td>
+            <td>Bagian gambar tidak terlihat.</td>
+          </tr>
+          <tr>
+            <td><strong>Abu-abu (Gray)</strong></td>
+            <td>Menampilkan sebagian</td>
+            <td>Bagian gambar menjadi transparan sebagian.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="success">
+        <strong>Rumus mudah diingat:</strong><br>
+        WHITE = SHOW / TAMPILKAN<br>
+        BLACK = HIDE / SEMBUNYIKAN<br>
+        GRAY = SEMI-TRANSPARENT / TAMPIL SEBAGIAN
+      </div>
+
+      <h3>Mengapa abu-abu juga penting?</h3>
+      <p>
+        Mask tidak hanya mempunyai warna hitam dan putih. Warna abu-abu menghasilkan
+        transparansi sebagian. Semakin dekat ke putih, gambar semakin terlihat. Semakin
+        dekat ke hitam, gambar semakin tersembunyi.
+      </p>
+
+      <p>
+        Hal ini sangat berguna ketika membuat transisi lembut, bayangan, efek kabur,
+        atau menyatukan dua foto agar tidak terlihat seperti ditempel begitu saja.
+      </p>
+
+      <h3>Contoh logika mask</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Mask putih seluruhnya</h4>
+          <p>Seluruh gambar terlihat. Tidak ada bagian yang disembunyikan.</p>
+        </div>
+        <div class="card">
+          <h4>Mask hitam seluruhnya</h4>
+          <p>Seluruh gambar disembunyikan. Layer gambar tidak terlihat, tetapi datanya masih ada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hide-show">
+      <h2>4. Menyembunyikan dan Menampilkan Kembali Bagian Gambar</h2>
+
+      <h3>A. Menyembunyikan bagian gambar dengan Brush</h3>
+      <div class="step">
+        <span class="step-number">1</span>
+        Pilih layer gambar.
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        Tambahkan <strong>Layer Mask</strong>.
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        Klik thumbnail mask, bukan thumbnail gambar.
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        Pilih <strong>Brush Tool</strong> dengan menekan <kbd>B</kbd>.
+      </div>
+      <div class="step">
+        <span class="step-number">5</span>
+        Gunakan warna <strong>hitam</strong>.
+      </div>
+      <div class="step">
+        <span class="step-number">6</span>
+        Sapukan brush pada area yang ingin disembunyikan.
+      </div>
+
+      <h3>B. Menampilkan kembali bagian yang tersembunyi</h3>
+      <div class="step">
+        <span class="step-number">1</span>
+        Pastikan thumbnail Layer Mask masih dipilih.
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        Ubah warna foreground menjadi <strong>putih</strong>.
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        Gunakan Brush Tool.
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        Sapukan brush pada area yang ingin ditampilkan kembali.
+      </div>
+
+      <div class="tip">
+        <strong>Shortcut praktis:</strong> Tekan <kbd>D</kbd> untuk mengembalikan warna
+        foreground/background ke hitam-putih. Tekan <kbd>X</kbd> untuk menukar warna
+        foreground dan background. Ini sangat membantu ketika bergantian antara
+        menyembunyikan dan menampilkan gambar.
+      </div>
+
+      <h3>C. Menyembunyikan seluruh gambar</h3>
+      <p>
+        Jika kamu ingin langsung membuat seluruh gambar tersembunyi, kamu dapat membuat
+        mask berwarna hitam. Cara ini berguna jika kamu ingin menampilkan hanya bagian
+        tertentu dari sebuah foto.
+      </p>
+
+      <h3>D. Menguji hasil mask</h3>
+      <p>
+        Untuk melihat pengaruh mask, kamu dapat menonaktifkan sementara mask dengan
+        <strong>Shift + klik thumbnail mask</strong>. Dengan cara ini kamu dapat membandingkan
+        kondisi gambar sebelum dan sesudah masking.
+      </p>
+    </section>
+
+    <section id="selection">
+      <h2>5. Masking Menggunakan Selection</h2>
+      <p>
+        Masking akan menjadi lebih cepat dan rapi jika diawali dengan selection.
+        Selection menentukan area yang dipilih, kemudian Photoshop dapat mengubah selection
+        tersebut menjadi Layer Mask.
+      </p>
+
+      <h3>Contoh: membuat mask dari selection objek</h3>
+
+      <div class="step">
+        <span class="step-number">1</span>
+        Buka foto yang berisi objek yang ingin dipisahkan.
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        Gunakan salah satu alat selection, misalnya <strong>Object Selection Tool</strong>,
+        Quick Selection Tool, atau Lasso Tool.
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        Buat selection pada objek yang diinginkan.
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        Periksa tepi selection. Pastikan bagian penting seperti rambut, tangan, atau kaki
+        tidak ikut terpotong.
+      </div>
+      <div class="step">
+        <span class="step-number">5</span>
+        Setelah selection siap, klik <strong>Add Layer Mask</strong>.
+      </div>
+      <div class="step">
+        <span class="step-number">6</span>
+        Photoshop akan menggunakan selection untuk menentukan area yang terlihat.
+      </div>
+
+      <div class="note">
+        <strong>Prinsip penting:</strong> Area yang terseleksi biasanya menjadi area yang
+        ditampilkan ketika mask dibuat dari selection. Jika hasilnya terbalik, gunakan
+        <strong>Invert Mask</strong> atau lakukan pembalikan selection sesuai kebutuhan.
+      </div>
+
+      <h3>Masking setelah selection</h3>
+      <p>
+        Jangan menganggap pekerjaan selesai setelah mask dibuat. Justru setelah itu kamu
+        perlu melakukan pengecekan tepi objek. Gunakan Brush dengan ukuran kecil dan
+        hardness yang sesuai untuk memperbaiki bagian yang kurang rapi.
+      </p>
+    </section>
+
+    <section id="objek">
+      <h2>6. Masking Objek</h2>
+      <p>
+        <strong>Masking objek</strong> adalah teknik membuat sebuah objek terlihat sementara
+        area di sekitarnya disembunyikan. Teknik ini sering digunakan untuk membuat poster,
+        thumbnail, iklan, desain media sosial, katalog produk, dan komposit foto.
+      </p>
+
+      <h3>Contoh sederhana: memisahkan seseorang dari background</h3>
+
+      <div class="step">
+        <span class="step-number">1</span>
+        Masukkan foto orang ke Photoshop.
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        Gunakan Object Selection Tool atau alat selection lain.
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        Buat selection pada tubuh orang.
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        Periksa bagian rambut, tangan, pakaian, dan kaki.
+      </div>
+      <div class="step">
+        <span class="step-number">5</span>
+        Buat Layer Mask dari selection.
+      </div>
+      <div class="step">
+        <span class="step-number">6</span>
+        Tambahkan foto background baru di bawah layer objek.
+      </div>
+      <div class="step">
+        <span class="step-number">7</span>
+        Perbaiki mask menggunakan Brush hitam dan putih.
+      </div>
+      <div class="step">
+        <span class="step-number">8</span>
+        Atur ukuran, posisi, pencahayaan, dan warna objek agar terlihat menyatu dengan background.
+      </div>
+
+      <h3>Bagian objek yang harus diperhatikan</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Rambut</h4>
+          <p>Rambut mempunyai banyak detail kecil. Hindari membuat tepi terlalu kaku.</p>
+        </div>
+        <div class="card">
+          <h4>Tangan &amp; jari</h4>
+          <p>Periksa area di antara jari agar background tidak ikut tertinggal.</p>
+        </div>
+        <div class="card">
+          <h4>Pakaian</h4>
+          <p>Periksa bagian tepi pakaian dan lipatan yang mempunyai bentuk tidak beraturan.</p>
+        </div>
+        <div class="card">
+          <h4>Bayangan</h4>
+          <p>Bayangan dapat membantu objek terlihat lebih menyatu dengan background baru.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <h2>7. Alur Kerja Masking yang Disarankan</h2>
+      <p>
+        Agar pekerjaan masking tidak berantakan, biasakan mengikuti alur kerja berikut:
+      </p>
+
+      <ol>
+        <li><strong>Siapkan foto:</strong> pilih foto utama dan background.</li>
+        <li><strong>Duplikasi layer:</strong> simpan layer asli sebagai cadangan jika diperlukan.</li>
+        <li><strong>Buat selection:</strong> pilih objek yang ingin dipertahankan.</li>
+        <li><strong>Buat Layer Mask:</strong> ubah selection menjadi mask.</li>
+        <li><strong>Periksa tepi:</strong> perbesar tampilan untuk mencari bagian yang kurang rapi.</li>
+        <li><strong>Perbaiki mask:</strong> gunakan Brush hitam untuk menyembunyikan dan putih untuk menampilkan kembali.</li>
+        <li><strong>Atur posisi:</strong> sesuaikan ukuran dan posisi objek terhadap background.</li>
+        <li><strong>Samakan warna:</strong> sesuaikan brightness, contrast, dan warna agar objek menyatu.</li>
+        <li><strong>Tambahkan bayangan bila perlu:</strong> bayangan dapat membuat komposit lebih realistis.</li>
+        <li><strong>Simpan file PSD:</strong> pertahankan layer dan mask agar masih dapat diedit.</li>
+      </ol>
+
+      <div class="success">
+        <strong>Tips:</strong> Jangan terlalu sering menggunakan Eraser pada objek.
+        Jika tujuanmu adalah membuat komposit, Layer Mask biasanya lebih aman karena
+        dapat diedit ulang.
+      </div>
+    </section>
+
+    <section id="project">
+      <h2>8. Proyek Utama: Membuat Komposit Dua atau Lebih Foto Menggunakan Masking</h2>
+
+      <div class="project-box">
+        <h3 style="margin-top:0">Judul Proyek</h3>
+        <p><strong>“Membuat Komposit Foto Kreatif dengan Layer Mask”</strong></p>
+        <p>
+          Buat sebuah desain yang menggabungkan minimal <strong>2 foto</strong>.
+          Contohnya adalah foto seseorang yang ditempatkan pada background pemandangan,
+          suasana kota, studio, alam, atau background kreatif lainnya.
+        </p>
+      </div>
+
+      <h3>Alat dan bahan</h3>
+      <ul>
+        <li>Adobe Photoshop.</li>
+        <li>Minimal 2 foto dengan kualitas yang cukup baik.</li>
+        <li>Foto objek utama.</li>
+        <li>Foto background.</li>
+        <li>Opsional: foto tambahan untuk dekorasi atau elemen pendukung.</li>
+      </ul>
+
+      <h3>Langkah proyek secara lengkap</h3>
+
+      <div class="step">
+        <span class="step-number">1</span>
+        <strong>Tentukan konsep.</strong>
+        Tentukan tema komposit, misalnya “Siswa di lingkungan masa depan”,
+        “Portrait di alam”, “Produk di studio”, atau konsep lain.
+      </div>
+
+      <div class="step">
+        <span class="step-number">2</span>
+        <strong>Buka background.</strong>
+        Jadikan foto background sebagai dasar komposisi.
+      </div>
+
+      <div class="step">
+        <span class="step-number">3</span>
+        <strong>Masukkan foto objek.</strong>
+        Letakkan foto objek sebagai layer baru di atas background.
+      </div>
+
+      <div class="step">
+        <span class="step-number">4</span>
+        <strong>Buat selection objek.</strong>
+        Gunakan Object Selection Tool, Quick Selection Tool, atau Lasso Tool.
+        Fokuskan selection pada objek utama.
+      </div>
+
+      <div class="step">
+        <span class="step-number">5</span>
+        <strong>Buat Layer Mask.</strong>
+        Setelah selection cukup rapi, tambahkan Layer Mask.
+        Background lama akan tersembunyi sesuai hasil mask.
+      </div>
+
+      <div class="step">
+        <span class="step-number">6</span>
+        <strong>Perbaiki tepi.</strong>
+        Gunakan Brush berukuran kecil pada mask.
+        Gunakan hitam untuk menghilangkan bagian yang tidak diperlukan dan putih
+        untuk mengembalikan bagian yang terlalu banyak tersembunyi.
+      </div>
+
+      <div class="step">
+        <span class="step-number">7</span>
+        <strong>Atur ukuran dan posisi.</strong>
+        Pastikan ukuran objek masuk akal terhadap background.
+        Jangan membuat objek terlalu besar atau terlalu kecil tanpa alasan visual.
+      </div>
+
+      <div class="step">
+        <span class="step-number">8</span>
+        <strong>Samakan pencahayaan.</strong>
+        Jika background terang tetapi objek terlalu gelap, komposit akan terlihat tidak menyatu.
+        Gunakan adjustment yang diperlukan untuk menyesuaikan objek.
+      </div>
+
+      <div class="step">
+        <span class="step-number">9</span>
+        <strong>Samakan warna.</strong>
+        Sesuaikan temperatur dan warna objek agar mendekati suasana background.
+      </div>
+
+      <div class="step">
+        <span class="step-number">10</span>
+        <strong>Tambahkan bayangan jika diperlukan.</strong>
+        Bayangan yang sesuai dapat membuat objek tampak benar-benar berada di dalam scene.
+      </div>
+
+      <div class="step">
+        <span class="step-number">11</span>
+        <strong>Periksa keseluruhan desain.</strong>
+        Zoom in untuk memeriksa tepi dan zoom out untuk melihat apakah komposisi terasa seimbang.
+      </div>
+
+      <div class="step">
+        <span class="step-number">12</span>
+        <strong>Simpan file.</strong>
+        Simpan versi PSD agar Layer Mask tetap dapat diedit.
+        Setelah itu buat versi JPG/PNG untuk hasil akhir.
+      </div>
+
+      <h3>Target hasil proyek</h3>
+      <div class="checklist">
+        <div class="check">☐ Minimal 2 foto digabungkan.</div>
+        <div class="check">☐ Menggunakan Layer Mask.</div>
+        <div class="check">☐ Objek utama terlihat jelas.</div>
+        <div class="check">☐ Tepi objek cukup rapi.</div>
+        <div class="check">☐ Tidak terlihat seperti sekadar copy-paste.</div>
+        <div class="check">☐ Ukuran dan posisi objek masuk akal.</div>
+        <div class="check">☐ Warna dan pencahayaan cukup menyatu.</div>
+        <div class="check">☐ File PSD tetap memiliki layer dan mask.</div>
+      </div>
+
+      <h3>Contoh ide komposit</h3>
+      <div class="grid">
+        <div class="card">
+          <h4>Ide 1 — Portrait Kreatif</h4>
+          <p>Gabungkan foto seseorang dengan background kota malam atau lingkungan futuristik.</p>
+        </div>
+        <div class="card">
+          <h4>Ide 2 — Poster Promosi</h4>
+          <p>Gabungkan foto produk dengan background yang sesuai dengan karakter produk.</p>
+        </div>
+        <div class="card">
+          <h4>Ide 3 — Dunia Imajinasi</h4>
+          <p>Gabungkan objek manusia, alam, dan elemen tambahan untuk membuat scene fantasi.</p>
+        </div>
+        <div class="card">
+          <h4>Ide 4 — Tema Sekolah</h4>
+          <p>Buat komposit bertema kegiatan atau lingkungan belajar SMK dengan gaya poster modern.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="kesalahan">
+      <h2>9. Kesalahan Umum Saat Masking</h2>
+
+      <h3>1. Mengecat gambar, bukan mask</h3>
+      <p>
+        Kesalahan ini terjadi ketika thumbnail gambar terpilih, bukan thumbnail mask.
+        Akibatnya Brush dapat mengubah pixel gambar.
+      </p>
+      <p><strong>Solusi:</strong> klik thumbnail mask terlebih dahulu sebelum menggunakan Brush.</p>
+
+      <h3>2. Lupa aturan hitam dan putih</h3>
+      <p>
+        Banyak pemula bingung karena mengira hitam berarti menghapus permanen.
+        Sebenarnya pada mask, hitam hanya menyembunyikan tampilan.
+      </p>
+      <p><strong>Ingat:</strong> hitam = sembunyikan, putih = tampilkan.</p>
+
+      <h3>3. Tepi objek terlalu kasar</h3>
+      <p>
+        Tepi yang terlalu tajam atau bergerigi dapat membuat objek terlihat seperti ditempel.
+        Gunakan ukuran brush yang tepat dan periksa area detail.
+      </p>
+
+      <h3>4. Masking terlalu banyak</h3>
+      <p>
+        Jika terlalu banyak area objek disembunyikan, gunakan warna putih untuk
+        menampilkan kembali area yang hilang.
+      </p>
+
+      <h3>5. Tidak menyimpan file PSD</h3>
+      <p>
+        Jika hanya menyimpan JPG, struktur layer dan mask tidak dapat dipertahankan.
+        Untuk pekerjaan yang masih mungkin diedit, simpan file utama dalam format PSD.
+      </p>
+
+      <h3>6. Hanya fokus pada masking, lupa komposisi</h3>
+      <p>
+        Mask yang rapi belum tentu menghasilkan komposit yang bagus. Perhatikan juga
+        perspektif, ukuran objek, pencahayaan, warna, bayangan, dan keseimbangan desain.
+      </p>
+    </section>
+
+    <section id="soal">
+      <h2>10. Latihan Soal — 5 Pertanyaan</h2>
+      <p>Jawablah pertanyaan berikut dengan menggunakan pemahamanmu sendiri.</p>
+
+      <details>
+        <summary>Soal 1 — Apa yang dimaksud dengan masking pada Photoshop?</summary>
+        <p>
+          <strong>Jawaban:</strong> Masking adalah teknik untuk mengatur bagian layer yang
+          terlihat dan tersembunyi tanpa menghapus pixel asli gambar. Masking membuat proses
+          editing lebih fleksibel karena bagian yang disembunyikan dapat ditampilkan kembali.
+        </p>
+      </details>
+
+      <details>
+        <summary>Soal 2 — Apa fungsi warna putih dan hitam pada Layer Mask?</summary>
+        <p>
+          <strong>Jawaban:</strong> Putih digunakan untuk menampilkan bagian gambar,
+          sedangkan hitam digunakan untuk menyembunyikan bagian gambar. Abu-abu dapat
+          menghasilkan tampilan sebagian/transparansi.
+        </p>
+      </details>
+
+      <details>
+        <summary>Soal 3 — Mengapa Layer Mask disebut non-destructive?</summary>
+        <p>
+          <strong>Jawaban:</strong> Karena masking tidak menghapus pixel asli gambar.
+          Mask hanya mengatur apakah bagian tersebut terlihat atau tersembunyi sehingga
+          hasilnya masih dapat diperbaiki.
+        </p>
+      </details>
+
+      <details>
+        <summary>Soal 4 — Bagaimana cara menampilkan kembali bagian gambar yang tersembunyi?</summary>
+        <p>
+          <strong>Jawaban:</strong> Pilih thumbnail Layer Mask, gunakan Brush, lalu gunakan
+          warna putih pada area yang ingin ditampilkan kembali.
+        </p>
+      </details>
+
+      <details>
+        <summary>Soal 5 — Mengapa masking berguna dalam membuat komposit foto?</summary>
+        <p>
+          <strong>Jawaban:</strong> Karena masking memungkinkan bagian tertentu dari sebuah
+          foto disembunyikan sehingga foto tersebut dapat digabungkan dengan foto lain.
+          Jika hasilnya belum rapi, mask dapat diedit kembali tanpa merusak foto asli.
+        </p>
+      </details>
+    </section>
+
+    <section id="tugas">
+      <h2>11. 5 Tugas Praktik</h2>
+
+      <div class="step">
+        <h3 style="margin-top:0">Tugas 1 — Latihan Black &amp; White Mask</h3>
+        <p>
+          Pilih satu foto. Tambahkan Layer Mask lalu sembunyikan beberapa bagian menggunakan
+          Brush hitam. Setelah itu tampilkan kembali bagian tertentu menggunakan Brush putih.
+        </p>
+        <p><strong>Tujuan:</strong> memahami hubungan warna mask dengan tampilan gambar.</p>
+        <p><strong>Output:</strong> JPG/PNG hasil latihan + PSD.</p>
+      </div>
+
+      <div class="step">
+        <h3 style="margin-top:0">Tugas 2 — Masking Berdasarkan Selection</h3>
+        <p>
+          Pilih satu objek dari foto menggunakan Selection Tool. Buat Layer Mask dari selection
+          tersebut sehingga objek dapat dipisahkan dari background.
+        </p>
+        <p><strong>Tujuan:</strong> menghubungkan teknik selection dengan masking.</p>
+        <p><strong>Output:</strong> before-after + file PSD.</p>
+      </div>
+
+      <div class="step">
+        <h3 style="margin-top:0">Tugas 3 — Mengganti Background</h3>
+        <p>
+          Ambil foto seseorang atau objek. Pisahkan objek menggunakan masking, kemudian
+          ganti background dengan foto lain yang sesuai.
+        </p>
+        <p><strong>Tujuan:</strong> melatih ketelitian tepi objek.</p>
+        <p><strong>Output:</strong> desain akhir ukuran minimal 1920 × 1080 px.</p>
+      </div>
+
+      <div class="step">
+        <h3 style="margin-top:0">Tugas 4 — Komposit Kreatif</h3>
+        <p>
+          Buat komposit menggunakan minimal 3 foto. Gunakan Layer Mask untuk menggabungkan
+          seluruh elemen sehingga membentuk satu scene yang mempunyai konsep jelas.
+        </p>
+        <p><strong>Tujuan:</strong> melatih kemampuan menggabungkan beberapa sumber gambar.</p>
+        <p><strong>Output:</strong> JPG/PNG + PSD.</p>
+      </div>
+
+      <div class="step">
+        <h3 style="margin-top:0">Tugas 5 — Proyek Utama Before–After</h3>
+        <p>
+          Buat sebuah komposit foto bertema bebas menggunakan minimal 2 foto dan Layer Mask.
+          Tampilkan perbandingan bahan awal dan hasil akhir.
+        </p>
+        <p>
+          Sertakan screenshot Layers panel yang memperlihatkan bahwa desain benar-benar
+          menggunakan Layer Mask.
+        </p>
+        <p><strong>Tujuan:</strong> menerapkan seluruh materi masking ke dalam karya desain.</p>
+        <p><strong>Output:</strong> 1 file PSD, 1 JPG/PNG, dan 2–3 screenshot proses.</p>
+      </div>
+
+      <h3>Kriteria penilaian yang dapat digunakan</h3>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Aspek</th>
+            <th>Yang Dinilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pemahaman</td>
+            <td>Mampu menjelaskan fungsi masking dan prinsip hitam-putih.</td>
+          </tr>
+          <tr>
+            <td>Teknik</td>
+            <td>Layer Mask digunakan dengan benar dan dapat diedit kembali.</td>
+          </tr>
+          <tr>
+            <td>Kerapian</td>
+            <td>Tepi objek rapi dan tidak banyak bagian yang salah tersembunyi.</td>
+          </tr>
+          <tr>
+            <td>Komposisi</td>
+            <td>Ukuran, posisi, dan hubungan antar-elemen terlihat masuk akal.</td>
+          </tr>
+          <tr>
+            <td>Kreativitas</td>
+            <td>Konsep komposit mempunyai ide dan penyajian visual yang jelas.</td>
+          </tr>
+          <tr>
+            <td>File kerja</td>
+            <td>PSD tersimpan dengan layer dan mask yang masih dapat diedit.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ringkasan">
+      <h2>12. Ringkasan Materi</h2>
+      <ul>
+        <li><strong>Masking</strong> digunakan untuk menyembunyikan atau menampilkan bagian gambar tanpa menghapus pixel asli.</li>
+        <li><strong>Layer Mask</strong> membuat proses editing menjadi lebih fleksibel dan non-destructive.</li>
+        <li><strong>Putih</strong> pada mask berarti bagian gambar ditampilkan.</li>
+        <li><strong>Hitam</strong> pada mask berarti bagian gambar disembunyikan.</li>
+        <li><strong>Abu-abu</strong> dapat membuat gambar terlihat sebagian/transparan.</li>
+        <li>Brush hitam dapat digunakan untuk menyembunyikan bagian gambar.</li>
+        <li>Brush putih dapat digunakan untuk menampilkan kembali bagian yang tersembunyi.</li>
+        <li>Selection dapat digunakan sebagai dasar pembuatan Layer Mask.</li>
+        <li>Masking objek berguna untuk memisahkan objek dari background.</li>
+        <li>Masking sangat berguna dalam pembuatan komposit dua atau lebih foto.</li>
+        <li>Untuk pekerjaan yang masih dapat diedit, simpan file utama dalam format PSD.</li>
+      </ul>
+
+      <div class="success">
+        <strong>Kalimat kunci untuk diingat:</strong><br>
+        <strong>“Mask menyembunyikan, bukan menghapus.”</strong><br>
+        <strong>“Putih menampilkan, hitam menyembunyikan.”</strong>
+      </div>
+
+      <p class="small">
+        Materi pembelajaran — SMK DIPSA Purwokerto. Disusun untuk latihan dasar Adobe Photoshop
+        dan dapat dikembangkan menjadi materi praktik lanjutan.
+      </p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="container">
+    <strong>SMK DIPSA PURWOKERTO</strong><br>
+    Materi Masking Dasar pada Photoshop
+  </div>
+</footer>
+
+</body>
+</html>

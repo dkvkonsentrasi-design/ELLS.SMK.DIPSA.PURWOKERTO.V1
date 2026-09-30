@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typography pada Photoshop - SMK DIPSA Purwokerto</title>
+<style>
+:root{
+  --ink:#17191d;
+  --muted:#626872;
+  --paper:#f5f2ec;
+  --white:#fff;
+  --accent:#8f1d2c;
+  --accent-dark:#6e1420;
+  --line:#ddd8cf;
+  --soft:#eee9e1;
+  --green:#176b4d;
+  --blue:#245b8f;
+  --gold:#9a6900;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.75;
+}
+.container{width:min(1120px,92%);margin:auto}
+header{
+  background:var(--ink);
+  color:#fff;
+  padding:22px 0;
+}
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.brand h1{margin:0;font-size:1.15rem;letter-spacing:.04em}
+.brand p{margin:3px 0 0;color:#cfd2d6;font-size:.88rem}
+.hero{
+  background:#fff;
+  padding:70px 0 55px;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  color:var(--accent);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+}
+.hero h2{
+  font-family:Georgia,serif;
+  font-size:clamp(2.2rem,5vw,4.4rem);
+  line-height:1.08;
+  margin:12px 0 18px;
+  max-width:900px;
+}
+.hero .lead{font-size:1.1rem;color:var(--muted);max-width:850px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}
+.badge{
+  border:1px solid var(--line);
+  padding:7px 12px;
+  border-radius:999px;
+  background:var(--paper);
+  font-size:.85rem;
+}
+.layout{
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:35px;
+  align-items:start;
+  padding:45px 0 80px;
+}
+.toc{
+  position:sticky;
+  top:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  padding:20px;
+}
+.toc h3{margin-top:0;font-family:Georgia,serif}
+.toc a{
+  display:block;
+  padding:7px 0;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:.92rem;
+  border-bottom:1px solid #eee;
+}
+.toc a:hover{color:var(--accent)}
+section{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:34px;
+  margin-bottom:25px;
+}
+section h2{
+  font-family:Georgia,serif;
+  font-size:2rem;
+  line-height:1.2;
+  margin:0 0 18px;
+}
+section h3{
+  font-size:1.3rem;
+  margin-top:30px;
+  color:var(--accent-dark);
+}
+section h4{margin-bottom:7px}
+.note,.tip,.warning,.success{
+  padding:17px 19px;
+  margin:20px 0;
+  border-left:5px solid;
+  background:var(--soft);
+}
+.note{border-color:var(--blue)}
+.tip{border-color:var(--green);background:#edf6f1}
+.warning{border-color:var(--gold);background:#fbf4e6}
+.success{border-color:var(--green);background:#edf6f1}
+strong{color:#202228}
+code{
+  background:#eeeae4;
+  padding:2px 6px;
+  border-radius:4px;
+  font-family:Consolas,monospace;
+}
+kbd{
+  border:1px solid #bbb;
+  border-bottom-width:2px;
+  border-radius:4px;
+  padding:2px 6px;
+  background:#fafafa;
+  font-family:Arial,sans-serif;
+}
+.step{
+  border:1px solid var(--line);
+  padding:20px;
+  margin:16px 0;
+  background:#fcfbf8;
+}
+.step-number{
+  display:inline-flex;
+  width:32px;height:32px;
+  align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-weight:bold;
+  margin-right:8px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
+  margin:20px 0;
+}
+.card{
+  border:1px solid var(--line);
+  padding:20px;
+  background:#fcfbf8;
+}
+.card h4{margin-top:0;color:var(--accent-dark)}
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  margin:20px 0;
+}
+.compare th,.compare td{
+  border:1px solid var(--line);
+  padding:12px;
+  text-align:left;
+  vertical-align:top;
+}
+.compare th{background:var(--ink);color:#fff}
+details{
+  border:1px solid var(--line);
+  padding:15px 18px;
+  margin:12px 0;
+  background:#fcfbf8;
+}
+summary{cursor:pointer;font-weight:700;color:var(--accent-dark)}
+.project-box{
+  border:2px solid var(--accent);
+  padding:25px;
+  background:#fff8f8;
+}
+.checklist{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.check{
+  padding:12px 14px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.small{font-size:.9rem;color:var(--muted)}
+.example-title{
+  padding:20px;
+  border:1px solid var(--line);
+  background:#17191d;
+  color:#fff;
+  margin:18px 0;
+}
+.example-title .big{
+  font-size:2.3rem;
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+.example-title .sub{
+  color:#ddd;
+  margin-top:8px;
+  font-size:.95rem;
+}
+footer{
+  background:var(--ink);
+  color:#ddd;
+  text-align:center;
+  padding:30px 20px;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .toc{position:relative;top:0}
+  .grid,.checklist{grid-template-columns:1fr}
+  section{padding:25px 20px}
+}
+@media print{
+  header,.toc{display:none}
+  .layout{display:block;padding-top:0}
+  section{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container brand">
+    <div>
+      <h1>SMK DIPSA PURWOKERTO</h1>
+      <p>Materi Pembelajaran Desain Grafis &amp; Photoshop</p>
+    </div>
+    <div>ADOBE PHOTOSHOP</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <div class="eyebrow">Materi Photoshop</div>
+    <h2>Typography pada Photoshop</h2>
+    <p class="lead">
+      Pelajari cara menggunakan teks sebagai elemen visual dalam desain. Materi ini membahas
+      Type Tool, Point Text, Paragraph Text, font, ukuran teks, tracking, leading, alignment,
+      hierarchy, kombinasi font, warna teks, efek teks sederhana, hingga proyek membuat
+      desain tipografi dengan tema tertentu.
+    </p>
+    <div class="badges">
+      <span class="badge">Type Tool</span>
+      <span class="badge">Point Text</span>
+      <span class="badge">Paragraph Text</span>
+      <span class="badge">Font</span>
+      <span class="badge">Typography Hierarchy</span>
+      <span class="badge">Text Effects</span>
+    </div>
+  </div>
+</div>
+
+<div class="container layout">
+
+<aside class="toc">
+  <h3>Daftar Materi</h3>
+  <a href="../index.html" class="back-btn">
+        ← Kembali ke Materi
+  <a href="#tujuan">Tujuan Pembelajaran</a>
+  <a href="#pengertian">1. Pengertian Typography</a>
+  <a href="#type-tool">2. Type Tool</a>
+  <a href="#point-paragraph">3. Point Text &amp; Paragraph Text</a>
+  <a href="#font">4. Font</a>
+  <a href="#size">5. Font Size</a>
+  <a href="#tracking">6. Tracking</a>
+  <a href="#leading">7. Leading</a>
+  <a href="#alignment">8. Alignment</a>
+  <a href="#hierarchy">9. Hierarchy</a>
+  <a href="#kombinasi">10. Kombinasi Font</a>
+  <a href="#warna">11. Warna Teks</a>
+  <a href="#efek">12. Efek Teks Sederhana</a>
+  <a href="#workflow">13. Workflow Typography</a>
+  <a href="#project">14. Proyek Tipografi</a>
+  <a href="#kesalahan">15. Kesalahan Umum</a>
+  <a href="#soal">16. 5 Latihan Soal</a>
+  <a href="#tugas">17. 5 Tugas Praktik</a>
+  <a href="#ringkasan">18. Ringkasan</a>
+</aside>
+
+<main>
+
+<section id="tujuan">
+  <h2>Tujuan Pembelajaran</h2>
+  <p>Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+  <ul>
+    <li>Menjelaskan pengertian typography dan perannya dalam desain grafis.</li>
+    <li>Menggunakan Type Tool untuk membuat teks di Photoshop.</li>
+    <li>Membedakan Point Text dan Paragraph Text.</li>
+    <li>Memilih font yang sesuai dengan tema desain.</li>
+    <li>Mengatur font size, tracking, dan leading.</li>
+    <li>Mengatur alignment teks dengan benar.</li>
+    <li>Membuat hierarchy agar informasi mudah dibaca.</li>
+    <li>Mengombinasikan dua atau lebih font secara harmonis.</li>
+    <li>Memilih warna teks yang mempunyai kontras dan sesuai dengan desain.</li>
+    <li>Membuat efek teks sederhana tanpa mengorbankan keterbacaan.</li>
+    <li>Membuat sebuah karya tipografi dengan tema tertentu.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Inti materi:</strong> Typography bukan sekadar memilih font yang bagus.
+    Typography adalah cara mengatur huruf, ukuran, jarak, posisi, warna, dan hubungan
+    antar-teks agar pesan dapat dibaca sekaligus terlihat menarik.
+  </div>
+</section>
+
+<section id="pengertian">
+  <h2>1. Pengertian Typography</h2>
+
+  <p>
+    <strong>Typography</strong> adalah seni dan teknik mengatur huruf atau teks agar
+    informasi dapat disampaikan dengan jelas, nyaman dibaca, dan mempunyai tampilan visual
+    yang sesuai dengan tujuan desain.
+  </p>
+
+  <p>
+    Dalam desain grafis, teks bukan hanya isi yang dibaca. Teks juga merupakan elemen visual.
+    Sebuah judul yang besar dapat menarik perhatian, teks kecil dapat memberikan informasi
+    tambahan, sedangkan pilihan font dapat memberikan kesan formal, modern, santai,
+    elegan, atau kuat.
+  </p>
+
+  <h3>Mengapa typography penting?</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>1. Menyampaikan informasi</h4>
+      <p>Typography membantu pembaca memahami isi desain dengan lebih cepat.</p>
+    </div>
+    <div class="card">
+      <h4>2. Menentukan karakter</h4>
+      <p>Font dan pengaturan teks dapat memberikan suasana tertentu pada sebuah desain.</p>
+    </div>
+    <div class="card">
+      <h4>3. Menarik perhatian</h4>
+      <p>Judul dan teks utama dapat dibuat lebih menonjol untuk mengarahkan perhatian.</p>
+    </div>
+    <div class="card">
+      <h4>4. Membuat desain terstruktur</h4>
+      <p>Hierarchy membantu pembaca mengetahui mana informasi utama dan mana informasi pendukung.</p>
+    </div>
+  </div>
+
+  <h3>Contoh sederhana</h3>
+  <div class="example-title">
+    <div class="big">BELAJAR. BERKARYA. BERKEMBANG.</div>
+    <div class="sub">Typography dapat membuat sebuah kalimat menjadi elemen visual yang kuat.</div>
+  </div>
+
+  <p>
+    Kalimat yang sama dapat memberikan kesan berbeda hanya dengan mengubah font, ukuran,
+    jarak, warna, dan susunannya. Inilah alasan typography sangat penting dalam desain.
+  </p>
+</section>
+
+<section id="type-tool">
+  <h2>2. Type Tool</h2>
+
+  <p>
+    <strong>Type Tool</strong> digunakan untuk membuat dan mengedit teks di Photoshop.
+    Type Tool biasanya ditandai dengan ikon huruf <strong>T</strong>.
+  </p>
+
+  <h3>Jenis Type Tool yang umum</h3>
+  <ul>
+    <li>Horizontal Type Tool — membuat teks secara horizontal.</li>
+    <li>Vertical Type Tool — membuat teks secara vertikal.</li>
+    <li>Horizontal Type Mask Tool — membuat selection berdasarkan bentuk teks.</li>
+    <li>Vertical Type Mask Tool — membuat selection teks secara vertikal.</li>
+  </ul>
+
+  <h3>Langkah membuat teks</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Buka Photoshop dan buat dokumen baru atau buka gambar yang ingin diberi teks.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Pilih <strong>Type Tool</strong> atau tekan <kbd>T</kbd>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Klik pada canvas untuk membuat Point Text, atau klik-drag untuk membuat area Paragraph Text.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Ketik teks yang diinginkan.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Pilih teks jika ingin mengubah font, ukuran, warna, atau pengaturan lainnya.
+  </div>
+  <div class="step">
+    <span class="step-number">6</span>
+    Gunakan Move Tool untuk mengatur posisi text layer jika diperlukan.
+  </div>
+
+  <div class="note">
+    <strong>Tips:</strong> Biasakan membuat teks sebagai <strong>Text Layer</strong>.
+    Jangan langsung mengubahnya menjadi raster jika belum diperlukan, karena Text Layer
+    lebih mudah diedit.
+  </div>
+</section>
+
+<section id="point-paragraph">
+  <h2>3. Point Text dan Paragraph Text</h2>
+
+  <p>
+    Saat menggunakan Type Tool, ada dua cara dasar membuat teks: <strong>Point Text</strong>
+    dan <strong>Paragraph Text</strong>.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Point Text</th>
+        <th>Paragraph Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dibuat dengan satu klik pada canvas.</td>
+        <td>Dibuat dengan klik-drag untuk membuat area teks.</td>
+      </tr>
+      <tr>
+        <td>Cocok untuk judul pendek, logo, label, atau kata utama.</td>
+        <td>Cocok untuk paragraf dan teks yang lebih panjang.</td>
+      </tr>
+      <tr>
+        <td>Teks dapat memanjang sesuai jumlah karakter.</td>
+        <td>Teks akan mengikuti batas area yang dibuat.</td>
+      </tr>
+      <tr>
+        <td>Praktis untuk headline.</td>
+        <td>Lebih mudah digunakan untuk mengontrol blok teks.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Contoh Point Text</h3>
+  <p>
+    Misalnya kamu membuat poster dengan judul <strong>"FESTIVAL KREATIF"</strong>.
+    Klik satu kali pada canvas kemudian ketik judul. Ini cocok karena judul merupakan
+    teks pendek.
+  </p>
+
+  <h3>Contoh Paragraph Text</h3>
+  <p>
+    Jika kamu ingin menambahkan deskripsi acara yang terdiri dari beberapa kalimat,
+    klik-drag untuk membuat area teks. Teks akan berada di dalam area tersebut.
+  </p>
+
+  <div class="tip">
+    <strong>Rumus mudah:</strong><br>
+    Teks pendek / judul → <strong>Point Text</strong><br>
+    Teks panjang / paragraf → <strong>Paragraph Text</strong>
+  </div>
+</section>
+
+<section id="font">
+  <h2>4. Font</h2>
+
+  <p>
+    <strong>Font</strong> adalah bentuk atau gaya visual huruf yang digunakan dalam teks.
+    Pemilihan font harus mempertimbangkan isi pesan, target pembaca, media, dan karakter desain.
+  </p>
+
+  <h3>Kelompok font secara sederhana</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Serif</h4>
+      <p>
+        Memiliki detail kecil atau "kaki" pada huruf. Sering memberikan kesan klasik,
+        formal, editorial, atau elegan.
+      </p>
+    </div>
+    <div class="card">
+      <h4>Sans Serif</h4>
+      <p>
+        Tidak mempunyai detail kaki. Sering memberikan kesan bersih, modern, sederhana,
+        dan mudah digunakan dalam desain digital.
+      </p>
+    </div>
+    <div class="card">
+      <h4>Script</h4>
+      <p>
+        Meniru gaya tulisan tangan atau kaligrafi. Dapat memberikan kesan personal,
+        elegan, atau dekoratif.
+      </p>
+    </div>
+    <div class="card">
+      <h4>Display</h4>
+      <p>
+        Dirancang untuk tampilan besar dan menarik perhatian. Cocok untuk judul,
+        poster, atau headline tertentu.
+      </p>
+    </div>
+  </div>
+
+  <h3>Cara memilih font</h3>
+  <ol>
+    <li>Tentukan tema desain.</li>
+    <li>Tentukan target pembaca.</li>
+    <li>Pilih font yang mudah dibaca.</li>
+    <li>Gunakan font dekoratif secara hati-hati.</li>
+    <li>Pastikan font mendukung karakter bahasa dan simbol yang digunakan.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Hindari:</strong> menggunakan terlalu banyak jenis font dalam satu desain.
+    Terlalu banyak font dapat membuat desain terlihat tidak teratur dan membingungkan.
+  </div>
+</section>
+
+<section id="size">
+  <h2>5. Font Size</h2>
+
+  <p>
+    <strong>Font size</strong> adalah ukuran huruf. Ukuran teks harus disesuaikan dengan
+    tingkat kepentingan informasi dan ukuran media.
+  </p>
+
+  <h3>Contoh hierarchy ukuran</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Judul utama</h4>
+      <p>Gunakan ukuran paling besar agar menjadi titik perhatian pertama.</p>
+    </div>
+    <div class="card">
+      <h4>Subjudul</h4>
+      <p>Lebih kecil dari judul tetapi tetap mudah terlihat.</p>
+    </div>
+    <div class="card">
+      <h4>Isi</h4>
+      <p>Gunakan ukuran yang nyaman dibaca dalam jumlah teks yang lebih banyak.</p>
+    </div>
+    <div class="card">
+      <h4>Informasi tambahan</h4>
+      <p>Dapat dibuat lebih kecil, tetapi tetap harus terbaca.</p>
+    </div>
+  </div>
+
+  <h3>Kesalahan yang sering terjadi</h3>
+  <p>
+    Jangan menentukan ukuran hanya berdasarkan angka. Ukuran visual setiap font dapat berbeda.
+    Dua font dengan ukuran yang sama belum tentu terlihat sama besar.
+  </p>
+
+  <div class="tip">
+    <strong>Tips:</strong> Selain melihat angka font size, lihat juga hasil visualnya.
+    Pastikan judul benar-benar terlihat sebagai judul dan isi tetap nyaman dibaca.
+  </div>
+</section>
+
+<section id="tracking">
+  <h2>6. Tracking</h2>
+
+  <p>
+    <strong>Tracking</strong> adalah pengaturan jarak secara keseluruhan antara karakter
+    dalam sebuah teks atau bagian teks.
+  </p>
+
+  <p>
+    Tracking berbeda dengan kerning. Tracking biasanya diterapkan pada sekumpulan huruf,
+    sedangkan kerning mengatur jarak antara pasangan huruf tertentu.
+  </p>
+
+  <h3>Contoh penggunaan tracking</h3>
+  <ul>
+    <li>Judul huruf kapital dapat diberi sedikit tambahan jarak agar terlihat lebih elegan.</li>
+    <li>Teks yang terlalu rapat dapat diberi tracking agar lebih nyaman dibaca.</li>
+    <li>Tracking dapat membantu membuat judul memiliki ruang visual yang lebih luas.</li>
+  </ul>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Tracking terlalu rapat</h4>
+      <p>Huruf terlihat berhimpitan dan dapat mengurangi kenyamanan membaca.</p>
+    </div>
+    <div class="card">
+      <h4>Tracking terlalu lebar</h4>
+      <p>Kata dapat terlihat terpecah dan hubungan antarhuruf menjadi terlalu jauh.</p>
+    </div>
+  </div>
+
+  <p>
+    Gunakan tracking secara visual. Tidak ada satu angka yang selalu benar untuk semua font.
+  </p>
+</section>
+
+<section id="leading">
+  <h2>7. Leading</h2>
+
+  <p>
+    <strong>Leading</strong> adalah jarak vertikal antarbaris teks. Pengaturan leading
+    sangat penting ketika menggunakan Paragraph Text atau teks yang terdiri dari beberapa baris.
+  </p>
+
+  <h3>Mengapa leading penting?</h3>
+  <ul>
+    <li>Leading terlalu kecil dapat membuat baris terlihat bertumpuk.</li>
+    <li>Leading terlalu besar dapat membuat paragraf terlihat terpecah.</li>
+    <li>Leading yang tepat membuat teks lebih nyaman dibaca.</li>
+  </ul>
+
+  <div class="note">
+    <strong>Tips sederhana:</strong> Jika paragraf terasa "sesak", coba tambahkan jarak
+    antarbaris. Jika setiap baris terasa terlalu jauh, kurangi leading.
+  </div>
+
+  <h3>Leading pada poster</h3>
+  <p>
+    Untuk poster, leading juga dapat digunakan sebagai elemen visual. Judul dengan dua
+    atau tiga baris dapat dibuat lebih rapat untuk menghasilkan tampilan yang kuat,
+    selama masih terbaca.
+  </p>
+</section>
+
+<section id="alignment">
+  <h2>8. Alignment</h2>
+
+  <p>
+    <strong>Alignment</strong> adalah cara teks disejajarkan dalam sebuah area.
+    Alignment yang tepat membuat desain terlihat teratur.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Alignment</th>
+        <th>Karakter</th>
+        <th>Contoh Penggunaan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Left Align</td>
+        <td>Rapi dan mudah dibaca.</td>
+        <td>Artikel, informasi, deskripsi.</td>
+      </tr>
+      <tr>
+        <td>Center Align</td>
+        <td>Simetris dan menarik perhatian.</td>
+        <td>Judul poster, undangan, headline.</td>
+      </tr>
+      <tr>
+        <td>Right Align</td>
+        <td>Memberikan variasi arah visual.</td>
+        <td>Informasi tertentu atau layout editorial.</td>
+      </tr>
+      <tr>
+        <td>Justify</td>
+        <td>Rata kiri dan kanan.</td>
+        <td>Blok paragraf tertentu.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Tips:</strong> Untuk teks panjang, left align biasanya lebih mudah dibaca.
+    Center align cocok untuk teks pendek seperti judul atau undangan.
+  </div>
+</section>
+
+<section id="hierarchy">
+  <h2>9. Hierarchy</h2>
+
+  <p>
+    <strong>Typography hierarchy</strong> adalah pengaturan tingkat kepentingan teks
+    sehingga pembaca tahu informasi mana yang harus dilihat terlebih dahulu.
+  </p>
+
+  <h3>Contoh hierarchy</h3>
+  <ol>
+    <li><strong>Headline:</strong> informasi paling penting dan paling menarik perhatian.</li>
+    <li><strong>Subheadline:</strong> menjelaskan atau memperkuat headline.</li>
+    <li><strong>Body Text:</strong> memberikan penjelasan lebih lengkap.</li>
+    <li><strong>Caption/Informasi kecil:</strong> informasi tambahan.</li>
+  </ol>
+
+  <h3>Cara membuat hierarchy</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Ukuran</h4>
+      <p>Gunakan ukuran berbeda antara judul dan isi.</p>
+    </div>
+    <div class="card">
+      <h4>Ketebalan</h4>
+      <p>Gunakan weight yang berbeda untuk membedakan tingkat informasi.</p>
+    </div>
+    <div class="card">
+      <h4>Warna</h4>
+      <p>Warna dapat digunakan untuk menarik perhatian pada informasi tertentu.</p>
+    </div>
+    <div class="card">
+      <h4>Posisi</h4>
+      <p>Informasi yang ditempatkan pada posisi strategis dapat menjadi perhatian pertama.</p>
+    </div>
+  </div>
+
+  <div class="success">
+    <strong>Prinsip mudah:</strong>
+    Jika semua teks terlihat sama penting, berarti hierarchy belum cukup jelas.
+    Buat satu elemen menjadi yang paling dominan, kemudian susun informasi pendukung di bawahnya.
+  </div>
+</section>
+
+<section id="kombinasi">
+  <h2>10. Kombinasi Font</h2>
+
+  <p>
+    Menggunakan dua font dapat membuat desain lebih menarik, tetapi kombinasi harus dilakukan
+    dengan hati-hati. Tujuannya adalah membuat font berbeda namun tetap terasa saling melengkapi.
+  </p>
+
+  <h3>Strategi kombinasi font</h3>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Serif + Sans Serif</h4>
+      <p>Gunakan serif untuk judul dan sans serif untuk isi, atau sebaliknya.</p>
+    </div>
+    <div class="card">
+      <h4>Bold + Regular</h4>
+      <p>Gunakan keluarga font yang sama dengan weight berbeda untuk hierarchy.</p>
+    </div>
+    <div class="card">
+      <h4>Display + Sans Serif</h4>
+      <p>Display digunakan untuk headline, sedangkan sans serif menjaga teks informasi tetap mudah dibaca.</p>
+    </div>
+    <div class="card">
+      <h4>Satu keluarga font</h4>
+      <p>Gunakan beberapa weight dari satu keluarga font untuk desain yang lebih konsisten.</p>
+    </div>
+  </div>
+
+  <h3>Aturan sederhana untuk pemula</h3>
+  <ol>
+    <li>Mulai dengan maksimal dua jenis keluarga font.</li>
+    <li>Pastikan keduanya mempunyai perbedaan yang cukup jelas.</li>
+    <li>Jangan memilih dua font yang terlihat hampir sama tetapi sebenarnya berbeda.</li>
+    <li>Gunakan font dekoratif hanya jika sesuai dengan tema.</li>
+    <li>Pastikan semua teks tetap mudah dibaca.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Hindari font overload:</strong> Jika satu poster menggunakan banyak font berbeda,
+    desain dapat kehilangan identitas visual dan terlihat tidak teratur.
+  </div>
+</section>
+
+<section id="warna">
+  <h2>11. Warna Teks</h2>
+
+  <p>
+    Warna teks harus dipilih berdasarkan background, tujuan desain, dan tingkat keterbacaan.
+    Warna yang bagus belum tentu cocok jika kontrasnya terlalu rendah.
+  </p>
+
+  <h3>Kontras</h3>
+  <p>
+    <strong>Kontras</strong> adalah perbedaan visual antara teks dan background.
+    Teks harus mempunyai perbedaan yang cukup agar mudah dibaca.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Background terang</h4>
+      <p>Gunakan teks yang cukup gelap atau warna yang memiliki kontras tinggi.</p>
+    </div>
+    <div class="card">
+      <h4>Background gelap</h4>
+      <p>Gunakan teks yang cukup terang atau warna yang jelas terlihat.</p>
+    </div>
+  </div>
+
+  <h3>Warna untuk hierarchy</h3>
+  <p>
+    Tidak semua teks harus memiliki warna berbeda. Gunakan satu warna utama dan satu
+    warna aksen jika diperlukan. Terlalu banyak warna dapat mengurangi fokus.
+  </p>
+
+  <div class="tip">
+    <strong>Tips:</strong> Setelah memilih warna teks, lihat desain pada jarak normal.
+    Jika kamu harus mendekat untuk membaca, kemungkinan kontras atau ukuran teks perlu diperbaiki.
+  </div>
+</section>
+
+<section id="efek">
+  <h2>12. Efek Teks Sederhana</h2>
+
+  <p>
+    Photoshop menyediakan beberapa efek yang dapat digunakan untuk memperkuat tampilan teks.
+    Efek sebaiknya digunakan sebagai pendukung, bukan sebagai tujuan utama.
+  </p>
+
+  <h3>Efek yang dapat dipelajari</h3>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Drop Shadow</h4>
+      <p>Memberikan bayangan pada teks sehingga dapat terlihat lebih terpisah dari background.</p>
+    </div>
+    <div class="card">
+      <h4>Stroke</h4>
+      <p>Memberikan garis di sekitar huruf. Dapat membantu teks lebih terlihat pada background tertentu.</p>
+    </div>
+    <div class="card">
+      <h4>Outer Glow</h4>
+      <p>Memberikan cahaya di sekitar teks untuk efek visual tertentu.</p>
+    </div>
+    <div class="card">
+      <h4>Gradient Overlay</h4>
+      <p>Memberikan variasi warna pada teks menggunakan gradasi.</p>
+    </div>
+  </div>
+
+  <h3>Contoh langkah membuat Drop Shadow</h3>
+  <div class="step">
+    <span class="step-number">1</span>
+    Pilih Text Layer.
+  </div>
+  <div class="step">
+    <span class="step-number">2</span>
+    Buka pengaturan <strong>Layer Style</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">3</span>
+    Pilih <strong>Drop Shadow</strong>.
+  </div>
+  <div class="step">
+    <span class="step-number">4</span>
+    Atur opacity, distance, spread, dan size sesuai kebutuhan.
+  </div>
+  <div class="step">
+    <span class="step-number">5</span>
+    Periksa hasil pada background.
+  </div>
+  <div class="step">
+    <span class="step-number">6</span>
+    Jangan membuat bayangan terlalu kuat jika desain membutuhkan kesan sederhana.
+  </div>
+
+  <div class="warning">
+    <strong>Ingat:</strong> Efek yang terlalu banyak dapat membuat teks sulit dibaca.
+    Typography yang kuat biasanya tetap terlihat jelas meskipun efeknya sederhana.
+  </div>
+</section>
+
+<section id="workflow">
+  <h2>13. Workflow Membuat Desain Typography</h2>
+
+  <p>
+    Berikut alur yang dapat digunakan ketika membuat desain berbasis typography:
+  </p>
+
+  <ol>
+    <li><strong>Tentukan pesan.</strong> Apa yang ingin disampaikan?</li>
+    <li><strong>Tentukan target.</strong> Siapa yang akan melihat desain?</li>
+    <li><strong>Tentukan tema.</strong> Modern, formal, kreatif, retro, elegan, edukatif, dan sebagainya.</li>
+    <li><strong>Pilih font utama.</strong> Mulai dari satu font yang paling sesuai.</li>
+    <li><strong>Tentukan hierarchy.</strong> Tentukan judul, subjudul, isi, dan informasi tambahan.</li>
+    <li><strong>Atur font size.</strong> Pastikan perbedaan tingkat informasi terlihat.</li>
+    <li><strong>Atur tracking dan leading.</strong> Perbaiki jarak huruf dan antarbaris.</li>
+    <li><strong>Atur alignment.</strong> Pilih arah teks yang sesuai dengan komposisi.</li>
+    <li><strong>Pilih warna.</strong> Pastikan kontras dengan background.</li>
+    <li><strong>Tambahkan efek jika diperlukan.</strong> Jangan berlebihan.</li>
+    <li><strong>Evaluasi.</strong> Lihat desain dari jauh dan pastikan pesan utama mudah ditemukan.</li>
+  </ol>
+
+  <div class="success">
+    <strong>Urutan mudah:</strong><br>
+    PESAN → TEMA → FONT → HIERARCHY → SIZE → SPACING → ALIGNMENT →
+    WARNA → EFEK → CEK KETERBACAAN.
+  </div>
+</section>
+
+<section id="project">
+  <h2>14. Proyek: Membuat Desain Tipografi dengan Tema Tertentu</h2>
+
+  <div class="project-box">
+    <h3 style="margin-top:0">Judul Proyek</h3>
+    <p><strong>“Typography Poster — Pesan dalam Huruf”</strong></p>
+    <p>
+      Buat sebuah desain poster yang menggunakan typography sebagai elemen visual utama.
+      Pilih satu tema dan komunikasikan pesan melalui ukuran, font, jarak, warna, dan susunan teks.
+    </p>
+  </div>
+
+  <h3>Pilihan tema</h3>
+  <div class="grid">
+    <div class="card">
+      <h4>Pendidikan</h4>
+      <p>Contoh: “Belajar Hari Ini, Berkarya Esok Hari”.</p>
+    </div>
+    <div class="card">
+      <h4>Motivasi</h4>
+      <p>Contoh: “Berani Mulai, Berani Berkembang”.</p>
+    </div>
+    <div class="card">
+      <h4>Kreativitas</h4>
+      <p>Contoh: “Ide Tidak Pernah Berhenti”.</p>
+    </div>
+    <div class="card">
+      <h4>Lingkungan</h4>
+      <p>Contoh: “Jaga Bumi, Jaga Masa Depan”.</p>
+    </div>
+    <div class="card">
+      <h4>Teknologi</h4>
+      <p>Contoh: “Masa Depan Dimulai dari Ide”.</p>
+    </div>
+    <div class="card">
+      <h4>Sekolah</h4>
+      <p>Buat poster promosi atau kampanye positif bertema sekolah.</p>
+    </div>
+  </div>
+
+  <h3>Ketentuan desain</h3>
+  <ul>
+    <li>Typography harus menjadi elemen utama.</li>
+    <li>Gunakan minimal dua tingkat hierarchy.</li>
+    <li>Gunakan minimal satu pengaturan tracking atau leading secara sadar.</li>
+    <li>Gunakan alignment yang jelas.</li>
+    <li>Gunakan maksimal dua keluarga font utama untuk menjaga konsistensi.</li>
+    <li>Gunakan warna teks yang mempunyai kontras dengan background.</li>
+    <li>Efek teks boleh digunakan, tetapi tidak wajib.</li>
+  </ul>
+
+  <h3>Langkah proyek secara lengkap</h3>
+
+  <div class="step">
+    <span class="step-number">1</span>
+    <strong>Tentukan tema.</strong>
+    Pilih satu tema yang ingin disampaikan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">2</span>
+    <strong>Buat dokumen.</strong>
+    Gunakan ukuran canvas sesuai kebutuhan proyek, misalnya ukuran poster digital.
+  </div>
+
+  <div class="step">
+    <span class="step-number">3</span>
+    <strong>Tulis pesan utama.</strong>
+    Buat satu kalimat pendek yang menjadi headline.
+  </div>
+
+  <div class="step">
+    <span class="step-number">4</span>
+    <strong>Buat headline menggunakan Point Text.</strong>
+    Atur font, ukuran, weight, warna, dan posisinya.
+  </div>
+
+  <div class="step">
+    <span class="step-number">5</span>
+    <strong>Buat informasi pendukung.</strong>
+    Jika membutuhkan paragraf atau deskripsi, gunakan Paragraph Text.
+  </div>
+
+  <div class="step">
+    <span class="step-number">6</span>
+    <strong>Bangun hierarchy.</strong>
+    Pastikan headline lebih dominan daripada informasi tambahan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">7</span>
+    <strong>Atur tracking.</strong>
+    Gunakan tracking untuk mengatur jarak antarhuruf pada bagian tertentu.
+  </div>
+
+  <div class="step">
+    <span class="step-number">8</span>
+    <strong>Atur leading.</strong>
+    Jika ada teks beberapa baris, atur jarak antarbaris agar nyaman dibaca.
+  </div>
+
+  <div class="step">
+    <span class="step-number">9</span>
+    <strong>Atur alignment.</strong>
+    Gunakan left, center, right, atau justify sesuai komposisi.
+  </div>
+
+  <div class="step">
+    <span class="step-number">10</span>
+    <strong>Periksa warna.</strong>
+    Pastikan teks mempunyai kontras yang cukup terhadap background.
+  </div>
+
+  <div class="step">
+    <span class="step-number">11</span>
+    <strong>Tambahkan efek sederhana jika diperlukan.</strong>
+    Misalnya Drop Shadow atau Stroke yang ringan.
+  </div>
+
+  <div class="step">
+    <span class="step-number">12</span>
+    <strong>Evaluasi.</strong>
+    Tanyakan: apakah pesan utama langsung terlihat? Apakah teks mudah dibaca?
+    Apakah desain terlalu ramai?
+  </div>
+
+  <div class="step">
+    <span class="step-number">13</span>
+    <strong>Simpan file.</strong>
+    Simpan file PSD agar seluruh Text Layer tetap dapat diedit.
+  </div>
+
+  <h3>Checklist proyek</h3>
+  <div class="checklist">
+    <div class="check">☐ Tema desain jelas.</div>
+    <div class="check">☐ Typography menjadi elemen utama.</div>
+    <div class="check">☐ Headline mudah ditemukan.</div>
+    <div class="check">☐ Hierarchy terlihat jelas.</div>
+    <div class="check">☐ Font sesuai dengan tema.</div>
+    <div class="check">☐ Tracking digunakan dengan tepat.</div>
+    <div class="check">☐ Leading nyaman dibaca.</div>
+    <div class="check">☐ Alignment konsisten.</div>
+    <div class="check">☐ Warna teks memiliki kontras.</div>
+    <div class="check">☐ Efek tidak berlebihan.</div>
+    <div class="check">☐ Text Layer masih editable.</div>
+    <div class="check">☐ File PSD tersedia.</div>
+  </div>
+
+  <h3>Dokumentasi yang dikumpulkan</h3>
+  <ol>
+    <li>File PSD.</li>
+    <li>JPG/PNG hasil akhir.</li>
+    <li>Screenshot panel Layers yang menunjukkan Text Layer.</li>
+    <li>Screenshot pengaturan teks jika diminta.</li>
+    <li>Penjelasan singkat mengenai alasan memilih font, warna, hierarchy, dan alignment.</li>
+  </ol>
+</section>
+
+<section id="kesalahan">
+  <h2>15. Kesalahan Umum dalam Typography</h2>
+
+  <h3>1. Terlalu banyak font</h3>
+  <p>
+    Menggunakan terlalu banyak font membuat desain kehilangan konsistensi.
+    Mulailah dengan satu atau dua keluarga font.
+  </p>
+
+  <h3>2. Semua teks dibuat sama besar</h3>
+  <p>
+    Jika semua teks memiliki ukuran yang sama, pembaca akan kesulitan mengetahui informasi utama.
+    Gunakan hierarchy.
+  </p>
+
+  <h3>3. Kontras warna terlalu rendah</h3>
+  <p>
+    Teks yang warnanya terlalu mirip dengan background sulit dibaca. Tingkatkan kontras.
+  </p>
+
+  <h3>4. Tracking terlalu lebar</h3>
+  <p>
+    Jarak huruf yang terlalu lebar dapat membuat kata terlihat terpecah.
+    Gunakan tracking sesuai kebutuhan visual.
+  </p>
+
+  <h3>5. Leading terlalu rapat</h3>
+  <p>
+    Baris teks dapat terlihat menumpuk. Atur leading agar setiap baris mempunyai ruang yang cukup.
+  </p>
+
+  <h3>6. Efek teks terlalu banyak</h3>
+  <p>
+    Drop Shadow, Stroke, Glow, Gradient, dan efek lainnya tidak harus digunakan semuanya.
+    Pilih efek yang benar-benar mendukung desain.
+  </p>
+
+  <h3>7. Font tidak sesuai tema</h3>
+  <p>
+    Font yang cocok untuk poster teknologi belum tentu cocok untuk undangan formal.
+    Selalu hubungkan pilihan font dengan pesan dan karakter desain.
+  </p>
+
+  <h3>8. Tidak memperhatikan keterbacaan</h3>
+  <p>
+    Desain harus tetap bisa dibaca. Keindahan font tidak boleh mengalahkan fungsi komunikasi.
+  </p>
+</section>
+
+<section id="soal">
+  <h2>16. Latihan Soal — 5 Pertanyaan</h2>
+  <p>Jawablah pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+  <details>
+    <summary>Soal 1 — Apa yang dimaksud dengan typography?</summary>
+    <p>
+      <strong>Jawaban:</strong> Typography adalah seni dan teknik mengatur huruf atau teks
+      agar informasi dapat disampaikan dengan jelas, nyaman dibaca, dan mempunyai tampilan
+      visual yang sesuai dengan tujuan desain.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 2 — Apa perbedaan Point Text dan Paragraph Text?</summary>
+    <p>
+      <strong>Jawaban:</strong> Point Text dibuat dengan satu klik dan cocok untuk teks pendek
+      seperti judul. Paragraph Text dibuat dengan membuat area teks dan lebih cocok untuk
+      paragraf atau teks yang lebih panjang.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 3 — Apa yang dimaksud dengan tracking dan leading?</summary>
+    <p>
+      <strong>Jawaban:</strong> Tracking adalah pengaturan jarak antarhuruf secara keseluruhan
+      pada teks, sedangkan leading adalah pengaturan jarak vertikal antarbaris.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 4 — Apa fungsi hierarchy dalam typography?</summary>
+    <p>
+      <strong>Jawaban:</strong> Hierarchy membantu menunjukkan tingkat kepentingan informasi
+      sehingga pembaca mengetahui bagian mana yang harus diperhatikan terlebih dahulu.
+    </p>
+  </details>
+
+  <details>
+    <summary>Soal 5 — Mengapa kombinasi font harus dilakukan dengan hati-hati?</summary>
+    <p>
+      <strong>Jawaban:</strong> Karena terlalu banyak atau kombinasi font yang tidak harmonis
+      dapat membuat desain terlihat tidak teratur dan mengurangi keterbacaan.
+    </p>
+  </details>
+</section>
+
+<section id="tugas">
+  <h2>17. 5 Tugas Praktik</h2>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 1 — Eksperimen Type Tool</h3>
+    <p>
+      Buat dokumen baru dan buat minimal lima Text Layer menggunakan Type Tool.
+      Gunakan variasi font, ukuran, warna, dan alignment.
+    </p>
+    <p><strong>Tujuan:</strong> mengenal dasar penggunaan Type Tool dan Text Layer.</p>
+    <p><strong>Output:</strong> PSD + JPG/PNG.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 2 — Point Text vs Paragraph Text</h3>
+    <p>
+      Buat satu desain sederhana yang berisi satu judul menggunakan Point Text dan
+      satu paragraf menggunakan Paragraph Text. Atur font, ukuran, leading, dan alignment.
+    </p>
+    <p><strong>Tujuan:</strong> memahami perbedaan dua jenis teks.</p>
+    <p><strong>Output:</strong> PSD + screenshot hasil.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 3 — Eksperimen Tracking dan Leading</h3>
+    <p>
+      Buat tiga contoh judul dengan tracking berbeda dan tiga contoh paragraf dengan
+      leading berbeda. Bandingkan mana yang paling nyaman dibaca dan jelaskan alasannya.
+    </p>
+    <p><strong>Tujuan:</strong> memahami pengaruh spacing terhadap typography.</p>
+    <p><strong>Output:</strong> satu file PSD berisi semua percobaan + penjelasan singkat.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 4 — Kombinasi Font</h3>
+    <p>
+      Buat satu desain menggunakan dua keluarga font. Gunakan satu untuk headline dan
+      satu untuk informasi pendukung. Pastikan keduanya mempunyai hubungan visual yang baik.
+    </p>
+    <p><strong>Tujuan:</strong> melatih pemilihan dan kombinasi font.</p>
+    <p><strong>Output:</strong> JPG/PNG + PSD.</p>
+  </div>
+
+  <div class="step">
+    <h3 style="margin-top:0">Tugas 5 — Proyek Typography</h3>
+    <p>
+      Buat poster tipografi dengan satu tema pilihan. Typography harus menjadi elemen visual
+      utama. Gunakan hierarchy, font, font size, tracking, leading, alignment, warna,
+      dan jika diperlukan satu efek teks sederhana.
+    </p>
+    <p><strong>Tujuan:</strong> menerapkan seluruh materi typography ke dalam satu karya.</p>
+    <p><strong>Output:</strong> 1 PSD, 1 JPG/PNG, dan 2–3 screenshot proses.</p>
+  </div>
+
+  <h3>Kriteria penilaian yang dapat digunakan</h3>
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Aspek</th>
+        <th>Yang Dinilai</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Konsep</td>
+        <td>Tema dan pesan desain dapat dipahami.</td>
+      </tr>
+      <tr>
+        <td>Typography</td>
+        <td>Pemilihan font, size, tracking, leading, dan alignment tepat.</td>
+      </tr>
+      <tr>
+        <td>Hierarchy</td>
+        <td>Tingkat kepentingan informasi terlihat jelas.</td>
+      </tr>
+      <tr>
+        <td>Keterbacaan</td>
+        <td>Teks mudah dibaca dan mempunyai kontras yang cukup.</td>
+      </tr>
+      <tr>
+        <td>Komposisi</td>
+        <td>Posisi dan hubungan antar-elemen terlihat seimbang.</td>
+      </tr>
+      <tr>
+        <td>Kreativitas</td>
+        <td>Desain mempunyai ide dan karakter visual yang jelas.</td>
+      </tr>
+      <tr>
+        <td>File kerja</td>
+        <td>Text Layer dan file PSD masih dapat diedit.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="ringkasan">
+  <h2>18. Ringkasan Materi</h2>
+
+  <ul>
+    <li><strong>Typography</strong> adalah seni dan teknik mengatur teks dalam desain.</li>
+    <li><strong>Type Tool</strong> digunakan untuk membuat dan mengedit teks.</li>
+    <li><strong>Point Text</strong> cocok untuk judul atau teks pendek.</li>
+    <li><strong>Paragraph Text</strong> cocok untuk teks yang lebih panjang.</li>
+    <li><strong>Font</strong> harus dipilih sesuai tema dan karakter desain.</li>
+    <li><strong>Font Size</strong> membantu membangun hierarchy.</li>
+    <li><strong>Tracking</strong> mengatur jarak antarhuruf secara keseluruhan.</li>
+    <li><strong>Leading</strong> mengatur jarak vertikal antarbaris.</li>
+    <li><strong>Alignment</strong> membantu membuat teks tersusun rapi.</li>
+    <li><strong>Hierarchy</strong> membantu pembaca mengetahui informasi yang paling penting.</li>
+    <li>Kombinasi font harus sederhana dan harmonis.</li>
+    <li>Warna teks harus mempunyai kontras yang cukup dengan background.</li>
+    <li>Efek teks dapat digunakan sebagai pendukung, bukan sebagai tujuan utama.</li>
+    <li>Text Layer sebaiknya dipertahankan agar teks masih mudah diedit.</li>
+  </ul>
+
+  <div class="success">
+    <strong>Kalimat kunci untuk diingat:</strong><br>
+    “Typography yang baik bukan hanya terlihat bagus, tetapi juga membuat pesan mudah dipahami.”
+  </div>
+
+  <p class="small">
+    Materi pembelajaran — SMK DIPSA Purwokerto. Disusun sebagai materi dasar Adobe Photoshop
+    dan dapat dikembangkan menjadi latihan typography tingkat lanjut.
+  </p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <div class="container">
+    <strong>SMK DIPSA PURWOKERTO</strong><br>
+    Materi Typography pada Photoshop
+  </div>
+</footer>
+
+</body>
+</html>
