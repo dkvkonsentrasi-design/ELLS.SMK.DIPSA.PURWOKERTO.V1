@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Siswa | SMK DIPSA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-page{min-height:100vh;display:grid;place-items:center;padding:30px;background:
+        radial-gradient(circle at 20% 20%,rgba(25,118,210,.18),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(117,72,217,.16),transparent 30%),var(--bg)}
+        .auth-card{width:min(440px,100%);background:var(--card);border:1px solid var(--line);
+        border-radius:20px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+        .auth-brand{text-align:center;margin-bottom:28px}
+        .auth-brand .brand-mark{margin:0 auto 14px}
+        .auth-brand h1{font-size:26px}
+        .auth-brand p{color:var(--muted);font-size:14px;margin-top:6px}
+        .form-group{margin-bottom:18px}
+        .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+        .form-group input{width:100%;height:48px;border:1px solid var(--line);border-radius:10px;
+        background:rgba(255,255,255,.04);color:var(--text);padding:0 14px;outline:none}
+        .form-group input:focus{border-color:var(--blue)}
+        .auth-submit{width:100%;border:0;cursor:pointer}
+        .auth-note{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
+        .auth-back{display:block;text-align:center;margin-top:20px;color:#7fc0ff;font-size:13px}
+    </style>
+</head>
+<body>
+<main class="auth-page">
+    <section class="auth-card">
+        <div class="auth-brand">
+            <div class="brand-mark">D</div>
+            <h1>SMK DIPSA</h1>
+            <p>Learning Center · Login Siswa</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="identity">Email / NIS</label>
+                <input id="identity" type="text" placeholder="Masukkan email atau NIS" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Masukkan password" required>
+            </div>
+
+            <button class="btn btn-primary auth-submit" type="submit">Login</button>
+        </form>
+
+        <p class="auth-note">Tahap 1: tampilan login. Autentikasi akan diaktifkan pada tahap berikutnya.</p>
+        <a class="auth-back" href="index.html">← Kembali ke website utama</a>
+    </section>
+</main>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Login belum diaktifkan. Pada tahap berikutnya kita hubungkan ke Supabase Authentication.");
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Materi Pembelajaran SMK DIPSA Purwokerto">
+    <title>Materi Pembelajaran | SMK DIPSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="brand">
+                <span class="brand-mark">D</span>
+                <span>
+                    <strong>SMK DIPSA</strong>
+                    <small>Learning Center</small>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="mainNav">
+                <a href="#beranda">Beranda</a>
+                <a href="#materi">Materi</a>
+                <a href="#jurusan">Jurusan</a>
+                <a href="#tentang">Tentang</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="beranda">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="eyebrow">MATERI PEMBELAJARAN SMK DIPSA</p>
+                    <h1>Belajar Lebih Mudah,<br><span>Berani Berkarya.</span></h1>
+                    <p class="hero-text">
+                        Pusat materi pembelajaran digital untuk siswa SMK DIPSA
+                        Purwokerto. Temukan materi, latihan, dan referensi belajar
+                        sesuai jurusan.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#materi" class="btn btn-primary">Lihat Materi</a>
+                        <a href="#jurusan" class="btn btn-secondary">Pilih Jurusan</a>
+                    </div>
+
+                    <div class="hero-note">
+                        <span class="check">✓</span>
+                        Materi belajar yang terstruktur dan mudah dipahami
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-label="Ilustrasi pembelajaran digital">
+                    <div class="glow"></div>
+                    <div class="orb orb-one"></div>
+                    <div class="orb orb-two"></div>
+                    <div class="book-card">
+                        <div class="book-top">
+                            <span>SMK</span>
+                            <span>DIPSA</span>
+                        </div>
+                        <div class="book-screen">
+                            <div class="screen-line wide"></div>
+                            <div class="screen-line"></div>
+                            <div class="screen-line short"></div>
+                            <div class="screen-chart">
+                                <i></i><i></i><i></i><i></i><i></i>
+                            </div>
+                        </div>
+                        <div class="book-base"></div>
+                    </div>
+                    <div class="floating-card card-html">&lt;/&gt;</div>
+                    <div class="floating-card card-math">π</div>
+                    <div class="floating-card card-design">✦</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATISTICS -->
+        <section class="stats">
+            <div class="container stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">▣</div>
+                    <div>
+                        <strong>UPDATE</strong>
+                        <span>Materi Pembelajaran</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">◆</div>
+                    <div>
+                        <strong>3</strong>
+                        <span>Program Keahlian</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✓</div>
+                    <div>
+                        <strong>100%</strong>
+                        <span>Akses Online</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATERI -->
+        <section class="section" id="materi">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">PEMBELAJARAN</p>
+                        <h2>Materi Terbaru</h2>
+                    </div>
+                    <p>Pilih materi yang ingin dipelajari dan lanjutkan proses belajarmu.</p>
+                </div>
+
+               
+<div class="material-tools">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <span class="search-icon">🔍</span>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari materi, contoh: Matriks, SPLTV, Photoshop..."
+            autocomplete="off"
+        >
+
+        <button
+            id="clearSearch"
+            class="clear-search"
+            type="button"
+            aria-label="Hapus pencarian"
+        >×</button>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-wrap">
+        <button class="filter-btn active" data-filter="semua">
+            Semua
+        </button>
+
+        <button class="filter-btn" data-filter="matematika">
+            Matematika
+        </button>
+
+        <button class="filter-btn" data-filter="dkv">
+            DKV
+        </button>
+
+                <button class="filter-btn" data-filter="koding dan kecerdasan artifisial">
+            Koding dan Kecerdasan Artifisial
+        </button>
+    </div>
+
+</div>
+
+<p id="searchResult" class="search-result"></p>
+
+                <div class="course-grid" id="courseGrid">
+                    <article class="course-card" data-category="matematika">
+                        <div class="course-cover cover-blue"><span>MATEMATIKA</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>SPLTV</h3>
+                            <p>Sistem Persamaan Linear Tiga Variabel dengan contoh dan latihan.</p>
+                            <a href="materi/spltv.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                    <article class="course-card" data-category="matematika">
+                        <div class="course-cover cover-purple"><span>MATEMATIKA</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Matriks</h3>
+                            <p>Pengertian Matriks.</p>
+                            <a href="materi/matriks.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+
+                    <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Mengenal Adobe Photoshop dan Workspace</h3>
+                            <p> Mengenalkan Adobe Photoshop dan Workspace.</p>
+                            <a href="materi/Mengenal Adobe Photoshop dan Workspace.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                    <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Layer pada Photoshop</h3>
+                            <p> Pengertian Layer dan Fungsinya.</p>
+                            <a href="materi/Layer.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Selection pada Photoshop</h3>
+                            <p> pengertian Selection pada Photoshop.</p>
+                            <a href="materi/Selection pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Crop Transform pada Photoshop</h3>
+                            <p> pengertian Crop Transform pada Photoshop.</p>
+                            <a href="materi/Crop Transform pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Adjustment Color Correction Dasar pada Photoshop</h3>
+                            <p> pengertian Adjustment Color Correction Dasar pada Photoshop.</p>
+                            <a href="materi/Adjustment Color Correction Dasar pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Masking Dasar pada Photoshop</h3>
+                            <p> pengertian Masking Dasar pada Photoshop.</p>
+                            <a href="materi/Masking Dasar pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Retouching Dasar pada Photoshop</h3>
+                            <p> pengertian Retouching Dasar pada Photoshop.</p>
+                            <a href="materi/Retouching Dasar pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Typography pada Photoshop</h3>
+                            <p> pengertian Typography pada Photoshop.</p>
+                            <a href="materi/Typography pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Desain Poster pada Photoshop</h3>
+                            <p> pengertian Desain Poster pada Photoshop.</p>
+                            <a href="materi/Desain Poster pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Social Media Design pada Photoshop</h3>
+                            <p> pengertian Social Media Design pada Photoshop.</p>
+                            <a href="materi/Social Media Design pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="dkv">
+                        <div class="course-cover cover-pink"><span>DKV</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas XI</span>
+                            <h3>Mockup Sederhana pada Photoshop</h3>
+                            <p> pengertian Mockup Sederhana pada Photoshop.</p>
+                            <a href="materi/Mockup Sederhana pada Photoshop.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Percabangan dalam Python pada Google Colab</h3>
+                            <p> Percabangan dalam Python pada Google Colab.</p>
+                            <a href="materi/Percabangan dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Perulangan dan List dalam Python pada Google Colab</h3>
+                            <p> Perulangan dan List dalam Python pada Google Colab.</p>
+                            <a href="materi/Perulangan dan List dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Fungsi Python dalam Python pada Google Colab</h3>
+                            <p> Fungsi Python dalam Python pada Google Colab.</p>
+                            <a href="materi/Fungsi Python dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Python untuk Pengolahan Data pada Google Colab</h3>
+                            <p> Python untuk Pengolahan Data pada Google Colab.</p>
+                            <a href="materi/Python untuk Pengolahan Data pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Visualisasi Data dalam Python pada Google Colab</h3>
+                            <p> Visualisasi Data dalam Python pada Google Colab.</p>
+                            <a href="materi/Visualisasi Data dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Mengenal Machine Learning dalam Python pada Google Colab</h3>
+                            <p> Mengenal Machine Learning dalam Python pada Google Colab.</p>
+                            <a href="materi/Mengenal Machine Learning dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Regression_ Membuat Prediksi Angka dalam Python pada Google Colab</h3>
+                            <p> Regression_ Membuat Prediksi Angka dalam Python pada Google Colab.</p>
+                            <a href="materi/Regression_ Membuat Prediksi Angka dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>Generative AI, Prompt Engineering, dan Etika AI dalam Python pada Google Colab</h3>
+                            <p> Generative AI, Prompt Engineering, dan Etika AI dalam Python pada Google Colab.</p>
+                            <a href="materi/Generative AI, Prompt Engineering, dan Etika AI dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+
+                     <article class="course-card" data-category="koding dan kecerdasan artifisial">
+                        <div class="course-cover cover-green"><span>Koding dan Kecerdasan Artifisial</span></div>
+                        <div class="course-body">
+                            <span class="course-tag">Kelas X</span>
+                            <h3>PROYEK AKHIR MEMBUAT APLIKASI AI SEDERHANA dalam Python pada Google Colab</h3>
+                            <p> PROYEK AKHIR MEMBUAT APLIKASI AI SEDERHANA dalam Python pada Google Colab.</p>
+                            <a href="materi/PROYEK AKHIR MEMBUAT APLIKASI AI SEDERHANA dalam Python pada Google Colab.html">Pelajari →</a>
+                        </div>
+                    </article>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- JURUSAN -->
+        <section class="section section-dark" id="jurusan">
+            <div class="container">
+                <div class="section-heading light">
+                    <div>
+                        <p class="eyebrow">PROGRAM KEAHLIAN</p>
+                        <h2>Belajar Sesuai Jurusan</h2>
+                    </div>
+                    <p>Materi dapat dikembangkan sesuai kebutuhan masing-masing program keahlian.</p>
+                </div>
+
+                <div class="major-grid">
+                    <a href="#materi" class="major-card">
+                        <span class="major-number">01</span>
+                        <div>
+                            <h3>Teknik Sepeda Motor</h3>
+                            <p>TSM</p>
+                        </div>
+                        <span class="arrow">↗</span>
+                    </a>
+                    <a href="#materi" class="major-card">
+                        <span class="major-number">02</span>
+                        <div>
+                            <h3>Desain Komunikasi Visual</h3>
+                            <p>DKV</p>
+                        </div>
+                        <span class="arrow">↗</span>
+                    </a>
+                    <a href="#materi" class="major-card">
+                        <span class="major-number">03</span>
+                        <div>
+                            <h3>Manajemen Perkantoran</h3>
+                            <p>MP</p>
+                        </div>
+                        <span class="arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="tentang">
+            <div class="container about">
+                <div>
+                    <p class="eyebrow">TENTANG WEBSITE</p>
+                    <h2>Ruang belajar digital SMK DIPSA.</h2>
+                </div>
+                <p>
+                    Website ini disiapkan sebagai pusat materi pembelajaran digital
+                    SMK DIPSA Purwokerto. 
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>
+                <strong>SMK DIPSA</strong>
+                <p>Materi Pembelajaran Digital</p>
+            </div>
+            <p>© <span id="year"></span> SMK DIPSA Purwokerto</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
