@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin | SMK DIPSA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-page{min-height:100vh;display:grid;place-items:center;padding:30px;background:
+        radial-gradient(circle at 20% 20%,rgba(25,118,210,.18),transparent 30%),
+        radial-gradient(circle at 80% 80%,rgba(117,72,217,.16),transparent 30%),var(--bg)}
+        .auth-card{width:min(440px,100%);background:var(--card);border:1px solid var(--line);
+        border-radius:20px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+        .auth-brand{text-align:center;margin-bottom:28px}
+        .auth-brand .brand-mark{margin:0 auto 14px}
+        .auth-brand h1{font-size:26px}
+        .auth-brand p{color:var(--muted);font-size:14px;margin-top:6px}
+        .admin-badge{display:inline-block;margin-top:10px;padding:6px 10px;border-radius:999px;
+        background:rgba(117,72,217,.14);border:1px solid rgba(117,72,217,.35);font-size:12px;font-weight:700}
+        .form-group{margin-bottom:18px}
+        .form-group label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+        .form-group input{width:100%;height:48px;border:1px solid var(--line);border-radius:10px;
+        background:rgba(255,255,255,.04);color:var(--text);padding:0 14px;outline:none;box-sizing:border-box}
+        .form-group input:focus{border-color:var(--blue)}
+        .auth-submit{width:100%;border:0;cursor:pointer}
+        .auth-submit:disabled{opacity:.65;cursor:not-allowed}
+        .auth-note{text-align:center;color:var(--muted);font-size:12px;margin-top:18px;line-height:1.6}
+        .auth-back{display:block;text-align:center;margin-top:20px;color:#7fc0ff;font-size:13px}
+        .auth-message{display:none;margin:0 0 18px;padding:12px 14px;border-radius:10px;font-size:13px;line-height:1.5}
+        .auth-message.show{display:block}
+        .auth-message.error{background:rgba(220,53,69,.12);border:1px solid rgba(220,53,69,.35);color:#ffb3ba}
+        .auth-message.success{background:rgba(25,135,84,.12);border:1px solid rgba(25,135,84,.35);color:#9ee2c0}
+    </style>
+</head>
+<body>
+<main class="auth-page">
+    <section class="auth-card">
+        <div class="auth-brand">
+            <div class="brand-mark">D</div>
+            <h1>SMK DIPSA</h1>
+            <p>Learning Center · Login Admin</p>
+            <span class="admin-badge">ADMINISTRATOR</span>
+        </div>
+
+        <div id="authMessage" class="auth-message"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="identity">Email Admin</label>
+                <input id="identity" type="email" placeholder="Masukkan email admin" autocomplete="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Masukkan password" autocomplete="current-password" required>
+            </div>
+
+            <button id="loginButton" class="btn btn-primary auth-submit" type="submit">Login Admin</button>
+        </form>
+
+        <p class="auth-note">Gunakan akun Supabase yang memiliki role <strong>admin</strong> pada tabel <strong>profiles</strong>.</p>
+        <a class="auth-back" href="index.html">← Kembali ke website utama</a>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const { createClient } = window.supabase;
+const message = document.getElementById("authMessage");
+const form = document.getElementById("loginForm");
+const button = document.getElementById("loginButton");
+
+function showMessage(text, type = "error") {
+    message.textContent = text;
+    message.className = "auth-message show " + type;
+}
+
+function getClient() {
+    if (!window.SUPABASE_URL || window.SUPABASE_URL.includes("PASTE_") ||
+        !window.SUPABASE_PUBLISHABLE_KEY || window.SUPABASE_PUBLISHABLE_KEY.includes("PASTE_")) {
+        throw new Error("Konfigurasi Supabase belum diisi di supabase-config.js.");
+    }
+    return createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+}
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    button.textContent = "Memproses...";
+
+    try {
+        const client = getClient();
+        const email = document.getElementById("identity").value.trim();
+        const password = document.getElementById("password").value;
+
+        const { data, error } = await client.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        if (!data.session) throw new Error("Login berhasil tetapi session belum tersedia.");
+
+        const { data: profile, error: profileError } = await client
+            .from("profiles")
+            .select("role")
+            .eq("id", data.session.user.id)
+            .single();
+
+        if (profileError) throw profileError;
+
+        if (!profile || profile.role !== "admin") {
+            await client.auth.signOut();
+            throw new Error("Akun ini bukan akun admin. Silakan gunakan Login Guru atau Login Siswa sesuai akun Anda.");
+        }
+
+        showMessage("Login admin berhasil. Membuka dashboard...", "success");
+        window.location.href = "teacher.html";
+    } catch (error) {
+        console.error(error);
+        showMessage(error.message || "Login admin gagal. Periksa email dan password.");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Login Admin";
+    }
+});
+</script>
+</body>
+</html>
