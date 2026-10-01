@@ -49,6 +49,10 @@ body{margin:0;background:var(--bg,#0b1020);color:var(--text,#f5f7fb)}
 .data-table tr:last-child td{border-bottom:0}
 .badge{display:inline-block;padding:5px 8px;border-radius:999px;background:rgba(79,140,255,.12);font-size:12px}
 .actions{display:flex;gap:7px;flex-wrap:wrap}
+.import-summary{padding:10px 12px;border:1px solid var(--line,#26304a);border-radius:10px;background:rgba(79,140,255,.06)}
+.import-errors{margin-top:10px;padding:10px 12px;border:1px solid rgba(220,53,69,.35);border-radius:10px;background:rgba(220,53,69,.08)}
+.import-ok{margin-top:10px;padding:10px 12px;border:1px solid rgba(40,167,69,.35);border-radius:10px;background:rgba(40,167,69,.08)}
+
 .empty{padding:25px;text-align:center;color:var(--muted,#9aa5bd)}
 .admin-only{display:block}
 .message{display:none;margin-bottom:18px;padding:12px 14px;border-radius:10px;font-size:13px}
@@ -261,6 +265,19 @@ body{margin:0;background:var(--bg,#0b1020);color:var(--text,#f5f7fb)}
         <p class="small">Akun login siswa akan dibuat otomatis. Password awal dapat diberikan kepada siswa untuk login pertama kali.</p>
       </form>
     </div>
+    <div class="panel admin-only" id="studentImportPanel">
+      <h2>Import / Export Data Siswa</h2>
+      <p class="small">Gunakan template Excel untuk menambahkan banyak siswa sekaligus. Sistem akan memeriksa email, jenis kelamin, password, dan kecocokan kelas sebelum membuat akun.</p>
+      <div class="form-actions">
+        <button class="btn-teacher" type="button" id="downloadStudentTemplateBtn">Download Template Excel</button>
+        <button class="btn-teacher" type="button" id="chooseStudentExcelBtn">Pilih File Excel</button>
+        <button class="btn-teacher primary" type="button" id="importStudentExcelBtn" disabled>Import Siswa</button>
+        <button class="btn-teacher" type="button" id="exportStudentsBtn">Export Data Siswa</button>
+        <input id="studentExcelInput" type="file" accept=".xlsx,.xls" style="display:none">
+      </div>
+      <div id="studentImportStatus" class="small" style="margin-top:12px"></div>
+      <div id="studentImportPreview" style="margin-top:12px"></div>
+    </div>
     <div class="panel">
       <h2>Data Siswa</h2>
       <div class="form-actions" style="margin-bottom:14px">
@@ -351,6 +368,7 @@ body{margin:0;background:var(--bg,#0b1020);color:var(--text,#f5f7fb)}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="supabase-config.js"></script>
 <script>
 const { createClient } = window.supabase;
@@ -427,6 +445,106 @@ function resetAssignmentForm(){document.getElementById('assignmentForm').reset()
 async function deleteAssignment(id){if(!confirm('Hapus tugas ini? Pengumpulan terkait dapat membuat penghapusan gagal.'))return;try{const {error}=await client.from('assignments').delete().eq('id',id);if(error)throw error;showMessage('Tugas berhasil dihapus.');await loadAssignments();await loadStats()}catch(e){showMessage(e.message||'Tugas tidak dapat dihapus.','error')}}
 document.getElementById('teacherForm').addEventListener('submit',async e=>{e.preventDefault();if(currentProfile?.role!=='admin')return showMessage('Penambahan guru hanya dapat dilakukan oleh Admin.','error');const btn=document.getElementById('saveTeacherBtn');const payload={nama:document.getElementById('teacherNameInput').value.trim(),email:document.getElementById('teacherEmailInput').value.trim(),password:document.getElementById('teacherPasswordInput').value,jenis_kelamin:document.getElementById('teacherGenderInput').value};if(!payload.nama||!payload.email||!payload.password||!payload.jenis_kelamin)return showMessage('Lengkapi semua data guru.','error');if(payload.password.length<6)return showMessage('Password minimal 6 karakter.','error');btn.disabled=true;try{const {data:{session}}=await client.auth.getSession();if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');const res=await fetch(`${window.SUPABASE_URL}/functions/v1/create-teacher`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(payload)});const raw=await res.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{}if(!res.ok)throw new Error(result.error||raw||`Gagal membuat akun guru (HTTP ${res.status}).`);document.getElementById('teacherForm').reset();showMessage(`Guru ${payload.nama} berhasil ditambahkan. Akun login: ${payload.email}`);await loadTeachers()}catch(err){showMessage(err.message||'Gagal menambahkan guru.','error')}finally{btn.disabled=false}});
 async function deleteTeacher(id){if(currentProfile?.role!=='admin')return showMessage('Penghapusan guru hanya dapat dilakukan oleh Admin.','error');const teacher=teacherData.find(g=>String(g.id)===String(id));if(!teacher)return;if(String(id)===String(currentProfile.id))return showMessage('Akun Admin yang sedang digunakan tidak dapat dihapus.','error');if(!confirm(`Hapus guru "${teacher.nama}"? Akun login guru akan dihapus. Pastikan guru ini tidak lagi diperlukan pada penugasan mata pelajaran.`))return;try{const {data:{session}}=await client.auth.getSession();if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');const res=await fetch(`${window.SUPABASE_URL}/functions/v1/delete-teacher`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({teacher_id:id})});const raw=await res.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{}if(!res.ok)throw new Error(result.error||raw||`Gagal menghapus guru (HTTP ${res.status}).`);showMessage(`Guru ${teacher.nama} berhasil dihapus.`);await loadTeachers();await loadSubjects()}catch(err){showMessage(err.message||'Gagal menghapus guru.','error')}}
+
+let pendingStudentImport=[];
+
+function normExcel(v){return String(v??'').trim().toLowerCase()}
+function getClassFromExcel(nama,tahun){
+  const n=normExcel(nama), t=normExcel(tahun);
+  return classesData.find(c=>normExcel(c.nama_kelas)===n && normExcel(c.tahun_ajaran)===t) || null;
+}
+function downloadStudentTemplate(){
+  if(currentProfile?.role!=='admin')return showMessage('Template import hanya dapat digunakan oleh Admin.','error');
+  const rows=[
+    {'Nama Lengkap':'Budi Santoso','Email Login':'budi@sekolah.sch.id','Password Awal':'Budi123456','Jenis Kelamin':'L','Kelas':'XI TSM','Tahun Ajaran':'2026/2027'}
+  ];
+  const ws=XLSX.utils.json_to_sheet(rows);
+  ws['!cols']=[{wch:28},{wch:32},{wch:22},{wch:18},{wch:22},{wch:20}];
+  const guide=XLSX.utils.aoa_to_sheet([
+    ['PETUNJUK IMPORT DATA SISWA'],[''],['Kolom','Keterangan'],
+    ['Nama Lengkap','Nama lengkap siswa.'],['Email Login','Email unik yang akan digunakan untuk login.'],
+    ['Password Awal','Minimal 6 karakter.'],['Jenis Kelamin','Isi L atau P.'],
+    ['Kelas','Harus sama persis dengan nama kelas di sistem.'],['Tahun Ajaran','Harus sama dengan tahun ajaran kelas di sistem.'],[''],
+    ['Catatan','Password tidak akan dimasukkan ke file export demi keamanan.']
+  ]);
+  guide['!cols']=[{wch:24},{wch:85}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');XLSX.utils.book_append_sheet(wb,guide,'Petunjuk');
+  XLSX.writeFile(wb,'TEMPLATE-IMPORT-SISWA-SMK-DIPSA.xlsx');
+}
+function renderStudentImportPreview(){
+  const el=document.getElementById('studentImportPreview'), status=document.getElementById('studentImportStatus'), btn=document.getElementById('importStudentExcelBtn');
+  if(!pendingStudentImport.length){el.innerHTML='';status.textContent='';btn.disabled=true;return}
+  const invalid=pendingStudentImport.filter(r=>r.errors.length), valid=pendingStudentImport.length-invalid.length;
+  status.innerHTML=`<div class="import-summary"><strong>${pendingStudentImport.length}</strong> baris dibaca · <strong>${valid}</strong> valid · <strong>${invalid.length}</strong> bermasalah.</div>`;
+  btn.disabled=invalid.length>0 || valid===0;
+  const rows=pendingStudentImport.slice(0,100);
+  el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Baris</th><th>Nama</th><th>Email</th><th>Kelas</th><th>Status</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.row}</td><td>${esc(r.nama||'-')}</td><td>${esc(r.email||'-')}</td><td>${esc(r.kelas_label||'-')}</td><td>${r.errors.length?`<span style="color:#ffb7bf">${esc(r.errors.join(' '))}</span>`:'<span style="color:#9be7ae">Valid</span>'}</td></tr>`).join('')}</tbody></table></div>${pendingStudentImport.length>100?'<p class="small">Preview menampilkan maksimal 100 baris pertama.</p>':''}`;
+}
+async function handleStudentExcelFile(file){
+  if(currentProfile?.role!=='admin')return showMessage('Import siswa hanya dapat dilakukan oleh Admin.','error');
+  pendingStudentImport=[];renderStudentImportPreview();
+  try{
+    const data=await file.arrayBuffer();
+    const wb=XLSX.read(data,{type:'array'});
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    const raw=XLSX.utils.sheet_to_json(ws,{defval:'',raw:false});
+    if(!raw.length)throw new Error('File Excel tidak berisi data.');
+    const required=['Nama Lengkap','Email Login','Password Awal','Jenis Kelamin','Kelas','Tahun Ajaran'];
+    const headers=Object.keys(raw[0]);
+    const missing=required.filter(h=>!headers.includes(h));
+    if(missing.length)throw new Error('Kolom wajib tidak ditemukan: '+missing.join(', '));
+    const seen=new Set();
+    pendingStudentImport=raw.map((r,i)=>{
+      const nama=String(r['Nama Lengkap']??'').trim(),email=String(r['Email Login']??'').trim().toLowerCase(),password=String(r['Password Awal']??''),jenis=String(r['Jenis Kelamin']??'').trim().toUpperCase(),kelas=String(r['Kelas']??'').trim(),tahun=String(r['Tahun Ajaran']??'').trim();
+      const errors=[];
+      if(!nama)errors.push('Nama kosong.');
+      if(!/^\S+@\S+\.\S+$/.test(email))errors.push('Email tidak valid.');
+      if(seen.has(email)&&email)errors.push('Email duplikat dalam file.'); else if(email)seen.add(email);
+      if(password.length<6)errors.push('Password < 6 karakter.');
+      if(!['L','P'].includes(jenis))errors.push('Jenis kelamin harus L/P.');
+      const cls=getClassFromExcel(kelas,tahun);
+      if(!cls)errors.push('Kelas/tahun ajaran tidak ditemukan.');
+      return {row:i+2,nama,email,password,jenis_kelamin:jenis,kelas_label:`${kelas} — ${tahun}`,kelas_id:cls?.id||null,errors};
+    });
+    renderStudentImportPreview();
+    if(pendingStudentImport.some(r=>r.errors.length))showMessage('Perbaiki baris yang bermasalah terlebih dahulu sebelum import.','error');
+    else showMessage('File siap diimport. Semua baris valid.','success');
+  }catch(e){showMessage(e.message||'File Excel tidak dapat dibaca.','error')}
+}
+async function importStudentExcel(){
+  if(currentProfile?.role!=='admin'||!pendingStudentImport.length)return;
+  if(pendingStudentImport.some(r=>r.errors.length))return showMessage('Masih ada data yang bermasalah. Perbaiki file lalu pilih kembali.','error');
+  if(!confirm(`Import ${pendingStudentImport.length} siswa dan membuat akun login untuk semuanya?`))return;
+  const btn=document.getElementById('importStudentExcelBtn');btn.disabled=true;
+  let ok=0,fail=0,failed=[];
+  try{
+    const {data:{session}}=await client.auth.getSession();
+    if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');
+    for(const row of pendingStudentImport){
+      try{
+        const res=await fetch(`${window.SUPABASE_URL}/functions/v1/create-student`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({nama:row.nama,email:row.email,password:row.password,jenis_kelamin:row.jenis_kelamin,kelas_id:Number(row.kelas_id)})});
+        const raw=await res.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{}
+        if(!res.ok)throw new Error(result.error||raw||`HTTP ${res.status}`);
+        ok++;
+      }catch(e){fail++;failed.push(`Baris ${row.row} (${row.email}): ${e.message||e}`)}
+    }
+    pendingStudentImport=[];document.getElementById('studentExcelInput').value='';renderStudentImportPreview();
+    await loadStudents();await loadStats();
+    if(fail){showMessage(`Import selesai: ${ok} berhasil, ${fail} gagal. ${failed.slice(0,3).join(' | ')}`,'error')}else showMessage(`Import berhasil. ${ok} akun siswa dibuat.`,'success');
+  }catch(e){showMessage(e.message||'Import gagal.','error')}finally{btn.disabled=!pendingStudentImport.length}
+}
+function exportStudents(){
+  if(currentProfile?.role!=='admin')return showMessage('Export siswa hanya dapat dilakukan oleh Admin.','error');
+  const rows=studentsData.map(s=>({'ID Akun':s.id,'Nama Lengkap':s.nama||'','Jenis Kelamin':s.jenis_kelamin||'','Kelas':s.classes?.nama_kelas||'','Tahun Ajaran':s.classes?.tahun_ajaran||''}));
+  if(!rows.length)return showMessage('Belum ada data siswa untuk diexport.','error');
+  const ws=XLSX.utils.json_to_sheet(rows);ws['!cols']=[{wch:38},{wch:28},{wch:18},{wch:22},{wch:20}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');XLSX.writeFile(wb,`DATA-SISWA-SMK-DIPSA-${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+document.getElementById('downloadStudentTemplateBtn').addEventListener('click',downloadStudentTemplate);
+document.getElementById('chooseStudentExcelBtn').addEventListener('click',()=>document.getElementById('studentExcelInput').click());
+document.getElementById('studentExcelInput').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)handleStudentExcelFile(f)});
+document.getElementById('importStudentExcelBtn').addEventListener('click',importStudentExcel);
+document.getElementById('exportStudentsBtn').addEventListener('click',exportStudents);
 
 document.getElementById('studentForm').addEventListener('submit',async e=>{
   e.preventDefault();
