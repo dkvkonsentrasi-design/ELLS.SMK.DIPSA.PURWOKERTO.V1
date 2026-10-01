@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Guru | SMK DIPSA</title>
+<link rel="stylesheet" href="style.css">
+<style>
+:root{--teacher-blue:#4f8cff}
+body{margin:0;background:var(--bg,#0b1020);color:var(--text,#f5f7fb)}
+.teacher-shell{min-height:100vh}
+.teacher-header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line,#26304a)}
+.teacher-header-inner{max-width:1200px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.teacher-brand{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none}
+.teacher-brand-mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#4f8cff,#8b5cf6);font-weight:900}
+.teacher-user{display:flex;align-items:center;gap:10px}
+.teacher-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#4f8cff,#8b5cf6);font-weight:800}
+.teacher-main{max-width:1200px;margin:auto;padding:30px 20px 70px}
+.teacher-top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.teacher-top h1{margin:0;font-size:clamp(28px,4vw,42px)}
+.teacher-top p{margin:7px 0 0;color:var(--muted,#9aa5bd)}
+.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.stat-card{background:var(--card,#121a2d);border:1px solid var(--line,#26304a);border-radius:16px;padding:18px}
+.stat-card .num{font-size:28px;font-weight:900}
+.stat-card .label{color:var(--muted,#9aa5bd);font-size:13px;margin-top:5px}
+.panel{background:var(--card,#121a2d);border:1px solid var(--line,#26304a);border-radius:18px;padding:20px;margin-bottom:22px}
+.panel h2{margin:0 0 15px}
+.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:18px;padding-bottom:2px}
+.tab-btn{white-space:nowrap;border:1px solid var(--line,#26304a);background:transparent;color:var(--text,#f5f7fb);padding:10px 14px;border-radius:10px;cursor:pointer}
+.tab-btn.active,.tab-btn:hover{background:var(--teacher-blue);border-color:var(--teacher-blue)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;color:var(--muted,#9aa5bd)}
+.field input,.field textarea,.field select{width:100%;box-sizing:border-box;background:#0c1324;color:var(--text,#f5f7fb);border:1px solid var(--line,#26304a);border-radius:10px;padding:11px 12px;outline:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--teacher-blue)}
+.field textarea{min-height:100px;resize:vertical}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn-teacher{border:1px solid var(--line,#26304a);background:transparent;color:var(--text,#f5f7fb);padding:10px 14px;border-radius:10px;cursor:pointer}
+.btn-teacher.primary{background:var(--teacher-blue);border-color:var(--teacher-blue)}
+.btn-teacher.danger{border-color:#b43b4a;color:#ffb7bf}
+.btn-teacher:disabled{opacity:.55;cursor:not-allowed}
+.table-wrap{overflow:auto;border:1px solid var(--line,#26304a);border-radius:12px}
+.data-table{width:100%;border-collapse:collapse;min-width:760px}
+.data-table th,.data-table td{text-align:left;padding:12px;border-bottom:1px solid var(--line,#26304a);vertical-align:top}
+.data-table th{font-size:12px;color:var(--muted,#9aa5bd);font-weight:700}
+.data-table tr:last-child td{border-bottom:0}
+.badge{display:inline-block;padding:5px 8px;border-radius:999px;background:rgba(79,140,255,.12);font-size:12px}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.empty{padding:25px;text-align:center;color:var(--muted,#9aa5bd)}
+.admin-only{display:block}
+.message{display:none;margin-bottom:18px;padding:12px 14px;border-radius:10px;font-size:13px}
+.message.show{display:block}
+.message.success{background:rgba(40,167,69,.12);border:1px solid rgba(40,167,69,.35)}
+.message.error{background:rgba(220,53,69,.12);border:1px solid rgba(220,53,69,.35)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;padding:20px;overflow:auto}
+.modal.show{display:block}
+.modal-card{max-width:720px;margin:6vh auto;background:var(--card,#121a2d);border:1px solid var(--line,#26304a);border-radius:18px;padding:22px;position:relative}
+.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;color:var(--muted,#9aa5bd);font-size:26px;cursor:pointer}
+.submission-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.grade-box{border:1px solid var(--line,#26304a);border-radius:14px;padding:15px}
+.small{font-size:12px;color:var(--muted,#9aa5bd)}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}.submission-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.teacher-header-inner{align-items:flex-start}.teacher-user small{display:none}.form-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.teacher-top{align-items:flex-start;flex-direction:column}.teacher-main{padding:22px 14px 50px}}
+</style>
+</head>
+<body>
+<div class="teacher-shell">
+<header class="teacher-header">
+  <div class="teacher-header-inner">
+    <a href="index.html" class="teacher-brand">
+      <span class="teacher-brand-mark">D</span>
+      <span><strong>SMK DIPSA</strong><small style="display:block;color:var(--muted,#9aa5bd)">Teacher/Admin Center</small></span>
+    </a>
+    <div class="teacher-user">
+      <div id="teacherAvatar" class="teacher-avatar">G</div>
+      <div>
+        <strong id="teacherName">Memuat...</strong>
+        <small id="teacherRole" style="display:block;color:var(--muted,#9aa5bd)">Memuat...</small>
+      </div>
+      <button id="logoutBtn" class="btn-teacher" type="button">Keluar</button>
+    </div>
+  </div>
+</header>
+
+<main class="teacher-main">
+  <div id="message" class="message"></div>
+
+  <div class="teacher-top">
+    <div>
+      <h1>Dashboard Guru</h1>
+      <p>Kelola kelas, materi, tugas, siswa, pengumpulan, nilai, dan feedback.</p>
+    </div>
+    <button class="btn-teacher primary" type="button" onclick="refreshAll()">↻ Refresh</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div id="statSubjects" class="num">-</div><div class="label">Mata Pelajaran</div></div>
+    <div class="stat-card"><div id="statClasses" class="num">-</div><div class="label">Kelas</div></div>
+    <div class="stat-card"><div id="statStudents" class="num">-</div><div class="label">Siswa</div></div>
+    <div class="stat-card"><div id="statMaterials" class="num">-</div><div class="label">Materi</div></div>
+    <div class="stat-card"><div id="statAssignments" class="num">-</div><div class="label">Tugas</div></div>
+    <div class="stat-card"><div id="statSubmissions" class="num">-</div><div class="label">Pengumpulan</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="overview">Dashboard</button>
+    <button class="tab-btn" data-tab="subjects">Mata Pelajaran</button>
+    <button class="tab-btn" data-tab="classes">Kelas</button>
+    <button class="tab-btn" data-tab="materials">Materi</button>
+    <button class="tab-btn" data-tab="assignments">Tugas</button>
+    <button class="tab-btn" data-tab="students">Siswa</button>
+    <button class="tab-btn" data-tab="submissions">Pengumpulan & Nilai</button>
+  </div>
+
+  <section id="tab-overview" class="tab-content active">
+    <div class="panel">
+      <h2>Ringkasan Sistem</h2>
+      <p style="color:var(--muted,#9aa5bd);line-height:1.7">
+        Akun kamu terdeteksi sebagai <strong id="overviewRole">guru</strong>.
+        Gunakan menu di atas untuk mengelola data Learning Center SMK DIPSA.
+      </p>
+      <div class="form-actions">
+        <button class="btn-teacher primary" onclick="activateTab('subjects')">Kelola Mata Pelajaran</button>
+        <button class="btn-teacher primary" onclick="activateTab('assignments')">Buat Tugas</button>
+        <button class="btn-teacher primary" onclick="activateTab('submissions')">Periksa Pengumpulan</button>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="tab-subjects" class="tab-content">
+    <div class="panel admin-only" id="subjectManagementPanel">
+      <h2 id="subjectFormTitle">Tambah Mata Pelajaran</h2>
+      <form id="subjectForm">
+        <input type="hidden" id="subjectEditId">
+        <div class="form-grid">
+          <div class="field"><label>Nama Mata Pelajaran</label><input id="subjectNameInput" required placeholder="Contoh: Matematika"></div>
+          <div class="field"><label>Kelas</label><select id="subjectClass" required></select></div>
+          <div class="field full" id="subjectTeacherField"><label>Guru Mata Pelajaran</label><select id="subjectTeacher"></select></div>
+        </div>
+        <div class="form-actions"><button class="btn-teacher primary" type="submit">Simpan Mata Pelajaran</button><button class="btn-teacher" type="button" id="cancelSubjectEdit" style="display:none">Batal Edit</button></div>
+        <p class="small">Guru hanya dapat mengelola materi dan tugas pada mata pelajaran yang ditugaskan kepadanya. Admin dapat mengatur guru dan kelas.</p>
+      </form>
+    </div>
+    <div class="panel"><h2>Daftar Mata Pelajaran</h2><p class="small" id="subjectsAccessNote">Mata pelajaran dan penugasan guru dikelola oleh Admin.</p><div id="subjectsTable"></div></div>
+  </section>
+  <section id="tab-classes" class="tab-content">
+    <div class="panel admin-only" id="classManagementPanel">
+      <h2 id="classFormTitle">Tambah Kelas</h2>
+      <form id="classForm">
+        <input type="hidden" id="classEditId">
+        <div class="form-grid">
+          <div class="field"><label>Tingkat</label>
+            <select id="classTingkat" required><option value="">Pilih</option><option>X</option><option>XI</option><option>XII</option></select>
+          </div>
+          <div class="field"><label>Jurusan</label>
+            <input id="classJurusan" required placeholder="Contoh: TSM">
+          </div>
+          <div class="field"><label>Nama Kelas</label>
+            <input id="classNama" required placeholder="Contoh: XI TSM">
+          </div>
+          <div class="field"><label>Tahun Ajaran</label>
+            <input id="classTahun" required value="2026/2027">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-teacher primary" type="submit">Simpan Kelas</button>
+          <button class="btn-teacher" type="button" id="cancelClassEdit" style="display:none">Batal Edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Daftar Kelas</h2><p class="small" id="classesAccessNote">Data kelas dikelola oleh Admin.</p>
+      <div id="classesTable"></div>
+    </div>
+  </section>
+
+  <section id="tab-materials" class="tab-content">
+    <div class="panel">
+      <h2 id="materialFormTitle">Tambah Materi</h2>
+      <form id="materialForm">
+        <input type="hidden" id="materialEditId">
+        <div class="form-grid">
+          <div class="field full"><label>Judul</label><input id="materialJudul" required placeholder="Contoh: Dasar-Dasar Matriks"></div>
+          <div class="field full"><label>Deskripsi</label><textarea id="materialDeskripsi" placeholder="Deskripsi materi"></textarea></div>
+          <div class="field"><label>Mata Pelajaran</label><select id="materialSubject" required></select></div>
+          <div class="field"><label>Link/File URL</label><input id="materialUrl" type="url" placeholder="https://..."></div>
+        </div>
+        <div class="form-actions"><button class="btn-teacher primary" type="submit">Simpan Materi</button><button class="btn-teacher" type="button" id="cancelMaterialEdit" style="display:none">Batal Edit</button></div>
+        <p class="small">Kelas otomatis mengikuti mata pelajaran yang dipilih.</p>
+      </form>
+    </div>
+    <div class="panel"><h2>Daftar Materi</h2><div id="materialsTable"></div></div>
+  </section>
+
+  <section id="tab-assignments" class="tab-content">
+    <div class="panel">
+      <h2 id="assignmentFormTitle">Tambah Tugas</h2>
+      <form id="assignmentForm">
+        <input type="hidden" id="assignmentEditId">
+        <div class="form-grid">
+          <div class="field full"><label>Judul</label><input id="assignmentJudul" required placeholder="Contoh: Tugas Matriks 1"></div>
+          <div class="field full"><label>Deskripsi</label><textarea id="assignmentDeskripsi" placeholder="Instruksi tugas"></textarea></div>
+          <div class="field"><label>Mata Pelajaran</label><select id="assignmentSubject" required></select></div>
+          <div class="field"><label>Deadline</label><input id="assignmentDeadline" type="datetime-local" required></div>
+          <div class="field full"><label>Link/File Instruksi (opsional)</label><input id="assignmentUrl" type="url" placeholder="https://..."></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-teacher primary" type="submit">Simpan Tugas</button>
+          <button class="btn-teacher" type="button" id="cancelAssignmentEdit" style="display:none">Batal Edit</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel"><h2>Daftar Tugas</h2><div id="assignmentsTable"></div></div>
+  </section>
+
+  <section id="tab-students" class="tab-content">
+    <div class="panel admin-only" id="studentManagementPanel">
+      <h2>Tambah Siswa Baru</h2>
+      <form id="studentForm">
+        <div class="form-grid">
+          <div class="field"><label>Nama Lengkap</label><input id="studentNameInput" required placeholder="Contoh: Budi Santoso"></div>
+          <div class="field"><label>Email Login</label><input id="studentEmailInput" type="email" required placeholder="siswa@contoh.com" autocomplete="off"></div>
+          <div class="field"><label>Password Awal</label><input id="studentPasswordInput" type="password" required minlength="6" placeholder="Minimal 6 karakter" autocomplete="new-password"></div>
+          <div class="field"><label>Jenis Kelamin</label><select id="studentGenderInput" required><option value="">Pilih</option><option value="L">Laki-laki</option><option value="P">Perempuan</option></select></div>
+          <div class="field"><label>Kelas</label><select id="studentClassInput" required><option value="">Pilih kelas</option></select></div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-teacher primary" type="submit" id="saveStudentBtn">Tambah Siswa</button>
+          <button class="btn-teacher" type="reset">Reset</button>
+        </div>
+        <p class="small">Akun login siswa akan dibuat otomatis. Password awal dapat diberikan kepada siswa untuk login pertama kali.</p>
+      </form>
+    </div>
+    <div class="panel">
+      <h2>Data Siswa</h2>
+      <div class="form-actions" style="margin-bottom:14px">
+        <select id="studentClassFilter" class="btn-teacher" style="background:#0c1324;color:var(--text,#f5f7fb)">
+          <option value="">Semua kelas</option>
+        </select>
+        <input id="studentSearch" class="btn-teacher" style="background:#0c1324;color:var(--text,#f5f7fb);min-width:220px" placeholder="Cari nama siswa">
+      </div>
+      <div id="studentsTable"></div>
+    </div>
+  </section>
+
+  <section id="tab-submissions" class="tab-content">
+    <div class="panel">
+      <h2>Pengumpulan Tugas</h2>
+      <p class="small" style="margin-top:-6px;margin-bottom:16px">Pilih kelas, mata pelajaran, dan tugas untuk melihat seluruh siswa di kelas tersebut beserta keterangan apakah sudah mengirimkan tugas.</p>
+      <div class="form-grid" style="margin-bottom:14px">
+        <div class="field">
+          <label>Kelas</label>
+          <select id="submissionClassFilter" style="background:#0c1324;color:var(--text,#f5f7fb)">
+            <option value="">Pilih kelas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Mata Pelajaran</label>
+          <select id="submissionSubjectFilter" style="background:#0c1324;color:var(--text,#f5f7fb)" disabled>
+            <option value="">Pilih kelas terlebih dahulu</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tugas</label>
+          <select id="submissionAssignmentFilter" style="background:#0c1324;color:var(--text,#f5f7fb)" disabled>
+            <option value="">Pilih mata pelajaran terlebih dahulu</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Status Pengumpulan</label>
+          <select id="submissionStatusFilter" style="background:#0c1324;color:var(--text,#f5f7fb)" disabled>
+            <option value="">Semua siswa</option>
+            <option value="sudah">Sudah mengirimkan</option>
+            <option value="belum">Belum mengirimkan</option>
+          </select>
+        </div>
+      </div>
+      <div id="submissionSummary" class="small" style="margin:6px 0 14px"></div>
+      <div id="submissionsTable"></div>
+    </div>
+  </section>
+</main>
+</div>
+
+<div id="gradeModal" class="modal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeGradeModal()">×</button>
+    <h2>Periksa & Nilai Tugas</h2>
+    <div id="gradeInfo" style="margin:14px 0"></div>
+    <div class="submission-grid">
+      <div class="grade-box">
+        <h3>File Siswa</h3>
+        <p id="gradeFileInfo" class="small">Belum ada file.</p>
+        <button id="openStudentFileBtn" class="btn-teacher primary" type="button">Buka File</button>
+      </div>
+      <div class="grade-box">
+        <div class="field"><label>Nilai (0–100)</label><input id="gradeValue" type="number" min="0" max="100" step="0.01"></div>
+        <div class="field" style="margin-top:12px"><label>Feedback / Komentar</label><textarea id="gradeFeedback" placeholder="Komentar guru"></textarea></div>
+        <div class="form-actions">
+          <button id="saveGradeBtn" class="btn-teacher primary" type="button">Simpan Nilai</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const { createClient } = window.supabase;
+let client,currentProfile=null,classesData=[],subjectsData=[],teacherData=[],materialsData=[],assignmentsData=[],studentsData=[],submissionsData=[],submissionRosterData=[],currentGradeSubmission=null;
+function getClient(){if(!window.SUPABASE_URL||!window.SUPABASE_PUBLISHABLE_KEY||window.SUPABASE_URL.includes('PASTE_')||window.SUPABASE_PUBLISHABLE_KEY.includes('PASTE_'))throw new Error('Konfigurasi Supabase belum diisi di supabase-config.js.');return createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY)}
+function esc(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
+function showMessage(msg,type='success'){const el=document.getElementById('message');el.textContent=msg;el.className='message show '+type;clearTimeout(window.msgTimer);window.msgTimer=setTimeout(()=>el.className='message',4500)}
+function activateTab(name){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('.tab-content').forEach(s=>s.classList.toggle('active',s.id==='tab-'+name))}
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>activateTab(btn.dataset.tab)));
+async function requireTeacher(){
+  client=getClient();
+  const {data:{session}}=await client.auth.getSession();
+  if(!session){location.href='teacher-login.html';return false}
+  const {data:profile,error}=await client.from('profiles').select('id,nama,jenis_kelamin,kelas_id,role').eq('id',session.user.id).single();
+  if(error)throw error;
+  if(!['guru','admin'].includes(profile.role)){alert('Akses ditolak. Halaman ini hanya untuk Guru/Admin.');location.href='dashboard.html';return false}
+  currentProfile=profile;
+  const name=profile.nama||session.user.email||'Guru';
+  document.getElementById('teacherName').textContent=name;
+  document.getElementById('teacherAvatar').textContent=name.charAt(0).toUpperCase();
+  document.getElementById('teacherRole').textContent=profile.role==='admin'?'Administrator':'Guru';
+  document.getElementById('overviewRole').textContent=profile.role;
+  document.querySelectorAll('.admin-only').forEach(el=>el.style.display=profile.role==='admin'?'':'none');
+  document.getElementById('subjectTeacherField').style.display=profile.role==='admin'?'':'none';
+  if(profile.role==='guru'){
+    document.getElementById('subjectsAccessNote').textContent='Mata pelajaran dan penugasan guru dikelola oleh Admin. Guru hanya dapat melihat mata pelajaran yang ditugaskan kepadanya.';
+    document.getElementById('classesAccessNote').textContent='Kelas dikelola oleh Admin. Guru hanya dapat melihat data kelas untuk kebutuhan pengelolaan siswa dan pengumpulan.';
+    document.querySelector('[onclick="activateTab(\'subjects\')"]').textContent='Lihat Mata Pelajaran';
+  }
+  return true
+}
+async function loadClasses(){const {data,error}=await client.from('classes').select('id,tingkat,jurusan,nama_kelas,tahun_ajaran,created_at').order('tingkat').order('nama_kelas');if(error)throw error;classesData=data||[];document.getElementById('statClasses').textContent=classesData.length;renderClassTable();fillClassSelects()}
+function fillClassSelects(){const ids=['subjectClass','studentClassInput','studentClassFilter','submissionClassFilter'];ids.forEach(id=>{const el=document.getElementById(id);if(!el)return;const old=el.value;const first=id.includes('Filter')?'<option value="">Semua kelas</option>':'<option value="">Pilih kelas</option>';el.innerHTML=first+classesData.map(c=>`<option value="${c.id}">${esc(c.nama_kelas)} — ${esc(c.tahun_ajaran)}</option>`).join('');if([...el.options].some(o=>o.value===old))el.value=old})}
+function renderClassTable(){const el=document.getElementById('classesTable');if(!classesData.length){el.innerHTML='<div class="empty">Belum ada kelas.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Kelas</th><th>Tingkat</th><th>Jurusan</th><th>Tahun Ajaran</th><th>Aksi</th></tr></thead><tbody>${classesData.map(c=>`<tr><td><strong>${esc(c.nama_kelas)}</strong></td><td>${esc(c.tingkat)}</td><td>${esc(c.jurusan)}</td><td>${esc(c.tahun_ajaran)}</td><td><div class="actions">${currentProfile?.role==='admin'?`<button class="btn-teacher" onclick="editClass(${c.id})">Edit</button><button class="btn-teacher danger" onclick="deleteClass(${c.id})">Hapus</button>`:'<span class="small">Dikelola Admin</span>'}</div></td></tr>`).join('')}</tbody></table></div>`}
+document.getElementById('classForm').addEventListener('submit',async e=>{e.preventDefault();if(currentProfile?.role!=='admin')return showMessage('Penambahan dan perubahan kelas hanya dapat dilakukan oleh Admin.','error');try{const id=document.getElementById('classEditId').value;const payload={tingkat:document.getElementById('classTingkat').value,jurusan:document.getElementById('classJurusan').value.trim(),nama_kelas:document.getElementById('classNama').value.trim(),tahun_ajaran:document.getElementById('classTahun').value.trim()};const {error}=await (id?client.from('classes').update(payload).eq('id',id):client.from('classes').insert(payload));if(error)throw error;showMessage(id?'Kelas berhasil diperbarui.':'Kelas berhasil ditambahkan.');resetClassForm();await loadClasses()}catch(err){showMessage(err.message||'Gagal menyimpan kelas.','error')}});
+function editClass(id){if(currentProfile?.role!=='admin')return showMessage('Kelas hanya dapat dikelola oleh Admin.','error');const c=classesData.find(x=>Number(x.id)===Number(id));if(!c)return;document.getElementById('classEditId').value=c.id;document.getElementById('classTingkat').value=c.tingkat||'';document.getElementById('classJurusan').value=c.jurusan||'';document.getElementById('classNama').value=c.nama_kelas||'';document.getElementById('classTahun').value=c.tahun_ajaran||'';document.getElementById('classFormTitle').textContent='Edit Kelas';document.getElementById('cancelClassEdit').style.display='inline-block';activateTab('classes')}
+function resetClassForm(){document.getElementById('classForm').reset();document.getElementById('classEditId').value='';document.getElementById('classTahun').value='2026/2027';document.getElementById('classFormTitle').textContent='Tambah Kelas';document.getElementById('cancelClassEdit').style.display='none'}document.getElementById('cancelClassEdit').onclick=resetClassForm;
+async function deleteClass(id){if(currentProfile?.role!=='admin')return showMessage('Kelas hanya dapat dikelola oleh Admin.','error');if(!confirm('Hapus kelas ini? Pastikan tidak sedang dipakai data siswa/mata pelajaran.'))return;try{const {error}=await client.from('classes').delete().eq('id',id);if(error)throw error;showMessage('Kelas berhasil dihapus.');await refreshAll()}catch(e){showMessage(e.message||'Kelas tidak dapat dihapus.','error')}}
+async function loadTeachers(){if(currentProfile.role!=='admin'){teacherData=[currentProfile];return}const {data,error}=await client.from('profiles').select('id,nama,role').eq('role','guru').order('nama');if(error)throw error;teacherData=data||[]}
+async function loadSubjects(){let q=client.from('subjects').select('id,nama_mapel,kelas_id,guru_id,created_at,classes(nama_kelas,tahun_ajaran),profiles!subjects_guru_id_fkey(nama)');if(currentProfile.role==='guru')q=q.eq('guru_id',currentProfile.id);const {data,error}=await q.order('nama_mapel');if(error)throw error;subjectsData=data||[];document.getElementById('statSubjects').textContent=subjectsData.length;renderSubjects();fillSubjectSelects()}
+function fillSubjectSelects(){['materialSubject','assignmentSubject'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const old=el.value;el.innerHTML='<option value="">Pilih mata pelajaran</option>'+subjectsData.map(s=>`<option value="${s.id}">${esc(s.nama_mapel)} — ${esc(s.classes?.nama_kelas||'-')}</option>`).join('');if([...el.options].some(o=>o.value===old))el.value=old});const classEl=document.getElementById('subjectClass');if(classEl){const old=classEl.value;classEl.innerHTML='<option value="">Pilih kelas</option>'+classesData.map(c=>`<option value="${c.id}">${esc(c.nama_kelas)} — ${esc(c.tahun_ajaran)}</option>`).join('');if([...classEl.options].some(o=>o.value===old))classEl.value=old}const teacherEl=document.getElementById('subjectTeacher');if(teacherEl){const old=teacherEl.value;teacherEl.innerHTML='<option value="">Pilih guru</option>'+teacherData.map(g=>`<option value="${g.id}">${esc(g.nama||'Guru')}</option>`).join('');if(currentProfile.role==='guru')teacherEl.value=currentProfile.id;else if([...teacherEl.options].some(o=>o.value===old))teacherEl.value=old}}
+function renderSubjects(){const el=document.getElementById('subjectsTable');if(!subjectsData.length){el.innerHTML='<div class="empty">Belum ada mata pelajaran.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Mata Pelajaran</th><th>Kelas</th><th>Guru</th><th>Aksi</th></tr></thead><tbody>${subjectsData.map(s=>`<tr><td><strong>${esc(s.nama_mapel)}</strong></td><td>${esc(s.classes?.nama_kelas||'-')}</td><td>${esc(s.profiles?.nama||'-')}</td><td><div class="actions">${currentProfile.role==='admin'?`<button class="btn-teacher" onclick="editSubject(${s.id})">Edit</button><button class="btn-teacher danger" onclick="deleteSubject(${s.id})">Hapus</button>`:'<span class="small">Dikelola Admin</span>'}</div></td></tr>`).join('')}</tbody></table></div>`}
+document.getElementById('subjectForm').addEventListener('submit',async e=>{e.preventDefault();if(currentProfile.role!=='admin')return showMessage('Penetapan mata pelajaran/guru dilakukan oleh Admin.','error');try{const id=document.getElementById('subjectEditId').value;const payload={nama_mapel:document.getElementById('subjectNameInput').value.trim(),kelas_id:Number(document.getElementById('subjectClass').value),guru_id:document.getElementById('subjectTeacher').value};const {error}=await (id?client.from('subjects').update(payload).eq('id',id):client.from('subjects').insert(payload));if(error)throw error;showMessage(id?'Mata pelajaran diperbarui.':'Mata pelajaran berhasil ditambahkan.');resetSubjectForm();await loadSubjects()}catch(err){showMessage(err.message||'Gagal menyimpan mata pelajaran.','error')}});
+function editSubject(id){if(currentProfile?.role!=='admin')return showMessage('Mata pelajaran hanya dapat dikelola oleh Admin.','error');const s=subjectsData.find(x=>Number(x.id)===Number(id));if(!s)return;document.getElementById('subjectEditId').value=s.id;document.getElementById('subjectNameInput').value=s.nama_mapel||'';document.getElementById('subjectClass').value=s.kelas_id||'';document.getElementById('subjectTeacher').value=s.guru_id||'';document.getElementById('subjectFormTitle').textContent='Edit Mata Pelajaran';document.getElementById('cancelSubjectEdit').style.display='inline-block';activateTab('subjects')}
+function resetSubjectForm(){document.getElementById('subjectForm').reset();document.getElementById('subjectEditId').value='';document.getElementById('subjectFormTitle').textContent='Tambah Mata Pelajaran';document.getElementById('cancelSubjectEdit').style.display='none';if(currentProfile?.role==='guru')document.getElementById('subjectTeacher').value=currentProfile.id}document.getElementById('cancelSubjectEdit').onclick=resetSubjectForm;
+async function deleteSubject(id){if(currentProfile?.role!=='admin')return showMessage('Mata pelajaran hanya dapat dikelola oleh Admin.','error');if(!confirm('Hapus mata pelajaran ini? Materi dan tugas yang terhubung akan menjadi tidak terpakai.'))return;try{const {error}=await client.from('subjects').delete().eq('id',id);if(error)throw error;showMessage('Mata pelajaran berhasil dihapus.');await refreshAll()}catch(e){showMessage(e.message||'Mata pelajaran tidak dapat dihapus.','error')}}
+async function loadMaterials(){let q=client.from('materials').select('id,judul,deskripsi,file_url,mapel_id,created_at,subjects(nama_mapel,kelas_id,guru_id,classes(nama_kelas))').order('created_at',{ascending:false});if(currentProfile.role==='guru')q=q.eq('subjects.guru_id',currentProfile.id);const {data,error}=await q;if(error)throw error;materialsData=data||[];document.getElementById('statMaterials').textContent=materialsData.length;renderMaterials()}
+function renderMaterials(){const el=document.getElementById('materialsTable');if(!materialsData.length){el.innerHTML='<div class="empty">Belum ada materi.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Materi</th><th>Mata Pelajaran</th><th>Link</th><th>Aksi</th></tr></thead><tbody>${materialsData.map(m=>`<tr><td><strong>${esc(m.judul)}</strong><br><span class="small">${esc(m.deskripsi||'')}</span></td><td>${esc(m.subjects?.nama_mapel||'-')}<br><span class="small">${esc(m.subjects?.classes?.nama_kelas||'-')}</span></td><td>${m.file_url?`<a href="${esc(m.file_url)}" target="_blank" rel="noopener noreferrer">Buka</a>`:'-'}</td><td><div class="actions"><button class="btn-teacher" onclick="editMaterial(${m.id})">Edit</button><button class="btn-teacher danger" onclick="deleteMaterial(${m.id})">Hapus</button></div></td></tr>`).join('')}</tbody></table></div>`}
+document.getElementById('materialForm').addEventListener('submit',async e=>{e.preventDefault();try{const id=document.getElementById('materialEditId').value;const mapel=subjectsData.find(s=>Number(s.id)===Number(document.getElementById('materialSubject').value));if(!mapel)throw new Error('Pilih mata pelajaran terlebih dahulu.');const payload={judul:document.getElementById('materialJudul').value.trim(),deskripsi:document.getElementById('materialDeskripsi').value.trim()||null,file_url:document.getElementById('materialUrl').value.trim()||null,mapel_id:mapel.id,kelas_id:mapel.kelas_id};const {error}=await (id?client.from('materials').update(payload).eq('id',id):client.from('materials').insert(payload));if(error)throw error;showMessage(id?'Materi berhasil diperbarui.':'Materi berhasil ditambahkan.');resetMaterialForm();await loadMaterials();await loadStats()}catch(err){showMessage(err.message||'Gagal menyimpan materi.','error')}});
+function editMaterial(id){const m=materialsData.find(x=>Number(x.id)===Number(id));if(!m)return;document.getElementById('materialEditId').value=m.id;document.getElementById('materialJudul').value=m.judul||'';document.getElementById('materialDeskripsi').value=m.deskripsi||'';document.getElementById('materialUrl').value=m.file_url||'';document.getElementById('materialSubject').value=m.mapel_id||'';document.getElementById('materialFormTitle').textContent='Edit Materi';document.getElementById('cancelMaterialEdit').style.display='inline-block';activateTab('materials')}
+function resetMaterialForm(){document.getElementById('materialForm').reset();document.getElementById('materialEditId').value='';document.getElementById('materialFormTitle').textContent='Tambah Materi';document.getElementById('cancelMaterialEdit').style.display='none'}document.getElementById('cancelMaterialEdit').onclick=resetMaterialForm;
+async function deleteMaterial(id){if(!confirm('Hapus materi ini?'))return;try{const {error}=await client.from('materials').delete().eq('id',id);if(error)throw error;showMessage('Materi berhasil dihapus.');await loadMaterials();await loadStats()}catch(e){showMessage(e.message||'Materi tidak dapat dihapus.','error')}}
+async function loadAssignments(){let q=client.from('assignments').select('id,judul,deskripsi,kelas_id,mapel_id,deadline,file_url,created_at,subjects(nama_mapel,kelas_id,guru_id,classes(nama_kelas))').order('deadline',{ascending:true});if(currentProfile.role==='guru')q=q.eq('subjects.guru_id',currentProfile.id);const {data,error}=await q;if(error)throw error;assignmentsData=data||[];document.getElementById('statAssignments').textContent=assignmentsData.length;renderAssignments()}
+function localDateTimeValue(v){if(!v)return'';const d=new Date(v),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`}
+function renderAssignments(){const el=document.getElementById('assignmentsTable');if(!assignmentsData.length){el.innerHTML='<div class="empty">Belum ada tugas.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Tugas</th><th>Mata Pelajaran</th><th>Deadline</th><th>Aksi</th></tr></thead><tbody>${assignmentsData.map(a=>`<tr><td><strong>${esc(a.judul)}</strong><br><span class="small">${esc(a.deskripsi||'')}</span></td><td>${esc(a.subjects?.nama_mapel||'-')}<br><span class="small">${esc(a.subjects?.classes?.nama_kelas||'-')}</span></td><td>${a.deadline?esc(new Date(a.deadline).toLocaleString('id-ID')):'-'}</td><td><div class="actions"><button class="btn-teacher" onclick="editAssignment(${a.id})">Edit</button><button class="btn-teacher danger" onclick="deleteAssignment(${a.id})">Hapus</button></div></td></tr>`).join('')}</tbody></table></div>`}
+document.getElementById('assignmentForm').addEventListener('submit',async e=>{e.preventDefault();try{const id=document.getElementById('assignmentEditId').value;const mapel=subjectsData.find(s=>Number(s.id)===Number(document.getElementById('assignmentSubject').value));if(!mapel)throw new Error('Pilih mata pelajaran terlebih dahulu.');const raw=document.getElementById('assignmentDeadline').value;const payload={judul:document.getElementById('assignmentJudul').value.trim(),deskripsi:document.getElementById('assignmentDeskripsi').value.trim()||null,mapel_id:mapel.id,kelas_id:mapel.kelas_id,deadline:raw?new Date(raw).toISOString():null,file_url:document.getElementById('assignmentUrl').value.trim()||null};const {error}=await (id?client.from('assignments').update(payload).eq('id',id):client.from('assignments').insert(payload));if(error)throw error;showMessage(id?'Tugas berhasil diperbarui.':'Tugas berhasil dibuat.');resetAssignmentForm();await loadAssignments();await loadStats()}catch(err){showMessage(err.message||'Gagal menyimpan tugas.','error')}});
+function editAssignment(id){const a=assignmentsData.find(x=>Number(x.id)===Number(id));if(!a)return;document.getElementById('assignmentEditId').value=a.id;document.getElementById('assignmentJudul').value=a.judul||'';document.getElementById('assignmentDeskripsi').value=a.deskripsi||'';document.getElementById('assignmentSubject').value=a.mapel_id||'';document.getElementById('assignmentDeadline').value=localDateTimeValue(a.deadline);document.getElementById('assignmentUrl').value=a.file_url||'';document.getElementById('assignmentFormTitle').textContent='Edit Tugas';document.getElementById('cancelAssignmentEdit').style.display='inline-block';activateTab('assignments')}
+function resetAssignmentForm(){document.getElementById('assignmentForm').reset();document.getElementById('assignmentEditId').value='';document.getElementById('assignmentFormTitle').textContent='Tambah Tugas';document.getElementById('cancelAssignmentEdit').style.display='none'}document.getElementById('cancelAssignmentEdit').onclick=resetAssignmentForm;
+async function deleteAssignment(id){if(!confirm('Hapus tugas ini? Pengumpulan terkait dapat membuat penghapusan gagal.'))return;try{const {error}=await client.from('assignments').delete().eq('id',id);if(error)throw error;showMessage('Tugas berhasil dihapus.');await loadAssignments();await loadStats()}catch(e){showMessage(e.message||'Tugas tidak dapat dihapus.','error')}}
+document.getElementById('studentForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(currentProfile?.role!=='admin')return showMessage('Penambahan siswa hanya dapat dilakukan oleh Admin.','error');
+  const btn=document.getElementById('saveStudentBtn');
+  const payload={
+    nama:document.getElementById('studentNameInput').value.trim(),
+    email:document.getElementById('studentEmailInput').value.trim(),
+    password:document.getElementById('studentPasswordInput').value,
+    jenis_kelamin:document.getElementById('studentGenderInput').value,
+    kelas_id:Number(document.getElementById('studentClassInput').value)
+  };
+  if(!payload.nama||!payload.email||!payload.password||!payload.jenis_kelamin||!payload.kelas_id)return showMessage('Lengkapi semua data siswa.','error');
+  btn.disabled=true;
+  try{
+    const {data:{session}}=await client.auth.getSession();
+    if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');
+    const res=await fetch(`${window.SUPABASE_URL}/functions/v1/create-student`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},
+      body:JSON.stringify(payload)
+    });
+    const result=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(result.error||'Gagal membuat akun siswa.');
+    document.getElementById('studentForm').reset();
+    showMessage(`Siswa ${payload.nama} berhasil ditambahkan. Akun login: ${payload.email}`);
+    await loadStudents();
+    await loadStats();
+  }catch(err){showMessage(err.message||'Gagal menambahkan siswa.','error')}finally{btn.disabled=false}
+});
+
+async function loadStudents(){const {data,error}=await client.from('profiles').select('id,nama,jenis_kelamin,kelas_id,role,classes(nama_kelas,tahun_ajaran)').eq('role','siswa').order('nama');if(error)throw error;studentsData=data||[];document.getElementById('statStudents').textContent=studentsData.length;renderStudents()}
+function renderStudents(){const filter=document.getElementById('studentClassFilter').value,search=document.getElementById('studentSearch').value.trim().toLowerCase(),rows=studentsData.filter(s=>(!filter||String(s.kelas_id)===String(filter))&&(!search||(s.nama||'').toLowerCase().includes(search))),el=document.getElementById('studentsTable');if(!rows.length){el.innerHTML='<div class="empty">Tidak ada siswa yang cocok.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Nama</th><th>Jenis Kelamin</th><th>Kelas</th><th>Tahun Ajaran</th></tr></thead><tbody>${rows.map(s=>`<tr><td><strong>${esc(s.nama||'-')}</strong></td><td>${esc(s.jenis_kelamin||'-')}</td><td>${esc(s.classes?.nama_kelas||'-')}</td><td>${esc(s.classes?.tahun_ajaran||'-')}</td></tr>`).join('')}</tbody></table></div>`}document.getElementById('studentClassFilter').addEventListener('change',renderStudents);document.getElementById('studentSearch').addEventListener('input',renderStudents);
+async function loadSubmissions(){let q=client.from('submissions').select('id,assignment_id,student_id,file_url,submitted_at,status,nilai,feedback,created_at,updated_at,assignments(id,judul,kelas_id,mapel_id,deadline,subjects(nama_mapel,kelas_id,guru_id,classes(nama_kelas))),profiles!submissions_student_id_fkey(id,nama,kelas_id)').order('submitted_at',{ascending:false});const {data,error}=await q;if(error)throw error;submissionsData=data||[];if(currentProfile.role==='guru')submissionsData=submissionsData.filter(s=>s.assignments?.subjects?.guru_id===currentProfile.id);document.getElementById('statSubmissions').textContent=submissionsData.length;setupSubmissionFilters();renderSubmissions()}
+function setupSubmissionFilters(){const classEl=document.getElementById('submissionClassFilter'),subjectEl=document.getElementById('submissionSubjectFilter'),assignmentEl=document.getElementById('submissionAssignmentFilter'),statusEl=document.getElementById('submissionStatusFilter');if(!classEl)return;const classId=classEl.value,subjectId=subjectEl.value,assignmentId=assignmentEl.value;classEl.innerHTML='<option value="">Pilih kelas</option>'+classesData.map(c=>`<option value="${c.id}">${esc(c.nama_kelas)} — ${esc(c.tahun_ajaran)}</option>`).join('');if(classId&&[...classEl.options].some(o=>o.value===classId))classEl.value=classId;else classEl.value='';const subjectsForClass=subjectsData.filter(s=>!classEl.value||String(s.kelas_id)===String(classEl.value));subjectEl.innerHTML='<option value="">Pilih mata pelajaran</option>'+subjectsForClass.map(s=>`<option value="${s.id}">${esc(s.nama_mapel)}</option>`).join('');subjectEl.disabled=!classEl.value;if(subjectId&&[...subjectEl.options].some(o=>o.value===subjectId))subjectEl.value=subjectId;else subjectEl.value='';const assignmentsForSubject=assignmentsData.filter(a=>String(a.kelas_id)===String(classEl.value)&&(!subjectEl.value||String(a.mapel_id)===String(subjectEl.value)));assignmentEl.innerHTML='<option value="">Pilih tugas</option>'+assignmentsForSubject.map(a=>`<option value="${a.id}">${esc(a.judul)}${a.deadline?' — '+esc(new Date(a.deadline).toLocaleDateString('id-ID')):''}</option>`).join('');assignmentEl.disabled=!subjectEl.value;if(assignmentId&&[...assignmentEl.options].some(o=>o.value===assignmentId))assignmentEl.value=assignmentId;else assignmentEl.value='';statusEl.disabled=!assignmentEl.value;if(!assignmentId||!assignmentEl.value)statusEl.value='';}
+function renderSubmissions(){const classId=document.getElementById('submissionClassFilter').value,subjectId=document.getElementById('submissionSubjectFilter').value,assignmentId=document.getElementById('submissionAssignmentFilter').value,statusFilter=document.getElementById('submissionStatusFilter').value,el=document.getElementById('submissionsTable'),summary=document.getElementById('submissionSummary');if(!classId||!subjectId||!assignmentId){summary.textContent='';el.innerHTML='<div class="empty">Pilih kelas, mata pelajaran, dan tugas untuk menampilkan daftar seluruh siswa beserta status pengumpulan.</div>';return}const assignment=assignmentsData.find(a=>String(a.id)===String(assignmentId));if(!assignment){summary.textContent='';el.innerHTML='<div class="empty">Tugas tidak ditemukan.</div>';return}const roster=studentsData.filter(s=>String(s.kelas_id)===String(classId));const latestByStudent=new Map();submissionsData.filter(s=>String(s.assignment_id)===String(assignmentId)&&String(s.profiles?.kelas_id||s.assignments?.kelas_id)===String(classId)).forEach(s=>{const old=latestByStudent.get(String(s.student_id));if(!old||new Date(s.updated_at||s.submitted_at||s.created_at||0)>new Date(old.updated_at||old.submitted_at||old.created_at||0))latestByStudent.set(String(s.student_id),s)});let rows=roster.map(student=>({student,submission:latestByStudent.get(String(student.id))||null}));const sudah=rows.filter(r=>r.submission).length,belum=rows.length-sudah;summary.innerHTML=`<strong>${esc(assignment.judul)}</strong> · ${esc(assignment.subjects?.nama_mapel||'-')} · ${esc(assignment.subjects?.classes?.nama_kelas||'-')} — <strong>${sudah}</strong> sudah mengirimkan, <strong>${belum}</strong> belum mengirimkan (${rows.length} siswa)`;if(statusFilter==='sudah')rows=rows.filter(r=>r.submission);if(statusFilter==='belum')rows=rows.filter(r=>!r.submission);if(!rows.length){el.innerHTML='<div class="empty">Tidak ada siswa yang sesuai dengan status yang dipilih.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>No</th><th>Siswa</th><th>Kelas</th><th>Status Pengumpulan</th><th>Dikirim</th><th>Nilai</th><th>Aksi</th></tr></thead><tbody>${rows.map((r,i)=>{const s=r.submission;const statusLabel=s?(s.status==='dinilai'?'Sudah mengirimkan · Dinilai':s.status==='terlambat'?'Sudah mengirimkan · Terlambat':'Sudah mengirimkan'):'Belum mengirimkan';return `<tr><td>${i+1}</td><td><strong>${esc(r.student.nama||'-')}</strong></td><td>${esc(r.student.classes?.nama_kelas||assignment.subjects?.classes?.nama_kelas||'-')}</td><td><span class="badge">${esc(statusLabel)}</span></td><td>${s?.submitted_at?esc(new Date(s.submitted_at).toLocaleString('id-ID')):'-'}</td><td>${s?.nilai??'-'}</td><td>${s?`<button class="btn-teacher primary" onclick="openGradeModal(${s.id})">Periksa / Nilai</button>`:'<span class="small">Belum ada pengumpulan</span>'}</td></tr>`}).join('')}</tbody></table></div>`}
+function refreshSubmissionFilterChain(){const classEl=document.getElementById('submissionClassFilter'),subjectEl=document.getElementById('submissionSubjectFilter'),assignmentEl=document.getElementById('submissionAssignmentFilter');if(!classEl||!subjectEl||!assignmentEl)return;const classId=classEl.value,subjectId=subjectEl.value;subjectEl.innerHTML='<option value="">Pilih mata pelajaran</option>'+subjectsData.filter(s=>String(s.kelas_id)===String(classId)).map(s=>`<option value="${s.id}">${esc(s.nama_mapel)}</option>`).join('');subjectEl.disabled=!classId;if(subjectId&&[...subjectEl.options].some(o=>o.value===subjectId))subjectEl.value=subjectId;else subjectEl.value='';const assignmentId=assignmentEl.value;assignmentEl.innerHTML='<option value="">Pilih tugas</option>'+assignmentsData.filter(a=>String(a.kelas_id)===String(classId)&&String(a.mapel_id)===String(subjectEl.value)).map(a=>`<option value="${a.id}">${esc(a.judul)}</option>`).join('');assignmentEl.disabled=!subjectEl.value;if(assignmentId&&[...assignmentEl.options].some(o=>o.value===assignmentId))assignmentEl.value=assignmentId;else assignmentEl.value='';document.getElementById('submissionStatusFilter').disabled=!assignmentEl.value;if(!assignmentEl.value)document.getElementById('submissionStatusFilter').value='';renderSubmissions()}
+document.getElementById('submissionClassFilter').addEventListener('change',()=>{document.getElementById('submissionSubjectFilter').value='';document.getElementById('submissionAssignmentFilter').value='';refreshSubmissionFilterChain()});document.getElementById('submissionSubjectFilter').addEventListener('change',()=>{document.getElementById('submissionAssignmentFilter').value='';refreshSubmissionFilterChain()});document.getElementById('submissionAssignmentFilter').addEventListener('change',()=>{document.getElementById('submissionStatusFilter').disabled=!document.getElementById('submissionAssignmentFilter').value;if(!document.getElementById('submissionAssignmentFilter').value)document.getElementById('submissionStatusFilter').value='';renderSubmissions()});document.getElementById('submissionStatusFilter').addEventListener('change',renderSubmissions);
+async function openGradeModal(id){const s=submissionsData.find(x=>Number(x.id)===Number(id));if(!s)return;currentGradeSubmission=s;document.getElementById('gradeInfo').innerHTML=`<strong>${esc(s.profiles?.nama||'Siswa')}</strong> — ${esc(s.assignments?.judul||'Tugas')}<br><span class="small">${esc(s.assignments?.subjects?.nama_mapel||'-')} · Kelas: ${esc(s.assignments?.subjects?.classes?.nama_kelas||'-')} · Dikirim: ${s.submitted_at?esc(new Date(s.submitted_at).toLocaleString('id-ID')):'-'}</span>`;document.getElementById('gradeFileInfo').textContent=s.file_url?s.file_url.split('/').pop():'Tidak ada file.';document.getElementById('gradeValue').value=s.nilai??'';document.getElementById('gradeFeedback').value=s.feedback??'';document.getElementById('openStudentFileBtn').disabled=!s.file_url;document.getElementById('openStudentFileBtn').onclick=()=>openStudentSubmissionFile(s);document.getElementById('gradeModal').classList.add('show')}
+function closeGradeModal(){document.getElementById('gradeModal').classList.remove('show');currentGradeSubmission=null}async function openStudentSubmissionFile(s){if(!s?.file_url)return alert('File tidak tersedia.');try{const {data,error}=await client.storage.from('student-submissions').createSignedUrl(s.file_url,3600);if(error)throw error;window.open(data.signedUrl,'_blank')}catch(e){alert('File tidak dapat dibuka: '+(e.message||e))}}
+document.getElementById('saveGradeBtn').addEventListener('click',async()=>{if(!currentGradeSubmission)return;const raw=document.getElementById('gradeValue').value.trim(),feedback=document.getElementById('gradeFeedback').value.trim(),nilai=raw===''?null:Number(raw);if(nilai!==null&&(!Number.isFinite(nilai)||nilai<0||nilai>100))return alert('Nilai harus antara 0 dan 100.');const btn=document.getElementById('saveGradeBtn');btn.disabled=true;try{const {error}=await client.from('submissions').update({nilai,feedback,status:nilai===null?'terkirim':'dinilai'}).eq('id',currentGradeSubmission.id);if(error)throw error;showMessage('Nilai dan feedback berhasil disimpan.');closeGradeModal();await loadSubmissions();await loadStats()}catch(e){showMessage(e.message||'Gagal menyimpan nilai.','error')}finally{btn.disabled=false}});
+async function loadStats(){const [c,s,sub]=await Promise.all([client.from('classes').select('id',{count:'exact',head:true}),client.from('profiles').select('id',{count:'exact',head:true}).eq('role','siswa'),client.from('submissions').select('id',{count:'exact',head:true})]);[c,s,sub].forEach(x=>{if(x.error)throw x.error});document.getElementById('statClasses').textContent=c.count??0;document.getElementById('statStudents').textContent=s.count??0;document.getElementById('statMaterials').textContent=materialsData.length;document.getElementById('statAssignments').textContent=assignmentsData.length;document.getElementById('statSubmissions').textContent=submissionsData.length}
+async function refreshAll(){try{await loadTeachers();await loadClasses();await loadSubjects();await Promise.all([loadMaterials(),loadAssignments(),loadStudents(),loadSubmissions()]);setupSubmissionFilters();renderSubmissions();await loadStats();}catch(e){console.error(e);showMessage(e.message||'Gagal memuat data.','error')}}
+document.getElementById('logoutBtn').addEventListener('click',async()=>{try{await client.auth.signOut()}finally{location.href='teacher-login.html'}});document.getElementById('gradeModal').addEventListener('click',e=>{if(e.target.id==='gradeModal')closeGradeModal()});
+(async()=>{try{const ok=await requireTeacher();if(ok)await refreshAll()}catch(e){console.error(e);showMessage(e.message||'Dashboard Guru gagal dimuat.','error')}})();
+</script>
+</body>
+</html>
