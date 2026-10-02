@@ -99,8 +99,21 @@ form.addEventListener("submit", async (e) => {
             throw new Error("Login berhasil tetapi session belum tersedia.");
         }
 
-        showMessage("Login berhasil. Membuka dashboard...", "success");
-        window.location.href = "dashboard.html";
+        // Pastikan halaman Login Siswa hanya digunakan oleh akun siswa.
+        const { data: profile, error: profileError } = await client
+            .from("profiles")
+            .select("id, role")
+            .eq("id", data.session.user.id)
+            .single();
+
+        if (profileError) throw profileError;
+        if (profile?.role !== "siswa") {
+            await client.auth.signOut();
+            throw new Error("Akun ini bukan akun siswa. Silakan gunakan Login Guru/Admin.");
+        }
+
+        showMessage("Login berhasil. Membuka dashboard siswa...", "success");
+        window.location.href = "student-dashboard.html";
     } catch (error) {
         console.error(error);
         showMessage(error.message || "Login gagal. Periksa email dan password.");
