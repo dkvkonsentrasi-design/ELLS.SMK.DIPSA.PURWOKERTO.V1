@@ -395,12 +395,33 @@ async function requireTeacher(){
   document.getElementById('subjectTeacherField').style.display=profile.role==='admin'?'':'none';
   if(profile.role==='guru'){
     document.getElementById('subjectsAccessNote').textContent='Mata pelajaran dan penugasan guru dikelola oleh Admin. Guru hanya dapat melihat mata pelajaran yang ditugaskan kepadanya.';
-    document.getElementById('classesAccessNote').textContent='Kelas dikelola oleh Admin. Guru hanya dapat melihat data kelas untuk kebutuhan pengelolaan siswa dan pengumpulan.';
+    document.getElementById('classesAccessNote').textContent='Kelas dikelola oleh Admin. Guru hanya dapat melihat kelas yang ditugaskan melalui mata pelajaran kepadanya.';
     document.querySelector('[onclick="activateTab(\'subjects\')"]').textContent='Lihat Mata Pelajaran';
   }
   return true
 }
-async function loadClasses(){const {data,error}=await client.from('classes').select('id,tingkat,jurusan,nama_kelas,tahun_ajaran,created_at').order('tingkat').order('nama_kelas');if(error)throw error;classesData=data||[];document.getElementById('statClasses').textContent=classesData.length;renderClassTable();fillClassSelects()}
+async function loadClasses(){
+  let data,error;
+  if(currentProfile?.role==='guru'){
+    // Guru hanya melihat kelas yang memiliki mata pelajaran yang ditugaskan kepadanya.
+    const assigned=await client.from('subjects').select('kelas_id').eq('guru_id',currentProfile.id).not('kelas_id','is',null);
+    if(assigned.error)throw assigned.error;
+    const classIds=[...new Set((assigned.data||[]).map(x=>x.kelas_id).filter(Boolean))];
+    if(!classIds.length){data=[];error=null}
+    else{
+      const result=await client.from('classes').select('id,tingkat,jurusan,nama_kelas,tahun_ajaran,created_at').in('id',classIds).order('tingkat').order('nama_kelas');
+      data=result.data;error=result.error;
+    }
+  }else{
+    const result=await client.from('classes').select('id,tingkat,jurusan,nama_kelas,tahun_ajaran,created_at').order('tingkat').order('nama_kelas');
+    data=result.data;error=result.error;
+  }
+  if(error)throw error;
+  classesData=data||[];
+  document.getElementById('statClasses').textContent=classesData.length;
+  renderClassTable();
+  fillClassSelects();
+}
 function fillClassSelects(){const ids=['subjectClass','studentClassInput','studentClassFilter','submissionClassFilter'];ids.forEach(id=>{const el=document.getElementById(id);if(!el)return;const old=el.value;const first=id.includes('Filter')?'<option value="">Semua kelas</option>':'<option value="">Pilih kelas</option>';el.innerHTML=first+classesData.map(c=>`<option value="${c.id}">${esc(c.nama_kelas)} — ${esc(c.tahun_ajaran)}</option>`).join('');if([...el.options].some(o=>o.value===old))el.value=old})}
 function renderClassTable(){const el=document.getElementById('classesTable');if(!classesData.length){el.innerHTML='<div class="empty">Belum ada kelas.</div>';return}el.innerHTML=`<div class="table-wrap"><table class="data-table"><thead><tr><th>Kelas</th><th>Tingkat</th><th>Jurusan</th><th>Tahun Ajaran</th><th>Aksi</th></tr></thead><tbody>${classesData.map(c=>`<tr><td><strong>${esc(c.nama_kelas)}</strong></td><td>${esc(c.tingkat)}</td><td>${esc(c.jurusan)}</td><td>${esc(c.tahun_ajaran)}</td><td><div class="actions">${currentProfile?.role==='admin'?`<button class="btn-teacher" onclick="editClass(${c.id})">Edit</button><button class="btn-teacher danger" onclick="deleteClass(${c.id})">Hapus</button>`:'<span class="small">Dikelola Admin</span>'}</div></td></tr>`).join('')}</tbody></table></div>`}
 document.getElementById('classForm').addEventListener('submit',async e=>{e.preventDefault();if(currentProfile?.role!=='admin')return showMessage('Penambahan dan perubahan kelas hanya dapat dilakukan oleh Admin.','error');try{const id=document.getElementById('classEditId').value;const payload={tingkat:document.getElementById('classTingkat').value,jurusan:document.getElementById('classJurusan').value.trim(),nama_kelas:document.getElementById('classNama').value.trim(),tahun_ajaran:document.getElementById('classTahun').value.trim()};const {error}=await (id?client.from('classes').update(payload).eq('id',id):client.from('classes').insert(payload));if(error)throw error;showMessage(id?'Kelas berhasil diperbarui.':'Kelas berhasil ditambahkan.');resetClassForm();await loadClasses()}catch(err){showMessage(err.message||'Gagal menyimpan kelas.','error')}});
@@ -443,7 +464,59 @@ document.getElementById('assignmentForm').addEventListener('submit',async e=>{e.
 function editAssignment(id){const a=assignmentsData.find(x=>Number(x.id)===Number(id));if(!a)return;document.getElementById('assignmentEditId').value=a.id;document.getElementById('assignmentJudul').value=a.judul||'';document.getElementById('assignmentDeskripsi').value=a.deskripsi||'';document.getElementById('assignmentSubject').value=a.mapel_id||'';document.getElementById('assignmentDeadline').value=localDateTimeValue(a.deadline);document.getElementById('assignmentUrl').value=a.file_url||'';document.getElementById('assignmentFormTitle').textContent='Edit Tugas';document.getElementById('cancelAssignmentEdit').style.display='inline-block';activateTab('assignments')}
 function resetAssignmentForm(){document.getElementById('assignmentForm').reset();document.getElementById('assignmentEditId').value='';document.getElementById('assignmentFormTitle').textContent='Tambah Tugas';document.getElementById('cancelAssignmentEdit').style.display='none'}document.getElementById('cancelAssignmentEdit').onclick=resetAssignmentForm;
 async function deleteAssignment(id){if(!confirm('Hapus tugas ini? Pengumpulan terkait dapat membuat penghapusan gagal.'))return;try{const {error}=await client.from('assignments').delete().eq('id',id);if(error)throw error;showMessage('Tugas berhasil dihapus.');await loadAssignments();await loadStats()}catch(e){showMessage(e.message||'Tugas tidak dapat dihapus.','error')}}
-document.getElementById('teacherForm').addEventListener('submit',async e=>{e.preventDefault();if(currentProfile?.role!=='admin')return showMessage('Penambahan guru hanya dapat dilakukan oleh Admin.','error');const btn=document.getElementById('saveTeacherBtn');const payload={nama:document.getElementById('teacherNameInput').value.trim(),email:document.getElementById('teacherEmailInput').value.trim(),password:document.getElementById('teacherPasswordInput').value,jenis_kelamin:document.getElementById('teacherGenderInput').value};if(!payload.nama||!payload.email||!payload.password||!payload.jenis_kelamin)return showMessage('Lengkapi semua data guru.','error');if(payload.password.length<6)return showMessage('Password minimal 6 karakter.','error');btn.disabled=true;try{const {data:{session}}=await client.auth.getSession();if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');const res=await fetch(`${window.SUPABASE_URL}/functions/v1/create-teacher`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(payload)});const raw=await res.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{}if(!res.ok)throw new Error(result.error||raw||`Gagal membuat akun guru (HTTP ${res.status}).`);document.getElementById('teacherForm').reset();showMessage(`Guru ${payload.nama} berhasil ditambahkan. Akun login: ${payload.email}`);await loadTeachers()}catch(err){showMessage(err.message||'Gagal menambahkan guru.','error')}finally{btn.disabled=false}});
+async function createTeacher(payload){
+  const {data:{session},error:sessionError}=await client.auth.getSession();
+  if(sessionError)throw sessionError;
+  if(!session?.access_token)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');
+  let res;
+  try{
+    res=await fetch(`${window.SUPABASE_URL}/functions/v1/create-teacher`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY,'x-client-info':'ells-teacher-admin'},
+      body:JSON.stringify(payload)
+    });
+  }catch(networkError){
+    throw new Error('Tidak dapat terhubung ke Supabase Edge Function create-teacher. Periksa koneksi dan pastikan Edge Function sudah di-deploy.');
+  }
+  const raw=await res.text();
+  let result={};
+  try{result=raw?JSON.parse(raw):{}}catch{}
+  if(!res.ok){
+    if(res.status===404)return {error:'Edge Function create-teacher belum ditemukan. Deploy Edge Function create-teacher ke project Supabase terlebih dahulu.'};
+    throw new Error(result.error||raw||`Gagal membuat akun guru (HTTP ${res.status}).`);
+  }
+  if(!result?.success)return {error:result?.error||'Supabase tidak mengembalikan status berhasil.'};
+  return result;
+}
+
+document.getElementById('teacherForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(currentProfile?.role!=='admin')return showMessage('Penambahan guru hanya dapat dilakukan oleh Admin.','error');
+  const btn=document.getElementById('saveTeacherBtn');
+  const payload={
+    nama:document.getElementById('teacherNameInput').value.trim(),
+    email:document.getElementById('teacherEmailInput').value.trim(),
+    password:document.getElementById('teacherPasswordInput').value,
+    jenis_kelamin:document.getElementById('teacherGenderInput').value
+  };
+  if(!payload.nama||!payload.email||!payload.password||!payload.jenis_kelamin)return showMessage('Lengkapi semua data guru.','error');
+  if(payload.password.length<6)return showMessage('Password minimal 6 karakter.','error');
+  btn.disabled=true;
+  btn.textContent='Menyimpan...';
+  try{
+    const result=await createTeacher(payload);
+    if(result?.error)throw new Error(result.error);
+    document.getElementById('teacherForm').reset();
+    showMessage(`Guru ${payload.nama} berhasil ditambahkan. Akun login: ${payload.email}`);
+    await loadTeachers();
+  }catch(err){
+    console.error('create-teacher:',err);
+    showMessage(err?.message||'Gagal menambahkan guru.','error');
+  }finally{
+    btn.disabled=false;
+    btn.textContent='Tambah Guru';
+  }
+});
 async function deleteTeacher(id){if(currentProfile?.role!=='admin')return showMessage('Penghapusan guru hanya dapat dilakukan oleh Admin.','error');const teacher=teacherData.find(g=>String(g.id)===String(id));if(!teacher)return;if(String(id)===String(currentProfile.id))return showMessage('Akun Admin yang sedang digunakan tidak dapat dihapus.','error');if(!confirm(`Hapus guru "${teacher.nama}"? Akun login guru akan dihapus. Pastikan guru ini tidak lagi diperlukan pada penugasan mata pelajaran.`))return;try{const {data:{session}}=await client.auth.getSession();if(!session)throw new Error('Sesi Admin tidak ditemukan. Silakan login kembali.');const res=await fetch(`${window.SUPABASE_URL}/functions/v1/delete-teacher`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${session.access_token}`,'apikey':window.SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({teacher_id:id})});const raw=await res.text();let result={};try{result=raw?JSON.parse(raw):{}}catch{}if(!res.ok)throw new Error(result.error||raw||`Gagal menghapus guru (HTTP ${res.status}).`);showMessage(`Guru ${teacher.nama} berhasil dihapus.`);await loadTeachers();await loadSubjects()}catch(err){showMessage(err.message||'Gagal menghapus guru.','error')}}
 
 let pendingStudentImport=[];
@@ -589,7 +662,20 @@ document.getElementById('submissionClassFilter').addEventListener('change',()=>{
 async function openGradeModal(id){const s=submissionsData.find(x=>Number(x.id)===Number(id));if(!s)return;currentGradeSubmission=s;document.getElementById('gradeInfo').innerHTML=`<strong>${esc(s.profiles?.nama||'Siswa')}</strong> — ${esc(s.assignments?.judul||'Tugas')}<br><span class="small">${esc(s.assignments?.subjects?.nama_mapel||'-')} · Kelas: ${esc(s.assignments?.subjects?.classes?.nama_kelas||'-')} · Dikirim: ${s.submitted_at?esc(new Date(s.submitted_at).toLocaleString('id-ID')):'-'}</span>`;document.getElementById('gradeFileInfo').textContent=s.file_url?s.file_url.split('/').pop():'Tidak ada file.';document.getElementById('gradeValue').value=s.nilai??'';document.getElementById('gradeFeedback').value=s.feedback??'';document.getElementById('openStudentFileBtn').disabled=!s.file_url;document.getElementById('openStudentFileBtn').onclick=()=>openStudentSubmissionFile(s);document.getElementById('gradeModal').classList.add('show')}
 function closeGradeModal(){document.getElementById('gradeModal').classList.remove('show');currentGradeSubmission=null}async function openStudentSubmissionFile(s){if(!s?.file_url)return alert('File tidak tersedia.');try{const {data,error}=await client.storage.from('student-submissions').createSignedUrl(s.file_url,3600);if(error)throw error;window.open(data.signedUrl,'_blank')}catch(e){alert('File tidak dapat dibuka: '+(e.message||e))}}
 document.getElementById('saveGradeBtn').addEventListener('click',async()=>{if(!currentGradeSubmission)return;const raw=document.getElementById('gradeValue').value.trim(),feedback=document.getElementById('gradeFeedback').value.trim(),nilai=raw===''?null:Number(raw);if(nilai!==null&&(!Number.isFinite(nilai)||nilai<0||nilai>100))return alert('Nilai harus antara 0 dan 100.');const btn=document.getElementById('saveGradeBtn');btn.disabled=true;try{const {error}=await client.from('submissions').update({nilai,feedback,status:nilai===null?'terkirim':'dinilai'}).eq('id',currentGradeSubmission.id);if(error)throw error;showMessage('Nilai dan feedback berhasil disimpan.');closeGradeModal();await loadSubmissions();await loadStats()}catch(e){showMessage(e.message||'Gagal menyimpan nilai.','error')}finally{btn.disabled=false}});
-async function loadStats(){const [c,s,sub]=await Promise.all([client.from('classes').select('id',{count:'exact',head:true}),client.from('profiles').select('id',{count:'exact',head:true}).eq('role','siswa'),client.from('submissions').select('id',{count:'exact',head:true})]);[c,s,sub].forEach(x=>{if(x.error)throw x.error});document.getElementById('statClasses').textContent=c.count??0;document.getElementById('statStudents').textContent=s.count??0;document.getElementById('statMaterials').textContent=materialsData.length;document.getElementById('statAssignments').textContent=assignmentsData.length;document.getElementById('statSubmissions').textContent=submissionsData.length}
+async function loadStats(){
+  const [s,sub]=await Promise.all([
+    client.from('profiles').select('id',{count:'exact',head:true}).eq('role','siswa'),
+    client.from('submissions').select('id',{count:'exact',head:true})
+  ]);
+  [s,sub].forEach(x=>{if(x.error)throw x.error});
+  // Untuk guru, classesData sudah berisi hanya kelas yang ditugaskan.
+  // Admin tetap melihat seluruh kelas.
+  document.getElementById('statClasses').textContent=classesData.length;
+  document.getElementById('statStudents').textContent=s.count??0;
+  document.getElementById('statMaterials').textContent=materialsData.length;
+  document.getElementById('statAssignments').textContent=assignmentsData.length;
+  document.getElementById('statSubmissions').textContent=submissionsData.length
+}
 async function refreshAll(){try{await loadTeachers();await loadClasses();await loadSubjects();await Promise.all([loadMaterials(),loadAssignments(),loadStudents(),loadSubmissions()]);setupSubmissionFilters();renderSubmissions();await loadStats();}catch(e){console.error(e);showMessage(e.message||'Gagal memuat data.','error')}}
 function openPasswordModal(userId,nama,role){
   if(currentProfile?.role!=='admin')return showMessage('Pengubahan password hanya dapat dilakukan oleh Admin.','error');
