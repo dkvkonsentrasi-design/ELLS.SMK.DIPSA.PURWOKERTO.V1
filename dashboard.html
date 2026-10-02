@@ -26,11 +26,14 @@ async function loadDashboard(){try{const client=getClient();const {data:{session
 const {data:profile,error:pe}=await client.from('profiles').select('id,nama,kelas_id,role').eq('id',session.user.id).single();if(pe)throw pe;if(profile.role!=='siswa'){location.href='teacher.html';return}
 let className='-';if(profile.kelas_id){const {data:kelas,error:ce}=await client.from('classes').select('id,nama_kelas,tingkat,jurusan,tahun_ajaran').eq('id',profile.kelas_id).single();if(ce)throw ce;className=kelas.nama_kelas}
 const name=profile.nama||session.user.email||'Siswa';document.getElementById('studentName').textContent=name;document.getElementById('studentClass').textContent=className;document.getElementById('welcomeTitle').textContent='Selamat Datang, '+name+'!';document.getElementById('avatar').textContent=name.charAt(0).toUpperCase();document.getElementById('classStat').textContent=className;
-const {data:subjects,error:se}=await client.from('subjects').select('id,nama_mapel,kelas_id,guru_id,profiles!subjects_guru_id_fkey(nama)').eq('kelas_id',profile.kelas_id).order('nama_mapel');if(se)throw se;
+const {data:subjects,error:se}=await client.from('subjects').select('id,nama_mapel,kelas_id,guru_id').eq('kelas_id',profile.kelas_id).order('nama_mapel');if(se)throw se;
 const list=document.getElementById('subjectsList');document.getElementById('subjectStat').textContent=subjects?.length??0;
 if(!subjects?.length){list.innerHTML='<div class="dash-card"><h3>Belum ada mata pelajaran</h3><p style="color:var(--muted);margin-top:7px">Guru/Admin belum menambahkan mata pelajaran untuk kelas kamu.</p></div>';document.getElementById('assignmentStat').textContent='0';return}
-const ids=subjects.map(s=>s.id);const {count,error:ae}=await client.from('assignments').select('id',{count:'exact',head:true}).in('mapel_id',ids);if(ae)throw ae;document.getElementById('assignmentStat').textContent=ae?'-':(count??0);
-list.innerHTML=subjects.map(s=>`<article class="dash-card subject-card"><h3>${esc(s.nama_mapel)}</h3><p class="subject-meta">Guru: ${esc(s.profiles?.nama||'Belum ditentukan')}<br>Materi dan tugas khusus mata pelajaran ini.</p><div class="subject-actions"><a class="btn btn-primary" href="subject.html?mapel_id=${encodeURIComponent(s.id)}">Buka Mata Pelajaran</a></div></article>`).join('');
-}catch(e){console.error(e);showError(e.message||String(e))}}
+// Ambil nama guru secara terpisah agar guru pengampu tetap tampil meskipun relasi nested belum terbaca.
+const guruIds=[...new Set(subjects.map(s=>s.guru_id).filter(Boolean))];let guruMap={};
+if(guruIds.length){const {data:guruData,error:ge}=await client.from('profiles').select('id,nama').in('id',guruIds);if(ge)throw ge;guruMap=Object.fromEntries((guruData||[]).map(g=>[g.id,g.nama]));}
+const ids=subjects.map(s=>s.id);const {count,error:ae}=await client.from('assignments').select('id',{count:'exact',head:true}).in('mapel_id',ids);if(ae)throw ae;document.getElementById('assignmentStat').textContent=count??0;
+list.innerHTML=subjects.map(s=>{const guruName=guruMap[s.guru_id]||'Belum ditentukan';return `<article class="dash-card subject-card"><h3>${esc(s.nama_mapel)}</h3><p class="subject-meta">Guru: ${esc(guruName)}<br>Materi dan tugas khusus mata pelajaran ini.</p><div class="subject-actions"><a class="btn btn-primary" href="subject.html?mapel_id=${encodeURIComponent(s.id)}">Buka Mata Pelajaran</a></div></article>`}).join('');}
+catch(e){console.error(e);showError(e.message||String(e))}}
 document.getElementById('logoutButton').addEventListener('click',async()=>{try{await getClient().auth.signOut()}finally{location.href='login.html'}});loadDashboard();
 </script></body></html>
