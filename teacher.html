@@ -385,7 +385,7 @@ async function requireTeacher(){
   if(!session){location.href='teacher-login.html';return false}
   const {data:profile,error}=await client.from('profiles').select('id,nama,jenis_kelamin,kelas_id,role').eq('id',session.user.id).single();
   if(error)throw error;
-  if(!['guru','admin'].includes(profile.role)){alert('Akses ditolak. Halaman ini hanya untuk Guru/Admin.');location.href='dashboard.html';return false}
+  if(!['guru','admin'].includes(profile.role)){alert('Akses ditolak. Halaman ini hanya untuk Guru/Admin.');location.href='student-dashboard.html';return false}
   currentProfile=profile;
   const name=profile.nama||session.user.email||'Guru';
   document.getElementById('teacherName').textContent=name;
