@@ -1,0 +1,569 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Materi invers matriks 2 × 2 untuk Matematika Kelas XI SMK DIPSA"><title>Materi Invers Matriks | SMK DIPSA</title><style>
+
+        /* =========================================================
+           RESET
+           ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================================================
+           BODY
+           ========================================================= */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7f5;
+            color: #26352c;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #075b3a,
+                #0b7a4b
+            );
+
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+
+        /* =========================================================
+           NAVIGASI
+           ========================================================= */
+
+        .menu {
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+
+            overflow-x: auto;
+            white-space: nowrap;
+
+            box-shadow:
+                0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .menu-inner {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .menu a {
+            display: inline-block;
+
+            padding: 14px 16px;
+
+            color: #075b3a;
+
+            text-decoration: none;
+
+            font-weight: bold;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover {
+            background: #e8f5ee;
+        }
+
+
+        /* =========================================================
+           CONTAINER
+           ========================================================= */
+
+        .container {
+            max-width: 1050px;
+
+            margin: 30px auto;
+
+            padding:
+                0 18px;
+        }
+
+
+        /* =========================================================
+           SECTION
+           ========================================================= */
+
+        section {
+            background: white;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.06);
+        }
+
+
+        /* =========================================================
+           JUDUL
+           ========================================================= */
+
+        h2 {
+            color: #075b3a;
+
+            font-size: 25px;
+
+            border-left:
+                6px solid #0b7a4b;
+
+            padding-left: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #0b6b43;
+
+            margin-top: 25px;
+            margin-bottom: 12px;
+
+            font-size: 20px;
+        }
+
+        h4 {
+            margin-top: 18px;
+            margin-bottom: 8px;
+
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================================================
+           LIST
+           ========================================================= */
+
+        ul,
+        ol {
+            margin:
+                10px 0 15px 25px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+
+        /* =========================================================
+           KARTU INFORMASI
+           ========================================================= */
+
+        .intro {
+            background: #eaf7f0;
+
+            border-left:
+                5px solid #0b7a4b;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .important {
+            background: #fff8df;
+
+            border-left:
+                5px solid #e0a800;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+        .tip {
+            background: #eef5ff;
+
+            border-left:
+                5px solid #3978c8;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+        .warning {
+            background: #fff0f0;
+
+            border-left:
+                5px solid #d9534f;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin: 18px 0;
+        }
+
+
+        /* =========================================================
+           KOTAK RUMUS / MATRIKS
+           ========================================================= */
+
+        .formula {
+            background: #f8faf9;
+
+            border:
+                1px solid #dce7e0;
+
+            border-radius: 12px;
+
+            padding: 22px 18px;
+
+            margin: 18px 0;
+
+            text-align: center;
+
+            /*
+             * Supaya rumus panjang tidak merusak
+             * layout pada HP.
+             */
+            overflow-x: auto;
+
+            /*
+             * Scroll hanya muncul jika
+             * rumus memang terlalu panjang.
+             */
+            -webkit-overflow-scrolling: touch;
+        }
+
+
+        /*
+         * MathJax display
+         */
+        .formula mjx-container[display="true"] {
+            margin:
+                0.5em auto !important;
+        }
+
+
+        /*
+         * Ukuran rumus desktop
+         */
+        .formula mjx-container {
+            font-size: 115%;
+        }
+
+
+        /*
+         * Matriks dibuat sedikit lebih besar
+         */
+        .matrix {
+            font-size: 1.15em;
+        }
+
+
+        /*
+         * Rumus yang menggunakan boxed
+         */
+        .formula mjx-math {
+            line-height: 1.5;
+        }
+
+
+        /* =========================================================
+           CONTOH
+           ========================================================= */
+
+        .example {
+            border:
+                1px solid #dfe7e2;
+
+            border-radius: 10px;
+
+            padding: 22px;
+
+            margin: 20px 0;
+
+            background: #fcfefd;
+        }
+
+        .example-title {
+            color: #075b3a;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+            margin-bottom: 12px;
+        }
+
+        .answer {
+            background: #eef8f2;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================================================
+           TABEL
+           ========================================================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+
+            margin: 20px 0;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 600px;
+        }
+
+        th {
+            background: #075b3a;
+
+            color: white;
+
+            padding: 12px;
+
+            text-align: left;
+        }
+
+        td {
+            border:
+                1px solid #ddd;
+
+            padding: 12px;
+
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: #f7faf8;
+        }
+
+
+        /* =========================================================
+           SOAL
+           ========================================================= */
+
+        .question {
+            background: #f8faf9;
+
+            border:
+                1px solid #dce7e0;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin: 15px 0;
+        }
+
+        .question-number {
+            font-weight: bold;
+
+            color: #075b3a;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================================================
+           TUGAS
+           ========================================================= */
+
+        .task {
+            border-left:
+                5px solid #075b3a;
+
+            background: #f1f7f3;
+
+            padding: 20px;
+
+            margin: 15px 0;
+
+            border-radius: 8px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        footer {
+            background: #075b3a;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+
+        /* =========================================================
+           INLINE MATH
+           ========================================================= */
+
+        mjx-container[jax="SVG"] {
+            outline: none;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE TABLET / HP
+           ========================================================= */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 28px 15px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .menu-inner {
+                justify-content: flex-start;
+            }
+
+            .menu a {
+                padding:
+                    12px 13px;
+
+                font-size: 13px;
+            }
+
+            section {
+                padding:
+                    20px 17px;
+
+                border-radius: 10px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            body {
+                font-size: 15px;
+            }
+
+            .formula {
+                padding:
+                    18px 12px;
+
+                margin:
+                    15px 0;
+            }
+
+            .formula mjx-container {
+                font-size: 105%;
+            }
+
+            .example {
+                padding:
+                    17px;
+            }
+
+            .answer {
+                padding:
+                    15px;
+            }
+        }
+
+
+        /* =========================================================
+           HP SANGAT KECIL
+           ========================================================= */
+
+        @media (max-width: 400px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            section {
+                padding:
+                    18px 14px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            .formula {
+                padding:
+                    15px 8px;
+            }
+
+            .formula mjx-container {
+                font-size: 95%;
+            }
+        }
+
+     .mat{display:inline-flex;vertical-align:middle;border-left:2px solid currentColor;border-right:2px solid currentColor;border-radius:7px;padding:5px 12px;margin:5px 8px;font-family:Georgia,serif}.cells{display:grid;gap:5px 22px;text-align:center}.fraction{display:inline-flex;flex-direction:column;vertical-align:middle;margin:0 8px;line-height:1.5}.fraction span:first-child{border-bottom:1px solid}.formula{line-height:2.2}section{scroll-margin-top:70px}html{scroll-behavior:smooth}@media print{.menu{display:none}section{box-shadow:none;break-inside:avoid}.container{margin:0;max-width:none}body{background:white}} </style></head><body><header><h1>INVERS MATRIKS</h1><p>Matematika Kelas XI</p><p>SMK DIPSA Purwokerto</p></header><nav class="menu" aria-label="Navigasi materi"><div class="menu-inner"><a href="#tujuan">Tujuan</a><a href="#pengertian">Konsep</a><a href="#determinan">Determinan</a><a href="#rumus">Invers</a><a href="#spl">Penerapan</a><a href="#contoh">Contoh</a><a href="#latihan">Latihan</a><a href="#tugas">Tugas</a></div></nav><main class="container"><section id="tujuan"><h2>A. Capaian dan Tujuan Pembelajaran</h2><div class="intro"><b>Capaian pembelajaran</b><p>Peserta didik dapat menyatakan data dalam bentuk matriks. Mereka dapat menentukan fungsi invers, komposisi fungsi, dan transformasi fungsi untuk memodelkan situasi dunia nyata menggunakan fungsi yang sesuai (linear, kuadrat, eksponensial).</p></div><p><b>Fokus materi:</b> peserta didik mampu menentukan invers matriks.</p><div class="important"><b>Tujuan pembelajaran</b><p>Peserta didik menentukan invers matriks untuk matriks berordo 2 × 2 dan menggunakannya dalam penyelesaian masalah sederhana.</p></div></section><section id="pengertian"><h2>B. Pengertian Invers Matriks</h2><p>Invers matriks adalah matriks yang apabila dikalikan dengan matriks asal menghasilkan matriks identitas. Invers dari A ditulis A<sup>−1</sup>.</p><div class="formula">A × A<sup>−1</sup> = A<sup>−1</sup> × A = I</div><p>Konsep ini mirip dengan kebalikan bilangan: 5 × ⅕ = 1. Pada matriks, hasilnya adalah matriks identitas.</p><div class="tip">Invers matriks berbeda dari fungsi invers. Pembahasan halaman ini berfokus pada invers matriks 2 × 2.</div></section><section id="prasyarat"><h2>C. Mengingat Matriks 2 × 2</h2><p>Matriks berordo 2 × 2 memiliki dua baris dan dua kolom.</p><div class="formula">A = <span class="mat" role="img" aria-label="Matriks a, b; c, d"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span></span></div><p>a dan d berada pada diagonal utama; b dan c berada pada diagonal lainnya. Posisi elemen menentukan langkah perhitungan invers.</p></section><section id="identitas"><h2>D. Matriks Identitas</h2><p>Matriks identitas memiliki angka 1 pada diagonal utama dan angka 0 di luar diagonal utama.</p><div class="formula">I = <span class="mat" role="img" aria-label="Matriks 1, 0; 0, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span></span></div><p>Untuk matriks A berordo 2 × 2 berlaku AI = IA = A. Matriks identitas berperan sebagai unsur netral dalam perkalian matriks.</p></section><section id="determinan"><h2>E. Determinan Matriks 2 × 2</h2><div class="formula">Jika A = <span class="mat" role="img" aria-label="Matriks a, b; c, d"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span></span>, maka det(A) = ad − bc.</div><p>Kalikan elemen diagonal utama, kemudian kurangi dengan hasil kali elemen diagonal lainnya.</p><div class="formula">A = <span class="mat" role="img" aria-label="Matriks 2, 1; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span></span> → det(A) = (2 × 1) − (1 × 1) = 1</div><div class="tip">Perhatikan tanda negatif. Misalnya 3 − (−2) = 5.</div></section><section id="syarat"><h2>F. Syarat Matriks Mempunyai Invers</h2><div class="important"><b>Invers ada jika det(A) ≠ 0.</b></div><p>Pada pembahasan matriks 2 × 2, matriks dengan determinan tidak nol disebut nonsingular. Matriks dengan determinan nol disebut singular dan tidak mempunyai invers.</p><div class="formula">S = <span class="mat" role="img" aria-label="Matriks 2, 4; 1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span></span> → det(S) = 4 − 4 = 0</div><p>Jadi, S tidak mempunyai invers. Pemeriksaan determinan harus dilakukan sebelum menggunakan rumus invers.</p></section><section id="rumus"><h2>G. Rumus Invers Matriks 2 × 2</h2><div class="formula">A = <span class="mat" role="img" aria-label="Matriks a, b; c, d"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span></span><br>A<sup>−1</sup> = <span class="fraction"><span>1</span><span>ad − bc</span></span> <span class="mat" role="img" aria-label="Matriks d, −b; −c, a"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></span></div><ol><li>Hitung determinan ad − bc.</li><li>Jika determinan nol, berhenti: invers tidak ada.</li><li>Tukar posisi a dan d.</li><li>Ubah tanda b dan c.</li><li>Kalikan setiap elemen dengan 1/det(A).</li></ol><div class="warning">Yang ditukar hanya elemen diagonal utama. Elemen b dan c tetap di tempatnya, tetapi tandanya berubah.</div></section><section id="langkah"><h2>H. Langkah Menentukan Invers</h2><div class="formula">A = <span class="mat" role="img" aria-label="Matriks 2, 1; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span></span></div><p><b>1. Determinan:</b> det(A) = 2(1) − 1(1) = 1.</p><p><b>2. Tukar diagonal utama dan ubah tanda elemen lainnya:</b></p><div class="formula"><span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span></div><p><b>3. Kalikan dengan 1/det(A):</b></p><div class="formula">A<sup>−1</sup> = 1 × <span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span> = <span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span></div></section><section id="verifikasi"><h2>I. Memeriksa Hasil Invers</h2><p>Periksa hasil dengan perkalian baris × kolom. Hasil A × A<sup>−1</sup> harus sama dengan I.</p><div class="formula"><span class="mat" role="img" aria-label="Matriks 2, 1; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span></span> × <span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span> = <span class="mat" role="img" aria-label="Matriks 2−1, −2+2; 1−1, −1+2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2−1</span><span>−2+2</span><span>1−1</span><span>−1+2</span></span></span> = <span class="mat" role="img" aria-label="Matriks 1, 0; 0, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span></span></div><div class="tip">Jika hasil bukan identitas, periksa kembali determinan, perubahan tanda, dan perkalian elemen.</div></section><section id="spl"><h2>J. Invers untuk Menyelesaikan SPLDV</h2><p>Sistem persamaan linear dua variabel (SPLDV) dapat ditulis AX = B, dengan A sebagai matriks koefisien, X sebagai matriks variabel, dan B sebagai matriks konstanta.</p><div class="formula">ax + by = p<br>cx + dy = q<br><span class="mat" role="img" aria-label="Matriks a, b; c, d"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span></span> <span class="mat" role="img" aria-label="Matriks x; y"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>x</span><span>y</span></span></span> = <span class="mat" role="img" aria-label="Matriks p; q"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>p</span><span>q</span></span></span></div><div class="important">Jika det(A) ≠ 0, maka X = A<sup>−1</sup>B.</div><p>Jika det(A) = 0, metode invers tidak dapat digunakan. Sistem dapat memiliki banyak solusi atau tidak memiliki solusi; perlu diperiksa dengan metode lain.</p></section><section id="penerapan"><h2>K. Penerapan dalam Masalah Sederhana</h2><p>Dua buku dan satu pulpen berharga Rp11.000. Satu buku dan satu pulpen berharga Rp7.000. Tentukan harga satu buku dan satu pulpen.</p><p>Misalkan x = harga buku dan y = harga pulpen, dalam ribuan rupiah.</p><div class="formula">2x + y = 11<br>x + y = 7<br>X = <span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span> <span class="mat" role="img" aria-label="Matriks 11; 7"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>11</span><span>7</span></span></span> = <span class="mat" role="img" aria-label="Matriks 4; 3"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>4</span><span>3</span></span></span></div><p>Jadi, harga buku Rp4.000 dan pulpen Rp3.000. Pemeriksaan: 2(4.000) + 3.000 = 11.000 dan 4.000 + 3.000 = 7.000.</p></section><section id="rangkuman"><h2>L. Rangkuman Rumus Penting</h2><div class="table-wrapper"><table><thead><tr><th>Materi</th><th>Rumus / Keterangan</th></tr></thead><tbody><tr><td>Determinan</td><td>det(A) = ad − bc</td></tr><tr><td>Syarat invers</td><td>det(A) ≠ 0</td></tr><tr><td>Invers 2 × 2</td><td>A⁻¹ = (1/det(A)) <span class="mat" role="img" aria-label="Matriks d, −b; −c, a"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></span></td></tr><tr><td>Pemeriksaan</td><td>AA⁻¹ = A⁻¹A = I</td></tr><tr><td>Bentuk SPLDV</td><td>AX = B</td></tr><tr><td>Penyelesaian</td><td>X = A⁻¹B</td></tr></tbody></table></div></section><section id="contoh"><h2>M. 5 Contoh Soal dan Pembahasan</h2><div class="example"><div class="example-title">Contoh 1 – Menentukan apakah invers ada</div><div class="formula">A = <span class="mat" role="img" aria-label="Matriks 3, 2; 1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span><span>1</span><span>2</span></span></span></div><div class="answer"><b>Pembahasan:</b><p>det(A) = 3(2) − 2(1) = 4. Karena 4 ≠ 0, A mempunyai invers.</p></div></div><div class="example"><div class="example-title">Contoh 2 – Invers dengan determinan 1</div><div class="formula">A = <span class="mat" role="img" aria-label="Matriks 2, 1; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span></span></div><div class="answer"><b>Pembahasan:</b><p>det(A) = 1. Tukar 2 dan 1 pada diagonal utama; ubah tanda kedua elemen lainnya.</p><div class="formula">A<sup>−1</sup> = <span class="mat" role="img" aria-label="Matriks 1, −1; −1, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></span></div></div></div><div class="example"><div class="example-title">Contoh 3 – Invers dengan hasil pecahan</div><div class="formula">B = <span class="mat" role="img" aria-label="Matriks 3, 1; 2, 2"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>2</span></span></span></div><div class="answer"><b>Pembahasan:</b><p>det(B) = 3(2) − 1(2) = 4.</p><div class="formula">B<sup>−1</sup> = ¼ <span class="mat" role="img" aria-label="Matriks 2, −1; −2, 3"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−2</span><span>3</span></span></span> = <span class="mat" role="img" aria-label="Matriks ½, −¼; −½, ¾"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−¼</span><span>−½</span><span>¾</span></span></span></div></div></div><div class="example"><div class="example-title">Contoh 4 – Matriks yang tidak mempunyai invers</div><div class="formula">C = <span class="mat" role="img" aria-label="Matriks 1, 2; 3, 6"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6</span></span></span></div><div class="answer"><b>Pembahasan:</b><p>det(C) = 1(6) − 2(3) = 0. Jadi C singular dan tidak mempunyai invers.</p></div></div><div class="example"><div class="example-title">Contoh 5 – Menyelesaikan SPLDV</div><div class="formula">3x + y = 9<br>2x + y = 7</div><div class="answer"><b>Pembahasan:</b><p>A = <span class="mat" role="img" aria-label="Matriks 3, 1; 2, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>1</span></span></span> dan det(A) = 3 − 2 = 1.</p><div class="formula">X = <span class="mat" role="img" aria-label="Matriks 1, −1; −2, 3"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−2</span><span>3</span></span></span> <span class="mat" role="img" aria-label="Matriks 9; 7"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>9</span><span>7</span></span></span> = <span class="mat" role="img" aria-label="Matriks 2; 3"><span class="cells" style="grid-template-columns:repeat(1,auto)"><span>2</span><span>3</span></span></span></div><p>Jadi x = 2 dan y = 3. Pemeriksaan: 3(2) + 3 = 9 dan 2(2) + 3 = 7.</p></div></div></section><section id="latihan"><h2>N. 5 Latihan Soal</h2><p>Kerjakan secara mandiri. Tuliskan determinan, langkah perhitungan, dan kesimpulan.</p><div class="question"><div class="question-number">Latihan 1</div><div class="formula">A = <span class="mat" role="img" aria-label="Matriks 4, 2; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>1</span><span>1</span></span></span></div><p>Hitung determinan A dan tentukan apakah A mempunyai invers.</p></div><div class="question"><div class="question-number">Latihan 2</div><div class="formula">B = <span class="mat" role="img" aria-label="Matriks 3, 2; 1, 1"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span><span>1</span><span>1</span></span></span></div><p>Tentukan B<sup>−1</sup> dan tuliskan langkahnya.</p></div><div class="question"><div class="question-number">Latihan 3</div><div class="formula">C = <span class="mat" role="img" aria-label="Matriks 2, 1; 1, 3"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span></span></div><p>Tentukan C<sup>−1</sup>, lalu periksa CC<sup>−1</sup>.</p></div><div class="question"><div class="question-number">Latihan 4</div><div class="formula">D = <span class="mat" role="img" aria-label="Matriks 2, 6; 1, 3"><span class="cells" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>6</span><span>1</span><span>3</span></span></span></div><p>Apakah D mempunyai invers? Jelaskan alasanmu.</p></div><div class="question"><div class="question-number">Latihan 5</div><p>Dua roti dan satu susu berharga Rp13.000. Satu roti dan satu susu berharga Rp8.000. Tentukan harga masing-masing dengan metode invers matriks.</p></div></section><section id="tugas"><h2>O. 5 Tugas</h2><div class="task"><h3>Tugas 1 – Mengenal Invers</h3><p>Buat tiga matriks berordo 2 × 2. Hitung determinan masing-masing dan kelompokkan sebagai singular atau nonsingular.</p></div><div class="task"><h3>Tugas 2 – Menentukan Invers</h3><p>Buat dua matriks 2 × 2 yang mempunyai invers. Tentukan inversnya dan tuliskan seluruh langkah perhitungan.</p></div><div class="task"><h3>Tugas 3 – Memeriksa Invers</h3><p>Gunakan salah satu matriks pada Tugas 2. Hitung AA⁻¹ dan A⁻¹A. Jelaskan hubungan hasilnya dengan matriks identitas.</p></div><div class="task"><h3>Tugas 4 – SPLDV dengan Metode Invers</h3><p>Buat SPLDV dengan solusi x = 2 dan y = 3 serta matriks koefisien yang determinannya tidak nol. Selesaikan menggunakan invers matriks dan periksa hasilnya.</p></div><div class="task"><h3>Tugas 5 – Invers dalam Kehidupan Sehari-hari</h3><p>Buat masalah dua jenis barang dengan dua kombinasi pembelian. Susun SPLDV, tulis dalam bentuk AX = B, lalu tentukan harga barang menggunakan invers. Pilih data dengan harga positif dan determinan tidak nol.</p></div><div class="important"><b>Format tugas:</b><ol><li>Judul</li><li>Permasalahan dan data</li><li>Model SPLDV / bentuk matriks</li><li>Determinan dan invers</li><li>Langkah penyelesaian dan pemeriksaan</li><li>Kesimpulan</li></ol></div></section><section id="kesimpulan"><h2>P. Kesimpulan</h2><p>Invers matriks 2 × 2 dapat ditentukan dengan menghitung determinan, menukar elemen diagonal utama, mengubah tanda elemen lainnya, lalu mengalikan dengan kebalikan determinan.</p><ol><li>Matriks mempunyai invers jika determinannya tidak nol.</li><li>Hasil perkalian matriks dengan inversnya adalah matriks identitas.</li><li>Invers dapat digunakan untuk menyelesaikan SPLDV melalui X = A⁻¹B.</li><li>Dalam masalah sehari-hari, definisikan variabel dan satuan, susun model, lalu periksa jawaban dalam konteks masalah.</li></ol></section></main><footer><p><b>MATEMATIKA KELAS XI</b></p><p>Materi Invers Matriks 2 × 2</p><p>SMK DIPSA Purwokerto</p></footer></body></html>
